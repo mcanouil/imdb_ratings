@@ -21,7 +21,7 @@ output:
     fig_width: 5
     fig_height: 4
     number_sections: true
-    self_contained: false
+    self_contained: true
     mathjax: default
     df_print: kable
 ---
