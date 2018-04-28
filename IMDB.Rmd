@@ -128,7 +128,7 @@ ratings_agg <- ratings %>%
     tibble(
       "Date Rated" = seq(
         from = as.Date("2014-01-01"),
-        to = Sys.Date(),
+        to = as.Date(paste0(year(Sys.Date()), "-12-31")),
         by = 1
       )
     )
@@ -145,7 +145,7 @@ ratings_agg <- ratings %>%
   group_by(YearRated) %>%
   mutate(
     streak = paste0(
-      "Movies seen: ", sum(n_rating), "\n",
+      "Movies rated: ", sum(n_rating), "\n",
       "Best streak: ", bestStreak(n_rating != 0), " days ! ",
       "Worst streak: ", bestStreak(n_rating == 0), " days !"
     ),
@@ -184,7 +184,8 @@ p_movies_streak <- lapply(unique(ratings_agg[["YearRated"]]), function(iyear) {
         axis.title = element_blank(),
         panel.grid = element_blank()
       ) +
-      labs(title = "Movies streak", x = "Month", y = "Day")
+      labs(title = "Movies streak", x = "Month", y = "Day") +
+    facet_grid(~streak)
   return(p)
 }) %>% 
   `names<-`(as.character(unique(ratings_agg[["YearRated"]])))
