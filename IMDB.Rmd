@@ -10,7 +10,6 @@ params:
   theme_dark: TRUE
   dpi: 120
   ggFontSize: 9
-  myYear: 2017
 output:
   bookdown::html_document2:
     theme: simplex
@@ -19,21 +18,19 @@ output:
     toc_float: 
       collapsed: false
     fig_width: 5
-    fig_height: 4
-    number_sections: true
+    fig_height: 3.5
+    number_sections: false
     self_contained: true
     mathjax: default
     df_print: kable
 ---
 
-```{r setup, include=FALSE, echo=FALSE}
-# rm(list = ls())
+```{r setup, include = FALSE, echo = FALSE}
 options(stringsAsFactors = FALSE)
 # Sys.setlocale("LC_TIME", "English")
 
 
 library(knitr)
-# dir.create(paste0(getwd(), "/KnitrFiles/"), showWarnings = FALSE)
 opts_chunk$set(
   size = "small",
   include = TRUE, # params$outputCode,
@@ -43,14 +40,10 @@ opts_chunk$set(
   tidy = FALSE,
   crop = TRUE,
   autodep = TRUE,
-  # fig.width = 7.5,
-  # fig.height = 6,
   fig.align = "center",
   fig.pos = "H",
   dpi = params$dpi,
-  fig.path = "./KnitrFiles/",
-  cache = FALSE,
-  cache.path = "./KnitrFiles/"
+  fig.path = "./images/"
 )
 
 library(kableExtra)
@@ -71,10 +64,10 @@ library(cowplot)
 library(ggrepel)
 library(viridis)
 library(lubridate)
-
+library(gridExtra)
+library(ggpubr)
+invisible(sapply(list.files("../DEV/Rfunctions/", full.names = TRUE), source))
 library(tidyverse)
-
-null <- sapply(list.files("../DEV/Rfunctions/", full.names = TRUE), source) %>% invisible()
 
 theme_dark <- params$theme_dark
 if (theme_dark) {
@@ -111,271 +104,275 @@ if (theme_dark) {
 }
 ```
 
-```{r, readIMDb, include=FALSE}
-myYear <- params$myYear
+```{r read_imdb, include = FALSE}
 bestStreak <- function(vec) {
   max(subset(as.data.frame(unclass(rle(vec))), values, lengths))
 }
 
 # "http://www.imdb.com/user/ur56341222/ratings?start=1&view=compact"
 
-ratings <- read.csv("ratings.csv") %>%
+ratings <- read_csv("ratings.csv") %>%
   mutate(
-    Genres = sapply(Genres, simpleCap),
-    Date = as.Date(x = Date.Rated, format = "%Y-%m-%d")
+    YearRated = year(`Date Rated`),
+    Genres = map(Genres, simpleCap) %>% 
+      gsub("Musical", "Music", .)
   )
 
-ratings.agg <- ratings %>%
-  group_by(Date) %>%
+ratings_agg <- ratings %>%
+  group_by(`Date Rated`) %>%
   summarise(
-    avg.rating = mean(Your.Rating),
-    n.rating = length(Your.Rating)
+    avg_rating = mean(`Your Rating`),
+    n_rating = n()
   ) %>%
-  ungroup() %>%
-  (function(data) {
-    merge(
-      x = data,
-      y = data.frame(
-        Date = seq(
-          from = as.Date("2015-01-01"),
-          to = min(Sys.Date(), as.Date("2017-12-31")),
-          by = 1
-        )
-      ),
-      by = "Date",
-      all.y = TRUE
-    )
-  }) %>%
-  mutate(
-    Year = year(Date),
-    Month = month(Date),
-    Day = day(Date),
-    wDay = wday(Date, label = TRUE, abbr = FALSE),
-    n.rating = ifelse(is.na(n.rating), 0, n.rating)
-  ) %>%
-  mutate(
-    wDay = factor(wDay, levels = c(levels(wDay)[-1], levels(wDay)[1])),
-    fDay = as.factor(paste(wDay, Day))
-  ) %>%
-  group_by(Year) %>%
-  do((function(idta) {
-    idta %>%
-      mutate(
-        Week = c(
-          rep(0, grep("Monday", wDay)[1] - 1),
-          rep(seq_along(grep("Monday", wDay)), each = 7)
-        )[seq_len(nrow(.))],
-        StreakYear = paste0(
-          "Movies seen: ", sum(n.rating), "\n",
-          "Best streak: ", bestStreak(n.rating != 0), " days ! ",
-          "Worst streak: ", bestStreak(n.rating == 0), " days !"
-        )
+  right_join(
+    tibble(
+      "Date Rated" = seq(
+        from = as.Date("2014-01-01"),
+        to = Sys.Date(),
+        by = 1
       )
-  })(.)) %>%
-  ungroup() %>%
-  as.data.frame()
-
-ratings <- ratings %>%
-  filter(year(Date) == myYear) %>%
-  as.data.frame()
-ratings.agg <- ratings.agg %>%
-  filter(Year == myYear) %>%
-  as.data.frame()
-```
-
-# My IMDb analysis
-
-## First Plot
-```{r FirstPlot, fig.height = 4/2}
-xlabels <- unique(cbind.data.frame(Month = month.abb[ratings.agg[, "Month"]], Week = ratings.agg[, "Week"], Year = ratings.agg[, "Year"]))
-p <- ggplot(data = ratings.agg, aes(x = Week, y = as.integer(wDay), fill = avg.rating, label = n.rating)) +
-  geom_tile(colour = "grey20", size = 0.1) +
-  geom_text(colour = "white", fontface = "bold", size = rel(2)) +
-  facet_wrap(~ StreakYear, ncol = 1) +
-  scale_fill_viridis(name = "Average\nRating", limits = c(0, 10), na.value = "grey30") +
-  scale_y_continuous(trans = "reverse", breaks = seq_len(7), labels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"), expand = c(0, 0)) +
-  scale_x_continuous(breaks = xlabels[!duplicated(xlabels[, "Month"]), "Week"], labels = xlabels[!duplicated(xlabels[, "Month"]), "Month"], expand = c(0, 0)) +
-  labs(title = "Movies streak", x = "Month", y = "Day") +
-  theme(
-    axis.ticks = element_blank(),
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    axis.title = element_blank(),
-    panel.grid = element_blank()
-  )
-# ggsave(file = "RatingsCoeos.png", plot = p, width = 8, height = 4, units = "in", dpi = 300)
-print(p)
-pFirst <- p
-```
-
-```{r FirstPlotSplit, fig.height = 4*2, fig.width = 5*2, eval = FALSE}
-plist <- lapply(unique(ratings.agg[, "Year"]), function(iyear) {
-  xlabels <- subset(unique(cbind.data.frame(Month = month.abb[ratings.agg[, "Month"]], Week = ratings.agg[, "Week"], Year = ratings.agg[, "Year"])), Year == iyear)
-  p <- ggplot(data = subset(ratings.agg, Year == iyear), aes(x = Week, y = as.integer(wDay), fill = avg.rating, label = n.rating)) +
-    geom_tile(colour = "grey20", size = 0.1) +
-    geom_text(colour = "white", fontface = "bold", size = rel(2)) +
-    facet_wrap(~ StreakYear, ncol = 1) +
-    scale_fill_viridis(name = "Average\nRating", limits = c(0, 10), na.value = "grey30") +
-    scale_y_continuous(trans = "reverse", breaks = seq_len(7), labels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"), expand = c(0, 0)) +
-    scale_x_continuous(breaks = xlabels[!duplicated(xlabels[, "Month"]), "Week"], labels = xlabels[!duplicated(xlabels[, "Month"]), "Month"], expand = c(0, 0)) +
-    labs(title = paste0("Movies streak (", iyear, ")"), x = "Month", y = "Day") +
-    theme(
-      axis.ticks = element_blank(),
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      axis.title = element_blank(),
-      panel.grid = element_blank()
     )
-  # ggsave(file = paste0("RatingsCoeos", iyear, ".png"), plot = p, width = 8, height = 2, units = "in", dpi = 300)
-})
-plot_grid(plotlist = plist, nrow = length(plist), labels = LETTERS)
-```
-
-## Second Plot
-```{r SecondPlot}
-dta <- do.call("rbind", lapply(ratings[, "Genres"], function(x) {
-  out <- factor(unlist(strsplit(x, split = ", ")), levels = unlist(strsplit(x, split = ", ")))
-  cbind.data.frame(
-    Genres = levels(out),
-    Weight = as.numeric(rev(out)) / sum(as.numeric(out))
-  )
-}))
-dta <- do.call("rbind", by(dta, dta[, "Genres"], function(idta) {
-  cbind.data.frame(
-    Genres = unique(idta[, "Genres"]),
-    Score = sum(idta[, "Weight"])
-  )
-}))
-dta <- dta[order(dta[, "Score"], decreasing = TRUE), ]
-dta[, "Genres"] <- factor(dta[, "Genres"], levels = dta[, "Genres"])
-
-
-pDta <- ggplot(data = dta, aes(x = factor(1), y = Score, fill = Genres)) +
-  geom_bar(colour = "white", width = 1, stat = "identity") +
-  coord_polar(theta = "y") +
-  scale_fill_viridis(discrete = TRUE) +
-  labs(title = "Movies' genres distribution") +
-  theme(
-    axis.ticks = element_blank(),
-    axis.text = element_blank(),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    panel.grid = element_blank(),
-    panel.border = element_blank()
-  )
-# ggsave(file = "RatingsCoeos_Genres.png", plot = ggdraw(plot = pDta, theme_dark = theme_dark), width = 7.5, height = 6, units = "in", dpi = 300)
-print(ggdraw(pDta, theme_dark = theme_dark))
-pSecond <- pDta
-```
-
-## Third Plot
-```{r ThirdPlot}
-dta <- do.call("rbind", lapply(seq_len(nrow(ratings)), function(irow) {
-  out <- factor(unlist(strsplit(ratings[irow, "Genres"], split = ", ")), levels = unlist(strsplit(ratings[irow, "Genres"], split = ", ")))
-  cbind.data.frame(
-    Genres = levels(out),
-    Weight = as.numeric(rev(out)) / sum(as.numeric(out)),
-    Rating = rep(ratings[irow, "Your.Rating"], length(levels(out)))
-  )
-}))
-dta <- do.call("rbind", by(dta, dta[, "Genres"], function(idta) {
-  cbind.data.frame(
-    Genres = unique(idta[, "Genres"]),
-    Rating = (idta[, "Weight"] %*% idta[, "Rating"]) / sum(idta[, "Weight"]),
-    Rating.avg = mean(idta[, "Rating"]),
-    N = length(idta[, "Rating"])
-  )
-}))
-dta[, "pN"] <- dta[, "N"] / sum(dta[, "N"])
-dta <- dta[order(dta[, "pN"], decreasing = TRUE), ]
-dta[, "Genres"] <- factor(dta[, "Genres"], levels = dta[, "Genres"])
-pDta <- ggplot(data = dta, aes(x = Genres, y = Rating, fill = N)) +
-  geom_bar(width = 1, stat = "identity", colour = "white") +
-  geom_text(aes(label = N), colour = "black", nudge_y = -0.5) +
-  geom_text(aes(label = round(Rating, digits = 1)), colour = "white", nudge_y = 0.5) +
-  scale_fill_viridis(discrete = FALSE, direction = 1) +
-  scale_x_discrete(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 10), breaks = seq(0, 10, 2)) +
-  # geom_hline(yintercept = 5, colour = "white", linetype = 2) +
-  geom_vline(xintercept = min(which(dta[, "pN"] < median(dta[, "pN"]))) - 0.5, colour = "white", linetype = 2) +
-  labs(title = "Average Weighted Rating per Genre") +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    axis.title.x = element_blank(),
-    panel.grid.major.x = element_blank()
-  )
-# ggsave(file = "RatingsCoeos_GenresRating.png", plot = pDta, width = 7.5, height = 6, units = "in", dpi = 300)
-print(pDta)
-pThird <- pDta
-```
-
-## Fourth Plot
-```{r FourthPlot}
-pDta <- ratings[, c("Your.Rating", "Runtime..mins.")] %>%
-  group_by(Your.Rating) %>%
-  summarise(Runtime = sum(Runtime..mins., na.rm = TRUE) / (60 * 24)) %>%
-  data.frame() %>%
-  ggplot(data = ., aes(x = factor(1), y = Runtime, fill = factor(Your.Rating))) +
-  geom_bar(colour = "white", width = 1, stat = "identity") +
-  geom_label(aes(
-    x = 1.5,
-    y = cumsum(rev(Runtime)) - rev(Runtime) / 2,
-    label = gsub("0", "", round(rev(Runtime), digits = 1))
-  ), fill = "white", size = 3) +
-  coord_polar(theta = "y") +
-  scale_fill_viridis(name = "Rating", discrete = TRUE) +
-  labs(title = "Days Spent Watching Movies per Rating") +
-  theme(
-    axis.ticks = element_blank(),
-    axis.text = element_blank(),
-    axis.title = element_blank(),
-    panel.grid = element_blank(),
-    panel.border = element_blank()
-  )
-# ggsave(file = "RatingsCoeos_Runtime.png", plot = ggdraw(plot = pDta, theme_dark = theme_dark), width = 7.5, height = 6, units = "in", dpi = 300)
-print(ggdraw(pDta, theme_dark = theme_dark))
-pFourth <- pDta
-```
-
-## Fifth Plot
-```{r FifthPlot}
-ggdta <- ratings[, c("Date.Rated", "Date", "Runtime..mins.", "Your.Rating", "IMDb.Rating")] %>%
-  gather(data = ., key = Who, value = Rating, -c(Runtime..mins., Date, Date.Rated)) %>%
-  mutate(
-    Year = year(Date),
-    Month = month(Date),
-    Day = day(Date),
-    wDay = wday(Date, label = TRUE, abbr = FALSE)
   ) %>%
   mutate(
-    wDay = factor(wDay, levels = c(levels(wDay)[-1], levels(wDay)[1])),
-    fDay = as.factor(paste(wDay, Day))
+    YearRated = year(`Date Rated`),
+    Month = month(`Date Rated`, label = TRUE, abbr = FALSE),
+    Day = day(`Date Rated`),
+    wDay = wday(`Date Rated`, label = TRUE, abbr = FALSE, week_start = 1),
+    wDay = factor(wDay, levels = rev(levels(wDay))),
+    n_rating = ifelse(is.na(n_rating), 0, n_rating),
+    Week = isoweek(`Date Rated`)
   ) %>%
-  arrange(Date)
-# ggdta[, "Year"] <- year(ggdta[, "Date"])
-# ggdta[, "Month"] <- month(ggdta[, "Date"])
-# ggdta[, "Day"] <- day(ggdta[, "Date"])
-# ggdta[, "wDay"] <- wday(ggdta[, "Date"], label = TRUE, abbr = FALSE)
-# ggdta[, "wDay"] <- factor(ggdta[, "wDay"], levels = c(levels(ggdta[, "wDay"])[-1], levels(ggdta[, "wDay"])[1]))
-# ggdta <- ggdta[order(ggdta[, "Date"]), ]
-# ggdta[, "fDay"] <- as.factor(paste(ggdta[, "wDay"], ggdta[, "Day"]))
-
-
-p <- ggplot(data = ggdta, aes(x = round(Rating, digits = 0), fill = Who)) +
-  geom_density(aes(y = ..count.. / sum(..count..) * 100), bw = 2, alpha = 0.75, colour = "white") +
-  geom_bar(aes(y = ..count.. / sum(..count..)), width = 0.90, colour = "white", position = "dodge") +
-  scale_x_continuous(name = "Rating", limits = c(0, 10), breaks = seq(0, 10, 2)) +
-  scale_y_continuous(labels = percent) +
-  scale_fill_viridis(discrete = TRUE) +
-  labs(x = "Rating", y = "Proportion", title = "Distribution of Ratings") +
-  theme(legend.position = c(0, 1), legend.justification = c(-0.05, 1.05))
-# ggsave(file = "RatingsCoeos_IMDb.png", plot = p, width = 7.5, height = 6, units = "in", dpi = 300)
-print(p)
-pFifth <- p
+  group_by(YearRated) %>%
+  mutate(
+    streak = paste0(
+      "Movies seen: ", sum(n_rating), "\n",
+      "Best streak: ", bestStreak(n_rating != 0), " days ! ",
+      "Worst streak: ", bestStreak(n_rating == 0), " days !"
+    ),
+    Week = ifelse(Month=="January" & Week>=50, 0, Week),
+    Week = ifelse(Month=="December" & Week<=40, max(Week)+1, Week) 
+  ) %>%
+  ungroup()
 ```
 
-## Final
-```{r Coeos_IMDb, fig.height = 4*4, fig.width = 5*2}
-library(ggpubr)
+# Movies Streak {.tabset}
+```{r movies_streak, fig.height = 2, results = "asis"}
+p_movies_streak <- lapply(unique(ratings_agg[["YearRated"]]), function(iyear) {
+  ratings_agg_year <- ratings_agg %>% 
+    filter(YearRated == iyear)
+  
+  x_labels <- ratings_agg_year %>% 
+    select(Week, Month) %>% 
+    distinct() %>% 
+    group_by(Month) %>% 
+    summarise(Week = min(Week)+2)
 
+  p <- ratings_agg_year %>% 
+    ggplot(aes(x = Week, y = wDay, fill = avg_rating, label = n_rating)) +
+      geom_tile(colour = "grey20", size = 0.1) +
+      geom_text(colour = "white", fontface = "bold", size = 1.5) +
+      scale_fill_viridis(name = "Average\nRating", limits = c(0, 10), na.value = "grey30") +
+      scale_y_discrete(expand = c(0, 0)) +
+      scale_x_continuous(
+        expand = c(0, 0), 
+        breaks = x_labels[["Week"]], 
+        labels = x_labels[["Month"]]
+      ) +
+      theme(
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title = element_blank(),
+        panel.grid = element_blank()
+      ) +
+      labs(title = "Movies streak", x = "Month", y = "Day")
+  return(p)
+}) %>% 
+  `names<-`(as.character(unique(ratings_agg[["YearRated"]])))
+
+for (iyear in as.character(unique(ratings_agg[["YearRated"]]))) {
+  cat("\n##", iyear, "{-}\n")
+  print(p_movies_streak[[iyear]])
+  cat("\n")
+}
+```
+
+# Genres distribution {.tabset}
+```{r genres_distribution, results = "asis"}
+p_genres_distribution <- lapply(unique(ratings[["YearRated"]]), function(iyear) {
+  ratings %>% 
+    filter(YearRated==iyear) %>% 
+    mutate(
+      Genre_details = map(Genres, function(x) {
+        tibble(
+          Genre = unique(unlist(strsplit(x, split = ", "))),
+          Weight = 1 / length(Genre)
+        )
+      })
+    ) %>% 
+    unnest(Genre_details) %>% 
+    group_by(Genre) %>% 
+    summarise(Score = sum(Weight)) %>% 
+    arrange(desc(Score)) %>% 
+    filter(Genre!="NANA") %>% 
+    mutate(
+      Genre = factor(Genre, levels = unique(Genre))
+    ) %>% 
+    ggplot(aes(x = factor(1), y = Score, fill = Genre)) +
+      geom_bar(colour = "white", width = 1, stat = "identity") +
+      coord_polar(theta = "y") +
+      scale_fill_viridis(discrete = TRUE, guide = guide_legend(ncol = 2)) +
+      labs(title = "Genres distribution") +
+      theme(
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.grid = element_blank(),
+        panel.border = element_blank(), 
+        legend.text = element_text(size = rel(0.4))
+      )
+}) %>% 
+  `names<-`(as.character(unique(ratings[["YearRated"]])))
+
+for (iyear in as.character(unique(ratings[["YearRated"]]))) {
+  cat("\n##", iyear, "{-}\n")
+  print(ggdraw(plot = p_genres_distribution[[iyear]], theme_dark = theme_dark))
+  cat("\n")
+}
+```
+
+# Rating per Genre {.tabset}
+```{r genres_rating, results = "asis"}
+p_genres_rating <- lapply(unique(ratings[["YearRated"]]), function(iyear) {
+  ratings %>% 
+    filter(YearRated==iyear) %>% 
+    mutate(
+      Genre_details = map(Genres, function(x) {
+        tibble(
+          Genre = unique(unlist(strsplit(x, split = ", "))),
+          Weight = 1 / length(Genre)
+        )
+      })
+    ) %>% 
+    unnest(Genre_details) %>% 
+    group_by(Genre) %>% 
+    summarise(
+      Score = sum(Weight),
+      Rating = (Weight %*% `Your Rating`) / Score,
+      Rating_avg = mean(`Your Rating`),
+      N = n()
+    ) %>% 
+    mutate(
+      Per = N / sum(N)
+    ) %>% 
+    arrange(desc(Rating)) %>% 
+    filter(Genre!="NANA") %>% 
+    mutate(
+      Genre = factor(Genre, levels = unique(Genre))
+    ) %>% 
+    ggplot(aes(x = Genre, y = Rating, fill = N)) +
+      geom_bar(width = 1, stat = "identity", colour = "white") +
+      geom_text(aes(label = N), colour = "black", nudge_y = -0.5, size = 1.5) +
+      geom_text(aes(label = round(Rating, digits = 1)), colour = "white", nudge_y = 0.5, size = 2.5) +
+      scale_fill_viridis(discrete = FALSE, direction = 1) +
+      scale_x_discrete(expand = c(0, 0)) +
+      scale_y_continuous(expand = c(0, 0), limits = c(0, 10), breaks = seq(0, 10, 2)) +
+      # geom_vline(aes(xintercept = min(which(Per < median(Per))) - 0.5), colour = "white", linetype = 2) +
+      labs(title = "Average Weighted Rating per Genre") +
+      theme(
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.title.x = element_blank(),
+        panel.grid.major.x = element_blank()
+      )
+}) %>% 
+  `names<-`(as.character(unique(ratings[["YearRated"]])))
+
+for (iyear in as.character(unique(ratings[["YearRated"]]))) {
+  cat("\n##", iyear, "{-}\n")
+  print(ggdraw(plot = p_genres_rating[[iyear]], theme_dark = theme_dark))
+  cat("\n")
+}
+```
+
+# Runtime versus Ratings {.tabset}
+```{r ratings_runtime, results = "asis"}
+p_ratings_runtime <- lapply(unique(ratings[["YearRated"]]), function(iyear) {
+  ratings %>% 
+    filter(YearRated==iyear) %>%
+    select(`Your Rating`, `Runtime (mins)`) %>%
+    group_by(`Your Rating`) %>%
+    summarise(Runtime = sum(`Runtime (mins)`, na.rm = TRUE) / (60 * 24)) %>%
+    ggplot(aes(x = factor(1), y = Runtime, fill = factor(`Your Rating`))) +
+      geom_bar(colour = "white", width = 1, stat = "identity") +
+      geom_label_repel(
+        aes(
+          x = 1.5,
+          y = cumsum(rev(Runtime)) - rev(Runtime) / 2,
+          label = round(rev(Runtime), digits = 1)
+        ), 
+        fill = "white", 
+        size = 3, 
+        nudge_x = 0.25,
+        min.segment.length = 0, 
+        segment.colour = "white"
+      ) +
+      coord_polar(theta = "y") +
+      scale_fill_viridis(name = "Rating", discrete = TRUE) +
+      labs(title = "Days Spent Watching Movies per Rating") +
+      theme(
+        axis.ticks = element_blank(),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.border = element_blank()
+      )
+}) %>% 
+  `names<-`(as.character(unique(ratings[["YearRated"]])))
+
+for (iyear in as.character(unique(ratings[["YearRated"]]))) {
+  cat("\n##", iyear, "{-}\n")
+  print(ggdraw(plot = p_ratings_runtime[[iyear]], theme_dark = theme_dark))
+  cat("\n")
+}
+```
+
+# Rating distribution {.tabset}
+```{r FifthPlot, results = "asis"}
+p_ratings_distribution <- lapply(unique(ratings[["YearRated"]]), function(iyear) {
+  ratings %>% 
+    filter(YearRated==iyear) %>% 
+    select(`Your Rating`, `IMDb Rating`) %>%
+    gather(key = Who, value = Rating) %>%
+    ggplot(aes(x = round(Rating, digits = 0), fill = Who)) +
+      geom_density(
+        aes(y = ..count.. / sum(..count..) * 100), 
+        bw = 2, 
+        alpha = 0.75, 
+        colour = "white"
+      ) +
+      geom_bar(
+        aes(y = ..count.. / sum(..count..)), 
+        width = 0.90, 
+        colour = "white", 
+        position = position_dodge(preserve = "single")
+      ) +
+      scale_x_continuous(name = "Rating", limits = c(0, 10), breaks = seq(0, 10, 2)) +
+      scale_y_continuous(labels = percent) +
+      scale_fill_viridis(discrete = TRUE) +
+      labs(x = "Rating", y = "Proportion", title = "Distribution of Ratings") +
+      theme(legend.position = c(0, 1), legend.justification = c(-0.05, 1.05))
+}) %>% 
+  `names<-`(as.character(unique(ratings[["YearRated"]])))
+
+for (iyear in as.character(unique(ratings[["YearRated"]]))) {
+  cat("\n##", iyear, "{-}\n")
+  print(ggdraw(plot = p_ratings_distribution[[iyear]], theme_dark = theme_dark))
+  cat("\n")
+}
+```
+
+# Final
+```{r Coeos_IMDb, fig.height = 4*4, fig.width = 5*2, eval = FALSE}
 pTop <- ratings %>%
   arrange(desc(Your.Rating), desc(IMDb.Rating)) %>%
   select(Title, Your.Rating, IMDb.Rating) %>%
