@@ -357,7 +357,7 @@ p_genres_distribution <- lapply(unique(ratings[["YearRated"]]), function(iyear) 
       ) +
       coord_polar(theta = "y") +
       scale_fill_viridis(discrete = TRUE, guide = guide_legend(ncol = 2)) +
-      labs(title = "Genres distribution") +
+      labs(title = "Distribution of Genres") +
       theme(
         axis.ticks = element_blank(),
         axis.text = element_blank(),
@@ -529,9 +529,9 @@ p_movies_theatres <- lapply(unique(movies_theatres[["Year"]]), function(iyear) {
       size = Year==iyear
     )
   {ggplot(data = dta) +
-    geom_rect(fill = "grey25", xmin = 1, xmax = 0, ymin = 0, ymax = 20) +
     geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "grey50", size = 0.2) +
     geom_hline(yintercept = seq(0, 20, by = 5), colour = "grey50", size = 0.4) +
+    geom_rect(fill = "grey20", xmin = 1, xmax = 0, ymin = 0, ymax = 20) +
     geom_vline(aes(xintercept = as.integer(Month)), colour = "grey50", size = 0.2) +
     geom_text(
       data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
@@ -712,8 +712,18 @@ for (iyear in as.character(unique(ratings[["YearRated"]]))) {
     ),
     ggarrange(
       p_genres_rating[[iyear]],
-      p_genres_distribution[[iyear]], 
-      p_ratings_runtime[[iyear]], 
+      p_genres_distribution[[iyear]] + 
+        guides(fill = guide_legend(
+          ncol = 1, 
+          keyheight = unit(params$ggFontSize*2/3, "pt"),
+          keywidth = unit(params$ggFontSize, "pt")
+        )), 
+      p_ratings_runtime[[iyear]] + 
+        guides(fill = guide_legend(
+          ncol = 1, 
+          keyheight = unit(params$ggFontSize*1.2, "pt"),
+          keywidth = unit(params$ggFontSize*1.2, "pt")
+        )), 
       ncol = 3,
       align = "v",
       widths = c(0.5, 0.25, 0.25)
