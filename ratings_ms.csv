@@ -1,0 +1,505 @@
+Const,Your Rating,Date Rated,Title,URL,Title Type,IMDb Rating,Runtime (mins),Year,Genres,Num Votes,Release Date,Directors,YearRated,Metascore Rating
+tt1014759,4,2016-05-01,Alice in Wonderland,https://www.imdb.com/title/tt1014759/,movie,6.5,108,2010,"Adventure, Family, Fantasy",340471,2010-02-25,Tim Burton,2016,5.3
+tt1051904,2,2016-07-27,Goosebumps,https://www.imdb.com/title/tt1051904/,movie,6.3,103,2015,"Adventure, Comedy, Family, Fantasy, Horror",64073,2015-10-03,Rob Letterman,2016,6
+tt1172049,7,2016-04-10,Demolition,https://www.imdb.com/title/tt1172049/,movie,7,101,2015,"Comedy, Drama",69815,2015-09-10,Jean-Marc Vallée,2016,4.9
+tt1179933,7,2016-03-28,10 Cloverfield Lane,https://www.imdb.com/title/tt1179933/,movie,7.2,103,2016,"Drama, Horror, Mystery, Sci-Fi, Thriller",234793,2016-03-08,Dan Trachtenberg,2016,7.6
+tt1186367,4,2017-06-05,Ninja Assassin,https://www.imdb.com/title/tt1186367/,movie,6.4,99,2009,"Action, Crime, Fantasy, Thriller",62244,2009-09-29,James McTeigue,2017,3.4
+tt0118715,6,2016-04-10,The Big Lebowski,https://www.imdb.com/title/tt0118715/,movie,8.1,117,1998,"Comedy, Crime",619227,1998-02-15,"Joel Coen, Ethan Coen",2016,6.9
+tt1201167,3,2018-03-03,Funny People,https://www.imdb.com/title/tt1201167/,movie,6.3,146,2009,"Comedy, Drama",106170,2009-07-20,Judd Apatow,2018,6
+tt0120586,7,2016-12-15,American History X,https://www.imdb.com/title/tt0120586/,movie,8.5,119,1998,"Crime, Drama",893106,1998-10-30,Tony Kaye,2016,6.2
+tt1211837,7,2016-10-30,Doctor Strange,https://www.imdb.com/title/tt1211837/,movie,7.5,115,2016,"Action, Adventure, Fantasy, Sci-Fi",405225,2016-10-13,Scott Derrickson,2016,7.2
+tt1212428,7,2017-03-18,The Lost City of Z,https://www.imdb.com/title/tt1212428/,movie,6.6,141,2016,"Adventure, Biography, Drama, History",55909,2016-10-15,James Gray,2017,7.8
+tt1219827,7,2017-03-31,Ghost in the Shell,https://www.imdb.com/title/tt1219827/,movie,6.4,107,2017,"Action, Crime, Drama, Mystery, Sci-Fi, Thriller",150648,2017-03-16,Rupert Sanders,2017,5.2
+tt1223236,5,2016-12-25,African Cats,https://www.imdb.com/title/tt1223236/,movie,7.6,89,2011,"Documentary, Adventure",5548,2011-04-21,"Alastair Fothergill, Keith Scholey",2016,6.1
+tt1235189,4,2016-07-23,Wild Target,https://www.imdb.com/title/tt1235189/,movie,6.8,98,2010,"Action, Comedy, Crime",32509,2010-04-08,Jonathan Lynn,2016,4.1
+tt1241317,3,2017-08-27,Death Note,https://www.imdb.com/title/tt1241317/,movie,4.6,101,2017,"Adventure, Crime, Drama, Fantasy, Horror, Mystery, Thriller",57185,2017-08-24,Adam Wingard,2017,4.3
+tt0125439,6,2017-06-25,Notting Hill,https://www.imdb.com/title/tt0125439/,movie,7.1,124,1999,"Comedy, Drama, Romance",228467,1999-05-13,Roger Michell,2017,6.6
+tt1289401,5,2016-08-14,Ghostbusters,https://www.imdb.com/title/tt1289401/,movie,5.3,116,2016,"Action, Comedy, Fantasy, Sci-Fi",166897,2016-07-09,Paul Feig,2016,6
+tt0129167,6,2016-12-19,The Iron Giant,https://www.imdb.com/title/tt0129167/,movie,8,86,1999,"Animation, Action, Adventure, Comedy, Drama, Family, Sci-Fi",146718,1999-07-31,Brad Bird,2016,8.5
+tt1292566,3,2016-07-14,How to Be Single,https://www.imdb.com/title/tt1292566/,movie,6.1,110,2016,"Comedy, Romance",67958,2016-01-08,Christian Ditter,2016,5.1
+tt1293847,4,2017-05-06,xXx: Return of Xander Cage,https://www.imdb.com/title/tt1293847/,movie,5.2,107,2017,"Action, Adventure, Thriller",68917,2017-01-05,D.J. Caruso,2017,4.2
+tt1311071,4,2016-01-07,Kill Your Darlings,https://www.imdb.com/title/tt1311071/,movie,6.5,104,2013,"Biography, Drama, Romance, Thriller",30650,2013-01-18,John Krokidas,2016,6.5
+tt1322354,4,2016-09-18,Protéger & servir,https://www.imdb.com/title/tt1322354/,movie,4.2,91,2010,Comedy,532,2010-01-22,Eric Lavaine,2016,NA
+tt0133152,4,2016-05-21,Planet of the Apes,https://www.imdb.com/title/tt0133152/,movie,5.7,119,2001,"Action, Adventure, Sci-Fi, Thriller",194658,2001-07-26,Tim Burton,2016,5
+tt1355631,7,2016-09-22,The Infiltrator,https://www.imdb.com/title/tt1355631/,movie,7,127,2016,"Biography, Crime, Drama, Thriller",55689,2016-07-06,Brad Furman,2016,6.6
+tt1355644,5,2016-12-28,Passengers,https://www.imdb.com/title/tt1355644/,movie,7,116,2016,"Drama, Sci-Fi, Thriller",271284,2016-12-14,Morten Tyldum,2016,4.1
+tt1365519,5,2018-03-16,Tomb Raider,https://www.imdb.com/title/tt1365519/,movie,6.8,118,2018,"Action, Adventure, Drama, Fantasy, Mystery, Thriller",49404,2018-03-02,Roar Uthaug,2018,4.8
+tt1386697,4,2016-08-04,Suicide Squad,https://www.imdb.com/title/tt1386697/,movie,6.1,123,2016,"Action, Adventure, Fantasy, Sci-Fi",474826,2016-08-01,David Ayer,2016,4
+tt1389072,7,2018-01-12,Downsizing,https://www.imdb.com/title/tt1389072/,movie,5.7,135,2017,"Comedy, Drama, Sci-Fi",43961,2017-08-30,Alexander Payne,2018,6.3
+tt1390411,5,2016-03-01,In the Heart of the Sea,https://www.imdb.com/title/tt1390411/,movie,6.9,122,2015,"Action, Adventure, Biography, Drama, History, Thriller",100293,2015-12-02,Ron Howard,2016,4.7
+tt1431045,7,2016-02-14,Deadpool,https://www.imdb.com/title/tt1431045/,movie,8,108,2016,"Action, Adventure, Comedy, Sci-Fi",718233,2016-01-21,Tim Miller,2016,6.5
+tt1454029,7,2018-01-10,The Help,https://www.imdb.com/title/tt1454029/,movie,8.1,146,2011,Drama,368782,2011-08-09,Tate Taylor,2018,6.2
+tt1464763,2,2018-02-25,Mute,https://www.imdb.com/title/tt1464763/,movie,5.4,126,2018,"Mystery, Sci-Fi, Thriller",17754,2018-02-23,Duncan Jones,2018,3.5
+tt1468846,1,2016-07-10,Get a Job,https://www.imdb.com/title/tt1468846/,movie,5.3,83,2016,Comedy,17828,2016-03-25,Dylan Kidd,2016,3.1
+tt1469304,3,2017-06-23,Baywatch,https://www.imdb.com/title/tt1469304/,movie,5.6,116,2017,"Action, Comedy, Crime",100768,2017-05-12,Seth Gordon,2017,3.7
+tt1472584,4,2017-01-01,Max Steel,https://www.imdb.com/title/tt1472584/,movie,4.6,92,2016,"Action, Adventure, Family, Fantasy, Sci-Fi",14970,2016-10-13,Stewart Hendler,2017,2.2
+tt1473832,7,2016-10-08,Bridget Jones's Baby,https://www.imdb.com/title/tt1473832/,movie,6.6,118,2016,"Comedy, Romance",52866,2016-09-05,Sharon Maguire,2016,5.9
+tt1485796,7,2018-01-26,The Greatest Showman,https://www.imdb.com/title/tt1485796/,movie,7.8,105,2017,"Biography, Drama, Music",112028,2017-12-20,Michael Gracey,2018,4.8
+tt1489889,5,2016-08-29,Central Intelligence,https://www.imdb.com/title/tt1489889/,movie,6.3,107,2016,"Action, Comedy, Crime",117133,2016-06-10,Rawson Marshall Thurber,2016,5.2
+tt1528854,3,2016-04-02,Daddy's Home,https://www.imdb.com/title/tt1528854/,movie,6.1,96,2015,Comedy,85739,2015-12-09,Sean Anders,2016,4.2
+tt1536537,4,2017-08-29,What Happened to Monday,https://www.imdb.com/title/tt1536537/,movie,6.9,123,2017,"Action, Adventure, Crime, Drama, Mystery, Sci-Fi, Thriller",60914,2017-08-06,Tommy Wirkola,2017,4.7
+tt1542768,3,2017-08-02,True Memoirs of an International Assassin,https://www.imdb.com/title/tt1542768/,movie,5.9,98,2016,"Action, Comedy",14904,2016-11-11,Jeff Wadlow,2017,3.7
+tt1590193,4,2018-01-30,The Commuter,https://www.imdb.com/title/tt1590193/,movie,6.3,105,2018,"Action, Crime, Drama, Mystery, Thriller",37133,2018-01-08,Jaume Collet-Serra,2018,5.6
+tt1594972,2,2016-12-24,Norm of the North,https://www.imdb.com/title/tt1594972/,movie,3.6,90,2016,"Animation, Adventure, Comedy, Family",7344,2016-01-14,Trevor Wall,2016,2.1
+tt1608290,2,2016-03-06,Zoolander 2,https://www.imdb.com/title/tt1608290/,movie,4.7,101,2016,Comedy,55355,2016-02-04,Ben Stiller,2016,3.4
+tt1618442,3,2016-02-27,The Last Witch Hunter,https://www.imdb.com/title/tt1618442/,movie,6,106,2015,"Action, Adventure, Fantasy",79364,2015-10-13,Breck Eisner,2016,3.4
+tt1619029,6,2017-05-27,Jackie,https://www.imdb.com/title/tt1619029/,movie,6.7,100,2016,"Biography, Drama, History",58991,2016-09-07,Pablo Larraín,2017,8.1
+tt1620680,3,2018-03-15,A Wrinkle in Time,https://www.imdb.com/title/tt1620680/,movie,4.2,109,2018,"Adventure, Family, Fantasy, Sci-Fi",12573,2018-02-26,Ava DuVernay,2018,5.3
+tt1628841,2,2016-07-23,Independence Day: Resurgence,https://www.imdb.com/title/tt1628841/,movie,5.2,120,2016,"Action, Adventure, Sci-Fi",144313,2016-06-20,Roland Emmerich,2016,3.2
+tt1638328,4,2017-07-28,L'amour dure trois ans,https://www.imdb.com/title/tt1638328/,movie,6.1,98,2011,"Comedy, Romance",3995,2011-12-10,Frédéric Beigbeder,2017,NA
+tt1648190,3,2017-08-11,The Dark Tower,https://www.imdb.com/title/tt1648190/,movie,5.7,95,2017,"Action, Adventure, Fantasy, Horror, Sci-Fi, Western",87662,2017-08-03,Nikolaj Arcel,2017,3.4
+tt1655442,8,2016-04-22,The Artist,https://www.imdb.com/title/tt1655442/,movie,7.9,100,2011,"Comedy, Drama, Romance",208727,2011-05-15,Michel Hazanavicius,2016,8.9
+tt1659619,6,2016-09-16,L'odyssée,https://www.imdb.com/title/tt1659619/,movie,6.7,122,2016,"Adventure, Biography",3320,2016-01-31,Jérôme Salle,2016,NA
+tt1661275,6,2017-08-12,Their Finest,https://www.imdb.com/title/tt1661275/,movie,6.8,117,2016,"Comedy, Drama, Romance, War",12420,2016-09-11,Lone Scherfig,2017,7.6
+tt1663202,8,2016-02-28,The Revenant,https://www.imdb.com/title/tt1663202/,movie,8,156,2015,"Adventure, Drama, History, Thriller, Western",557133,2015-12-16,Alejandro G. Iñárritu,2016,7.6
+tt1677720,6,2018-03-28,Ready Player One,https://www.imdb.com/title/tt1677720/,movie,7.8,140,2018,"Action, Adventure, Sci-Fi",103870,2018-03-11,Steven Spielberg,2018,6.4
+tt1679335,7,2016-10-22,Trolls,https://www.imdb.com/title/tt1679335/,movie,6.5,92,2016,"Animation, Adventure, Comedy, Family, Fantasy, Music",56272,2016-10-08,"Mike Mitchell, Walt Dohrn",2016,5.6
+tt1691916,6,2017-07-15,Before I Fall,https://www.imdb.com/title/tt1691916/,movie,6.4,98,2017,"Drama, Mystery",30730,2017-01-21,Ry Russo-Young,2017,5.8
+tt1700841,3,2016-12-03,Sausage Party,https://www.imdb.com/title/tt1700841/,movie,6.2,89,2016,"Animation, Adventure, Comedy, Fantasy",143473,2016-03-14,"Conrad Vernon, Greg Tiernan",2016,6.6
+tt1707386,5,2016-05-16,Les Misérables,https://www.imdb.com/title/tt1707386/,movie,7.6,158,2012,"Drama, History, Music, Romance, War",271029,2012-12-05,Tom Hooper,2016,6.3
+tt1712261,4,2016-03-16,Triple 9,https://www.imdb.com/title/tt1712261/,movie,6.3,115,2016,"Action, Crime, Drama, Thriller",55698,2016-02-16,John Hillcoat,2016,5.2
+tt1715873,5,2017-11-26,10 Years,https://www.imdb.com/title/tt1715873/,movie,6.1,100,2011,"Comedy, Drama, Romance",21329,2011-09-12,Jamie Linden,2017,6.1
+tt1723642,3,2017-12-03,Sur la piste du Marsupilami,https://www.imdb.com/title/tt1723642/,movie,5.5,105,2012,"Adventure, Comedy, Family",2971,2012-04-04,Alain Chabat,2017,NA
+tt1734493,5,2017-06-04,Unlocked,https://www.imdb.com/title/tt1734493/,movie,6.2,98,2017,"Action, Drama, Mystery, Thriller",16785,2017-04-24,Michael Apted,2017,4.6
+tt1741273,4,2018-02-26,Secret in Their Eyes,https://www.imdb.com/title/tt1741273/,movie,6.3,111,2015,"Crime, Drama, Mystery, Thriller",32738,2015-11-12,Billy Ray,2018,4.5
+tt1742336,7,2016-07-16,Your Sister's Sister,https://www.imdb.com/title/tt1742336/,movie,6.7,90,2011,"Comedy, Drama",23919,2011-09-11,Lynn Shelton,2016,7.2
+tt1748122,7,2016-01-31,Moonrise Kingdom,https://www.imdb.com/title/tt1748122/,movie,7.8,94,2012,"Adventure, Comedy, Drama, Romance",272904,2012-05-16,Wes Anderson,2016,8.4
+tt1753383,3,2017-04-30,A Dog's Purpose,https://www.imdb.com/title/tt1753383/,movie,6.9,100,2017,"Adventure, Comedy, Drama, Family, Fantasy",43664,2017-01-19,Lasse Hallström,2017,4.3
+tt1758810,4,2017-12-02,The Snowman,https://www.imdb.com/title/tt1758810/,movie,5.1,119,2017,"Crime, Drama, Mystery, Thriller",34265,2017-10-07,Tomas Alfredson,2017,2.3
+tt1781922,5,2016-01-01,No Escape,https://www.imdb.com/title/tt1781922/,movie,6.8,103,2015,"Action, Thriller",64820,2015-08-26,John Erick Dowdle,2016,3.8
+tt1790809,5,2017-05-25,Pirates of the Caribbean: Dead Men Tell No Tales,https://www.imdb.com/title/tt1790809/,movie,6.6,129,2017,"Action, Adventure, Fantasy",192122,2017-05-11,"Espen Sandberg, Joachim Rønning",2017,3.9
+tt1800302,5,2017-04-19,Gold,https://www.imdb.com/title/tt1800302/,movie,6.7,120,2016,"Adventure, Drama, Thriller",43040,2016-12-29,Stephen Gaghan,2017,4.9
+tt0180052,1,2016-12-15,The Adventures of Pluto Nash,https://www.imdb.com/title/tt0180052/,movie,3.8,95,2002,"Comedy, Action, Sci-Fi",21691,2002-08-16,Ron Underwood,2016,1.2
+tt1825683,8,2018-02-18,Black Panther,https://www.imdb.com/title/tt1825683/,movie,7.7,134,2018,"Action, Adventure, Sci-Fi",237339,2018-01-29,Ryan Coogler,2018,8.8
+tt1850457,4,2016-05-14,Sisters,https://www.imdb.com/title/tt1850457/,movie,6,118,2015,Comedy,55213,2015-12-12,Jason Moore,2016,5.8
+tt1856101,7,2017-10-04,Blade Runner 2049,https://www.imdb.com/title/tt1856101/,movie,8.1,164,2017,"Drama, Mystery, Sci-Fi, Thriller",285812,2017-10-03,Denis Villeneuve,2017,8.1
+tt1859650,5,2017-09-27,To Rome with Love,https://www.imdb.com/title/tt1859650/,movie,6.3,112,2012,"Comedy, Romance",76227,2012-04-20,Woody Allen,2017,5.4
+tt1860213,3,2016-07-28,Dirty Grandpa,https://www.imdb.com/title/tt1860213/,movie,5.9,102,2016,Comedy,90198,2016-01-20,Dan Mazer,2016,2.1
+tt1860357,7,2017-05-21,Deepwater Horizon,https://www.imdb.com/title/tt1860357/,movie,7.2,107,2016,"Action, Drama, Thriller",118181,2016-09-13,Peter Berg,2017,6.8
+tt1865505,7,2017-10-29,Song of the Sea,https://www.imdb.com/title/tt1865505/,movie,8.1,93,2014,"Animation, Adventure, Drama, Family, Fantasy",38531,2014-09-06,Tomm Moore,2017,8.5
+tt1878870,8,2017-05-21,The Edge of Seventeen,https://www.imdb.com/title/tt1878870/,movie,7.4,104,2016,"Comedy, Drama",70888,2016-09-16,Kelly Fremon Craig,2017,7.7
+tt1895587,8,2016-03-05,Spotlight,https://www.imdb.com/title/tt1895587/,movie,8.1,128,2015,"Crime, Drama, History",321256,2015-09-03,Tom McCarthy,2016,9.3
+tt1935859,6,2016-10-08,Miss Peregrine's Home for Peculiar Children,https://www.imdb.com/title/tt1935859/,movie,6.7,127,2016,"Adventure, Drama, Family, Fantasy",127491,2016-09-25,Tim Burton,2016,5.7
+tt1959563,4,2017-08-25,The Hitman's Bodyguard,https://www.imdb.com/title/tt1959563/,movie,6.9,118,2017,"Action, Comedy, Thriller",126559,2017-08-10,Patrick Hughes,2017,4.7
+tt1969062,6,2016-02-13,Infinitely Polar Bear,https://www.imdb.com/title/tt1969062/,movie,7,90,2014,"Comedy, Drama, Romance",13073,2014-01-18,Maya Forbes,2016,6.4
+tt1972591,6,2017-05-16,King Arthur: Legend of the Sword,https://www.imdb.com/title/tt1972591/,movie,6.8,126,2017,"Action, Adventure, Drama, Fantasy",146103,2017-04-27,Guy Ritchie,2017,4.1
+tt1974419,3,2016-11-27,The Neon Demon,https://www.imdb.com/title/tt1974419/,movie,6.2,118,2016,"Horror, Thriller",63475,2016-05-20,Nicolas Winding Refn,2016,5.1
+tt1976009,4,2016-02-28,Victor Frankenstein,https://www.imdb.com/title/tt1976009/,movie,6,110,2015,"Drama, Horror, Sci-Fi, Thriller",43349,2015-11-10,Paul McGuigan,2016,3.6
+tt1979319,7,2016-05-10,Rurôni Kenshin: Meiji kenkaku roman tan,https://www.imdb.com/title/tt1979319/,movie,7.6,134,2012,"Action, Drama, History",17105,2012-08-25,Keishi Ohtomo,2016,NA
+tt1981677,6,2017-09-09,Pitch Perfect,https://www.imdb.com/title/tt1981677/,movie,7.2,112,2012,"Comedy, Music, Romance",241839,2012-09-28,Jason Moore,2017,6.6
+tt1985949,2,2016-05-14,Angry Birds,https://www.imdb.com/title/tt1985949/,movie,6.3,97,2016,"Animation, Action, Adventure, Comedy, Family",63872,2016-05-01,"Fergal Reilly, Clay Kaytis",2016,4.3
+tt2005151,7,2016-09-19,War Dogs,https://www.imdb.com/title/tt2005151/,movie,7.1,114,2016,"Comedy, Crime, Drama, War",135841,2016-08-03,Todd Phillips,2016,5.7
+tt2025690,5,2016-02-28,The Finest Hours,https://www.imdb.com/title/tt2025690/,movie,6.8,117,2016,"Action, Drama, History, Thriller",51624,2016-01-27,Craig Gillespie,2016,5.8
+tt2034800,4,2017-01-16,The Great Wall,https://www.imdb.com/title/tt2034800/,movie,6,103,2016,"Action, Adventure, Fantasy, Thriller",97439,2016-12-06,Yimou Zhang,2017,4.2
+tt2049543,3,2016-05-30,Synchronicity,https://www.imdb.com/title/tt2049543/,movie,5.5,101,2015,"Drama, Mystery, Romance, Sci-Fi",8361,2015-07-22,Jacob Gentry,2016,3.9
+tt2058673,4,2016-04-09,Point Break,https://www.imdb.com/title/tt2058673/,movie,5.3,114,2015,"Action, Crime, Sport, Thriller",49821,2015-12-01,Ericson Core,2016,3.4
+tt2062700,6,2017-08-05,Song to Song,https://www.imdb.com/title/tt2062700/,movie,5.7,129,2017,"Drama, Music, Romance",12502,2017-03-10,Terrence Malick,2017,5.4
+tt2072230,4,2016-07-15,Shingeki no kyojin,https://www.imdb.com/title/tt2072230/,movie,5.1,98,2015,"Action, Adventure, Drama, Fantasy, Horror, Sci-Fi",10232,2015-07-14,Shinji Higuchi,2016,NA
+tt2080374,8,2016-02-10,Steve Jobs,https://www.imdb.com/title/tt2080374/,movie,7.2,122,2015,"Biography, Drama",129664,2015-09-05,Danny Boyle,2016,8.2
+tt2093991,5,2016-08-01,Elvis & Nixon,https://www.imdb.com/title/tt2093991/,movie,6.4,86,2016,"Comedy, History",10893,2016-04-18,Liza Johnson,2016,5.9
+tt2094766,6,2016-12-22,Assassin's Creed,https://www.imdb.com/title/tt2094766/,movie,5.8,115,2016,"Action, Adventure, Fantasy, Sci-Fi",150976,2016-12-13,Justin Kurzel,2016,3.6
+tt2106651,5,2017-06-26,Spectral,https://www.imdb.com/title/tt2106651/,movie,6.3,107,2016,"Action, Mystery, Sci-Fi, Thriller",35500,2016-12-09,Nic Mathieu,2017,NA
+tt2119532,8,2016-12-11,Hacksaw Ridge,https://www.imdb.com/title/tt2119532/,movie,8.2,139,2016,"Biography, Drama, History, War",315180,2016-09-04,Mel Gibson,2016,7.1
+tt2140037,5,2016-01-30,Jane Got a Gun,https://www.imdb.com/title/tt2140037/,movie,5.9,98,2015,"Action, Drama, Western",17157,2015-12-31,Gavin O'Connor,2016,4.9
+tt2140479,6,2016-11-12,The Accountant,https://www.imdb.com/title/tt2140479/,movie,7.4,128,2016,"Action, Crime, Drama, Thriller",209635,2016-10-10,Gavin O'Connor,2016,5.1
+tt2179121,7,2017-01-16,Le prénom,https://www.imdb.com/title/tt2179121/,movie,7.3,109,2012,"Comedy, Drama",12597,2012-04-23,"Matthieu Delaporte, Alexandre de La Patellière",2017,6.6
+tt2239822,6,2017-07-25,Valerian and the City of a Thousand Planets,https://www.imdb.com/title/tt2239822/,movie,6.5,137,2017,"Action, Adventure, Fantasy, Sci-Fi",113723,2017-07-17,Luc Besson,2017,5.1
+tt2241351,6,2016-05-19,Money Monster,https://www.imdb.com/title/tt2241351/,movie,6.5,98,2016,"Crime, Drama, Thriller",78562,2016-05-12,Jodie Foster,2016,5.5
+tt2250912,7,2017-07-13,Spider-Man: Homecoming,https://www.imdb.com/title/tt2250912/,movie,7.5,133,2017,"Action, Adventure, Sci-Fi",309370,2017-06-28,Jon Watts,2017,7.3
+tt2261287,6,2016-12-19,Ballerina,https://www.imdb.com/title/tt2261287/,movie,6.8,89,2016,"Animation, Adventure, Comedy, Family, Music",13275,2016-10-19,"Mimi Maynard, Éric Warin, Eric Summer, Paulette Victor-Lifton",2016,4.8
+tt2267968,7,2016-03-30,Kung Fu Panda 3,https://www.imdb.com/title/tt2267968/,movie,7.1,95,2016,"Animation, Action, Adventure, Comedy, Family, Fantasy",102434,2016-01-16,"Alessandro Carloni, Jennifer Yuh Nelson",2016,6.6
+tt2277860,7,2016-06-23,Finding Dory,https://www.imdb.com/title/tt2277860/,movie,7.3,97,2016,"Animation, Adventure, Comedy, Family",189703,2016-06-08,"Andrew Stanton, Angus MacLane",2016,7.7
+tt2283362,5,2017-12-21,Jumanji: Welcome to the Jungle,https://www.imdb.com/title/tt2283362/,movie,7,119,2017,"Action, Adventure, Comedy, Fantasy",149854,2017-12-05,Jake Kasdan,2017,5.8
+tt2304933,4,2016-01-31,The 5th Wave,https://www.imdb.com/title/tt2304933/,movie,5.2,112,2016,"Action, Adventure, Sci-Fi, Thriller",83204,2016-01-14,J Blakeson,2016,3.3
+tt2316204,6,2017-05-10,Alien: Covenant,https://www.imdb.com/title/tt2316204/,movie,6.5,122,2017,"Horror, Sci-Fi, Thriller",196531,2017-05-04,Ridley Scott,2017,6.5
+tt2345759,4,2017-06-16,The Mummy,https://www.imdb.com/title/tt2345759/,movie,5.5,110,2017,"Action, Adventure, Fantasy, Thriller",130468,2017-05-22,Alex Kurtzman,2017,3.4
+tt2361317,5,2017-01-22,Live by Night,https://www.imdb.com/title/tt2361317/,movie,6.4,129,2016,"Action, Crime, Drama, Thriller",41472,2016-12-13,Ben Affleck,2017,4.9
+tt2380307,9,2017-11-26,Coco,https://www.imdb.com/title/tt2380307/,movie,8.5,105,2017,"Animation, Adventure, Comedy, Family, Fantasy, Music, Mystery",163136,2017-10-20,"Adrian Molina, Lee Unkrich",2017,8.1
+tt2381111,8,2017-01-10,Brooklyn,https://www.imdb.com/title/tt2381111/,movie,7.5,117,2015,"Drama, Romance",107290,2015-01-26,John Crowley,2017,8.7
+tt2381991,3,2016-04-21,The Huntsman: Winter's War,https://www.imdb.com/title/tt2381991/,movie,6.1,114,2016,"Action, Adventure, Drama, Fantasy",77932,2016-03-29,Cedric Nicolas-Troyan,2016,3.5
+tt2398241,4,2017-04-08,Smurfs: The Lost Village,https://www.imdb.com/title/tt2398241/,movie,5.9,90,2017,"Animation, Adventure, Comedy, Family, Fantasy",12958,2017-03-23,Kelly Asbury,2017,4
+tt2404233,2,2016-05-21,Gods of Egypt,https://www.imdb.com/title/tt2404233/,movie,5.4,127,2016,"Action, Adventure, Fantasy",85366,2016-02-24,Alex Proyas,2016,2.5
+tt2404435,5,2016-10-08,The Magnificent Seven,https://www.imdb.com/title/tt2404435/,movie,6.9,132,2016,"Action, Adventure, Western",151795,2016-09-08,Antoine Fuqua,2016,5.4
+tt2406566,4,2017-08-15,Atomic Blonde,https://www.imdb.com/title/tt2406566/,movie,6.7,115,2017,"Action, Mystery, Thriller",118632,2017-03-12,David Leitch,2017,6.3
+tt2441982,2,2016-04-11,Les Visiteurs: La Révolution,https://www.imdb.com/title/tt2441982/,movie,4.5,110,2016,"Comedy, Fantasy",2469,2016-04-06,Jean-Marie Poiré,2016,NA
+tt2446980,5,2016-02-04,Joy,https://www.imdb.com/title/tt2446980/,movie,6.6,124,2015,Drama,109199,2015-12-13,David O. Russell,2016,5.6
+tt2452386,4,2017-09-09,The Fundamentals of Caring,https://www.imdb.com/title/tt2452386/,movie,7.3,97,2016,"Comedy, Drama",40393,2016-01-29,Rob Burnett,2017,5.5
+tt2503944,3,2016-01-30,Burnt,https://www.imdb.com/title/tt2503944/,movie,6.6,101,2015,"Comedy, Drama",87028,2015-10-18,John Wells,2016,4.2
+tt2509850,5,2016-05-22,The Rewrite,https://www.imdb.com/title/tt2509850/,movie,6.2,107,2014,"Comedy, Romance",15164,2014-06-15,Marc Lawrence,2016,5.1
+tt2515180,7,2016-05-23,L'origine de la violence,https://www.imdb.com/title/tt2515180/,movie,6.5,116,2016,"Drama, Romance",70,2016-05-25,Élie Chouraqui,2016,NA
+tt2527336,7,2017-12-23,Star Wars: Episode VIII - The Last Jedi,https://www.imdb.com/title/tt2527336/,movie,7.3,152,2017,"Action, Adventure, Fantasy, Sci-Fi",368831,2017-12-09,Rian Johnson,2017,8.5
+tt2543164,8,2016-12-10,Arrival,https://www.imdb.com/title/tt2543164/,movie,7.9,116,2016,"Drama, Mystery, Sci-Fi, Thriller",445529,2016-09-01,Denis Villeneuve,2016,8.1
+tt2543472,8,2017-12-21,Wonder,https://www.imdb.com/title/tt2543472/,movie,8,113,2017,"Drama, Family",71202,2017-11-14,Stephen Chbosky,2017,6.6
+tt2547584,7,2016-10-08,The Light Between Oceans,https://www.imdb.com/title/tt2547584/,movie,7.2,133,2016,"Drama, Romance",38951,2016-09-01,Derek Cianfrance,2016,6
+tt2548396,4,2018-02-19,The Cloverfield Paradox,https://www.imdb.com/title/tt2548396/,movie,5.6,102,2018,"Horror, Mystery, Sci-Fi, Thriller",62271,2018-02-04,Julius Onah,2018,3.7
+tt2557478,3,2018-03-22,Pacific Rim: Uprising,https://www.imdb.com/title/tt2557478/,movie,5.9,111,2018,"Action, Adventure, Sci-Fi",31441,2018-03-21,Steven S. DeKnight,2018,4.4
+tt2567026,5,2016-06-05,Alice Through the Looking Glass,https://www.imdb.com/title/tt2567026/,movie,6.2,113,2016,"Adventure, Family, Fantasy",69444,2016-05-10,James Bobin,2016,3.4
+tt2568862,4,2017-05-05,Going in Style,https://www.imdb.com/title/tt2568862/,movie,6.6,96,2017,"Comedy, Crime",55370,2017-04-01,Zach Braff,2017,5
+tt2582496,7,2016-03-28,Me and Earl and the Dying Girl,https://www.imdb.com/title/tt2582496/,movie,7.8,105,2015,"Comedy, Drama",103852,2015-01-25,Alfonso Gomez-Rejon,2016,7.4
+tt2582782,8,2016-09-17,Hell or High Water,https://www.imdb.com/title/tt2582782/,movie,7.6,102,2016,"Crime, Drama, Thriller, Western",152015,2016-05-16,David Mackenzie,2016,8.8
+tt2592614,4,2017-04-11,Resident Evil: The Final Chapter,https://www.imdb.com/title/tt2592614/,movie,5.6,107,2016,"Action, Horror, Sci-Fi, Thriller",66121,2016-12-13,Paul W.S. Anderson,2017,4.9
+tt2597892,3,2017-08-06,Viral,https://www.imdb.com/title/tt2597892/,movie,5.5,85,2016,"Drama, Horror, Sci-Fi, Thriller",6137,2016-07-29,"Henry Joost, Ariel Schulman",2017,NA
+tt2638144,5,2016-09-09,Ben-Hur,https://www.imdb.com/title/tt2638144/,movie,5.7,123,2016,"Action, Adventure, Drama, History",34632,2016-08-17,Timur Bekmambetov,2016,3.8
+tt2649554,6,2016-03-27,Midnight Special,https://www.imdb.com/title/tt2649554/,movie,6.6,112,2016,"Action, Drama, Mystery, Sci-Fi, Thriller",63248,2016-02-12,Jeff Nichols,2016,7.6
+tt2652118,5,2016-08-01,"Crouching Tiger, Hidden Dragon: Sword of Destiny",https://www.imdb.com/title/tt2652118/,movie,6.1,96,2016,"Action, Adventure, Drama, Fantasy",14391,2016-02-18,Woo-Ping Yuen,2016,4.7
+tt2660888,6,2016-08-17,Star Trek: Beyond,https://www.imdb.com/title/tt2660888/,movie,7.1,122,2016,"Action, Adventure, Sci-Fi, Thriller",192929,2016-07-20,Justin Lin,2016,6.8
+tt2667380,2,2016-05-30,Kill Command,https://www.imdb.com/title/tt2667380/,movie,5.7,99,2016,"Action, Horror, Sci-Fi, Thriller",10538,2016-05-13,Steven Gomez,2016,NA
+tt2671706,7,2017-04-15,Fences,https://www.imdb.com/title/tt2671706/,movie,7.2,139,2016,Drama,74277,2016-12-06,Denzel Washington,2017,7.9
+tt2674426,7,2016-08-14,Me Before You,https://www.imdb.com/title/tt2674426/,movie,7.4,106,2016,"Drama, Romance",143726,2016-05-23,Thea Sharrock,2016,5.1
+tt2702724,5,2016-09-04,The Boss,https://www.imdb.com/title/tt2702724/,movie,5.4,99,2016,Comedy,34009,2016-03-21,Ben Falcone,2016,4
+tt2704998,8,2018-04-19,Game Night,https://www.imdb.com/title/tt2704998/,movie,7.4,100,2018,"Comedy, Crime, Mystery, Thriller",29087,2018-02-15,"John Francis Daley, Jonathan Goldstein",2018,6.6
+tt2709768,6,2016-07-27,The Secret Life of Pets,https://www.imdb.com/title/tt2709768/,movie,6.5,87,2016,"Animation, Adventure, Comedy, Family",144321,2016-06-16,"Yarrow Cheney, Chris Renaud",2016,6.1
+tt2763304,5,2017-03-04,T2 Trainspotting,https://www.imdb.com/title/tt2763304/,movie,7.3,117,2017,Drama,80526,2017-01-22,Danny Boyle,2017,6.7
+tt2771200,7,2017-03-22,Beauty and the Beast,https://www.imdb.com/title/tt2771200/,movie,7.2,129,2017,"Family, Fantasy, Music, Romance",205465,2017-02-23,Bill Condon,2017,6.5
+tt2788710,2,2018-02-25,The Interview,https://www.imdb.com/title/tt2788710/,movie,6.6,112,2014,Comedy,274118,2014-12-11,"Evan Goldberg, Seth Rogen",2018,5.2
+tt2788732,7,2016-08-19,Pete's Dragon,https://www.imdb.com/title/tt2788732/,movie,6.7,102,2016,"Action, Adventure, Comedy, Family, Fantasy",44722,2016-07-31,David Lowery,2016,7.1
+tt2823054,3,2016-10-29,Mike and Dave Need Wedding Dates,https://www.imdb.com/title/tt2823054/,movie,6,98,2016,"Adventure, Comedy, Romance",67504,2016-06-29,Jake Szymanski,2016,5.1
+tt2848292,5,2017-09-09,Pitch Perfect 2,https://www.imdb.com/title/tt2848292/,movie,6.4,115,2015,"Comedy, Music",120729,2015-04-20,Elizabeth Banks,2017,6.3
+tt2853614,6,2018-01-28,9 mois ferme,https://www.imdb.com/title/tt2853614/,movie,6.4,82,2013,Comedy,3913,2013-08-25,Albert Dupontel,2018,NA
+tt2865120,6,2016-04-16,Ratchet & Clank,https://www.imdb.com/title/tt2865120/,movie,5.6,94,2016,"Animation, Action, Adventure, Comedy, Family, Fantasy, Sci-Fi",8271,2016-04-13,"Kevin Munroe, Jericca Cleland",2016,2.9
+tt2869728,2,2016-04-22,Ride Along 2,https://www.imdb.com/title/tt2869728/,movie,5.9,102,2016,"Action, Comedy",43816,2016-01-06,Tim Story,2016,3.2
+tt2873282,5,2018-04-05,Red Sparrow,https://www.imdb.com/title/tt2873282/,movie,6.7,140,2018,"Drama, Mystery, Thriller",42880,2018-02-19,Francis Lawrence,2018,5.3
+tt2888046,7,2016-03-06,Yip Man 3,https://www.imdb.com/title/tt2888046/,movie,7.1,105,2015,"Action, Biography, Drama, History",34083,2015-12-16,Wilson Yip,2016,5.7
+tt2927212,4,2016-08-03,Dear Eleanor,https://www.imdb.com/title/tt2927212/,movie,6,89,2016,"Adventure, Comedy, Drama, Family, History",1360,2016-07-04,Kevin Connolly,2016,NA
+tt2937696,7,2016-07-14,Everybody Wants Some!!,https://www.imdb.com/title/tt2937696/,movie,7,117,2016,Comedy,43622,2016-03-11,Richard Linklater,2016,8.3
+tt2948356,8,2016-02-22,Zootopia,https://www.imdb.com/title/tt2948356/,movie,8,108,2016,"Animation, Adventure, Comedy, Crime, Family, Mystery",342673,2016-02-11,"Rich Moore, Jared Bush, Byron Howard",2016,7.8
+tt2974918,3,2016-02-10,Alvin and the Chipmunks: The Road Chip,https://www.imdb.com/title/tt2974918/,movie,5.1,92,2015,"Animation, Adventure, Comedy, Family, Fantasy, Music",12961,2015-12-06,Walt Becker,2016,3.3
+tt2975590,4,2016-03-27,Batman v Superman: Dawn of Justice,https://www.imdb.com/title/tt2975590/,movie,6.6,151,2016,"Action, Adventure, Fantasy, Sci-Fi",529959,2016-03-12,Zack Snyder,2016,4.4
+tt2980210,5,2016-08-02,A Hologram for the King,https://www.imdb.com/title/tt2980210/,movie,6.1,98,2016,"Comedy, Drama, Romance",31928,2016-04-20,Tom Tykwer,2016,5.8
+tt3014866,5,2016-08-02,Criminal,https://www.imdb.com/title/tt3014866/,movie,6.3,113,2016,"Action, Crime, Drama, Mystery, Sci-Fi, Thriller",46436,2016-04-05,Ariel Vromen,2016,3.6
+tt3029558,7,2016-05-13,Rurôni Kenshin: Kyôto taika-hen,https://www.imdb.com/title/tt3029558/,movie,7.7,138,2014,"Action, Adventure, Drama, Fantasy",9894,2014-08-01,Keishi Ohtomo,2016,NA
+tt3040964,8,2016-04-18,The Jungle Book,https://www.imdb.com/title/tt3040964/,movie,7.5,106,2016,"Adventure, Drama, Family, Fantasy",223847,2016-04-04,Jon Favreau,2016,7.7
+tt3062096,6,2016-11-11,Inferno,https://www.imdb.com/title/tt3062096/,movie,6.2,121,2016,"Action, Adventure, Crime, Drama, Mystery, Thriller",121746,2016-10-08,Ron Howard,2016,4.2
+tt3065204,6,2016-09-10,The Conjuring 2,https://www.imdb.com/title/tt3065204/,movie,7.4,134,2016,"Horror, Mystery, Thriller",165338,2016-05-13,James Wan,2016,6.5
+tt3072482,4,2016-07-15,Hardcore Henry,https://www.imdb.com/title/tt3072482/,movie,6.7,96,2015,"Action, Adventure, Sci-Fi, Thriller",69323,2015-09-12,Ilya Naishuller,2016,5.1
+tt3078296,4,2016-01-10,Il ragazzo invisibile,https://www.imdb.com/title/tt3078296/,movie,6.2,100,2014,"Action, Adventure, Comedy, Fantasy, Sci-Fi",2422,2014-12-01,Gabriele Salvatores,2016,NA
+tt3095734,4,2017-04-01,Monster Trucks,https://www.imdb.com/title/tt3095734/,movie,5.7,104,2016,"Action, Adventure, Comedy, Family, Fantasy, Sci-Fi",11520,2016-12-21,Chris Wedge,2017,4.1
+tt3110958,6,2016-07-27,Now You See Me 2,https://www.imdb.com/title/tt3110958/,movie,6.5,129,2016,"Action, Adventure, Comedy, Crime, Mystery, Thriller",188550,2016-06-02,Jon M. Chu,2016,4.6
+tt3147312,3,2016-04-17,Desierto,https://www.imdb.com/title/tt3147312/,movie,6,88,2015,"Drama, Thriller",7155,2015-09-13,Jonás Cuarón,2016,5.1
+tt3165612,6,2016-05-08,Sleeping with Other People,https://www.imdb.com/title/tt3165612/,movie,6.5,101,2015,"Comedy, Drama, Romance",32332,2015-01-24,Leslye Headland,2016,6.4
+tt3168230,7,2016-05-08,Mr. Holmes,https://www.imdb.com/title/tt3168230/,movie,6.9,104,2015,"Drama, Mystery",54412,2015-02-08,Bill Condon,2016,6.7
+tt3170832,9,2016-08-01,Room,https://www.imdb.com/title/tt3170832/,movie,8.2,118,2015,Drama,272289,2015-09-04,Lenny Abrahamson,2016,8.6
+tt3171832,3,2017-07-29,iBoy,https://www.imdb.com/title/tt3171832/,movie,6,90,2017,"Action, Crime, Sci-Fi, Thriller",13748,2017-01-27,Adam Randall,2017,5
+tt3183660,8,2016-11-18,Fantastic Beasts and Where to Find Them,https://www.imdb.com/title/tt3183660/,movie,7.4,133,2016,"Adventure, Family, Fantasy",301503,2016-11-08,David Yates,2016,6.6
+tt3236120,6,2016-04-20,I'll See You in My Dreams,https://www.imdb.com/title/tt3236120/,movie,6.7,92,2015,"Comedy, Drama, Romance",5702,2015-01-27,Brett Haley,2016,7.5
+tt3263904,7,2016-12-04,Sully,https://www.imdb.com/title/tt3263904/,movie,7.5,96,2016,"Biography, Drama",176002,2016-09-02,Clint Eastwood,2016,7.4
+tt3268668,3,2016-01-30,Captive,https://www.imdb.com/title/tt3268668/,movie,5.4,97,2015,"Action, Crime, Drama, Thriller",5596,2015-09-17,Jerry Jameson,2016,3.6
+tt3276924,2,2016-05-08,Heist,https://www.imdb.com/title/tt3276924/,movie,6.1,93,2015,"Action, Crime, Thriller",22347,2015-11-11,Scott Mann,2016,3.7
+tt3289728,5,2016-11-27,Equals,https://www.imdb.com/title/tt3289728/,movie,6.1,101,2015,"Drama, Romance, Sci-Fi",20779,2015-09-05,Drake Doremus,2016,4.3
+tt3289956,5,2017-06-05,The Autopsy of Jane Doe,https://www.imdb.com/title/tt3289956/,movie,6.8,86,2016,"Horror, Mystery, Thriller",60098,2016-09-09,André Øvredal,2017,6.5
+tt3300542,2,2016-08-01,London Has Fallen,https://www.imdb.com/title/tt3300542/,movie,5.9,99,2016,"Action, Drama, Thriller",114181,2016-03-01,Babak Najafi,2016,2.8
+tt3315342,8,2017-03-04,Logan,https://www.imdb.com/title/tt3315342/,movie,8.1,137,2017,"Action, Drama, Sci-Fi, Thriller",473983,2017-02-17,James Mangold,2017,7.7
+tt3317234,2,2018-04-08,"Game Over, Man!",https://www.imdb.com/title/tt3317234/,movie,5.4,101,2018,"Action, Comedy",13556,2018-03-23,Kyle Newacheck,2018,3.2
+tt3322364,6,2016-03-21,Concussion,https://www.imdb.com/title/tt3322364/,movie,7.1,123,2015,"Biography, Drama, Sport",71077,2015-11-10,Peter Landesman,2016,5.5
+tt3343350,1,2017-08-27,One Shot,https://www.imdb.com/title/tt3343350/,movie,3.6,91,2014,"Action, Sci-Fi, War",399,2014-10-07,John Lyde,2017,NA
+tt3345472,6,2016-05-21,Kiseijuu,https://www.imdb.com/title/tt3345472/,movie,7,109,2014,"Action, Drama, Horror, Sci-Fi",3107,2014-10-30,Takashi Yamazaki,2016,NA
+tt3345474,6,2016-05-21,Kiseijuu: Kanketsuhen,https://www.imdb.com/title/tt3345474/,movie,6.6,117,2015,"Action, Drama, Horror, Sci-Fi",1668,2015-04-25,Takashi Yamazaki,2016,NA
+tt0335345,4,2017-08-29,The Passion of the Christ,https://www.imdb.com/title/tt0335345/,movie,7.2,127,2004,Drama,193900,2004-02-25,Mel Gibson,2017,4.7
+tt3371366,4,2017-06-28,Transformers: The Last Knight,https://www.imdb.com/title/tt3371366/,movie,5.2,154,2017,"Action, Adventure, Sci-Fi",96360,2017-06-18,Michael Bay,2017,2.7
+tt3381008,2,2016-06-07,Grimsby,https://www.imdb.com/title/tt3381008/,movie,6.2,83,2016,"Action, Adventure, Comedy",74439,2016-02-24,Louis Leterrier,2016,4.4
+tt3385516,5,2016-05-25,X-Men: Apocalypse,https://www.imdb.com/title/tt3385516/,movie,7,144,2016,"Action, Adventure, Sci-Fi",316646,2016-05-09,Bryan Singer,2016,5.2
+tt3393786,5,2016-10-22,Jack Reacher: Never Go Back,https://www.imdb.com/title/tt3393786/,movie,6.1,118,2016,"Action, Adventure, Crime, Mystery, Thriller",102281,2016-10-19,Edward Zwick,2016,4.7
+tt3402236,6,2017-12-13,Murder on the Orient Express,https://www.imdb.com/title/tt3402236/,movie,6.6,114,2017,"Crime, Drama, Mystery",131420,2017-11-03,Kenneth Branagh,2017,5.2
+tt3410834,2,2016-03-09,Allegiant,https://www.imdb.com/title/tt3410834/,movie,5.7,120,2016,"Action, Adventure, Mystery, Sci-Fi, Thriller",83952,2016-03-08,Robert Schwentke,2016,3.3
+tt3411444,5,2017-12-17,Ferdinand,https://www.imdb.com/title/tt3411444/,movie,6.7,108,2017,"Animation, Adventure, Comedy, Family, Fantasy",23837,2017-12-08,Carlos Saldanha,2017,5.8
+tt3416532,6,2017-01-04,A Monster Calls,https://www.imdb.com/title/tt3416532/,movie,7.5,108,2016,"Animation, Drama, Fantasy",60662,2016-09-09,J.A. Bayona,2017,7.6
+tt3416828,3,2016-07-14,Ice Age: Collision Course,https://www.imdb.com/title/tt3416828/,movie,5.7,94,2016,"Animation, Adventure, Comedy, Family, Fantasy, Sci-Fi",42241,2016-06-19,"Galen T. Chu, Mike Thurmeier",2016,3.4
+tt3422078,8,2016-03-29,Avril et le monde truqué,https://www.imdb.com/title/tt3422078/,movie,7.3,105,2015,"Animation, Adventure, Comedy, Drama, Mystery, Thriller",4371,2015-06-15,"Christian Desmares, Franck Ekinci",2016,8.5
+tt3450900,3,2016-05-01,The Sea of Trees,https://www.imdb.com/title/tt3450900/,movie,6,110,2015,Drama,9546,2015-05-16,Gus Van Sant,2016,2.3
+tt3450958,8,2017-08-03,War for the Planet of the Apes,https://www.imdb.com/title/tt3450958/,movie,7.5,140,2017,"Action, Adventure, Drama, Sci-Fi, Thriller",166813,2017-07-07,Matt Reeves,2017,8.2
+tt3460252,7,2016-01-18,The Hateful Eight,https://www.imdb.com/title/tt3460252/,movie,7.8,187,2015,"Crime, Drama, Mystery, Thriller, Western",388794,2015-12-07,Quentin Tarantino,2016,6.8
+tt3469046,5,2017-07-11,Despicable Me 3,https://www.imdb.com/title/tt3469046/,movie,6.3,89,2017,"Animation, Action, Adventure, Comedy, Family, Fantasy, Sci-Fi",71792,2017-06-14,"Eric Guillon, Kyle Balda, Pierre Coffin",2017,4.9
+tt3470600,6,2017-01-02,Sing,https://www.imdb.com/title/tt3470600/,movie,7.1,108,2016,"Animation, Comedy, Family, Music, Music",97074,2016-09-11,"Garth Jennings, Christophe Lourdelet",2017,5.9
+tt3486626,3,2017-11-05,The Nut Job 2: Nutty by Nature,https://www.imdb.com/title/tt3486626/,movie,5.3,91,2017,"Animation, Action, Adventure, Comedy, Family, Fantasy",3504,2017-08-10,Cal Brunker,2017,3.6
+tt3498820,8,2016-05-01,Captain America: Civil War,https://www.imdb.com/title/tt3498820/,movie,7.8,147,2016,"Action, Adventure, Sci-Fi",489045,2016-04-12,"Anthony Russo, Joe Russo",2016,7.5
+tt3501632,8,2017-10-28,Thor: Ragnarok,https://www.imdb.com/title/tt3501632/,movie,7.9,130,2017,"Action, Adventure, Comedy, Fantasy, Sci-Fi",306510,2017-10-10,Taika Waititi,2017,7.4
+tt3508840,5,2016-03-12,Cìkè Niè Yinniáng,https://www.imdb.com/title/tt3508840/,movie,6.3,105,2015,"Action, Drama, History",13022,2015-05-21,Hsiao-Hsien Hou,2016,8
+tt3511596,2,2016-05-15,Close Range,https://www.imdb.com/title/tt3511596/,movie,5,80,2015,"Action, Crime",3510,2015-09-16,Isaac Florentine,2016,NA
+tt3513054,6,2016-11-27,Last Days in the Desert,https://www.imdb.com/title/tt3513054/,movie,5.6,98,2015,"Adventure, Drama",2828,2015-01-25,Rodrigo García,2016,6.7
+tt3521164,7,2016-12-03,Moana,https://www.imdb.com/title/tt3521164/,movie,7.6,107,2016,"Animation, Adventure, Comedy, Family, Fantasy, Music",187836,2016-11-14,"Don Hall, Ron Clements, John Musker, Chris Williams",2016,8.1
+tt3530002,3,2016-03-12,The Night Before,https://www.imdb.com/title/tt3530002/,movie,6.4,101,2015,"Adventure, Comedy, Fantasy",52931,2015-11-20,Jonathan Levine,2016,5.8
+tt3531824,5,2016-08-26,Nerve,https://www.imdb.com/title/tt3531824/,movie,6.6,96,2016,"Action, Adventure, Crime, Drama, Mystery, Thriller",90347,2016-07-12,"Henry Joost, Ariel Schulman",2016,5.8
+tt3532216,6,2017-09-17,American Made,https://www.imdb.com/title/tt3532216/,movie,7.2,115,2017,"Action, Biography, Comedy, Crime, Drama, History, Thriller",95421,2017-08-18,Doug Liman,2017,6.5
+tt3533916,2,2016-04-15,The Veil,https://www.imdb.com/title/tt3533916/,movie,4.8,93,2016,"Horror, Thriller",6235,2016-01-19,Phil Joanou,2016,NA
+tt3553976,7,2016-10-16,Captain Fantastic,https://www.imdb.com/title/tt3553976/,movie,7.9,118,2016,"Comedy, Drama",137756,2016-01-23,Matt Ross,2016,7.2
+tt3564574,6,2016-09-09,Éternité,https://www.imdb.com/title/tt3564574/,movie,5.6,115,2016,Drama,795,2016-09-07,Tran Anh Hung,2016,NA
+tt3569230,4,2016-04-10,Legend,https://www.imdb.com/title/tt3569230/,movie,7,132,2015,"Biography, Crime, Drama, Thriller",124558,2015-09-03,Brian Helgeland,2016,5.5
+tt3577624,5,2016-03-16,A Perfect Day,https://www.imdb.com/title/tt3577624/,movie,6.8,106,2015,"Comedy, Drama, War",15839,2015-05-16,Fernando León de Aranoa,2016,6
+tt3606752,5,2017-07-25,Cars 3,https://www.imdb.com/title/tt3606752/,movie,6.8,102,2017,"Animation, Adventure, Comedy, Family, Sport",44080,2017-06-10,Brian Fee,2017,5.9
+tt3631112,5,2016-10-29,The Girl on the Train,https://www.imdb.com/title/tt3631112/,movie,6.5,112,2016,"Crime, Drama, Mystery, Thriller",132058,2016-09-20,Tate Taylor,2016,4.8
+tt3640424,6,2016-12-10,Allied,https://www.imdb.com/title/tt3640424/,movie,7.1,124,2016,"Action, Drama, Romance, Thriller, War",109109,2016-11-13,Robert Zemeckis,2016,6
+tt3666024,8,2016-06-29,La tortue rouge,https://www.imdb.com/title/tt3666024/,movie,7.5,80,2016,"Animation, Fantasy",20418,2016-05-18,Michael Dudok de Wit,2016,8.6
+tt3691740,6,2016-07-23,The BFG,https://www.imdb.com/title/tt3691740/,movie,6.4,117,2016,"Adventure, Family, Fantasy",62099,2016-05-14,Steven Spielberg,2016,6.6
+tt3717252,3,2017-02-15,Underworld: Blood Wars,https://www.imdb.com/title/tt3717252/,movie,5.8,91,2016,"Action, Adventure, Fantasy, Horror",55933,2016-11-24,Anna Foerster,2017,2.3
+tt3717490,5,2017-04-08,Power Rangers,https://www.imdb.com/title/tt3717490/,movie,6,124,2017,"Action, Adventure, Sci-Fi",80918,2017-03-22,Dean Israelite,2017,4.4
+tt3731562,6,2017-03-08,Kong: Skull Island,https://www.imdb.com/title/tt3731562/,movie,6.7,118,2017,"Action, Adventure, Fantasy, Sci-Fi",202923,2017-02-28,Jordan Vogt-Roberts,2017,6.2
+tt3741632,5,2018-01-14,The Leisure Seeker,https://www.imdb.com/title/tt3741632/,movie,6.6,112,2017,"Adventure, Comedy, Drama, Romance",1535,2017-09-03,Paolo Virzì,2018,4.5
+tt3741834,8,2017-04-02,Lion,https://www.imdb.com/title/tt3741834/,movie,8.1,118,2016,"Biography, Drama",158067,2016-09-10,Garth Davis,2017,6.9
+tt3748528,7,2016-12-18,Rogue One,https://www.imdb.com/title/tt3748528/,movie,7.8,133,2016,"Action, Adventure, Sci-Fi",420487,2016-12-10,Gareth Edwards,2016,6.5
+tt3774802,4,2016-05-30,Pandemic,https://www.imdb.com/title/tt3774802/,movie,4.5,91,2016,"Action, Horror, Sci-Fi, Thriller",6693,2016-02-26,John Suits,2016,4.7
+tt3783958,9,2017-01-25,La La Land,https://www.imdb.com/title/tt3783958/,movie,8.1,128,2016,"Comedy, Drama, Music, Music, Romance",368755,2016-08-31,Damien Chazelle,2017,9.3
+tt3787590,5,2016-06-04,We Are Your Friends,https://www.imdb.com/title/tt3787590/,movie,6.2,96,2015,"Drama, Music, Romance",29473,2015-08-11,Max Joseph,2016,4.6
+tt3797868,4,2016-05-16,The Choice,https://www.imdb.com/title/tt3797868/,movie,6.6,111,2016,"Drama, Romance",26094,2016-02-01,Ross Katz,2016,2.6
+tt3799694,7,2016-05-21,The Nice Guys,https://www.imdb.com/title/tt3799694/,movie,7.4,116,2016,"Action, Comedy, Crime, Drama, Mystery, Thriller",212798,2016-05-15,Shane Black,2016,7
+tt3832914,3,2016-01-31,War Room,https://www.imdb.com/title/tt3832914/,movie,6.4,120,2015,Drama,10811,2015-08-28,Alex Kendrick,2016,2.6
+tt3850590,3,2016-04-15,Krampus,https://www.imdb.com/title/tt3850590/,movie,6.2,98,2015,"Comedy, Fantasy, Horror",49432,2015-11-30,Michael Dougherty,2016,4.9
+tt3874544,4,2017-04-01,The Boss Baby,https://www.imdb.com/title/tt3874544/,movie,6.3,97,2017,"Animation, Comedy, Family, Fantasy",77558,2017-03-12,Tom McGrath,2017,5
+tt3890160,7,2017-07-20,Baby Driver,https://www.imdb.com/title/tt3890160/,movie,7.7,112,2017,"Action, Crime, Music, Thriller",293081,2017-03-11,Edgar Wright,2017,8.6
+tt3896198,6,2017-04-29,Guardians of the Galaxy Vol. 2,https://www.imdb.com/title/tt3896198/,movie,7.7,136,2017,"Action, Adventure, Sci-Fi",366628,2017-04-10,James Gunn,2017,6.7
+tt3949660,2,2016-07-11,Teenage Mutant Ninja Turtles: Out of the Shadows,https://www.imdb.com/title/tt3949660/,movie,6,112,2016,"Action, Adventure, Comedy, Sci-Fi",70033,2016-05-22,Dave Green,2016,4
+tt3950078,5,2016-04-09,Zhì qu weihu shan,https://www.imdb.com/title/tt3950078/,movie,6.5,141,2014,"Action, Adventure, Biography, History, War",2262,2014-12-23,Hark Tsui,2016,6.1
+tt3963816,5,2016-09-04,Marauders,https://www.imdb.com/title/tt3963816/,movie,5.5,107,2016,"Action, Crime, Mystery, Thriller",14173,2016-07-01,Steven C. Miller,2016,4.2
+tt3967856,6,2017-09-09,Okja,https://www.imdb.com/title/tt3967856/,movie,7.4,120,2017,"Action, Adventure, Drama, Sci-Fi",58711,2017-05-19,Joon-ho Bong,2017,7.5
+tt3991412,3,2017-09-10,The 9th Life of Louis Drax,https://www.imdb.com/title/tt3991412/,movie,6.3,108,2016,"Mystery, Thriller",10383,2016-09-01,Alexandre Aja,2017,4.1
+tt4005402,4,2016-04-22,Colonia,https://www.imdb.com/title/tt4005402/,movie,7.1,106,2015,"Drama, Romance, Thriller",36530,2015-09-13,Florian Gallenberger,2016,3.3
+tt4019560,3,2017-06-11,Exposed,https://www.imdb.com/title/tt4019560/,movie,4.3,102,2016,"Crime, Drama, Fantasy, Mystery, Thriller",10274,2016-01-22,Gee Malik Linton,2017,2.3
+tt4034228,7,2016-12-14,Manchester by the Sea,https://www.imdb.com/title/tt4034228/,movie,7.8,137,2016,Drama,186440,2016-01-23,Kenneth Lonergan,2016,9.6
+tt4034354,5,2017-06-04,Swiss Army Man,https://www.imdb.com/title/tt4034354/,movie,7,97,2016,"Adventure, Comedy, Drama, Fantasy, Romance",79482,2016-01-22,"Dan Kwan, Daniel Scheinert",2017,6.4
+tt4057632,6,2016-03-28,Nous trois ou rien,https://www.imdb.com/title/tt4057632/,movie,7.2,102,2015,"Comedy, Drama",1514,2015-10-22,Kheiron,2016,NA
+tt4058218,3,2016-04-20,Ange et Gabrielle,https://www.imdb.com/title/tt4058218/,movie,5.7,91,2015,"Comedy, Romance",618,2015-11-11,Anne Giafferi,2016,NA
+tt4062536,5,2016-05-01,Green Room,https://www.imdb.com/title/tt4062536/,movie,7,95,2015,"Crime, Horror, Thriller",76579,2015-05-17,Jeremy Saulnier,2016,7.9
+tt4084056,7,2017-01-10,Le goût des merveilles,https://www.imdb.com/title/tt4084056/,movie,6.8,100,2015,"Comedy, Drama, Romance",1741,2015-11-08,Éric Besnard,2017,NA
+tt4085944,2,2016-03-02,Lolo,https://www.imdb.com/title/tt4085944/,movie,5.7,99,2015,Comedy,2849,2015-09-03,Julie Delpy,2016,5
+tt4116116,7,2016-08-14,Guibord s'en va-t-en guerre,https://www.imdb.com/title/tt4116116/,movie,7,108,2015,Comedy,643,2015-08-10,Philippe Falardeau,2016,NA
+tt4116284,6,2017-02-17,The LEGO Batman Movie,https://www.imdb.com/title/tt4116284/,movie,7.3,104,2017,"Animation, Action, Adventure, Comedy, Family, Fantasy",98349,2017-02-01,Chris McKay,2017,7.5
+tt4125300,5,2016-05-15,Hana to Arisu satsujin jiken,https://www.imdb.com/title/tt4125300/,movie,7.2,100,2015,"Animation, Drama",984,2015-02-20,Shunji Iwai,2016,NA
+tt4139124,6,2016-08-02,Keanu,https://www.imdb.com/title/tt4139124/,movie,6.3,100,2016,"Action, Comedy",37641,2016-03-13,Peter Atencio,2016,6.3
+tt4154756,7,2018-04-25,Avengers: Infinity War,https://www.imdb.com/title/tt4154756/,movie,9.1,149,2018,"Action, Adventure, Fantasy, Sci-Fi",105969,2018-04-23,"Anthony Russo, Joe Russo",2018,6.8
+tt4158096,4,2017-06-19,Free Fire,https://www.imdb.com/title/tt4158096/,movie,6.4,91,2016,"Action, Comedy, Crime, Thriller",30244,2016-09-08,Ben Wheatley,2017,6.3
+tt4161586,3,2016-06-15,Et ta soeur,https://www.imdb.com/title/tt4161586/,movie,5.3,95,2015,"Comedy, Drama",250,2015-10-23,Marion Vernoux,2016,NA
+tt4172430,4,2016-08-14,13 Hours,https://www.imdb.com/title/tt4172430/,movie,7.3,144,2016,"Action, Drama, History, Thriller, War",91732,2016-01-12,Michael Bay,2016,4.8
+tt4176826,6,2016-07-18,Er ist wieder da,https://www.imdb.com/title/tt4176826/,movie,7.1,116,2015,"Comedy, Fantasy",28853,2015-10-08,David Wnendt,2016,NA
+tt4196776,6,2016-08-13,Jason Bourne,https://www.imdb.com/title/tt4196776/,movie,6.6,123,2016,"Action, Thriller",174249,2016-07-03,Paul Greengrass,2016,5.8
+tt4209788,7,2018-01-24,Molly's Game,https://www.imdb.com/title/tt4209788/,movie,7.5,140,2017,"Biography, Crime, Drama",56151,2017-09-08,Aaron Sorkin,2018,7.1
+tt4225622,4,2017-11-26,The Babysitter,https://www.imdb.com/title/tt4225622/,movie,6.3,85,2017,"Comedy, Horror",33195,2017-10-13,McG,2017,NA
+tt4244162,2,2016-12-25,Beta Test,https://www.imdb.com/title/tt4244162/,movie,5.9,88,2016,"Action, Sci-Fi, Thriller",10677,2016-07-22,Nicholas Gyeney,2016,NA
+tt4250606,5,2016-02-18,Good Luck Algeria,https://www.imdb.com/title/tt4250606/,movie,6,91,2015,"Comedy, Sport",192,2015-10-25,Farid Bentoumi,2016,NA
+tt4272866,8,2016-02-10,Bakemono no ko,https://www.imdb.com/title/tt4272866/,movie,7.7,119,2015,"Animation, Action, Adventure, Fantasy",13052,2015-07-11,Mamoru Hosoda,2016,6.5
+tt4283358,6,2016-01-20,Les saisons,https://www.imdb.com/title/tt4283358/,movie,7.2,96,2015,Documentary,1085,2015-10-23,"Jacques Cluzaud, Jacques Perrin",2016,6.7
+tt4287320,6,2017-07-19,The Circle,https://www.imdb.com/title/tt4287320/,movie,5.3,110,2017,"Drama, Sci-Fi, Thriller",60283,2017-04-26,James Ponsoldt,2017,4.3
+tt4291600,6,2017-04-13,Lady Macbeth,https://www.imdb.com/title/tt4291600/,movie,6.9,89,2016,"Drama, Romance",11586,2016-09-10,William Oldroyd,2017,7.6
+tt4302938,8,2016-09-25,Kubo and the Two Strings,https://www.imdb.com/title/tt4302938/,movie,7.8,101,2016,"Animation, Action, Adventure, Family, Fantasy",91848,2016-08-13,Travis Knight,2016,8.4
+tt0433400,4,2017-11-26,Just Friends,https://www.imdb.com/title/tt0433400/,movie,6.2,96,2005,"Comedy, Romance",91133,2005-11-23,Roger Kumble,2017,4.7
+tt4334266,4,2017-09-25,The Bad Batch,https://www.imdb.com/title/tt4334266/,movie,5.3,118,2016,"Drama, Horror, Romance, Sci-Fi",15153,2016-09-06,Ana Lily Amirpour,2017,6.2
+tt4385888,7,2017-03-07,20th Century Women,https://www.imdb.com/title/tt4385888/,movie,7.4,119,2016,"Comedy, Drama",26428,2016-10-08,Mike Mills,2017,8.3
+tt4386356,4,2016-08-10,Tout pour être heureux,https://www.imdb.com/title/tt4386356/,movie,6.3,97,2015,"Comedy, Drama",367,2015-11-12,Cyril Gelblat,2016,NA
+tt4400038,7,2016-02-10,Chocolat,https://www.imdb.com/title/tt4400038/,movie,7.1,119,2016,"Biography, Drama",4897,2016-01-05,Roschdy Zem,2016,NA
+tt4411596,5,2017-07-29,My Cousin Rachel,https://www.imdb.com/title/tt4411596/,movie,6,106,2017,"Drama, Mystery, Romance",11992,2017-06-07,Roger Michell,2017,6.3
+tt4420704,7,2018-01-01,Kedi,https://www.imdb.com/title/tt4420704/,movie,7.7,79,2016,Documentary,8525,2016-02-21,Ceyda Torun,2018,7.8
+tt4425200,6,2017-06-11,John Wick: Chapter 2,https://www.imdb.com/title/tt4425200/,movie,7.5,122,2017,"Action, Crime, Thriller",225379,2017-01-30,Chad Stahelski,2017,7.5
+tt4428740,3,2016-04-21,Les malheurs de Sophie,https://www.imdb.com/title/tt4428740/,movie,5.5,106,2016,Comedy,239,2016-03-20,Christophe Honoré,2016,NA
+tt0443465,3,2016-05-07,Before We Go,https://www.imdb.com/title/tt0443465/,movie,6.8,95,2014,"Comedy, Drama, Romance",37926,2014-09-12,Chris Evans,2016,3.1
+tt4438848,5,2016-08-14,Neighbors 2: Sorority Rising,https://www.imdb.com/title/tt4438848/,movie,5.7,92,2016,Comedy,90865,2016-04-26,Nicholas Stoller,2016,5.8
+tt4447076,8,2016-02-23,Rosalie Blum,https://www.imdb.com/title/tt4447076/,movie,6.8,95,2015,Comedy,962,2015-11-11,Julien Rappeneau,2016,NA
+tt4466894,4,2017-02-13,Sahara,https://www.imdb.com/title/tt4466894/,movie,5.5,86,2017,"Animation, Adventure, Comedy, Family, Romance",1483,2017-01-18,Pierre Coré,2017,NA
+tt4468740,7,2017-12-03,Paddington 2,https://www.imdb.com/title/tt4468740/,movie,7.9,103,2017,"Animation, Adventure, Comedy, Family, Fantasy",25820,2017-11-05,Paul King,2017,8.8
+tt4481414,7,2017-08-12,Gifted,https://www.imdb.com/title/tt4481414/,movie,7.6,101,2017,Drama,65338,2017-04-07,Marc Webb,2017,6
+tt4500922,5,2018-02-08,Maze Runner: The Death Cure,https://www.imdb.com/title/tt4500922/,movie,6.4,141,2018,"Action, Sci-Fi, Thriller",44945,2018-01-17,Wes Ball,2018,5.1
+tt4505118,3,2016-01-12,Arrête ton cinéma!,https://www.imdb.com/title/tt4505118/,movie,4.9,90,2016,Comedy,128,2016-01-05,Diane Kurys,2016,NA
+tt4505208,7,2016-02-19,La vache,https://www.imdb.com/title/tt4505208/,movie,6.8,91,2016,"Adventure, Comedy, Drama",1557,2016-01-14,Mohamed Hamidi,2016,NA
+tt0451279,8,2017-06-08,Wonder Woman,https://www.imdb.com/title/tt0451279/,movie,7.5,141,2017,"Action, Adventure, Fantasy, Sci-Fi, War",404126,2017-05-15,Patty Jenkins,2017,7.6
+tt4513674,6,2016-05-21,Café Society,https://www.imdb.com/title/tt4513674/,movie,6.6,96,2016,"Comedy, Drama, Romance",55908,2016-05-11,Woody Allen,2016,6.4
+tt4515544,1,2016-02-16,La tour 2 contrôle infernale,https://www.imdb.com/title/tt4515544/,movie,4.1,88,2016,Comedy,528,2016-01-24,Eric Judor,2016,NA
+tt4523050,6,2016-02-15,Marseille,https://www.imdb.com/title/tt4523050/,movie,4.9,97,2016,"Comedy, Drama",265,2016-01-16,Kad Merad,2016,NA
+tt4531006,4,2016-01-01,Je compte sur vous,https://www.imdb.com/title/tt4531006/,movie,5.6,98,2015,"Biography, Comedy, Crime, Drama",281,2015-12-30,Pascal Elbé,2016,NA
+tt4535650,5,2017-07-29,Dilwale,https://www.imdb.com/title/tt4535650/,movie,5.3,158,2015,"Action, Comedy, Romance",26824,2015-12-17,Rohit Shetty,2017,NA
+tt4547056,6,2017-07-09,The Girl with All the Gifts,https://www.imdb.com/title/tt4547056/,movie,6.7,111,2016,"Drama, Horror, Thriller",39114,2016-08-03,Colm McCarthy,2017,6.7
+tt4550098,6,2017-01-05,Nocturnal Animals,https://www.imdb.com/title/tt4550098/,movie,7.5,116,2016,"Crime, Drama, Romance, Thriller",175901,2016-09-02,Tom Ford,2017,6.7
+tt4551314,4,2016-09-17,Un petit boulot,https://www.imdb.com/title/tt4551314/,movie,6.5,107,2016,"Comedy, Crime",1121,2016-08-01,Pascal Chaumeil,2016,NA
+tt4555426,7,2018-01-21,Darkest Hour,https://www.imdb.com/title/tt4555426/,movie,7.4,125,2017,"Biography, Drama, History, War",91793,2017-09-01,Joe Wright,2018,7.5
+tt0462335,5,2016-04-06,High-Rise,https://www.imdb.com/title/tt0462335/,movie,5.6,119,2015,Drama,30489,2015-09-13,Ben Wheatley,2016,6.5
+tt4624424,6,2016-12-04,Storks,https://www.imdb.com/title/tt4624424/,movie,6.8,87,2016,"Animation, Adventure, Comedy, Family, Fantasy",45329,2016-09-22,"Nicholas Stoller, Doug Sweetland",2016,5.6
+tt4629266,4,2017-08-26,Born in China,https://www.imdb.com/title/tt4629266/,movie,7.2,79,2016,Documentary,2506,2016-08-05,Chuan Lu,2017,5.7
+tt4630562,4,2017-04-18,The Fate of the Furious,https://www.imdb.com/title/tt4630562/,movie,6.7,136,2017,"Action, Crime, Thriller",159181,2017-04-04,F. Gary Gray,2017,5.6
+tt4643432,8,2016-06-21,Dans les forêts de Sibérie,https://www.imdb.com/title/tt4643432/,movie,6.9,105,2016,"Adventure, Drama",655,2016-06-08,Safy Nebbou,2016,NA
+tt4645330,6,2017-05-13,Denial,https://www.imdb.com/title/tt4645330/,movie,6.6,109,2016,"Biography, Drama",13546,2016-09-11,Mick Jackson,2017,6.3
+tt4645368,7,2016-10-05,Juste la fin du monde,https://www.imdb.com/title/tt4645368/,movie,6.9,97,2016,Drama,15456,2016-05-19,Xavier Dolan,2016,4.8
+tt4649466,4,2017-10-18,Kingsman: The Golden Circle,https://www.imdb.com/title/tt4649466/,movie,6.8,141,2017,"Action, Adventure, Comedy",175123,2017-09-20,Matthew Vaughn,2017,4.4
+tt4669986,7,2017-02-25,Loving,https://www.imdb.com/title/tt4669986/,movie,7,123,2016,"Biography, Drama, Romance",24742,2016-05-16,Jeff Nichols,2017,7.9
+tt4675926,6,2017-07-29,De standhaftige,https://www.imdb.com/title/tt4675926/,movie,6.6,105,2016,"Drama, Romance, War",220,2016-04-07,Lisa Ohlin,2017,NA
+tt4680196,4,2016-11-26,Planetarium,https://www.imdb.com/title/tt4680196/,movie,4.7,105,2016,"Drama, Fantasy, Mystery, Romance, Thriller",1959,2016-09-08,Rebecca Zlotowski,2016,4.4
+tt4682786,6,2016-12-25,Collateral Beauty,https://www.imdb.com/title/tt4682786/,movie,6.8,97,2016,"Drama, Romance",68081,2016-12-12,David Frankel,2016,2.3
+tt4682788,3,2018-04-27,Loving Pablo,https://www.imdb.com/title/tt4682788/,movie,6,123,2017,"Biography, Crime, Drama",564,2017-09-06,Fernando León de Aranoa,2018,4.4
+tt4693612,5,2017-04-12,Un profil pour deux,https://www.imdb.com/title/tt4693612/,movie,6.4,99,2017,"Comedy, Romance",1488,2017-01-19,Stéphane Robelin,2017,NA
+tt4694544,2,2017-06-24,Once Upon a Time in Venice,https://www.imdb.com/title/tt4694544/,movie,5.3,94,2017,"Action, Comedy, Thriller",11392,2017-06-09,Mark Cullen,2017,2.8
+tt4699388,6,2016-05-04,Un homme à la hauteur,https://www.imdb.com/title/tt4699388/,movie,6.3,98,2016,"Comedy, Romance",4972,2016-04-25,Laurent Tirard,2016,4.8
+tt4701724,4,2018-02-04,Early Man,https://www.imdb.com/title/tt4701724/,movie,6.3,89,2018,"Animation, Adventure, Comedy, Family, Fantasy",4558,2018-01-20,Nick Park,2018,6.8
+tt4714782,5,2016-12-14,Personal Shopper,https://www.imdb.com/title/tt4714782/,movie,6.2,105,2016,"Drama, Horror, Mystery, Thriller",24671,2016-05-17,Olivier Assayas,2016,7.7
+tt4720654,6,2016-06-13,La nouvelle vie de Paul Sneijder,https://www.imdb.com/title/tt4720654/,movie,6.6,114,2016,Drama,302,2016-06-08,Thomas Vincent,2016,NA
+tt4720674,7,2016-01-02,Paul à Québec,https://www.imdb.com/title/tt4720674/,movie,7,98,2015,"Comedy, Drama",454,2015-09-18,François Bouvier,2016,NA
+tt4731008,4,2016-08-31,Robinson Crusoe,https://www.imdb.com/title/tt4731008/,movie,5.3,91,2016,"Animation, Adventure, Comedy, Family",4502,2016-02-04,"Mimi Maynard, Ben Stassen, Vincent Kesteloot",2016,3.6
+tt4731136,5,2017-02-16,A Cure for Wellness,https://www.imdb.com/title/tt4731136/,movie,6.4,146,2016,"Drama, Fantasy, Horror, Mystery, Sci-Fi, Thriller",59099,2016-12-10,Gore Verbinski,2017,4.7
+tt4731504,7,2016-02-06,Dofus - Livre 1: Julith,https://www.imdb.com/title/tt4731504/,movie,7.5,100,2015,"Animation, Adventure, Comedy, Fantasy",386,2015-11-07,"Jean-Jacques Denis, Anthony Roux",2016,NA
+tt4741714,6,2016-08-04,Five,https://www.imdb.com/title/tt4741714/,movie,6.3,102,2016,Comedy,1881,2016-01-16,Igor Gotsmanov,2016,NA
+tt4746484,5,2016-08-15,L'économie du couple,https://www.imdb.com/title/tt4746484/,movie,6.5,100,2016,Drama,1417,2016-05-13,Joachim Lafosse,2016,6.6
+tt0475290,6,2016-02-20,"Hail, Caesar!",https://www.imdb.com/title/tt0475290/,movie,6.3,106,2016,"Comedy, Mystery",101708,2016-02-01,"Joel Coen, Ethan Coen",2016,7.2
+tt4758646,4,2017-06-24,War Machine,https://www.imdb.com/title/tt4758646/,movie,6,122,2017,"Comedy, Drama, War",29083,2017-05-26,David Michôd,2017,5.6
+tt4769824,7,2017-09-07,Kono sekai no katasumi ni,https://www.imdb.com/title/tt4769824/,movie,7.9,129,2016,"Animation, Drama, Family, Fantasy, History, War",3819,2016-10-28,Sunao Katabuchi,2017,7.3
+tt4769836,2,2017-10-01,The Do-Over,https://www.imdb.com/title/tt4769836/,movie,5.7,108,2016,"Action, Adventure, Comedy, Mystery",29079,2016-05-27,Steven Brill,2017,2.2
+tt4772750,3,2016-03-06,Ego Trip,https://www.imdb.com/title/tt4772750/,movie,5.6,105,2015,Comedy,191,2015-07-08,Benoit Pelletier,2016,NA
+tt4776964,2,2016-08-01,Irréprochable,https://www.imdb.com/title/tt4776964/,movie,6.4,103,2016,Thriller,516,2016-07-03,Sébastien Marnier,2016,NA
+tt0477988,4,2017-12-11,Jean-Philippe,https://www.imdb.com/title/tt0477988/,movie,6.1,90,2006,"Comedy, Fantasy, Music",1547,2006-04-05,Laurent Tuel,2017,NA
+tt4824302,3,2016-08-07,Mother's Day,https://www.imdb.com/title/tt4824302/,movie,5.6,118,2016,"Comedy, Drama",25074,2016-04-13,Garry Marshall,2016,1.8
+tt4840554,4,2016-07-03,L'idéal,https://www.imdb.com/title/tt4840554/,movie,5.1,90,2016,Drama,513,2016-06-15,Frédéric Beigbeder,2016,NA
+tt4846232,7,2017-09-17,Good Time,https://www.imdb.com/title/tt4846232/,movie,7.3,101,2017,"Crime, Drama, Thriller",37006,2017-05-25,"Josh Safdie, Benny Safdie",2017,8
+tt4846340,7,2017-03-19,Hidden Figures,https://www.imdb.com/title/tt4846340/,movie,7.8,127,2016,"Biography, Drama, History",147706,2016-12-25,Theodore Melfi,2017,7.4
+tt4857596,8,2016-07-11,Adopte un veuf,https://www.imdb.com/title/tt4857596/,movie,6.2,97,2016,"Comedy, Drama",895,2016-01-16,François Desagnat,2016,NA
+tt4897822,8,2016-09-20,Where to Invade Next,https://www.imdb.com/title/tt4897822/,movie,7.6,120,2015,"Documentary, Comedy",19233,2015-09-10,Michael Moore,2016,6.4
+tt0490215,6,2017-05-14,Silence,https://www.imdb.com/title/tt0490215/,movie,7.2,161,2016,"Adventure, Drama, History",74470,2016-11-29,Martin Scorsese,2017,7.9
+tt4902716,5,2016-09-04,Rebirth,https://www.imdb.com/title/tt4902716/,movie,5,100,2016,Thriller,2452,2016-04-17,Karl Mueller,2016,NA
+tt0491175,4,2017-12-10,Suburbicon,https://www.imdb.com/title/tt0491175/,movie,5.6,105,2017,"Crime, Drama, Mystery, Thriller",20015,2017-09-02,George Clooney,2017,4.2
+tt4925292,8,2018-03-01,Lady Bird,https://www.imdb.com/title/tt4925292/,movie,7.5,94,2017,"Comedy, Drama",115482,2017-09-01,Greta Gerwig,2018,9.4
+tt4926822,4,2016-08-14,C'est quoi cette famille?!,https://www.imdb.com/title/tt4926822/,movie,6.1,99,2016,Comedy,470,2016-05-15,Gabriel Julien-Laferrière,2016,NA
+tt4938374,4,2016-03-05,Open Season: Scared Silly,https://www.imdb.com/title/tt4938374/,video,5.1,84,2015,"Animation, Adventure, Comedy, Family, Horror",1741,2015-12-18,David Feiss,2016,NA
+tt4948452,6,2016-04-23,L'étudiante et Monsieur Henri,https://www.imdb.com/title/tt4948452/,movie,6.8,98,2015,"Comedy, Drama",2261,2015-08-27,Ivan Calbérac,2016,NA
+tt4954522,6,2017-03-28,Grave,https://www.imdb.com/title/tt4954522/,movie,7,99,2016,"Drama, Horror",38200,2016-05-14,Julia Ducournau,2017,8.1
+tt4960934,4,2016-09-18,Smaragdgrün,https://www.imdb.com/title/tt4960934/,movie,5.9,113,2016,Fantasy,1293,2016-06-24,"Felix Fuchssteiner, Katharina Schöde",2016,NA
+tt4972582,6,2017-02-26,Split,https://www.imdb.com/title/tt4972582/,movie,7.3,117,2016,"Horror, Thriller",260727,2016-09-26,M. Night Shyamalan,2017,6.2
+tt4975722,7,2017-03-05,Moonlight,https://www.imdb.com/title/tt4975722/,movie,7.4,111,2016,Drama,191864,2016-09-02,Barry Jenkins,2017,9.9
+tt4977530,7,2017-07-08,Viceroy's House,https://www.imdb.com/title/tt4977530/,movie,6.6,106,2017,"Biography, Drama, History, Romance",4126,2017-02-12,Gurinder Chadha,2017,5.3
+tt4979860,2,2016-07-03,Camping 3,https://www.imdb.com/title/tt4979860/,movie,4.3,105,2016,Comedy,638,2016-06-07,Fabien Onteniente,2016,NA
+tt4995790,7,2017-10-21,The Square,https://www.imdb.com/title/tt4995790/,movie,7.4,151,2017,"Comedy, Drama",30204,2017-05-20,Ruben Östlund,2017,7.3
+tt5013056,7,2017-07-22,Dunkirk,https://www.imdb.com/title/tt5013056/,movie,8,106,2017,"Action, Drama, History, Thriller, War",381642,2017-07-13,Christopher Nolan,2017,9.4
+tt5027774,7,2018-01-21,"Three Billboards Outside Ebbing, Missouri",https://www.imdb.com/title/tt5027774/,movie,8.2,115,2017,"Crime, Drama",222746,2017-09-04,Martin McDonagh,2018,8.8
+tt5029602,5,2016-10-20,Brice 3,https://www.imdb.com/title/tt5029602/,movie,4.3,95,2016,Comedy,865,2016-09-23,James Huth,2016,NA
+tt5029608,8,2016-09-16,Frantz,https://www.imdb.com/title/tt5029608/,movie,7.5,113,2016,"Drama, History, Romance, War",8720,2016-09-03,François Ozon,2016,7.3
+tt5037626,7,2017-08-03,Crash Test Aglaé,https://www.imdb.com/title/tt5037626/,movie,6.5,85,2017,"Comedy, Drama",345,2017-08-02,Eric Gravel,2017,NA
+tt5052448,7,2017-05-06,Get Out,https://www.imdb.com/title/tt5052448/,movie,7.7,104,2017,"Horror, Mystery, Thriller",297950,2017-01-23,Jordan Peele,2017,8.4
+tt5058358,2,2016-07-11,Hibou,https://www.imdb.com/title/tt5058358/,movie,4.8,82,2016,Comedy,144,2016-07-06,Ramzy Bedia,2016,NA
+tt5061360,7,2017-12-29,La promesse de l'aube,https://www.imdb.com/title/tt5061360/,movie,7.5,131,2017,"Biography, Drama, Romance",513,2017-10-14,Eric Barbier,2017,NA
+tt5078204,5,2016-12-04,Demain tout commence,https://www.imdb.com/title/tt5078204/,movie,7.4,118,2016,"Comedy, Drama",12910,2016-11-04,Hugo Gélin,2016,NA
+tt5078214,5,2016-09-16,Victoria,https://www.imdb.com/title/tt5078214/,movie,6.3,97,2016,"Comedy, Drama, Romance",2096,2016-05-12,Justine Triet,2016,NA
+tt5078326,4,2016-03-15,Médecin de campagne,https://www.imdb.com/title/tt5078326/,movie,6.5,102,2016,"Comedy, Drama",1975,2016-01-25,Thomas Lilti,2016,NA
+tt5091538,5,2016-11-25,La folle histoire de Max et Léon,https://www.imdb.com/title/tt5091538/,movie,6.2,98,2016,"Comedy, War",1172,2016-08-27,Jonathan Barré,2016,NA
+tt5092380,5,2018-04-08,Dans la brume,https://www.imdb.com/title/tt5092380/,movie,6.2,89,2018,Sci-Fi,268,2018-04-04,Daniel Roby,2018,NA
+tt5104604,5,2018-04-15,Isle of Dogs,https://www.imdb.com/title/tt5104604/,movie,8.2,101,2018,"Animation, Adventure, Comedy, Drama, Fantasy, Sci-Fi",20888,2018-02-15,Wes Anderson,2018,8.2
+tt5109784,6,2017-09-30,Mother!,https://www.imdb.com/title/tt5109784/,movie,6.7,121,2017,"Drama, Horror, Mystery",114499,2017-09-05,Darren Aronofsky,2017,7.5
+tt5114984,6,2016-07-03,L'outsider,https://www.imdb.com/title/tt5114984/,movie,6.7,117,2016,"Biography, Drama, Thriller",766,2016-06-21,Christophe Barratier,2016,NA
+tt5115024,4,2016-10-29,Retour chez ma mère,https://www.imdb.com/title/tt5115024/,movie,5.8,97,2016,"Comedy, Drama",1373,2016-04-13,Eric Lavaine,2016,NA
+tt5155780,4,2017-08-04,The Discovery,https://www.imdb.com/title/tt5155780/,movie,6.3,102,2017,"Drama, Mystery, Romance, Sci-Fi, Thriller",20414,2017-01-20,Charlie McDowell,2017,5.4
+tt5157682,4,2017-01-27,L'ascension,https://www.imdb.com/title/tt5157682/,movie,6.9,103,2017,"Adventure, Comedy, Romance",2257,2017-01-18,Ludovic Bernard,2017,NA
+tt5168192,6,2017-02-21,"I, Daniel Blake",https://www.imdb.com/title/tt5168192/,movie,7.9,100,2016,Drama,37294,2016-05-13,Ken Loach,2017,7.8
+tt5197068,3,2016-11-12,Tamara,https://www.imdb.com/title/tt5197068/,movie,5.6,103,2016,Comedy,228,2016-08-25,Alexandre Castagnetti,2016,NA
+tt5208216,7,2017-11-15,Wonderstruck,https://www.imdb.com/title/tt5208216/,movie,6.3,116,2017,"Drama, Family, Mystery",5082,2017-05-18,Todd Haynes,2017,7.1
+tt5215952,8,2016-08-16,Gok-seong,https://www.imdb.com/title/tt5215952/,movie,7.4,156,2016,"Horror, Mystery, Thriller",27093,2016-05-12,Hong-jin Na,2016,8.1
+tt5247022,7,2016-12-24,Paterson,https://www.imdb.com/title/tt5247022/,movie,7.4,118,2016,"Comedy, Drama, Romance",45876,2016-05-16,Jim Jarmusch,2016,9
+tt5247704,7,2017-07-15,Ce qui nous lie,https://www.imdb.com/title/tt5247704/,movie,7,113,2017,"Comedy, Drama",1940,2017-05-16,Cédric Klapisch,2017,5.8
+tt5253294,6,2016-09-29,Radin!,https://www.imdb.com/title/tt5253294/,movie,5.8,89,2016,Comedy,2713,2016-09-02,Fred Cavayé,2016,NA
+tt5256722,7,2017-01-09,Il a déjà tes yeux,https://www.imdb.com/title/tt5256722/,movie,6.1,95,2016,Comedy,1195,2016-08-27,Lucien Jean-Baptiste,2017,NA
+tt5258850,8,2017-10-26,Au revoir là-haut,https://www.imdb.com/title/tt5258850/,movie,7.6,117,2017,"Crime, Drama",2601,2017-07-27,Albert Dupontel,2017,NA
+tt5294550,7,2017-12-29,All the Money in the World,https://www.imdb.com/title/tt5294550/,movie,6.9,132,2017,"Biography, Crime, Drama, Mystery, Thriller",32808,2017-12-18,Ridley Scott,2017,7.2
+tt5311514,8,2016-12-29,Kimi no na wa.,https://www.imdb.com/title/tt5311514/,movie,8.4,106,2016,"Animation, Drama, Fantasy, Romance",90410,2016-07-03,Makoto Shinkai,2016,7.9
+tt5313906,6,2017-10-29,Zombillénium,https://www.imdb.com/title/tt5313906/,movie,6.7,78,2017,"Animation, Comedy, Fantasy",280,2017-05-24,"Alexis Ducord, Arthur de Pins",2017,NA
+tt5324800,3,2016-06-06,Ils sont partout,https://www.imdb.com/title/tt5324800/,movie,5.1,111,2016,Comedy,628,2016-06-01,Yvan Attal,2016,NA
+tt5351818,4,2017-02-21,Rock'n Roll,https://www.imdb.com/title/tt5351818/,movie,6.1,123,2017,"Comedy, Drama",2435,2017-02-02,Guillaume Canet,2017,NA
+tt5360996,5,2018-03-31,Mary Magdalene,https://www.imdb.com/title/tt5360996/,movie,6,120,2018,Drama,1740,2018-02-26,Garth Davis,2018,4.5
+tt5362988,7,2017-09-06,Wind River,https://www.imdb.com/title/tt5362988/,movie,7.8,107,2017,"Crime, Drama, Mystery, Thriller",119928,2017-01-21,Taylor Sheridan,2017,7.3
+tt5390504,8,2017-10-25,Detroit,https://www.imdb.com/title/tt5390504/,movie,7.4,143,2017,"Crime, Drama, Thriller",30097,2017-07-25,Kathryn Bigelow,2017,7.7
+tt5442430,4,2017-04-18,Life,https://www.imdb.com/title/tt5442430/,movie,6.6,104,2017,"Horror, Sci-Fi, Thriller",155481,2017-03-18,Daniel Espinosa,2017,5.4
+tt5478478,7,2018-03-17,Hostiles,https://www.imdb.com/title/tt5478478/,movie,7.2,134,2017,"Adventure, Drama, Western",18178,2017-09-02,Scott Cooper,2018,6.5
+tt5519340,3,2017-12-23,Bright,https://www.imdb.com/title/tt5519340/,movie,6.4,117,2017,"Action, Crime, Fantasy, Thriller",123992,2017-12-22,David Ayer,2017,2.9
+tt5539054,3,2017-07-10,You Get Me,https://www.imdb.com/title/tt5539054/,movie,4.6,89,2017,Thriller,6517,2017-06-23,Brent Bonacorso,2017,NA
+tt5544384,8,2017-04-20,Gekijo-ban Sword Art Online: Ordinal Scale,https://www.imdb.com/title/tt5544384/,movie,7.4,119,2017,"Animation, Action, Adventure, Fantasy, Sci-Fi",2824,2017-02-18,Tomohiko Itô,2017,NA
+tt5555502,7,2016-06-26,Bienvenue à Marly-Gomont,https://www.imdb.com/title/tt5555502/,movie,7,96,2016,"Biography, Comedy, Drama",4262,2016-06-08,Julien Rambaldi,2016,NA
+tt5580036,7,2018-03-03,"I, Tonya",https://www.imdb.com/title/tt5580036/,movie,7.6,120,2017,"Biography, Comedy, Drama, Sport",83479,2017-09-08,Craig Gillespie,2018,7.7
+tt5580390,7,2018-02-21,The Shape of Water,https://www.imdb.com/title/tt5580390/,movie,7.5,123,2017,"Adventure, Drama, Fantasy, Horror, Romance, Thriller",202624,2017-08-31,Guillermo del Toro,2018,8.7
+tt5592248,6,2017-08-24,The Beguiled,https://www.imdb.com/title/tt5592248/,movie,6.4,93,2017,"Drama, Thriller",33991,2017-05-24,Sofia Coppola,2017,7.7
+tt5597946,2,2016-07-14,Débarquement immédiat!,https://www.imdb.com/title/tt5597946/,movie,5.7,90,2016,Comedy,826,2016-07-13,Philippe de Chauveron,2016,NA
+tt5598110,6,2016-11-26,Iris,https://www.imdb.com/title/tt5598110/,movie,6.1,99,2016,Thriller,1793,2016-11-16,Jalil Lespert,2016,NA
+tt5598160,6,2017-11-01,Jeune femme,https://www.imdb.com/title/tt5598160/,movie,6.8,97,2017,Drama,854,2017-05-23,Léonor Serraille,2017,8
+tt5610626,3,2017-06-13,Dragonheart: Battle for the Heartfire,https://www.imdb.com/title/tt5610626/,movie,5.2,98,2017,Fantasy,1266,2017-06-13,Patrik Syversen,2017,NA
+tt5629340,4,2017-09-06,Ôtez-moi d'un doute,https://www.imdb.com/title/tt5629340/,movie,6.8,100,2017,"Comedy, Drama",728,2017-03-30,Carine Tardieu,2017,NA
+tt5640450,5,2017-08-02,ARQ,https://www.imdb.com/title/tt5640450/,movie,6.4,88,2016,"Sci-Fi, Thriller",24049,2016-09-09,Tony Elliott,2017,NA
+tt5649144,7,2017-12-24,The Florida Project,https://www.imdb.com/title/tt5649144/,movie,7.6,111,2017,Drama,45857,2017-05-22,Sean Baker,2017,9.2
+tt5657028,5,2017-02-16,Alibi.com,https://www.imdb.com/title/tt5657028/,movie,6.5,90,2017,Comedy,4230,2017-01-20,Philippe Lacheau,2017,NA
+tt5669936,2,2017-12-30,The Recall,https://www.imdb.com/title/tt5669936/,movie,4.7,90,2017,"Horror, Sci-Fi, Thriller",6739,2017-06-02,Mauro Borrelli,2017,NA
+tt5687040,6,2017-05-20,Les fantômes d'Ismaël,https://www.imdb.com/title/tt5687040/,movie,5.7,114,2017,"Drama, Romance, Thriller",1076,2017-05-17,Arnaud Desplechin,2017,6.6
+tt5699154,6,2017-10-09,Le sens de la fête,https://www.imdb.com/title/tt5699154/,movie,7,117,2017,Comedy,3945,2017-07-05,"Olivier Nakache, Éric Toledano",2017,NA
+tt5700672,7,2016-08-15,Busanhaeng,https://www.imdb.com/title/tt5700672/,movie,7.5,118,2016,"Action, Horror, Thriller",86838,2016-05-13,Sang-ho Yeon,2016,7.2
+tt5702566,1,2017-07-09,Stasis,https://www.imdb.com/title/tt5702566/,movie,3,90,2017,"Adventure, Sci-Fi",2365,2017-06-04,Nicole Jones-Dion,2017,NA
+tt5715410,6,2017-08-13,The Son of Bigfoot,https://www.imdb.com/title/tt5715410/,movie,6.2,92,2017,"Animation, Comedy, Family, Fantasy",2510,2017-07-26,"Ben Stassen, Jeremy Degruson",2017,NA
+tt5715874,7,2017-11-05,The Killing of a Sacred Deer,https://www.imdb.com/title/tt5715874/,movie,7.1,121,2017,"Drama, Mystery, Thriller",57038,2017-05-22,Yorgos Lanthimos,2017,7.3
+tt5723272,5,2018-01-28,Aus dem Nichts,https://www.imdb.com/title/tt5723272/,movie,7.2,106,2017,"Crime, Drama",7301,2017-05-26,Fatih Akin,2018,6.4
+tt5726616,8,2018-03-03,Call Me by Your Name,https://www.imdb.com/title/tt5726616/,movie,8,132,2017,"Drama, Romance",101157,2017-01-22,Luca Guadagnino,2018,9.3
+tt5731132,3,2017-07-14,Hirune-hime: Shiranai watashi no monogatari,https://www.imdb.com/title/tt5731132/,movie,6.4,111,2017,"Animation, Adventure, Drama, Family, Fantasy, Sci-Fi",591,2017-03-02,Kenji Kamiyama,2017,6.9
+tt5736696,4,2017-02-05,Raid dingue,https://www.imdb.com/title/tt5736696/,movie,5.4,105,2016,"Action, Comedy",2059,2016-12-19,Dany Boon,2017,NA
+tt5742374,7,2017-11-12,You Were Never Really Here,https://www.imdb.com/title/tt5742374/,movie,7,89,2017,"Drama, Mystery, Thriller",21657,2017-05-27,Lynne Ramsay,2017,8.4
+tt5770430,1,2017-07-14,Ozzy,https://www.imdb.com/title/tt5770430/,movie,5.2,90,2016,"Animation, Adventure, Comedy, Family",1389,2016-10-14,"Nacho La Casa, Alberto Rodríguez",2017,NA
+tt5776858,8,2018-02-25,Phantom Thread,https://www.imdb.com/title/tt5776858/,movie,7.7,130,2017,"Drama, Romance",53893,2017-11-24,Paul Thomas Anderson,2018,9
+tt5783956,3,2018-02-14,When We First Met,https://www.imdb.com/title/tt5783956/,movie,6.4,97,2018,"Comedy, Fantasy, Romance",21562,2018-02-09,Ari Sandel,2018,3.5
+tt5804948,3,2017-04-09,À bras ouverts,https://www.imdb.com/title/tt5804948/,movie,5.3,92,2017,Comedy,1421,2017-04-05,Philippe de Chauveron,2017,NA
+tt5825380,3,2018-02-02,Wonder Wheel,https://www.imdb.com/title/tt5825380/,movie,6.2,101,2017,Drama,11857,2017-10-14,Woody Allen,2018,4.5
+tt5833730,4,2016-12-11,Papa ou maman 2,https://www.imdb.com/title/tt5833730/,movie,6.2,NA,2016,Comedy,877,2016-11-20,Martin Bourboulon,2016,NA
+tt5834036,7,2017-03-18,1:54,https://www.imdb.com/title/tt5834036/,movie,6.7,106,2016,"Drama, Sport",879,2016-08-24,Yan England,2017,4.6
+tt5843850,3,2018-04-13,Kings,https://www.imdb.com/title/tt5843850/,movie,4.8,92,2017,"Crime, Drama, Romance, Thriller",289,2017-09-13,Deniz Gamze Ergüven,2018,3.4
+tt5859238,8,2018-01-04,Lucky,https://www.imdb.com/title/tt5859238/,movie,7.4,88,2017,"Comedy, Drama",7395,2017-03-11,John Carroll Lynch,2018,7.9
+tt5969846,4,2017-04-23,Sous le même toit,https://www.imdb.com/title/tt5969846/,movie,5.2,97,2017,Comedy,439,2017-01-19,Dominique Farrugia,2017,NA
+tt5972780,1,2017-09-06,Bonne pomme,https://www.imdb.com/title/tt5972780/,movie,5,101,2017,Comedy,116,2017-08-25,Florence Quentin,2017,NA
+tt5975354,2,2017-04-09,"Telle mère, telle fille",https://www.imdb.com/title/tt5975354/,movie,5,94,2017,Comedy,557,2017-03-29,Noémie Saglio,2017,NA
+tt5976178,2,2017-03-29,Gangsterdam,https://www.imdb.com/title/tt5976178/,movie,4.1,100,2017,Comedy,433,2017-03-07,Romain Lévy,2017,NA
+tt6009140,6,2017-04-28,Jour J,https://www.imdb.com/title/tt6009140/,movie,6.2,94,2017,Comedy,1539,2017-03-30,Reem Kherici,2017,NA
+tt6021478,2,2017-10-27,Épouse-moi mon pote,https://www.imdb.com/title/tt6021478/,movie,6.1,92,2017,Comedy,861,2017-10-25,Tarek Boudali,2017,NA
+tt6021860,4,2017-07-21,Sales gosses,https://www.imdb.com/title/tt6021860/,movie,4.9,88,2017,Comedy,98,2017-07-19,Frédéric Quiring,2017,NA
+tt6063866,7,2017-04-12,C'est beau la vie quand on y pense,https://www.imdb.com/title/tt6063866/,movie,5.1,95,2017,NANA,90,2017-04-12,Gérard Jugnot,2017,NA
+tt6081632,5,2017-06-04,Marie-Francine,https://www.imdb.com/title/tt6081632/,movie,5.5,95,2017,Comedy,452,2017-05-31,Valérie Lemercier,2017,NA
+tt6096500,3,2017-09-26,L'un dans l'autre,https://www.imdb.com/title/tt6096500/,movie,5.2,85,2017,Comedy,280,2017-08-23,Bruno Chiche,2017,NA
+tt6119504,2,2017-09-17,#REALITYHIGH,https://www.imdb.com/title/tt6119504/,movie,5.2,99,2017,"Comedy, Drama, Romance",2356,2017-09-08,Fernando Lebrija,2017,NA
+tt6144762,3,2017-10-19,Coexister,https://www.imdb.com/title/tt6144762/,movie,5.9,90,2017,"Comedy, Music",482,2017-08-25,Fabrice Eboué,2017,NA
+tt6183834,7,2017-11-04,Carbone,https://www.imdb.com/title/tt6183834/,movie,6.9,104,2017,"Crime, Thriller",549,2017-10-13,Olivier Marchal,2017,NA
+tt6194538,4,2017-09-30,Le petit Spirou,https://www.imdb.com/title/tt6194538/,movie,4.2,86,2017,"Comedy, Family",130,2017-08-27,Nicolas Bary,2017,NA
+tt6286630,4,2017-07-08,Mon poussin,https://www.imdb.com/title/tt6286630/,movie,4.9,97,2017,Comedy,220,2017-06-28,Frédéric Forestier,2017,NA
+tt6286668,3,2017-12-23,Tout là-haut,https://www.imdb.com/title/tt6286668/,movie,5.7,99,2017,Adventure,95,2017-09-24,Serge Hazanavicius,2017,NA
+tt6293032,3,2017-09-23,Mon garçon,https://www.imdb.com/title/tt6293032/,movie,5.7,84,2017,"Drama, Thriller",395,2017-08-23,Christian Carion,2017,NA
+tt6294822,7,2018-01-28,The Post,https://www.imdb.com/title/tt6294822/,movie,7.2,116,2017,"Biography, Drama, History, Thriller",65553,2017-12-22,Steven Spielberg,2018,8.3
+tt6298780,1,2017-09-09,Sharknado 5: Global Swarming,https://www.imdb.com/title/tt6298780/,tvMovie,4.1,93,2017,"Action, Adventure, Comedy, Horror, Sci-Fi",3110,2017-08-06,Anthony C. Ferrante,2017,NA
+tt6304046,7,2017-11-25,Thelma,https://www.imdb.com/title/tt6304046/,movie,7.1,116,2017,"Drama, Fantasy, Mystery, Romance, Thriller",12398,2017-08-20,Joachim Trier,2017,7.4
+tt6314690,5,2017-07-16,Les as de la jungle,https://www.imdb.com/title/tt6314690/,movie,5,97,2017,"Animation, Adventure, Comedy, Family, Fantasy",338,2017-06-13,David Alaux,2017,3.8
+tt6330052,4,2017-10-06,Gauguin - Voyage de Tahiti,https://www.imdb.com/title/tt6330052/,movie,5.8,102,2017,"Biography, Drama, Romance",346,2017-09-20,Edouard Deluc,2017,NA
+tt6336356,7,2018-02-20,Meari to majo no hana,https://www.imdb.com/title/tt6336356/,movie,6.8,102,2017,"Animation, Adventure, Family, Fantasy",2262,2017-07-08,Hiromasa Yonebayashi,2018,7.3
+tt6350304,5,2017-12-31,L'échange des princesses,https://www.imdb.com/title/tt6350304/,movie,7.9,100,2017,"Drama, History",195,2017-12-27,Marc Dugain,2017,NA
+tt6414890,2,2018-03-24,Eva,https://www.imdb.com/title/tt6414890/,movie,4.8,100,2018,"Drama, Romance",231,2018-02-17,Benoît Jacquot,2018,3.8
+tt6423776,5,2017-10-01,Un beau soleil intérieur,https://www.imdb.com/title/tt6423776/,movie,6.2,94,2017,"Comedy, Drama, Romance",1634,2017-05-18,Claire Denis,2017,7.8
+tt6445396,4,2017-03-26,L'embarras du choix,https://www.imdb.com/title/tt6445396/,movie,5.4,95,2017,"Comedy, Romance",375,2017-01-19,Eric Lavaine,2017,NA
+tt6452332,7,2017-09-05,Yoake tsugeru Rû no uta,https://www.imdb.com/title/tt6452332/,movie,6.9,112,2017,"Animation, Adventure, Comedy, Family, Fantasy, Music",385,2017-05-19,Masaaki Yuasa,2017,NA
+tt6470762,3,2017-11-22,Mazinger Z: Infinity,https://www.imdb.com/title/tt6470762/,movie,6,95,2017,"Animation, Action, Sci-Fi",795,2017-10-27,Junji Shimizu,2017,NA
+tt6481478,6,2017-09-26,Les grands esprits,https://www.imdb.com/title/tt6481478/,movie,6.9,106,2017,"Comedy, Drama",239,2017-08-24,Olivier Ayache-Vidal,2017,NA
+tt6515342,5,2017-10-22,Knock,https://www.imdb.com/title/tt6515342/,movie,5.8,113,2017,Comedy,745,2017-10-18,Lorraine Lévy,2017,NA
+tt6515420,3,2017-12-18,La deuxième étoile,https://www.imdb.com/title/tt6515420/,movie,4.3,NA,2017,Comedy,37,2017-11-08,Lucien Jean-Baptiste,2017,NA
+tt6645154,6,2017-07-08,Les hommes du feu,https://www.imdb.com/title/tt6645154/,movie,6.1,90,2017,Drama,159,2017-06-23,Pierre Jolivet,2017,NA
+tt6781638,3,2018-03-28,Dolphins,https://www.imdb.com/title/tt6781638/,movie,NA,75,2018,Documentary,NA,2018-05-02,"Alastair Fothergill, Keith Scholey",2018,NA
+tt6820184,2,2018-03-08,"Madame Mills, une voisine si parfaite",https://www.imdb.com/title/tt6820184/,movie,4.1,88,2018,Comedy,95,2018-03-07,Sophie Marceau,2018,NA
+tt6830780,4,2017-07-30,Loosideu deurim,https://www.imdb.com/title/tt6830780/,movie,6.1,101,2017,"Sci-Fi, Thriller",1515,2017-02-22,Kim Joon-Sung,2017,NA
+tt6838702,5,2018-03-15,Tout le monde debout,https://www.imdb.com/title/tt6838702/,movie,5.7,107,2018,"Comedy, Romance",322,2018-02-23,Franck Dubosc,2018,NA
+tt6857988,4,2018-04-23,Je ne suis pas un homme facile,https://www.imdb.com/title/tt6857988/,movie,6.5,98,2018,Comedy,1402,2018-04-13,Eleonore Pourriat,2018,NA
+tt6859418,4,2018-02-24,La ch'tite famille,https://www.imdb.com/title/tt6859418/,movie,5.7,107,2018,Comedy,342,2018-01-13,Dany Boon,2018,NA
+tt6923840,4,2018-01-13,Normandie nue,https://www.imdb.com/title/tt6923840/,movie,5.4,105,2018,"Comedy, Drama",67,2018-01-10,Philippe Le Guay,2018,NA
+tt6947294,4,2017-06-24,Les ex,https://www.imdb.com/title/tt6947294/,movie,5.5,84,2017,Comedy,320,2017-06-14,Maurice Barthélémy,2017,NA
+tt6960736,5,2018-04-22,Love Addict,https://www.imdb.com/title/tt6960736/,movie,5.1,93,2018,Comedy,31,2018-03-17,Frank Bellocq,2018,NA
+tt6972372,6,2018-04-23,Place publique,https://www.imdb.com/title/tt6972372/,movie,6.2,98,2018,"Comedy, Drama",77,2018-04-18,Agnès Jaoui,2018,NA
+tt6995612,2,2018-04-04,Gaston Lagaffe,https://www.imdb.com/title/tt6995612/,movie,4,NA,2018,Comedy,100,2018-03-17,Pierre-François Martin-Laval,2018,NA
+tt7018010,6,2017-12-04,Santa & Cie,https://www.imdb.com/title/tt7018010/,movie,6.4,92,2017,"Comedy, Family",682,2017-12-03,Alain Chabat,2017,NA
+tt7023354,4,2017-07-21,La colle,https://www.imdb.com/title/tt7023354/,movie,6,91,2017,Comedy,166,2017-06-17,Alexandre Castagnetti,2017,NA
+tt7064498,6,2018-02-14,Le retour du héros,https://www.imdb.com/title/tt7064498/,movie,6.5,90,2018,"Comedy, History",286,2018-02-14,Laurent Tirard,2018,NA
+tt7066382,2,2018-02-07,Les Tuche 3,https://www.imdb.com/title/tt7066382/,movie,4.7,95,2018,Comedy,198,2018-01-31,Olivier Baroux,2018,NA
+tt7141030,5,2018-03-24,La finale,https://www.imdb.com/title/tt7141030/,movie,6.1,85,2018,Comedy,68,2018-01-17,Robin Sykes,2018,NA
+tt7217028,2,2017-12-23,Garde alternée,https://www.imdb.com/title/tt7217028/,movie,5.6,104,2017,Comedy,51,2017-12-20,Alexandra Leclère,2017,NA
+tt7219324,6,2017-12-12,La villa,https://www.imdb.com/title/tt7219324/,movie,6.5,107,2017,Drama,372,2017-09-03,Robert Guédiguian,2017,6.4
+tt7238392,2,2018-04-13,Taxi 5,https://www.imdb.com/title/tt7238392/,movie,5.4,102,2018,"Action, Adventure, Comedy, Crime",480,2018-04-07,Franck Gastambide,2018,NA
+tt7491128,5,2018-01-26,Ami-ami,https://www.imdb.com/title/tt7491128/,movie,5.5,82,2018,Comedy,89,2018-01-17,Victor Saint Macary,2018,NA
+tt0756648,6,2016-04-23,Le renard et l'enfant,https://www.imdb.com/title/tt0756648/,movie,7,92,2007,"Adventure, Drama, Family",3310,2007-11-28,Luc Jacquet,2016,NA
+tt0758758,7,2017-12-17,Into the Wild,https://www.imdb.com/title/tt0758758/,movie,8.1,148,2007,"Adventure, Biography, Drama",494289,2007-09-01,Sean Penn,2017,7.3
+tt7608028,2,2018-01-28,The Open House,https://www.imdb.com/title/tt7608028/,movie,3.3,94,2018,"Horror, Thriller",16873,2018-01-19,"Suzanne Coote, Matt Angel",2018,NA
+tt7654872,4,2018-04-26,Amoureux de ma femme,https://www.imdb.com/title/tt7654872/,movie,4.7,84,2018,Comedy,15,2018-04-25,Daniel Auteuil,2018,NA
+tt7839456,7,2018-03-24,La prière,https://www.imdb.com/title/tt7839456/,movie,7.3,107,2018,Drama,288,2018-02-18,Cédric Kahn,2018,7.2
+tt0803096,5,2016-06-10,Warcraft,https://www.imdb.com/title/tt0803096/,movie,6.9,123,2016,"Action, Adventure, Fantasy",209137,2016-05-24,Duncan Jones,2016,3.2
+tt8098548,4,2018-04-21,Larguées,https://www.imdb.com/title/tt8098548/,movie,6.2,95,2018,Comedy,59,2018-01-20,Eloïse Lang,2018,NA
+tt0810819,6,2016-01-24,The Danish Girl,https://www.imdb.com/title/tt0810819/,movie,7.1,119,2015,"Biography, Drama, History, Romance",130374,2015-09-05,Tom Hooper,2016,6.6
+tt0824747,6,2016-10-29,Changeling,https://www.imdb.com/title/tt0824747/,movie,7.8,141,2008,"Biography, Crime, Drama, History, Mystery, Thriller",214669,2008-05-20,Clint Eastwood,2016,6.3
+tt0842926,6,2016-04-25,The Kids Are All Right,https://www.imdb.com/title/tt0842926/,movie,7,106,2010,"Comedy, Drama, Romance",117515,2010-01-25,Lisa Cholodenko,2016,8.6
+tt0875113,6,2016-08-21,99 francs,https://www.imdb.com/title/tt0875113/,movie,7.3,100,2007,"Comedy, Drama",16926,2007-09-26,Jan Kounen,2016,NA
+tt0879870,4,2017-09-27,Eat Pray Love,https://www.imdb.com/title/tt0879870/,movie,5.7,133,2010,"Drama, Romance",72349,2010-08-13,Ryan Murphy,2017,5
+tt0088847,6,2017-09-09,The Breakfast Club,https://www.imdb.com/title/tt0088847/,movie,7.9,97,1985,"Comedy, Drama",295541,1985-02-07,John Hughes,2017,6.2
+tt0918940,3,2016-07-11,The Legend of Tarzan,https://www.imdb.com/title/tt0918940/,movie,6.3,110,2016,"Action, Adventure, Drama, Fantasy, Romance",137201,2016-06-27,David Yates,2016,4.4
+tt0926759,7,2016-04-23,Le premier jour du reste de ta vie,https://www.imdb.com/title/tt0926759/,movie,7.6,114,2008,Drama,8151,2008-06-13,Rémi Bezançon,2016,NA
+tt0095687,4,2017-06-07,My Stepmother Is an Alien,https://www.imdb.com/title/tt0095687/,movie,5.3,105,1988,"Comedy, Sci-Fi",22729,1988-12-09,Richard Benjamin,2017,NA
+tt0974015,4,2017-11-17,Justice League,https://www.imdb.com/title/tt0974015/,movie,6.7,120,2017,"Action, Adventure, Fantasy, Sci-Fi",242184,2017-11-13,Zack Snyder,2017,4.5
