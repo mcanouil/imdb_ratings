@@ -216,7 +216,7 @@ movies_theatres <- tribble(
   2018, "February", 10,
   2018, "March", 14,
   2018, "April", 14,
-  2018, "May", NA,
+  2018, "May", 12,
   2018, "June", NA,
   2018, "July", NA,
   2018, "August", NA,
@@ -230,19 +230,29 @@ movies_theatres <- tribble(
 ```{r read_imdb, include = FALSE}
 # "http://www.imdb.com/user/ur56341222/ratings?start=1&view=compact"
 
-# ratings <- read_csv("ratings.csv", locale = locale(encoding = "Windows-1252")) %>%
-#   mutate(
-#     YearRated = year(`Date Rated`),
-#     Genres = map(Genres, simpleCap) %>%
-#       gsub("Musical", "Music", .)
-#   ) %>%
-#   filter(YearRated>=2016) %>%
-#   mutate(
-#     `Metascore Rating` = get_metascore(URL)
-#   ) %>%
-#   write_csv(path = "ratings_ms.csv")
+ratings_old <- read_csv("ratings_ms.csv")
 
-ratings <- read_csv("ratings_ms.csv")
+ratings <- read_csv("ratings.csv", locale = locale(encoding = "Windows-1252")) %>%
+  filter(!Const%in%ratings_old[["Const"]]) %>% 
+  mutate(
+    YearRated = year(`Date Rated`),
+    Genres = map(Genres, simpleCap) %>%
+      gsub("Musical", "Music", .)
+  ) %>%
+  filter(YearRated>=2016)
+
+if (nrow(ratings)>0) {
+  ratings <- ratings%>%
+    mutate(
+      `Metascore Rating` = get_metascore(URL)
+    ) %>%
+    bind_rows(ratings_old) %>% 
+    write_csv(path = "ratings_ms.csv")
+} else {
+  ratings <- read_csv("ratings_ms.csv")
+}
+
+
 
 ratings_agg <- ratings %>%
   group_by(`Date Rated`) %>%
@@ -685,7 +695,7 @@ for (iyear in as.character(unique(ratings[["YearRated"]]))) {
 
 ```{r Coeos_IMDb, fig.height = 9, fig.width = 16, results = "asis"}
 cat("\n# {.tabset .tabset-fade .tabset-pills}\n")
-for (iyear in as.character(unique(ratings[["YearRated"]]))) {
+for (iyear in sort(as.character(unique(ratings[["YearRated"]])))) {
   cat("\n##", iyear, "{-}\n")
   ggarrange(
     ggarrange(
