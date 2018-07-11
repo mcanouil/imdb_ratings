@@ -7,7 +7,6 @@ options(stringsAsFactors = FALSE)
 # library(broom)
 # 
 # library(cowplot)
-# library(rvest)
 
 library(tidyverse)
 library(viridis)
@@ -17,6 +16,7 @@ library(grid)
 library(gridExtra)
 library(ggrepel)
 library(ggpubr)
+library(rvest)
 
 invisible(sapply(list.files("../DEV/Rfunctions/", full.names = TRUE), source))
 
@@ -32,8 +32,36 @@ scale_colour_viridis <- hijack(
   end = 1,
   direction = -1
 )
+scale_colour_viridis_d <- hijack(
+  scale_colour_viridis_d,
+  option = "viridis",
+  begin = 2 / 5,
+  end = 1,
+  direction = -1
+)
+scale_colour_viridis_c <- hijack(
+  scale_colour_viridis_c,
+  option = "viridis",
+  begin = 2 / 5,
+  end = 1,
+  direction = -1
+)
 scale_fill_viridis <- hijack(
   scale_fill_viridis,
+  option = "viridis",
+  begin = 2 / 5,
+  end = 1,
+  direction = -1
+)
+scale_fill_viridis_c <- hijack(
+  scale_fill_viridis_c,
+  option = "viridis",
+  begin = 2 / 5,
+  end = 1,
+  direction = -1
+)
+scale_fill_viridis_d <- hijack(
+  scale_fill_viridis_d,
   option = "viridis",
   begin = 2 / 5,
   end = 1,
@@ -180,7 +208,7 @@ plot_genres_distribution <- function(.data) {
         segment.colour = "white"
       ) +
       coord_polar(theta = "y") +
-      scale_fill_viridis(discrete = TRUE, guide = guide_legend(ncol = 2)) +
+      scale_fill_viridis_d(guide = guide_legend(ncol = 2)) +
       labs(title = "Distribution of Genres") +
       theme(
         axis.ticks = element_blank(),
@@ -223,7 +251,7 @@ plot_genres_rating <- function(.data) {
       geom_bar(width = 1, stat = "identity", colour = "white") +
       geom_text(aes(label = N), colour = "black", nudge_y = -0.5, size = 2) +
       geom_text(aes(label = round(Rating, digits = 2)), colour = "white", nudge_y = 0.5, size = 3) +
-      scale_fill_viridis(discrete = FALSE, direction = 1) +
+      scale_fill_viridis_c(direction = 1) +
       scale_x_discrete(expand = c(0, 0)) +
       scale_y_continuous(expand = c(0, 0), limits = c(0, 10), breaks = seq(0, 10, 2)) +
       labs(title = "Average Weighted Rating per Genre", fill = "# Movies") +
@@ -254,7 +282,7 @@ plot_ratings_runtime <- function(.data) {
         segment.colour = "white"
       ) +
       coord_polar(theta = "y") +
-      scale_fill_viridis(name = "Rating", discrete = TRUE) +
+      scale_fill_viridis_d(name = "Rating") +
       labs(title = "Days Spent per Rating") +
       theme(
         axis.ticks = element_blank(),
@@ -293,7 +321,7 @@ plot_ratings_distribution <- function(.data) {
         breaks = c(0, seq_len(10))
       ) +
       scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.25)) +
-      scale_fill_viridis(discrete = TRUE) +
+      scale_fill_viridis_d() +
       labs(
         x = "Rating", 
         y = "Proportion", 
@@ -539,24 +567,24 @@ movies_theatres <- tribble(
 ratings_old <- read_csv("ratings_ms.csv")
 
 ratings <- read_csv("ratings.csv", locale = locale(encoding = "Windows-1252")) %>%
-  filter(!Const%in%ratings_old[["Const"]]) %>% 
+#   filter(!Const%in%ratings_old[["Const"]]) %>% 
   mutate(
     YearRated = year(`Date Rated`),
     Genres = map(Genres, simpleCap) %>%
       gsub("Musical", "Music", .)
   ) %>%
   filter(YearRated>=2016)
-
-if (nrow(ratings)>0) {
-  ratings <- ratings%>%
-    mutate(
-      `Metascore Rating` = get_metascore(URL)
-    ) %>%
-    bind_rows(ratings_old) %>% 
-    write_csv(path = "ratings_ms.csv")
-} else {
-  ratings <- read_csv("ratings_ms.csv")
-}
+# 
+# if (nrow(ratings)>0) {
+#   ratings <- ratings %>%
+#     mutate(
+#       `Metascore Rating` = get_metascore(URL)
+#     ) %>%
+#     bind_rows(ratings_old) %>% 
+#     write_csv(path = "ratings_ms.csv")
+# } else {
+#   ratings <- read_csv("ratings_ms.csv")
+# }
 
 
 ### make plots
@@ -607,7 +635,7 @@ gg_ratings  %>%
 
 
 ### gganimate
-year_radar <- function(data) {
+year_radar <- function(data, base_size = 10) {
   set_colours <- function(fac, direction = 1) {
     fac %>% 
       unique() %>% 
@@ -617,6 +645,7 @@ year_radar <- function(data) {
       c("ALL" = "white", .)
   }
   ggplot(data = data) +
+    theme_black(base_size = base_size) +
     geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "grey50", size = 0.2) +
     geom_hline(yintercept = seq(0, 20, by = 5), colour = "grey50", size = 0.4) +
     geom_rect(fill = "grey20", xmin = 1, xmax = 0, ymin = 0, ymax = 20, inherit.aes = FALSE) +
@@ -625,7 +654,7 @@ year_radar <- function(data) {
       data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
       aes(x = Month, y = Count, label = Count),
       colour = "white",
-      size = 2,
+      size = base_size * 1/5,
       inherit.aes = FALSE
     ) +
     scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
@@ -657,6 +686,7 @@ year_radar <- function(data) {
 dta <- movies_theatres %>% 
   mutate(
     Year = factor(Year),
+    year = as.character(Year),
     Month = factor(Month, levels = locale()$date_names$mon)
   ) %>% 
   arrange(Year, Month) %>% 
@@ -665,12 +695,23 @@ dta <- movies_theatres %>%
   )
 
 
-p <- year_radar(data = dta) +
-  # geom_point(aes(x = as.integer(Month), y = Count, colour = Year, frame = Year), shape = 21) +
+
+p <- year_radar(data = dta, base_size = 16) +
+  geom_point(
+    aes(x = as.integer(Month), y = Count, colour = Year, frame = year, cumulative = TRUE),
+    shape = 21
+  ) +
   geom_path(
-    aes(x = as.integer(Month), y = Count, colour = Year, frame = Year))
+    aes(x = as.integer(Month), y = Count, colour = Year, frame = year, cumulative = TRUE)
+  ) +
+  guides(colour = "none")
 
-library(gganimate)
-gganimate(p, filename = "./images/Coeos_IMDb.gif")
-
-
+# library(gganimate)
+# gganimate(
+#   p = p, 
+#   filename = "./images/Coeos_IMDb.gif", 
+#   ani.width = 500, 
+#   ani.height = 500, 
+#   ani.res = 100, 
+#   interval = 1
+# )
