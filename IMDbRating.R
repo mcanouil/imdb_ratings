@@ -5,7 +5,6 @@ options(stringsAsFactors = FALSE)
 # library(kableExtra)
 # library(Hmisc)
 # library(broom)
-# 
 # library(cowplot)
 
 library(tidyverse)
@@ -25,56 +24,6 @@ invisible(sapply(list.files("../DEV/Rfunctions/", full.names = TRUE), source))
 gg_fontsize <- 9
 
 theme_set(theme_black(base_size = gg_fontsize))
-scale_colour_viridis <- hijack(
-  scale_colour_viridis,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-scale_colour_viridis_d <- hijack(
-  scale_colour_viridis_d,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-scale_colour_viridis_c <- hijack(
-  scale_colour_viridis_c,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-scale_fill_viridis <- hijack(
-  scale_fill_viridis,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-scale_fill_viridis_c <- hijack(
-  scale_fill_viridis_c,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-scale_fill_viridis_d <- hijack(
-  scale_fill_viridis_d,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-viridis_pal <- hijack(
-  viridis_pal,
-  option = "viridis",
-  begin = 2 / 5,
-  end = 1,
-  direction = -1
-)
-
 
 ### functions
 set_colours <- function(fac, direction = 1) {
@@ -86,7 +35,7 @@ set_colours <- function(fac, direction = 1) {
     c("ALL" = "white", .)
 }
 
-bestStreak <- function(vec) {
+best_streak <- function(vec) {
   bs <- function(vec) {
     rle(vec) %>% 
       unclass() %>% 
@@ -141,7 +90,7 @@ plot_streak <- function(.data) {
     ) %>%
     group_by(YearRated) %>%
     mutate(
-      streak = bestStreak(n_rating),
+      streak = best_streak(n_rating),
       Week = ifelse(Month=="January" & Week>=50, 0, Week),
       Week = ifelse(Month=="December" & Week<=40, max(Week)+1, Week) 
     ) %>%
