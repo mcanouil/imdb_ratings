@@ -58,7 +58,11 @@ invisible(sapply(list.files("../DEV/Rfunctions/", full.names = TRUE), source))
 
 
 ### ggplot2 parameters
-theme_set(theme_black(base_size = params$gg_fontsize))
+if (params$theme_dark) {
+  theme_set(theme_black(base_size = params$gg_fontsize))
+} else {
+  theme_set(theme_grey(base_size = params$gg_fontsize))
+}
 
 ### functions
 set_colours <- function(fac, direction = 1) {
@@ -67,7 +71,7 @@ set_colours <- function(fac, direction = 1) {
     length() %>% 
     viridis_pal(direction = direction)(.) %>% 
     `names<-`(sort(unique(fac))) %>% 
-    c("ALL" = "white", .)
+    c("ALL" = ggplot2::theme_get()$text$colour, .)
 }
 
 best_streak <- function(vec) {
@@ -138,9 +142,9 @@ plot_streak <- function(.data) {
     summarise(Week = min(Week))
 
   ggplot(data = .data, aes(x = Week, y = wDay, fill = avg_rating, label = n_rating)) +
-    geom_tile(colour = "grey20", size = 0.1) +
+    geom_tile(colour = "white", size = 0.1) +
     geom_text(colour = "white", fontface = "bold", size = 2) +
-    scale_fill_viridis_c(name = "Average\nRating", limits = c(0, 10), na.value = "grey30") +
+    scale_fill_viridis_c(name = "Average\nRating", limits = c(0, 10), na.value = ggplot2::theme_get()$panel.background$fill) +
     scale_y_discrete(expand = c(0, 0)) +
     scale_x_continuous(
       expand = c(0, 0), 
@@ -189,7 +193,7 @@ plot_genres_distribution <- function(.data) {
         size = 2, 
         nudge_x = 0.25,
         min.segment.length = 0, 
-        segment.colour = "white"
+        segment.colour = ggplot2::theme_get()$line$colour
       ) +
       coord_polar(theta = "y") +
       scale_fill_viridis_d(guide = guide_legend(ncol = 2)) +
@@ -233,8 +237,8 @@ plot_genres_rating <- function(.data) {
     ) %>% 
     ggplot(aes(x = Genre, y = Rating, fill = N)) +
       geom_bar(width = 1, stat = "identity", colour = "white") +
-      geom_text(aes(label = N), colour = "black", nudge_y = -0.5, size = 2) +
-      geom_text(aes(label = round(Rating, digits = 2)), colour = "white", nudge_y = 0.5, size = 3) +
+      geom_text(aes(label = N), colour = ggplot2::theme_get()$panel.grid$colour, nudge_y = -0.5, size = 2) +
+      geom_text(aes(label = round(Rating, digits = 2)), colour = ggplot2::theme_get()$text$colour, nudge_y = 0.5, size = 3) +
       scale_fill_viridis_c(direction = 1) +
       scale_x_discrete(expand = c(0, 0)) +
       scale_y_continuous(expand = c(0, 0), limits = c(0, 10), breaks = seq(0, 10, 2)) +
@@ -321,7 +325,7 @@ plot_bad <- function(.data, n = 3, gg_fontsize = params$gg_fontsize) {
     head(n) %>%
     ggtexttable(rows = NULL, theme = ttheme("mBlack", base_size = gg_fontsize*0.80)) %>%
     arrangeGrob(
-      top = text_grob("Worst Movies", color = "white", face = "bold", size = gg_fontsize*1.2)
+      top = text_grob("Worst Movies", color = ggplot2::theme_get()$text$colour, face = "bold", size = gg_fontsize*1.2)
     ) %>% 
     as_ggplot()
 }
@@ -333,7 +337,7 @@ plot_top <- function(.data, n = 3, gg_fontsize = params$gg_fontsize) {
     head(n) %>%
     ggtexttable(rows = NULL, theme = ttheme("mBlack", base_size = gg_fontsize*0.80)) %>%
     arrangeGrob(
-      top = text_grob("Best Movies", color = "white", face = "bold", size = gg_fontsize*1.2)
+      top = text_grob("Best Movies", color = ggplot2::theme_get()$text$colour, face = "bold", size = gg_fontsize*1.2)
     ) %>% 
     as_ggplot()
 }
@@ -345,15 +349,16 @@ plot_movies_theatres <- function(.year, .data) {
       size = Year==.year
     ) %>% 
     ggplot() +
-      geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "grey50", size = 0.2) +
-      geom_hline(yintercept = seq(0, 20, by = 5), colour = "grey50", size = 0.4) +
-      geom_rect(fill = "grey20", xmin = 1, xmax = 0, ymin = 0, ymax = 20) +
-      geom_vline(aes(xintercept = as.integer(Month)), colour = "grey50", size = 0.2) +
+      geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "white", size = 0.20) +
+      geom_hline(yintercept = seq(0, 15, by = 5), colour = "white", size = 0.4) +
+      geom_rect(fill = ggplot2::theme_get()$panel.background$fill, xmin = 1, xmax = 0, ymin = 0, ymax = 20) +
+      geom_hline(yintercept = 20, colour = "white", size = 0.4) +
+      geom_vline(aes(xintercept = as.integer(Month)), colour = "white", size = 0.20) +
       geom_text(
         data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
         aes(x = Month, y = Count, label = Count),
-        colour = "white",
-        size = 2
+        colour = ggplot2::theme_get()$text$colour,
+        size = 2.5
       ) +
       geom_smooth(
         aes(x = as.integer(Month), y = Count, colour = "ALL"),
@@ -450,7 +455,7 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
     arrangeGrob(
       top = text_grob(
         paste0(.x, " in Movie Theatres"), 
-        color = "white", 
+        color = ggplot2::theme_get()$text$colour, 
         face = "bold", 
         size = 16
       ),
@@ -458,9 +463,9 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
       right = "", 
       bottom = text_grob(
         "© Mickaël 'Coeos' Canouil", 
-        color = "white", 
+        color = ggplot2::theme_get()$text$colour, 
         face = "bold",
-        hjust = -6.64,
+        hjust = -8.08,
         size = 5
       )
     ) %>%
@@ -629,73 +634,77 @@ p <- gg_ratings %>%
 ```
 
 ```{r animate, eval = FALSE}
-### gganimate
-year_radar <- function(data, base_size = 10) {
-  set_colours <- function(fac, direction = 1) {
-    fac %>% 
-      unique() %>% 
-      length() %>% 
-      viridis_pal(direction = direction)(.) %>% 
-      `names<-`(sort(unique(fac))) %>% 
-      c("ALL" = "white", .)
-  }
-  ggplot(data = data) +
-    theme_black(base_size = base_size) +
-    geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "grey50", size = 0.2) +
-    geom_hline(yintercept = seq(0, 20, by = 5), colour = "grey50", size = 0.4) +
-    geom_rect(fill = "grey20", xmin = 1, xmax = 0, ymin = 0, ymax = 20, inherit.aes = FALSE) +
-    geom_vline(xintercept = seq_len(12), colour = "grey50", size = 0.2) +
-    geom_text(
-      data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
-      aes(x = Month, y = Count, label = Count),
-      colour = "white",
-      size = base_size * 1/5,
-      inherit.aes = FALSE
-    ) +
-    scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
-    scale_x_continuous(limits = c(0, 12), breaks = seq_len(12), labels = locale()$date_names$mon) +
-    coord_polar(theta = "x", start = 2 * pi * 11/12) +
-    theme(
-      axis.text.y = element_blank(),
-      axis.text.x = element_text(size = rel(0.80)),
-      axis.title = element_blank(),
-      axis.ticks = element_blank(),
-      axis.line = element_blank(),
-      panel.grid = element_blank(),
-      panel.border = element_blank()
-    ) +
-    geom_smooth(
-      aes(x = as.integer(Month), y = Count, colour = "ALL"),
-      method = "loess",
-      se = FALSE,
-      size = 0.5,
-      linetype = 2,
-      show.legend = TRUE
-    ) +
-    scale_colour_manual(
-      name = "Year", 
-      values = set_colours(data[["Year"]], direction = 1)
-    ) 
-}
+# ### gganimate
+# year_radar <- function(data, base_size = 10) {
+#   set_colours <- function(fac, direction = 1) {
+#     fac %>% 
+#       unique() %>% 
+#       length() %>% 
+#       viridis_pal(direction = direction)(.) %>% 
+#       `names<-`(sort(unique(fac))) %>% 
+#       c("ALL" = "white", .)
+#   }
+#   ggplot(data = data) +
+#     theme_black(base_size = base_size) +
+#     geom_hline(yintercept = seq(0, 20, by = 2.5), colour = ggplot2::theme_get()$panel.grid$colour, size = 0.2) +
+#     geom_hline(yintercept = seq(0, 20, by = 5), colour = ggplot2::theme_get()$panel.grid$colour, size = 0.4) +
+#     geom_rect(fill = ggplot2::theme_get()$plot.background$colour, xmin = 1, xmax = 0, ymin = 0, ymax = 20, inherit.aes = FALSE) +
+#     geom_vline(xintercept = seq_len(12), colour = ggplot2::theme_get()$panel.grid$colour, size = 0.2) +
+#     geom_text(
+#       data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
+#       aes(x = Month, y = Count, label = Count),
+#       colour = ggplot2::theme_get()$text$colour,
+#       size = base_size * 1/5,
+#       inherit.aes = FALSE
+#     ) +
+#     scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
+#     scale_x_continuous(limits = c(0, 12), breaks = seq_len(12), labels = locale()$date_names$mon) +
+#     coord_polar(theta = "x", start = 2 * pi * 11/12) +
+#     theme(
+#       axis.text.y = element_blank(),
+#       axis.text.x = element_text(size = rel(0.80)),
+#       axis.title = element_blank(),
+#       axis.ticks = element_blank(),
+#       axis.line = element_blank(),
+#       panel.grid = element_blank(),
+#       panel.border = element_blank()
+#     ) +
+#     geom_smooth(
+#       aes(x = as.integer(Month), y = Count, colour = "ALL"),
+#       method = "loess",
+#       se = FALSE,
+#       size = 0.5,
+#       linetype = 2,
+#       show.legend = TRUE
+#     ) +
+#     scale_colour_manual(
+#       name = "Year", 
+#       values = set_colours(data[["Year"]], direction = 1)
+#     ) 
+# }
+# 
+# dta <- movies_theatres %>% 
+#   mutate(
+#     year = as.character(Year),
+#     Month = factor(Month, levels = locale()$date_names$mon)
+#   ) %>% 
+#   arrange(Year, Month) %>% 
+#   mutate(
+#     YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer()
+#   )
+# 
+# 
+# p <- year_radar(data = dta, base_size = 16) +
+#   geom_point(aes(x = as.integer(Month), y = Count, colour = year), shape = 21) +
+#   geom_path(aes(x = as.integer(Month), y = Count, colour = year))
 
-dta <- movies_theatres %>% 
-  mutate(
-    year = as.character(Year),
-    Month = factor(Month, levels = locale()$date_names$mon)
-  ) %>% 
-  arrange(Year, Month) %>% 
-  mutate(
-    YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer()
-  )
 
-library(gganimate)
-p <- year_radar(data = dta, base_size = 16) +
-  geom_point(aes(x = as.integer(Month), y = Count, colour = year), shape = 21) +
-  geom_path(aes(x = as.integer(Month), y = Count, colour = year)) +
-  guides(colour = "none") +
-  enter_fade() + 
-  transition_time(Year)
-
-animate(plot = p, device = "gif")
+# library(gganimate)
+# p <- gg_ratings$p_movies_theatres[[1]] +
+#   guides(colour = "none") +
+#   enter_fade() + 
+#   transition_time(Year)
+# write_rds(x = p, path = "p.rds")
+# animate(plot = p, device = "gif")
 
 ```
