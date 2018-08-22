@@ -643,7 +643,8 @@ p <- gg_ratings %>%
   ungroup()
 ```
 
-```{r animate, eval = FALSE}
+# gganimate
+```{r animate}
 year_radar <- function(data, base_size = 10) {
   set_colours <- function(fac, direction = 1) {
     fac %>%
@@ -743,7 +744,7 @@ print(p, width = 500, height = 500, units = "px", bg = ggplot2::theme_get()$plot
 anim_save(filename = "./images/Coeos_IMDb.gif")
 ```
 
-```{r}
+```{r, eval = FALSE}
 # mutate(
   # p_movies_streak = map(.x = data, .f = plot_streak)#,
   # p_genres_distribution = map(.x = data, .f = plot_genres_distribution),
@@ -765,7 +766,7 @@ p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
   ease_aes('linear') + 
   labs(title = "Movies Streak", subtitle = "{closest_state}")
 
-print(p, width = 1500, height = 450, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
+print(p, width = 500, height = 175, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
 
 ```
 
