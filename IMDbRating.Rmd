@@ -12,6 +12,8 @@ output:
     fig_width: 5
     fig_height: 3.5
     self_contained: true
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE, echo = FALSE}
@@ -101,7 +103,7 @@ get_metascore <- function(.x) {
   })
 }
 
-plot_streak <- function(.data) {
+plot_streak <- function(.data, facet = TRUE, number = TRUE) {
   .data <- .data %>%
     group_by(`Date Rated`) %>%
     summarise(
@@ -111,8 +113,8 @@ plot_streak <- function(.data) {
     right_join(
       y = tibble(
         "Date Rated" = seq(
-          from = as.Date(paste0(unique(year(.[["Date Rated"]])), "-01-01")),
-          to = as.Date(paste0(unique(year(.[["Date Rated"]])), "-12-31")),
+          from = as.Date(paste0(min(unique(year(.[["Date Rated"]]))), "-01-01")),
+          to = as.Date(paste0(max(unique(year(.[["Date Rated"]]))), "-12-31")),
           by = 1
         )
       ),
@@ -129,7 +131,7 @@ plot_streak <- function(.data) {
     ) %>%
     group_by(YearRated) %>%
     mutate(
-      streak = best_streak(n_rating),
+      streak = paste0("[", year(`Date Rated`), "] ", best_streak(n_rating)),
       Week = ifelse(Month=="January" & Week>=50, 0, Week),
       Week = ifelse(Month=="December" & Week<=40, max(Week)+1, Week) 
     ) %>%
@@ -141,10 +143,16 @@ plot_streak <- function(.data) {
     group_by(Month) %>% 
     summarise(Week = min(Week))
 
-  ggplot(data = .data, aes(x = Week, y = wDay, fill = avg_rating, label = n_rating)) +
+  p_out <- ggplot(
+    data = .data, 
+    mapping = aes(x = Week, y = wDay, fill = avg_rating, label = n_rating)
+  ) +
     geom_tile(colour = "white", size = 0.1) +
-    geom_text(colour = "white", fontface = "bold", size = 2) +
-    scale_fill_viridis_c(name = "Average\nRating", limits = c(0, 10), na.value = ggplot2::theme_get()$panel.background$fill) +
+    scale_fill_viridis_c(
+      name = "Average\nRating", 
+      limits = c(0, 10), 
+      na.value = ggplot2::theme_get()$panel.background$fill
+    ) +
     scale_y_discrete(expand = c(0, 0)) +
     scale_x_continuous(
       expand = c(0, 0), 
@@ -157,8 +165,15 @@ plot_streak <- function(.data) {
       axis.title = element_blank(),
       panel.grid = element_blank()
     ) +
-    labs(title = "Movies Streak", x = "Month", y = "Day") +
-    facet_grid(~streak)
+    labs(title = "Movies Streak", x = "Month", y = "Day")
+  
+  if (number) {
+    p_out <- p_out + geom_text(colour = "white", fontface = "bold", size = 2)
+  }
+  if (facet) {
+    p_out <- p_out + facet_grid(~streak)
+  }
+  return(p_out)
 }
 
 plot_genres_distribution <- function(.data) {
@@ -723,7 +738,34 @@ p <- year_radar(data = dta, base_size = 16) +
   ease_aes('linear') + 
   labs(title = "# Movies Seen in Theatres: {closest_state}")
 
-print(p, width = 480, height = 438, units = "px")
-# gganimate:::print.gganim
+
+print(p, width = 500, height = 500, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
+anim_save(filename = "./images/Coeos_IMDb.gif")
+```
+
+```{r}
+# mutate(
+  # p_movies_streak = map(.x = data, .f = plot_streak)#,
+  # p_genres_distribution = map(.x = data, .f = plot_genres_distribution),
+  # p_genres_rating = map(.x = data, .f = plot_genres_rating),
+  # p_ratings_runtime = map(.x = data, .f = plot_ratings_runtime),
+  # p_ratings_distribution = map(.x = data, .f = plot_ratings_distribution),
+  # data_agg = list(movies_theatres),
+  # p_movies_theatres = map2(.x = YearRated, .y = data_agg, .f = plot_movies_theatres)
+# )
+
+p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
+  transition_states(
+    streak,
+    transition_length = 2,
+    state_length = 1
+  ) +
+  enter_fade() +
+  exit_fade() +
+  ease_aes('linear') + 
+  labs(title = "Movies Streak", subtitle = "{closest_state}")
+
+print(p, width = 1500, height = 450, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
 
 ```
+
