@@ -298,8 +298,8 @@ plot_ratings_runtime <- function(.data) {
 
 plot_ratings_distribution <- function(.data) {
   .data %>% 
-    select(ends_with("Rating")) %>%
-    gather(key = Who, value = Rating) %>%
+    select(ends_with("Rating"), Year) %>%
+    gather(key = Who, value = Rating, -Year) %>%
     mutate(
       Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
       rounded_rating = round(Rating, digits = 0)
@@ -745,26 +745,50 @@ anim_save(filename = "./images/Coeos_IMDb.gif")
 ```
 
 ```{r, eval = FALSE}
-# mutate(
-  # p_movies_streak = map(.x = data, .f = plot_streak)#,
-  # p_genres_distribution = map(.x = data, .f = plot_genres_distribution),
-  # p_genres_rating = map(.x = data, .f = plot_genres_rating),
-  # p_ratings_runtime = map(.x = data, .f = plot_ratings_runtime),
-  # p_ratings_distribution = map(.x = data, .f = plot_ratings_distribution),
-  # data_agg = list(movies_theatres),
-  # p_movies_theatres = map2(.x = YearRated, .y = data_agg, .f = plot_movies_theatres)
-# )
-
-p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
+ratings %>% 
+  select(ends_with("Rating"), YearRated) %>%
+  gather(key = Who, value = Rating, -YearRated) %>%
+  mutate(
+    Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+    rounded_rating = round(Rating, digits = 0),
+    YearRated = as.factor(YearRated)
+  ) %>% 
+  group_by(YearRated) %>% 
+  ggplot(aes(x = round(Rating, digits = 0), fill = Who)) +
+  geom_density(
+    aes(x = Rating, y = (..count../sum(..count..))*100),
+    bw = 1,
+    alpha = 0.75,
+    colour = "white"
+  ) +
+  geom_histogram(
+    aes(y = ..count../sum(..count..)),
+    binwidth = 0.5,
+    colour = "white",
+    position = position_dodge(preserve = "single")
+  ) +
+  scale_x_continuous(
+    expand = c(0, 0), 
+    limits = c(0, 10), 
+    breaks = 0:10
+  ) +
+  scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.15)) +
+  scale_fill_viridis_d() +
+  labs(
+    x = "Rating", 
+    y = "Proportion", 
+    title = "Distribution of Ratings", 
+    fill = "Rating from"
+  ) +
   transition_states(
-    streak,
+    YearRated,
     transition_length = 2,
     state_length = 1
   ) +
-  enter_fade() +
-  exit_fade() +
+  enter_appear() +
+  exit_disappear() +
   ease_aes('linear') + 
-  labs(title = "Movies Streak", subtitle = "{closest_state}")
+  labs(title = "Distribution of Ratings: {closest_state}")
 
 print(p, width = 500, height = 175, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
 
