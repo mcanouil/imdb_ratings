@@ -908,3 +908,94 @@ animate(
 )
 ```
 
+```{r}
+data_ratings <- full_join(
+  x = ratings %>% 
+    select(ends_with("Rating"), YearRated) %>%
+    gather(key = Who, value = Rating, -YearRated) %>%
+    mutate(
+      Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+      rounded_rating = round(Rating, digits = 0)
+    ) %>% 
+    select(-Rating) %>% 
+    group_by(YearRated, Who, rounded_rating) %>% 
+    summarise(n = n()) %>% 
+    mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+    complete(rating) %>% 
+    mutate(
+      rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
+      n = ifelse(is.na(n), 0, n)
+    ) %>% 
+    ungroup() %>% 
+    group_by(YearRated, Who) %>% 
+    mutate(
+      total = sum(n),
+      ntotal = n/total
+    ) %>% 
+    ungroup() %>% 
+    select(YearRated, Who, rounded_rating, ntotal),
+  y = ratings %>% 
+    select(ends_with("Rating"), YearRated) %>%
+    gather(key = Who, value = Rating, -YearRated) %>%
+    mutate(
+      Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+      rounded_rating = round(Rating, digits = 0)
+    ) %>% 
+    select(-Rating),
+  by = c("YearRated", "Who", "rounded_rating")
+)
+
+
+p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
+  # geom_density(
+  #   aes(x = rounded_rating, y = ..density..),
+  #   bw = 1,
+  #   alpha = 0.75,
+  #   colour = "white"
+  # ) +
+  stat_density(bw = 2) +
+  geom_histogram(
+    data = distinct(data_ratings),
+    aes(y = ntotal),
+    stat = "identity",
+    binwidth = 0.5,
+    colour = "white",
+    position = position_dodge(preserve = "single")
+  ) +
+  scale_x_continuous(
+    expand = c(0, 0), 
+    name = "Rating", 
+    limits = c(0, 10), 
+    breaks = c(0, seq_len(10))
+  ) +
+  scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.15)) +
+  scale_fill_viridis_d() +
+  labs(
+    x = "Rating", 
+    y = "Proportion", 
+    title = "Distribution of Ratings", 
+    fill = "Rating from"
+  ) + facet_wrap(~YearRated)
+  transition_states(
+    YearRated,
+    transition_length = 6,
+    state_length = 8
+  ) +
+  enter_appear(early = TRUE) +
+  exit_disappear(early = TRUE) +
+  ease_aes('linear') + 
+  labs(title = "Distribution of Ratings: {closest_state}")
+
+fac <- 1
+animate(
+  plot = p, 
+  width = 500*fac, 
+  height = 500*fac, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gifski_renderer(
+    file = "./images/Coeos_IMDb_01.gif"
+  )
+)
+```
+
