@@ -4,14 +4,14 @@ params:
   output_code: FALSE
   n_cores: !r parallel::detectCores()
   theme_dark: TRUE
-  dpi: 300
+  dpi: 150
   gg_fontsize: 9
 output:
   html_document:
     theme: simplex
     fig_width: 5
     fig_height: 3.5
-    self_contained: true
+    self_contained: false
 editor_options: 
   chunk_output_type: console
 ---
@@ -55,6 +55,7 @@ library(gridExtra)
 library(ggrepel)
 library(ggpubr)
 library(rvest)
+library(gganimate)
 
 invisible(sapply(list.files("../DEV/Rfunctions/", full.names = TRUE), source))
 
@@ -364,13 +365,16 @@ plot_movies_theatres <- function(.year, .data) {
       size = Year==.year
     ) %>% 
     ggplot() +
-      geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "white", size = 0.20) +
-      geom_hline(yintercept = seq(0, 15, by = 5), colour = "white", size = 0.4) +
+      geom_hline(yintercept = seq(0, 20, by = 2.5), colour = "white", size = 0.10) +
+      geom_hline(yintercept = seq(0, 15, by = 5), colour = "white", size = 0.2) +
       geom_rect(fill = ggplot2::theme_get()$panel.background$fill, xmin = 1, xmax = 0, ymin = 0, ymax = 20) +
-      geom_hline(yintercept = 20, colour = "white", size = 0.4) +
-      geom_vline(aes(xintercept = as.integer(Month)), colour = "white", size = 0.20) +
+      geom_hline(yintercept = 20, colour = "white", size = 0.2) +
+      geom_vline(aes(xintercept = as.integer(Month)), colour = "white", size = 0.1) +
       geom_text(
-        data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
+        data = tibble(
+          Count = c(0, rep(seq(5, 20, by = 5), times = 4)), 
+          Month = c(1, rep(c(1, 4, 7, 10), each = 4))
+        ),
         aes(x = Month, y = Count, label = Count),
         colour = ggplot2::theme_get()$text$colour,
         size = 2.5
@@ -379,7 +383,7 @@ plot_movies_theatres <- function(.year, .data) {
         aes(x = as.integer(Month), y = Count, colour = "ALL"),
         method = "loess",
         se = FALSE,
-        size = 0.5,
+        size = 1,
         linetype = 2,
         show.legend = TRUE
       ) +
@@ -405,7 +409,7 @@ plot_movies_theatres <- function(.year, .data) {
         name = "Year", 
         values = set_colours(.data[["Year"]])
       ) +
-      scale_size_manual(values = c(0.15, 0.5)*1.25, guide = "none") +
+      scale_size_manual(values = c(0.15, 0.5)*1.5, guide = "none") +
       scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
       scale_x_continuous(limits = c(0, 12), breaks = seq_len(12), labels = levels(month_factor)) +
       labs(title = "# Movies Seen in Theatres") +
@@ -553,9 +557,9 @@ movies_theatres <- tribble(
   2018, "March", 14,
   2018, "April", 14,
   2018, "May", 12,
-  2018, "June", NA,
-  2018, "July", NA,
-  2018, "August", NA,
+  2018, "June", 14,
+  2018, "July", 10,
+  2018, "August", 14,
   2018, "September", NA,
   2018, "October", NA,
   2018, "November", NA,
@@ -643,154 +647,264 @@ p <- gg_ratings %>%
   ungroup()
 ```
 
-# gganimate
-```{r animate}
-year_radar <- function(data, base_size = 10) {
-  set_colours <- function(fac, direction = 1) {
-    fac %>%
-      unique() %>%
-      length() %>%
-      viridis_pal(direction = direction)(.) %>%
-      `names<-`(sort(unique(fac))) %>%
-      c("ALL" = "white", .)
-  }
-  ggplot(data = data) +
-    theme_black(base_size = base_size) +
-    geom_hline(
-      yintercept = seq(0, 20, by = 2.5), 
-      colour = ggplot2::theme_get()$panel.grid$colour, 
-      size = 0.2
-    ) +
-    geom_hline(
-      yintercept = seq(0, 20, by = 5), 
-      colour = ggplot2::theme_get()$panel.grid$colour, 
-      size = 0.4
-    ) +
-    geom_rect(
-      fill = ggplot2::theme_get()$plot.background$colour, 
-      xmin = 1, 
-      xmax = 0, 
-      ymin = 0, 
-      ymax = 20, 
-      inherit.aes = FALSE
-    ) +
-    geom_vline(
-      xintercept = seq_len(12), 
-      colour = ggplot2::theme_get()$panel.grid$colour, 
-      size = 0.2
-    ) +
-    geom_text(
-      data = tibble(Count = rep(seq(0, 20, by = 5), 4), Month = rep(c(1, 4, 7, 10), 5)),
-      aes(x = Month, y = Count, label = Count),
-      colour = ggplot2::theme_get()$text$colour,
-      size = base_size * 1/5,
-      inherit.aes = FALSE
-    ) +
-    scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
-    scale_x_continuous(limits = c(0, 12), breaks = seq_len(12), labels = locale()$date_names$mon) +
-    coord_polar(theta = "x", start = 2 * pi * 11/12) +
-    theme(
-      axis.text.y = element_blank(),
-      axis.text.x = element_text(size = rel(0.80)),
-      axis.title = element_blank(),
-      axis.ticks = element_blank(),
-      axis.line = element_blank(),
-      panel.grid = element_blank(),
-      panel.border = element_blank()
-    ) +
-    geom_smooth(
-      aes(x = as.integer(Month), y = Count, colour = "ALL"),
-      method = "loess",
-      se = FALSE,
-      size = 0.5,
-      linetype = 2,
-      show.legend = TRUE
-    ) +
-    scale_colour_manual(
-      name = "Year",
-      values = set_colours(data[["Year"]], direction = 1)
-    )
+```{r}
+set_colours <- function(fac, direction = 1) {
+  fac %>%
+    unique() %>%
+    length() %>%
+    viridis_pal(direction = direction)(.) %>%
+    `names<-`(sort(unique(fac))) %>%
+    c("SMOOTH" = "white", "ALL" = "white", .)
 }
 
-dta <- movies_theatres %>%
+data_radar <- movies_theatres  %>% 
   mutate(
-    year = as.character(Year),
+    Year = as.character(Year),
     Month = factor(Month, levels = locale()$date_names$mon)
-  ) %>%
+  ) %>% 
+  bind_rows(
+    movies_theatres  %>% 
+      mutate(
+        Year = as.character(Year),
+        Month = factor(Month, levels = locale()$date_names$mon)
+      ) %>% 
+      group_by(Month) %>% 
+      summarise(
+        Year = "ALL",
+        Count = floor(mean(Count, na.rm = TRUE))
+      )
+  ) %>% 
   arrange(Year, Month) %>%
   mutate(
-    YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer()
+    YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer(),
+    Year = factor(x = Year, levels = c(2013:2018, "ALL"))
   )
 
-
-
-library(gganimate)
-p <- year_radar(data = dta, base_size = 16) +
-  geom_point(aes(x = as.integer(Month), y = Count, colour = year), shape = 21) +
-  geom_path(aes(x = as.integer(Month), y = Count, colour = year)) +
-  guides(colour = "none") +
+p <- ggplot(data = data_radar) +
+  # theme
+  theme_black(base_size = 16) +
+  geom_hline(
+    yintercept = seq(0, 20, by = 2.5), 
+    colour = ggplot2::theme_get()$panel.grid$colour, 
+    size = 0.2
+  ) +
+  geom_hline(
+    yintercept = seq(0, 20, by = 5), 
+    colour = ggplot2::theme_get()$panel.grid$colour, 
+    size = 0.4
+  ) +
+  geom_rect(
+    fill = ggplot2::theme_get()$plot.background$colour, 
+    xmin = 1, 
+    xmax = 0, 
+    ymin = 0, 
+    ymax = 20, 
+    inherit.aes = FALSE
+  ) +
+  geom_hline(
+    yintercept = 20, 
+    colour = ggplot2::theme_get()$panel.grid$colour, 
+    size = 0.4
+  ) +
+  geom_vline(
+    xintercept = seq_len(12), 
+    colour = ggplot2::theme_get()$panel.grid$colour, 
+    size = 0.2
+  ) +
+  geom_text(
+    data = tibble(
+      Count = c(0, rep(seq(5, 20, by = 5), times = 4)), 
+      Month = c(1, rep(c(1, 4, 7, 10), each = 4))
+    ),
+    mapping = aes(x = Month, y = Count, label = Count),
+    colour = ggplot2::theme_get()$text$colour,
+    size = 16 * 1/5,
+    inherit.aes = FALSE
+  ) +
+  scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
+  scale_x_continuous(
+    limits = c(0, 12), 
+    breaks = seq_len(12), 
+    labels = locale()$date_names$mon
+  ) +
+  coord_polar(theta = "x", start = 2 * pi * 11/12) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(size = rel(0.80)),
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    axis.line = element_blank(),
+    panel.grid = element_blank(),
+    panel.border = element_blank()
+  ) +
+  # real geom
+  geom_smooth(
+    aes(x = as.integer(Month), y = Count, colour = "SMOOTH"),
+    method = "loess",
+    se = FALSE,
+    size = 1,
+    linetype = 2,
+    show.legend = TRUE
+  ) +
+  scale_colour_manual(
+    name = "Year",
+    breaks = names(set_colours(data_radar[["Year"]], direction = 1)),
+    values = set_colours(data_radar[["Year"]], direction = 1)
+  ) +
+  scale_fill_manual(
+    name = "Year",
+    breaks = names(set_colours(data_radar[["Year"]], direction = 1)),
+    values = set_colours(data_radar[["Year"]], direction = 1)
+  ) +
+  geom_point(
+    mapping = aes(x = as.integer(Month), y = Count, colour = Year, fill = Year), 
+    size = 3, shape = 21
+  ) +
+  geom_path(
+    mapping = aes(x = as.integer(Month), y = Count, colour = Year), 
+    size = 1.5
+  ) +
+  guides(colour = "none", fill = "none") + 
   transition_states(
     Year,
-    transition_length = 2,
-    state_length = 1
+    transition_length = 6,
+    state_length = 8
   ) +
-  enter_appear() +
-  exit_disappear() +
+  enter_appear(early = TRUE) +
+  exit_disappear(early = TRUE) +
   ease_aes('linear') + 
   labs(title = "# Movies Seen in Theatres: {closest_state}")
 
 
-print(p, width = 500, height = 500, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
-anim_save(filename = "./images/Coeos_IMDb.gif")
+fac <- 1
+animate(
+  plot = p, 
+  width = 500*fac, 
+  height = 500*fac, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gifski_renderer(
+    file = "./images/Coeos_IMDb_01.gif"
+  )
+)
+
+
+# knit_print.gganim(
+#   x = p,
+#   renderer = gifski_renderer(
+#     file = "./images/Coeos_IMDb.gif",
+#     width = 400*fac,
+#     height = 400*fac,
+#     bg = ggplot2::theme_get()$plot.background$colour
+#   ),
+#   device = "png",
+#   width = 400*fac, 
+#   height = 400*fac, 
+#   units = "px",
+#   bg = ggplot2::theme_get()$plot.background$colour
+# )
 ```
 
-```{r, eval = FALSE}
-ratings %>% 
-  select(ends_with("Rating"), YearRated) %>%
-  gather(key = Who, value = Rating, -YearRated) %>%
+```{r}
+p <- ratings %>% 
+  select(`Your Rating`, `Runtime (mins)`, YearRated) %>%
+  group_by(YearRated, `Your Rating`) %>%
+  summarise(Runtime = sum(`Runtime (mins)`, na.rm = TRUE) / (60 * 24)) %>% 
   mutate(
-    Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
-    rounded_rating = round(Rating, digits = 0),
-    YearRated = as.factor(YearRated)
+    `Your Rating` = factor(x = `Your Rating`, levels = 1:10)
   ) %>% 
-  group_by(YearRated) %>% 
-  ggplot(aes(x = round(Rating, digits = 0), fill = Who)) +
-  geom_density(
-    aes(x = Rating, y = (..count../sum(..count..))*100),
-    bw = 1,
-    alpha = 0.75,
-    colour = "white"
-  ) +
-  geom_histogram(
-    aes(y = ..count../sum(..count..)),
-    binwidth = 0.5,
-    colour = "white",
-    position = position_dodge(preserve = "single")
-  ) +
-  scale_x_continuous(
-    expand = c(0, 0), 
-    limits = c(0, 10), 
-    breaks = 0:10
-  ) +
-  scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.15)) +
-  scale_fill_viridis_d() +
-  labs(
-    x = "Rating", 
-    y = "Proportion", 
-    title = "Distribution of Ratings", 
-    fill = "Rating from"
+  mutate(
+    time = Runtime/sum(Runtime),
+    label = as.character(round(rev(Runtime), digits = 1)),
+    x = 1.5,
+    y = cumsum(rev(time)) - rev(time) / 2
+  ) %>% 
+  complete(`Your Rating`) %>% 
+  mutate(Runtime = replace_na(Runtime, 0)) %>% 
+  ungroup() %>% 
+  ggplot() +
+    theme_black(base_size = 16) +
+    geom_bar(
+      mapping = aes(x = factor(1), y = time, fill = `Your Rating`), 
+      colour = "white", 
+      width = 1, 
+      stat = "identity"
+    ) +
+    geom_label_repel(
+      mapping = aes(x = x, y = y, label = label), 
+      fill = "white",
+      colour = "black",
+      size = 16 * 1/2, 
+      nudge_x = 0.25,
+      min.segment.length = 0, 
+      segment.colour = "white", 
+      inherit.aes = FALSE
+    ) +
+    coord_polar(theta = "y") +
+    scale_fill_viridis_d(name = "Rating") +
+    labs(title = "Days Spent per Rating: {closest_state}") +
+    theme(
+      axis.ticks = element_blank(),
+      axis.text = element_blank(),
+      axis.title = element_blank(),
+      panel.grid = element_blank(),
+      panel.border = element_blank()
+    ) +
+    guides(fill = guide_legend(ncol = 2))  +
+    transition_states(
+      states = YearRated,
+      transition_length = 4,
+      state_length = 8
+    ) +
+    enter_appear() +
+    exit_disappear() +
+    ease_aes('linear')
+
+fac <- 2
+animate(
+  plot = p, 
+  width = 400*fac, 
+  height = 400*fac, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gifski_renderer(
+    file = "./images/Coeos_IMDb_02.gif"
+  )
+)
+```
+
+```{r}
+p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
+  theme_black(base_size = 16) +
+  coord_polar(theta = "x") +
+  theme(
+    axis.text.y = element_blank(),
+    # axis.text.x = element_text(size = rel(0.80)),
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    axis.line = element_blank(),
+    panel.grid = element_blank(),
+    panel.border = element_blank()
   ) +
   transition_states(
-    YearRated,
-    transition_length = 2,
-    state_length = 1
+    states = YearRated,
+    transition_length = 4,
+    state_length = 8
   ) +
   enter_appear() +
   exit_disappear() +
-  ease_aes('linear') + 
-  labs(title = "Distribution of Ratings: {closest_state}")
+  ease_aes('linear')
 
-print(p, width = 500, height = 175, units = "px", bg = ggplot2::theme_get()$plot.background$colour)
-
+fac <- 2
+animate(
+  plot = p, 
+  width = 400*fac, 
+  height = 400*fac, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gifski_renderer(
+    file = "./images/Coeos_IMDb_03.gif"
+  )
+)
 ```
 
