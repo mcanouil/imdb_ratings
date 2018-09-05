@@ -299,8 +299,8 @@ plot_ratings_runtime <- function(.data) {
 
 plot_ratings_distribution <- function(.data) {
   .data %>% 
-    select(ends_with("Rating"), Year) %>%
-    gather(key = Who, value = Rating, -Year) %>%
+    select(ends_with("Rating"), YearRated) %>%
+    gather(key = Who, value = Rating, -YearRated) %>%
     mutate(
       Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
       rounded_rating = round(Rating, digits = 0)
@@ -597,7 +597,8 @@ if (nrow(ratings)>0) {
 ```{r ggplot_time, fig.height = 9, fig.width = 16}
 ### make plots
 gg_ratings <- ratings %>% 
-  group_by(YearRated) %>% 
+  mutate(YR = YearRated) %>% 
+  group_by(YR) %>% 
   nest() %>% 
   mutate(
     p_movies_streak = map(.x = data, .f = plot_streak),
@@ -606,19 +607,20 @@ gg_ratings <- ratings %>%
     p_ratings_runtime = map(.x = data, .f = plot_ratings_runtime),
     p_ratings_distribution = map(.x = data, .f = plot_ratings_distribution),
     p_bad = map(.x = data, .f = plot_bad),
-    p_top = map(.x = data, .f = plot_top),
+    p_top = map(.x = data, .f = plot_top)
+  ) %>% 
+  mutate(
     data_agg = list(movies_theatres),
-    p_movies_theatres = map2(.x = YearRated, .y = data_agg, .f = plot_movies_theatres)
+    p_movies_theatres = map2(.x = YR, .y = data_agg, .f = plot_movies_theatres)
   ) %>% 
   select(-data, -data_agg) %>%
   ungroup()
 
 p <- gg_ratings %>% 
-  mutate(Year = YearRated) %>% 
-  group_by(Year) %>% 
+  group_by(YR) %>% 
   mutate(
     gg = map(
-      .x = YearRated,
+      .x = YR,
       .a = p_movies_streak,
       .b = p_movies_theatres,
       .c = p_top,
@@ -629,7 +631,7 @@ p <- gg_ratings %>%
       .i = p_ratings_distribution,
       .f = print_infography
     ) %>% 
-      map2(.x = YearRated, .y = ., .f = function(x, y) {
+      map2(.x = YR, .y = ., .f = function(x, y) {
         ggsave(
           filename = paste0("./images/", x, "_Coeos_IMDb.png"),
           plot = y,
@@ -638,7 +640,7 @@ p <- gg_ratings %>%
           dpi = 300
         )
         cat("\n\n")
-        cat("##", YearRated, "  \n\n")
+        cat("##", YR, "  \n\n")
         print(y)
         cat("\n\n")
         return(y)
@@ -773,7 +775,9 @@ p <- ggplot(data = data_radar) +
   enter_appear(early = TRUE) +
   exit_disappear(early = TRUE) +
   ease_aes('linear') + 
-  labs(title = "# Movies Seen in Theatres: {closest_state}")
+  labs(title = "# Movies Seen in Theatres: {closest_state}") +
+  labs(caption = "© Mickaël 'Coeos' Canouil") +
+  theme(plot.caption = element_text(size = 8))
 
 
 fac <- 1
@@ -943,17 +947,54 @@ data_ratings <- full_join(
     ) %>% 
     select(-Rating),
   by = c("YearRated", "Who", "rounded_rating")
-)
+) %>% 
+  mutate(
+    YearRated = as.character(YearRated)
+  ) %>% 
+  bind_rows(
+    full_join(
+      x = ratings %>% 
+        select(ends_with("Rating"), YearRated) %>%
+        gather(key = Who, value = Rating, -YearRated) %>%
+        mutate(
+          Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+          rounded_rating = round(Rating, digits = 0)
+        ) %>% 
+        select(-Rating) %>% 
+        group_by(Who, rounded_rating) %>% 
+        summarise(n = n()) %>% 
+        mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+        complete(rating) %>% 
+        mutate(
+          rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
+          n = ifelse(is.na(n), 0, n)
+        ) %>% 
+        ungroup() %>% 
+        group_by(Who) %>% 
+        mutate(
+          total = sum(n),
+          ntotal = n/total
+        ) %>% 
+        ungroup() %>% 
+        mutate(YearRated = "ALL") %>% 
+        select(YearRated, Who, rounded_rating, ntotal),
+      y = ratings %>% 
+        select(ends_with("Rating"), YearRated) %>%
+        gather(key = Who, value = Rating, -YearRated) %>%
+        mutate(
+          Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+          rounded_rating = round(Rating, digits = 0)
+        ) %>% 
+        select(-Rating) %>% 
+        mutate(YearRated = "ALL"),
+      by = c("YearRated", "Who", "rounded_rating")
+    )
+  )
 
 
 p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
-  # geom_density(
-  #   aes(x = rounded_rating, y = ..density..),
-  #   bw = 1,
-  #   alpha = 0.75,
-  #   colour = "white"
-  # ) +
-  stat_density(bw = 2) +
+  theme_black(base_size = 16) +
+  geom_density(colour = "white", adjust = 2.5, alpha = 0.25) +
   geom_histogram(
     data = distinct(data_ratings),
     aes(y = ntotal),
@@ -968,14 +1009,14 @@ p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
     limits = c(0, 10), 
     breaks = c(0, seq_len(10))
   ) +
-  scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.15)) +
+  scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.5)) +
   scale_fill_viridis_d() +
   labs(
     x = "Rating", 
     y = "Proportion", 
     title = "Distribution of Ratings", 
     fill = "Rating from"
-  ) + facet_wrap(~YearRated)
+  ) + # facet_wrap(~YearRated)
   transition_states(
     YearRated,
     transition_length = 6,
@@ -983,18 +1024,28 @@ p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
   ) +
   enter_appear(early = TRUE) +
   exit_disappear(early = TRUE) +
-  ease_aes('linear') + 
-  labs(title = "Distribution of Ratings: {closest_state}")
+  ease_aes('linear') +
+  labs(
+    title = "Distribution of Ratings: {closest_state}",
+    caption = "© Mickaël 'Coeos' Canouil"
+  ) +
+  theme(
+    plot.caption = element_text(size = 8),
+    legend.position = c(1, 1),
+    legend.justification = c(1.05, 1.05)
+  )
+
+
 
 fac <- 1
 animate(
   plot = p, 
-  width = 500*fac, 
+  width = 700*fac, 
   height = 500*fac, 
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gifski_renderer(
-    file = "./images/Coeos_IMDb_01.gif"
+    file = "./images/Coeos_IMDb_04.gif"
   )
 )
 ```
