@@ -587,7 +587,7 @@ movies_theatres <- tribble(
   2018, "June", 14,
   2018, "July", 10,
   2018, "August", 14,
-  2018, "September", NA,
+  2018, "September", 14,
   2018, "October", NA,
   2018, "November", NA,
   2018, "December", NA
@@ -678,12 +678,15 @@ p <- gg_ratings %>%
 
 ```{r}
 set_colours <- function(fac, direction = 1) {
-  fac %>%
+  out <- fac %>%
+    as.character() %>% 
     unique() %>%
     length() %>%
     viridis_pal(direction = direction)(.) %>%
-    `names<-`(sort(unique(fac))) %>%
-    c("SMOOTH" = "white", "ALL" = "white", .)
+    `names<-`(sort(unique(as.character(fac)))) %>%
+    c("SMOOTH" = "white", .)
+  out["ALL"] <- "white"
+  return(out)
 }
 
 data_radar <- movies_theatres  %>% 
@@ -706,7 +709,8 @@ data_radar <- movies_theatres  %>%
   arrange(Year, Month) %>%
   mutate(
     YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer(),
-    Year = factor(x = Year, levels = c(2013:2018, "ALL"))
+    Year = factor(x = Year, levels = c(2013:2018, "ALL")),
+    Month_int = as.integer(Month)
   )
 
 p <- ggplot(data = data_radar) +
@@ -768,7 +772,7 @@ p <- ggplot(data = data_radar) +
   ) +
   # real geom
   geom_smooth(
-    aes(x = as.integer(Month), y = Count, colour = "SMOOTH"),
+    aes(x = Month_int, y = Count, colour = "SMOOTH"),
     method = "loess",
     se = FALSE,
     size = 1,
@@ -786,11 +790,11 @@ p <- ggplot(data = data_radar) +
     values = set_colours(data_radar[["Year"]], direction = 1)
   ) +
   geom_point(
-    mapping = aes(x = as.integer(Month), y = Count, colour = Year, fill = Year), 
+    mapping = aes(x = Month_int, y = Count, colour = Year, fill = Year), 
     size = 3, shape = 21
   ) +
   geom_path(
-    mapping = aes(x = as.integer(Month), y = Count, colour = Year), 
+    mapping = aes(x = Month_int, y = Count, colour = Year), 
     size = 1.5
   ) +
   guides(colour = "none", fill = "none") + 
@@ -801,7 +805,7 @@ p <- ggplot(data = data_radar) +
   ) +
   enter_appear(early = TRUE) +
   exit_disappear(early = TRUE) +
-  ease_aes('linear') + 
+  ease_aes('linear') +
   labs(title = "# Movies Seen in Theatres: {closest_state}") +
   labs(caption = "© Mickaël 'Coeos' Canouil") +
   theme(plot.caption = element_text(size = 8))
