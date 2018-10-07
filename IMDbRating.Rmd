@@ -66,7 +66,9 @@ if (params$theme_dark) {
 } else {
   theme_set(theme_grey(base_size = params$gg_fontsize))
 }
+```
 
+```{r functions, include = FALSE}
 ### functions
 set_colours <- function(fac, direction = 1) {
   fac %>% 
@@ -676,7 +678,7 @@ p <- gg_ratings %>%
   ungroup()
 ```
 
-```{r}
+```{r gif_radar}
 set_colours <- function(fac, direction = 1) {
   out <- fac %>%
     as.character() %>% 
@@ -822,22 +824,6 @@ animate(
     file = "./images/Coeos_IMDb_01.gif"
   )
 )
-
-
-# knit_print.gganim(
-#   x = p,
-#   renderer = gifski_renderer(
-#     file = "./images/Coeos_IMDb.gif",
-#     width = 400*fac,
-#     height = 400*fac,
-#     bg = ggplot2::theme_get()$plot.background$colour
-#   ),
-#   device = "png",
-#   width = 400*fac, 
-#   height = 400*fac, 
-#   units = "px",
-#   bg = ggplot2::theme_get()$plot.background$colour
-# )
 ```
 
 ```{r}
@@ -908,7 +894,7 @@ animate(
 )
 ```
 
-```{r}
+```{r gif_streak}
 p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
   theme_black(base_size = 16) +
   coord_polar(theta = "x") +
@@ -943,7 +929,7 @@ animate(
 )
 ```
 
-```{r}
+```{r gif_distribution}
 data_ratings <- full_join(
   x = ratings %>% 
     select(ends_with("Rating"), YearRated) %>%
