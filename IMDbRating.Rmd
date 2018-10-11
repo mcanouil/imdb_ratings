@@ -148,6 +148,8 @@ p <- gg_ratings %>%
   ungroup()
 ```
 
+# GIF {.tabset}
+## Movies at theatre (smooth)
 ```{r gif_circular}
 data_radar <- movies_theatres  %>% 
   mutate(
@@ -283,6 +285,7 @@ animate(
 )
 ```
 
+## Movies at theatre (radar)
 ```{r gif_radar}
 p <- movies_theatres  %>% 
   mutate(
@@ -408,6 +411,7 @@ animate(
 
 ```
 
+## year streak
 ```{r gif_streak}
 p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
   transition_states(
@@ -431,6 +435,7 @@ animate(
 )
 ```
 
+## Ratings distribution
 ```{r gif_distribution}
 data_ratings <- full_join(
   x = ratings %>% 
