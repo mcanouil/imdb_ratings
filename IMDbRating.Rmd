@@ -411,7 +411,7 @@ animate(
 
 ```
 
-## year streak
+## Year streak
 ```{r gif_streak}
 p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
   transition_states(

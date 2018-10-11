@@ -41,11 +41,16 @@ editor_options:
 
 <img src="./images/ggplot_time-3.png" style="display: block; margin: auto;" />
 
+# GIF {.tabset}
+## Movies at theatre (smooth)
 <img src="./images/gif_circular-1.gif" style="display: block; margin: auto;" />
 
+## Movies at theatre (radar)
 <img src="./images/gif_radar-1.gif" style="display: block; margin: auto;" />
 
+## year streak
 <img src="./images/gif_streak-1.gif" style="display: block; margin: auto;" />
 
+## Ratings distribution
 <img src="./images/gif_distribution-1.gif" style="display: block; margin: auto;" />
 
