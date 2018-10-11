@@ -11,7 +11,7 @@ output:
     theme: simplex
     fig_width: 5
     fig_height: 3.5
-    self_contained: false
+    self_contained: true
     keep_md: true
 editor_options: 
   chunk_output_type: console
@@ -48,7 +48,7 @@ editor_options:
 ## Movies at theatre (radar)
 <img src="./images/gif_radar-1.gif" style="display: block; margin: auto;" />
 
-## year streak
+## Year streak
 <img src="./images/gif_streak-1.gif" style="display: block; margin: auto;" />
 
 ## Ratings distribution
