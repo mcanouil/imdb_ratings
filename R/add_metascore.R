@@ -8,7 +8,7 @@ add_metascore <- function(
     ratings <- read_csv(file = file_in, locale = locale) %>%
       mutate(
         YearRated = year(`Date Rated`),
-        Genres = map(Genres, simpleCap) %>%
+        Genres = map(Genres, capitalise) %>%
           gsub("Musical", "Music", .)
       ) %>%
       filter(YearRated>=!!from)
