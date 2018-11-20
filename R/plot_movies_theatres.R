@@ -51,7 +51,7 @@ plot_movies_theatres <- function(.year, .data) {
         values = set_colours(.data[["Year"]])
       ) +
       scale_size_manual(values = c(0.15, 0.5)*1.5, guide = "none") +
-      scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
+      scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
       scale_x_continuous(limits = c(0, 12), breaks = seq_len(12), labels = levels(month_factor)) +
       labs(title = "# Movies Seen in Theatres") +
       coord_polar(theta = "x", start = 2*pi * 22/24) +

@@ -12,7 +12,7 @@ output:
     fig_width: 5
     fig_height: 3.5
     self_contained: true
-    keep_md: true
+    keep_md: false
 editor_options: 
   chunk_output_type: console
 ---
@@ -216,7 +216,7 @@ p <- ggplot(data = data_radar) +
     size = 16 * 1/5,
     inherit.aes = FALSE
   ) +
-  scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
   scale_x_continuous(
     limits = c(0, 12), 
     breaks = seq_len(12), 
@@ -313,30 +313,30 @@ p <- movies_theatres  %>%
   ggplot(data = ., aes(group = Year)) +
   # theme
   theme_black(base_size = 16) +
-  geom_hline(
+  geom_hline( # layer 1
     yintercept = seq(0, 20, by = 2.5),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.2
   ) +
-  geom_hline(
+  geom_hline( # layer 2
     yintercept = seq(0, 20, by = 5),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4
   ) +
-  geom_hline(
+  geom_hline( # layer 3
     yintercept = 20,
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4
   ) +
-  geom_vline(
+  geom_vline( # layer 4
     xintercept = seq_len(12),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.2
   ) +
-  geom_text(
+  geom_text( # layer 5
     data = tibble(
-      Count = c(0, rep(seq(5, 20, by = 5), times = 4)),
-      Month = c(1, rep(c(1, 4, 7, 10), each = 4))
+      Count = c(0, rep(seq(5, 20, by = 5), times = 3)),
+      Month = c(1, rep(c(1, 5, 8), each = 4))
     ),
     mapping = aes(x = Month, y = Count, label = Count),
     colour = ggplot2::theme_get()$text$colour,
@@ -345,15 +345,16 @@ p <- movies_theatres  %>%
   ) +
   scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
   scale_x_continuous(
-    limits = c(0, 12),
+    # limits = c(0, 12),
     breaks = seq_len(12),
     labels = locale()$date_names$mon,
     expand = c(0, 0)
   ) +
-  coord_polar(theta = "x", start = 2 * pi * 11/12) +
+  # coord_polar(theta = "x", start = 2 * pi * 11/12) +
+  coord_polar(theta = "x") +
   theme(
     axis.text.y = element_blank(),
-    axis.text.x = element_text(size = rel(0.80)),
+    axis.text.x = element_text(size = rel(0.75)),
     axis.title = element_blank(),
     axis.ticks = element_blank(),
     axis.line = element_blank(),
@@ -376,14 +377,14 @@ p <- movies_theatres  %>%
     values = c(5, rep(3, length(2013:2018))) %>% 
       `names<-`(c("ALL", 2013:2018))
   ) +
-  geom_vline(
+  geom_vline( # layer 6
     mapping = aes(xintercept = Month_int),
     colour = "grey50"
   ) +
-  geom_point(
+  geom_point( # layer 7
     mapping = aes(x = Month_int, y = Count, colour = Year, size = Year)
   ) +
-  geom_path(
+  geom_path( # layer 8
     mapping = aes(x = Month_int, y = Count, colour = Year),
     size = 1.5
   ) +
@@ -391,13 +392,14 @@ p <- movies_theatres  %>%
   labs(caption = "© Mickaël 'Coeos' Canouil") +
   theme(plot.caption = element_text(size = 8, hjust = 0.5))
 
+
 animate(
   plot = p + 
-    transition_reveal(id = Year, along = Month_int, range = c(0L, 13L)) +
+    transition_reveal(id = Year, along = Month_int, range = c(1L, 12L), keep_last = TRUE) +
     shadow_wake(
       wake_length = 0.15,
-      wrap = FALSE,
-      exclude_layer = c(1:5, 7:8),
+      wrap = TRUE,
+      exclude_layer = c(1:5, 7, 8),
       exclude_phase = NULL
     ), 
   width = 500, 
@@ -500,6 +502,7 @@ p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
     mapping = aes(y = ntotal),
     stat = "identity",
     colour = "white",
+    width = 0.5,
     position = position_dodge()
   ) +
   scale_x_continuous(
@@ -508,7 +511,7 @@ p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
     limits = c(0, 10), 
     breaks = c(0, seq_len(10))
   ) +
-  scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.5)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = percent) +
   scale_fill_viridis_d() +
   labs(
     x = "Rating", 
@@ -541,7 +544,7 @@ animate(
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gifski_renderer(
-    file = "./images/Coeos_IMDb_04.gif"
+    file = "./images/Coeos_IMDb_03.gif"
   )
 )
 ```

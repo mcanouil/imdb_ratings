@@ -42,7 +42,7 @@ plot_ratings_distribution <- function(.data) {
       data = distinct(data_ratings),
       aes(y = ntotal),
       stat = "identity",
-      binwidth = 0.5,
+      width = 0.5,
       colour = "white",
       position = position_dodge(preserve = "single")
     ) +
@@ -52,7 +52,7 @@ plot_ratings_distribution <- function(.data) {
       limits = c(0, 10), 
       breaks = c(0, seq_len(10))
     ) +
-    scale_y_continuous(expand = c(0, 0), labels = percent, limits = c(0, 0.5)) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = percent) +
     scale_fill_viridis_d() +
     labs(
       x = "Rating", 
