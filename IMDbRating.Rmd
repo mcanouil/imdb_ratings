@@ -411,30 +411,6 @@ animate(
 
 ```
 
-## Year streak
-```{r gif_streak}
-p <- plot_streak(.data = ratings, facet = FALSE, number = FALSE) +
-  transition_states(
-    states = YearRated,
-    transition_length = 4,
-    state_length = 8
-  ) +
-  enter_appear() +
-  exit_disappear() +
-  ease_aes('linear')
-
-animate(
-  plot = p, 
-  width = 800, 
-  height = 450, 
-  units = "px", 
-  bg = ggplot2::theme_get()$plot.background$colour,
-  renderer = gifski_renderer(
-    file = "./images/Coeos_IMDb_03.gif"
-  )
-)
-```
-
 ## Ratings distribution
 ```{r gif_distribution}
 data_ratings <- full_join(
@@ -521,11 +497,10 @@ p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
   geom_density(colour = "white", adjust = 2.5, alpha = 0.25) +
   geom_histogram(
     data = distinct(data_ratings),
-    aes(y = ntotal),
+    mapping = aes(y = ntotal),
     stat = "identity",
-    binwidth = 0.5,
     colour = "white",
-    position = position_dodge(preserve = "single")
+    position = position_dodge()
   ) +
   scale_x_continuous(
     expand = c(0, 0), 
