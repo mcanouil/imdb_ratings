@@ -287,32 +287,73 @@ animate(
 
 ## Movies at theatre (radar)
 ```{r gif_radar}
-p <- movies_theatres  %>% 
-  mutate(
-    Year = as.character(Year),
-    Month = factor(Month, levels = locale()$date_names$mon)
-  ) %>% 
-  bind_rows(
-    movies_theatres  %>% 
+range_dates <- 2013:2018
+p <- movies_theatres %>% 
+  (function(.movies_theatres) {
+    .movies_theatres  %>% 
       mutate(
         Year = as.character(Year),
         Month = factor(Month, levels = locale()$date_names$mon)
       ) %>% 
-      group_by(Month) %>% 
-      summarise(
-        Year = "ALL",
-        Count = floor(mean(Count, na.rm = TRUE))
+      bind_rows(
+        .movies_theatres  %>% 
+          mutate(
+            Year = as.character(Year),
+            Month = factor(Month, levels = locale()$date_names$mon)
+          ) %>% 
+          group_by(Month) %>% 
+          summarise(
+            Year = "ALL",
+            Count = floor(mean(Count, na.rm = TRUE))
+          )
+      ) %>% 
+      arrange(Year, Month) %>%
+      mutate(
+        YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer(),
+        Year = factor(x = Year, levels = c(range_dates, "ALL")),
+        Month_int = as.integer(Month)
       )
-  ) %>% 
-  arrange(Year, Month) %>%
-  mutate(
-    YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer(),
-    Year = factor(x = Year, levels = c(2013:2018, "ALL")),
-    Month_int = as.integer(Month)
-  ) %>% 
-  ggplot(data = ., aes(group = Year)) +
+  })(.) %>% 
+  ggplot(data = ., mapping = aes(group = Year)) +
+  coord_polar(theta = "x") +
   # theme
   theme_black(base_size = 16) +
+    theme(
+    axis.text.y = element_blank(),
+    axis.text.x = element_text(size = rel(0.75)),
+    axis.title = element_blank(),
+    axis.ticks = element_blank(),
+    axis.line = element_blank(),
+    panel.grid = element_blank(), # panel.grid.minor.x
+    panel.border = element_blank(),
+    plot.caption = element_text(size = 8, hjust = 0.5)
+  ) +
+  scale_y_continuous(
+    limits = c(0, 22.5),
+    breaks = seq(0, 20, by = 5),
+    minor_breaks = seq(0, 20, by = 2.5),
+    expand = c(0, 0)
+  ) +
+  scale_x_continuous(
+    breaks = seq_len(12),
+    labels = locale()$date_names$mon,
+    expand = c(0, 0)
+  ) +
+  scale_colour_manual(
+    name = "Year",
+    values = c("white", viridis_pal(direction = 1)(length(range_dates))) %>% 
+      `names<-`(c("ALL", range_dates))
+  ) +
+  scale_fill_manual(
+    name = "Year",
+    values = c("white", viridis_pal(direction = 1)(length(range_dates))) %>% 
+      `names<-`(c("ALL", range_dates))
+  ) +
+  scale_size_manual(
+    name = "Year",
+    values = c(5, rep(3, length(range_dates))) %>% 
+      `names<-`(c("ALL", range_dates))
+  ) +
   geom_hline( # layer 1
     yintercept = seq(0, 20, by = 2.5),
     colour = ggplot2::theme_get()$panel.grid$colour,
@@ -343,40 +384,6 @@ p <- movies_theatres  %>%
     size = 16 * 1/4,
     inherit.aes = FALSE
   ) +
-  scale_y_continuous(limits = c(0, 22), expand = c(0, 0)) +
-  scale_x_continuous(
-    # limits = c(0, 12),
-    breaks = seq_len(12),
-    labels = locale()$date_names$mon,
-    expand = c(0, 0)
-  ) +
-  # coord_polar(theta = "x", start = 2 * pi * 11/12) +
-  coord_polar(theta = "x") +
-  theme(
-    axis.text.y = element_blank(),
-    axis.text.x = element_text(size = rel(0.75)),
-    axis.title = element_blank(),
-    axis.ticks = element_blank(),
-    axis.line = element_blank(),
-    panel.grid = element_blank(),
-    panel.border = element_blank()
-  ) +
-  # real geom
-  scale_colour_manual(
-    name = "Year",
-    values = c("white", viridis_pal(direction = 1)(length(2013:2018))) %>% 
-      `names<-`(c("ALL", 2013:2018))
-  ) +
-  scale_fill_manual(
-    name = "Year",
-    values = c("white", viridis_pal(direction = 1)(length(2013:2018))) %>% 
-      `names<-`(c("ALL", 2013:2018))
-  ) +
-  scale_size_manual(
-    name = "Year",
-    values = c(5, rep(3, length(2013:2018))) %>% 
-      `names<-`(c("ALL", 2013:2018))
-  ) +
   geom_vline( # layer 6
     mapping = aes(xintercept = Month_int),
     colour = "grey50"
@@ -388,9 +395,10 @@ p <- movies_theatres  %>%
     mapping = aes(x = Month_int, y = Count, colour = Year),
     size = 1.5
   ) +
-  labs(title = "# Movies Seen in Theatres") +
-  labs(caption = "© Mickaël 'Coeos' Canouil") +
-  theme(plot.caption = element_text(size = 8, hjust = 0.5))
+  labs(
+    title = "# Movies Seen in Theatres",
+    caption = "© Mickaël 'Coeos' Canouil"
+  )
 
 
 animate(
