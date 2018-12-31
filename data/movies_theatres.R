@@ -70,6 +70,6 @@ tribble(
   2018, "August", 14,
   2018, "September", 14,
   2018, "October", 16,
-  2018, "November", NA,
-  2018, "December", NA
+  2018, "November", 16,
+  2018, "December", 8
 )
