@@ -19,7 +19,7 @@ plot_genres_distribution <- function(.data) {
       Genre = factor(Genre, levels = unique(Genre))
     ) %>% 
     ggplot(aes(x = factor(1), y = Score, fill = Genre)) +
-      geom_bar(colour = "white", width = 1, stat = "identity") +
+      geom_bar(colour = "white", width = 1, stat = "identity", na.rm = TRUE) +
       geom_label_repel(
         aes(
           x = 1.5,

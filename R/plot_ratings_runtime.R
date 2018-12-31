@@ -4,7 +4,7 @@ plot_ratings_runtime <- function(.data) {
     group_by(`Your Rating`) %>%
     summarise(Runtime = sum(`Runtime (mins)`, na.rm = TRUE) / (60 * 24)) %>%
     ggplot(aes(x = factor(1), y = Runtime, fill = factor(`Your Rating`))) +
-      geom_bar(colour = "white", width = 1, stat = "identity") +
+      geom_bar(colour = "white", width = 1, stat = "identity", na.rm = TRUE) +
       geom_label_repel(
         aes(
           x = 1.5,

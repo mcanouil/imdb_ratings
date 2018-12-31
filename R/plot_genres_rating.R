@@ -25,7 +25,7 @@ plot_genres_rating <- function(.data) {
       Genre = factor(Genre, levels = unique(Genre))
     ) %>% 
     ggplot(aes(x = Genre, y = Rating, fill = N)) +
-      geom_bar(width = 1, stat = "identity", colour = "white") +
+      geom_bar(width = 1, stat = "identity", colour = "white", na.rm = TRUE) +
       geom_text(aes(label = N), colour = ggplot2::theme_get()$panel.grid$colour, nudge_y = -0.5, size = 2) +
       geom_text(aes(label = round(Rating, digits = 2)), colour = ggplot2::theme_get()$text$colour, nudge_y = 0.5, size = 3) +
       scale_fill_viridis_c(direction = 1) +
