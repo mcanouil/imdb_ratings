@@ -149,157 +149,22 @@ p <- gg_ratings %>%
 ```
 
 # GIF {.tabset}
-## Movies at theatre (smooth)
-```{r gif_circular}
-data_radar <- movies_theatres  %>% 
-  mutate(
-    Year = as.character(Year),
-    Month = factor(Month, levels = locale()$date_names$mon)
-  ) %>% 
-  bind_rows(
-    movies_theatres  %>% 
-      mutate(
-        Year = as.character(Year),
-        Month = factor(Month, levels = locale()$date_names$mon)
-      ) %>% 
-      group_by(Month) %>% 
-      summarise(
-        Year = "ALL",
-        Count = floor(mean(Count, na.rm = TRUE))
-      )
-  ) %>% 
-  arrange(Year, Month) %>%
-  mutate(
-    YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer(),
-    Year = factor(x = Year, levels = c(2013:2018, "ALL")),
-    Month_int = as.integer(Month)
-  )
-
-p <- ggplot(data = data_radar) +
-  # theme
-  theme_black(base_size = 16) +
-  geom_hline(
-    yintercept = seq(0, 20, by = 2.5), 
-    colour = ggplot2::theme_get()$panel.grid$colour, 
-    size = 0.2
-  ) +
-  geom_hline(
-    yintercept = seq(0, 20, by = 5), 
-    colour = ggplot2::theme_get()$panel.grid$colour, 
-    size = 0.4
-  ) +
-  geom_rect(
-    fill = ggplot2::theme_get()$plot.background$colour, 
-    xmin = 1, 
-    xmax = 0, 
-    ymin = 0, 
-    ymax = 20, 
-    inherit.aes = FALSE
-  ) +
-  geom_hline(
-    yintercept = 20, 
-    colour = ggplot2::theme_get()$panel.grid$colour, 
-    size = 0.4
-  ) +
-  geom_vline(
-    xintercept = seq_len(12), 
-    colour = ggplot2::theme_get()$panel.grid$colour, 
-    size = 0.2
-  ) +
-  geom_text(
-    data = tibble(
-      Count = c(0, rep(seq(5, 20, by = 5), times = 4)), 
-      Month = c(1, rep(c(1, 4, 7, 10), each = 4))
-    ),
-    mapping = aes(x = Month, y = Count, label = Count),
-    colour = ggplot2::theme_get()$text$colour,
-    size = 16 * 1/5,
-    inherit.aes = FALSE
-  ) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  scale_x_continuous(
-    limits = c(0, 12), 
-    breaks = seq_len(12), 
-    labels = locale()$date_names$mon
-  ) +
-  coord_polar(theta = "x", start = 2 * pi * 11/12) +
-  theme(
-    axis.text.y = element_blank(),
-    axis.text.x = element_text(size = rel(0.80)),
-    axis.title = element_blank(),
-    axis.ticks = element_blank(),
-    axis.line = element_blank(),
-    panel.grid = element_blank(),
-    panel.border = element_blank()
-  ) +
-  # real geom
-  geom_smooth(
-    aes(x = Month_int, y = Count, colour = "SMOOTH"),
-    method = "loess",
-    se = FALSE,
-    size = 1,
-    linetype = 2,
-    show.legend = TRUE
-  ) +
-  scale_colour_manual(
-    name = "Year",
-    breaks = names(set_colours(data_radar[["Year"]], direction = 1)),
-    values = set_colours(data_radar[["Year"]], direction = 1)
-  ) +
-  scale_fill_manual(
-    name = "Year",
-    breaks = names(set_colours(data_radar[["Year"]], direction = 1)),
-    values = set_colours(data_radar[["Year"]], direction = 1)
-  ) +
-  geom_point(
-    mapping = aes(x = Month_int, y = Count, colour = Year, fill = Year), 
-    size = 3, shape = 21
-  ) +
-  geom_path(
-    mapping = aes(x = Month_int, y = Count, colour = Year), 
-    size = 1.5
-  ) +
-  guides(colour = "none", fill = "none") + 
-  transition_states(
-    Year,
-    transition_length = 6,
-    state_length = 8
-  ) +
-  enter_appear(early = TRUE) +
-  exit_disappear(early = TRUE) +
-  ease_aes('linear') +
-  labs(title = "# Movies Seen in Theatres: {closest_state}") +
-  labs(caption = "© Mickaël 'Coeos' Canouil") +
-  theme(plot.caption = element_text(size = 8))
-
-
-animate(
-  plot = p, 
-  width = 500, 
-  height = 500, 
-  units = "px", 
-  bg = ggplot2::theme_get()$plot.background$colour,
-  renderer = gifski_renderer(
-    file = "./images/Coeos_IMDb_01.gif"
-  )
-)
-```
-
-## Movies at theatre (radar)
-```{r gif_radar}
+```{r data_radar}
 range_dates <- 2013:2018
 p <- movies_theatres %>% 
+  mutate(Month = map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
+  unnest() %>% 
   (function(.movies_theatres) {
     .movies_theatres  %>% 
       mutate(
         Year = as.character(Year),
-        Month = factor(Month, levels = locale()$date_names$mon)
+        Month = factor(Month, levels = c(locale()$date_names$mon, "JD"))
       ) %>% 
       bind_rows(
         .movies_theatres  %>% 
           mutate(
             Year = as.character(Year),
-            Month = factor(Month, levels = locale()$date_names$mon)
+            Month = factor(Month, levels = c(locale()$date_names$mon, "JD"))
           ) %>% 
           group_by(Month) %>% 
           summarise(
@@ -314,7 +179,7 @@ p <- movies_theatres %>%
         Month_int = as.integer(Month)
       )
   })(.) %>% 
-  ggplot(data = ., mapping = aes(group = Year)) +
+  ggplot(mapping = aes(group = Year)) +
   coord_polar(theta = "x") +
   # theme
   theme_black(base_size = 16) +
@@ -326,7 +191,7 @@ p <- movies_theatres %>%
     axis.line = element_blank(),
     panel.grid = element_blank(), # panel.grid.minor.x
     panel.border = element_blank(),
-    plot.caption = element_text(size = 8, hjust = 0.5)
+    plot.caption = element_text(size = 10, hjust = 0.5)
   ) +
   scale_y_continuous(
     limits = c(0, 22.5),
@@ -376,8 +241,8 @@ p <- movies_theatres %>%
   ) +
   geom_text( # layer 5
     data = tibble(
-      Count = c(0, rep(seq(5, 20, by = 5), times = 3)),
-      Month = c(1, rep(c(1, 5, 8), each = 4))
+      Count = c(0, rep(seq(5, 20, by = 5), times = 4)), 
+      Month = c(1, rep(c(1, 4, 7, 10), each = 4))
     ),
     mapping = aes(x = Month, y = Count, label = Count),
     colour = ggplot2::theme_get()$text$colour,
@@ -399,17 +264,54 @@ p <- movies_theatres %>%
     title = "# Movies Seen in Theatres",
     caption = "© Mickaël 'Coeos' Canouil"
   )
+```
 
+## Movies at theatre (smooth)
+```{r gif_circular}
+p_animate1 <- p +
+  geom_smooth(
+    mapping = aes(x = Month_int, y = Count),
+    colour ="white",
+    method = "loess",
+    se = FALSE,
+    size = 1,
+    linetype = 2,
+    show.legend = FALSE
+  ) +
+  transition_states(
+    Year,
+    transition_length = 6,
+    state_length = 8
+  ) +
+  enter_appear(early = TRUE) +
+  exit_disappear(early = TRUE) +
+  ease_aes('linear')
 
 animate(
-  plot = p + 
-    transition_reveal(id = Year, along = Month_int, range = c(1L, 12L), keep_last = TRUE) +
-    shadow_wake(
-      wake_length = 0.15,
-      wrap = TRUE,
-      exclude_layer = c(1:5, 7, 8),
-      exclude_phase = NULL
-    ), 
+  plot = p_animate1, 
+  width = 500, 
+  height = 500, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gifski_renderer(
+    file = "./images/Coeos_IMDb_01.gif"
+  )
+)
+```
+
+## Movies at theatre (radar)
+```{r gif_radar}
+p_animate2 <- p + 
+  transition_reveal(along = Month_int, range = c(1L, 13L), keep_last = TRUE) +
+  shadow_wake(
+    wake_length = 0.15,
+    wrap = TRUE,
+    exclude_layer = c(1:5, 7, 8),
+    exclude_phase = NULL
+  )
+
+animate(
+  plot = p_animate2, 
   width = 500, 
   height = 500, 
   units = "px", 
@@ -418,7 +320,6 @@ animate(
     file = "./images/Coeos_IMDb_02.gif"
   )
 )
-
 ```
 
 ## Ratings distribution
@@ -541,7 +442,7 @@ p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
     caption = "© Mickaël 'Coeos' Canouil"
   ) +
   theme(
-    plot.caption = element_text(size = 8),
+    plot.caption = element_text(size = 10),
     legend.position = c(1, 1),
     legend.justification = c(1.05, 1.05)
   )

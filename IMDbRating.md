@@ -42,6 +42,8 @@ editor_options:
 <img src="./images/ggplot_time-3.png" style="display: block; margin: auto;" />
 
 # GIF {.tabset}
+
+
 ## Movies at theatre (smooth)
 <img src="./images/gif_circular-1.gif" style="display: block; margin: auto;" />
 
