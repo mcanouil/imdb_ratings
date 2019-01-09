@@ -1,12 +1,12 @@
 print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = params$gg_fontsize) {
-  ggarrange(
-    ggarrange(
+  ggpubr::ggarrange(
+    ggpubr::ggarrange(
       .b[[1]],
-      ggarrange(
+      ggpubr::ggarrange(
         .a[[1]],
-        ggarrange(
+        ggpubr::ggarrange(
           .i[[1]],
-          ggarrange(.c[[1]], .d[[1]], ncol = 1, nrow = 2),
+          ggpubr::ggarrange(.c[[1]], .d[[1]], ncol = 1, nrow = 2),
           ncol = 2,
           widths = c(0.6, 0.40)
         ),
@@ -17,19 +17,19 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
       align = "v",
       widths = c(1/3, 2/3)
     ),
-    ggarrange(
+    ggpubr::ggarrange(
       .e[[1]],
       .h[[1]] + 
-        guides(fill = guide_legend(
+        ggplot2::guides(fill = ggplot2::guide_legend(
           ncol = 1, 
-          keyheight = unit(gg_fontsize*2/3, "pt"),
-          keywidth = unit(gg_fontsize, "pt")
+          keyheight = ggplot2::unit(gg_fontsize*2/3, "pt"),
+          keywidth = ggplot2::unit(gg_fontsize, "pt")
         )), 
       .g[[1]] + 
-        guides(fill = guide_legend(
+        ggplot2::guides(fill = ggplot2::guide_legend(
           ncol = 1, 
-          keyheight = unit(gg_fontsize*1.2, "pt"),
-          keywidth = unit(gg_fontsize*1.2, "pt")
+          keyheight = ggplot2::unit(gg_fontsize*1.2, "pt"),
+          keywidth = ggplot2::unit(gg_fontsize*1.2, "pt")
         )), 
       ncol = 3,
       align = "v",
@@ -39,8 +39,8 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
     heights = c(2/3, 1/3),
     align = "v"
   ) %>%
-    arrangeGrob(
-      top = text_grob(
+    gridExtra::arrangeGrob(
+      top = ggpubr::text_grob(
         paste0(.x, " in Movie Theatres"), 
         color = ggplot2::theme_get()$text$colour, 
         face = "bold", 
@@ -48,7 +48,7 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
       ),
       left = "",
       right = "", 
-      bottom = text_grob(
+      bottom = ggpubr::text_grob(
         "© Mickaël 'Coeos' Canouil", 
         color = ggplot2::theme_get()$text$colour, 
         face = "bold",
@@ -56,5 +56,5 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
         size = 5
       )
     ) %>%
-    as_ggplot()
+    ggpubr::as_ggplot()
 }

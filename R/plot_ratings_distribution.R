@@ -1,60 +1,64 @@
 plot_ratings_distribution <- function(.data) {
   
-  data_ratings <- full_join(
+  data_ratings <- dplyr::full_join(
     x = .data %>% 
-      select(ends_with("Rating"), YearRated) %>%
-      gather(key = Who, value = Rating, -YearRated) %>%
-      mutate(
+      dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+      tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+      dplyr::mutate(
         Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
         rounded_rating = round(Rating, digits = 0)
       ) %>% 
-      select(-Rating) %>% 
-      group_by(YearRated, Who, rounded_rating) %>% 
-      summarise(n = n()) %>% 
-      mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
-      complete(rating) %>% 
-      mutate(
+      dplyr::select(-Rating) %>% 
+      dplyr::group_by(YearRated, Who, rounded_rating) %>% 
+      dplyr::summarise(n = dplyr::n()) %>% 
+      dplyr::mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+      tidyr::complete(rating) %>% 
+      dplyr::mutate(
         rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
         n = ifelse(is.na(n), 0, n)
       ) %>% 
-      ungroup() %>% 
-      group_by(YearRated, Who) %>% 
-      mutate(
+      dplyr::ungroup() %>% 
+      dplyr::group_by(YearRated, Who) %>% 
+      dplyr::mutate(
         total = sum(n),
         ntotal = n/total
       ) %>% 
-      ungroup() %>% 
-      select(YearRated, Who, rounded_rating, ntotal),
+      dplyr::ungroup() %>% 
+      dplyr::select(YearRated, Who, rounded_rating, ntotal),
     y = .data %>% 
-      select(ends_with("Rating"), YearRated) %>%
-      gather(key = Who, value = Rating, -YearRated) %>%
-      mutate(
+      dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+      tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+      dplyr::mutate(
         Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
         rounded_rating = round(Rating, digits = 0)
       ) %>% 
-      select(-Rating),
+      dplyr::select(-Rating),
     by = c("YearRated", "Who", "rounded_rating")
   )
   
-  ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
-    geom_density(colour = "white", adjust = 2.5, alpha = 0.25) +
-    geom_histogram(
-      data = distinct(data_ratings),
-      aes(y = ntotal),
+  ggplot2::ggplot(data = data_ratings, mapping = ggplot2::aes(x = rounded_rating, fill = Who)) +
+    ggplot2::geom_density(colour = "white", adjust = 2.5, alpha = 0.25, na.rm = TRUE) +
+    ggplot2::geom_bar(
+      data = dplyr::distinct(data_ratings),
+      mapping = ggplot2::aes(y = ntotal),
       stat = "identity",
-      width = 0.5,
       colour = "white",
-      position = position_dodge(preserve = "single")
+      width = 0.5,
+      position = ggplot2::position_dodge(),
+      na.rm = TRUE
     ) +
-    scale_x_continuous(
+    ggplot2::scale_x_continuous(
       expand = c(0, 0), 
       name = "Rating", 
       limits = c(0, 10), 
       breaks = c(0, seq_len(10))
     ) +
-    scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = percent) +
+    ggplot2::scale_y_continuous(
+      expand = ggplot2::expand_scale(mult = c(0, 0.1)), 
+      labels = scales::percent
+    ) +
     scale_fill_viridis_d() +
-    labs(
+    ggplot2::labs(
       x = "Rating", 
       y = "Proportion", 
       title = "Distribution of Ratings", 

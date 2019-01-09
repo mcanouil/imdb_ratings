@@ -1,8 +1,6 @@
 best_streak <- function(vec) {
   bs <- function(vec) {
-    rle(vec) %>% 
-      unclass() %>% 
-      as.data.frame() %>% 
+    as.data.frame(unclass(rle(vec))) %>% 
       subset(values, lengths) %>% 
       max()
   }

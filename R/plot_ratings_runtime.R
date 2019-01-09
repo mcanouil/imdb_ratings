@@ -1,12 +1,14 @@
 plot_ratings_runtime <- function(.data) {
   .data %>% 
-    select(`Your Rating`, `Runtime (mins)`) %>%
-    group_by(`Your Rating`) %>%
-    summarise(Runtime = sum(`Runtime (mins)`, na.rm = TRUE) / (60 * 24)) %>%
-    ggplot(aes(x = factor(1), y = Runtime, fill = factor(`Your Rating`))) +
-      geom_bar(colour = "white", width = 1, stat = "identity", na.rm = TRUE) +
-      geom_label_repel(
-        aes(
+    dplyr::select(`Your Rating`, `Runtime (mins)`) %>%
+    dplyr::group_by(`Your Rating`) %>%
+    dplyr::summarise(Runtime = sum(`Runtime (mins)`, na.rm = TRUE) / (60 * 24)) %>%
+    ggplot2::ggplot(
+      mapping = ggplot2::aes(x = factor(1), y = Runtime, fill = factor(`Your Rating`))
+    ) +
+      ggplot2::geom_bar(colour = "white", width = 1, stat = "identity", na.rm = TRUE) +
+      ggrepel::geom_label_repel(
+        mapping = ggplot2::aes(
           x = 1.5,
           y = cumsum(rev(Runtime)) - rev(Runtime) / 2,
           label = round(rev(Runtime), digits = 1)
@@ -17,14 +19,14 @@ plot_ratings_runtime <- function(.data) {
         min.segment.length = 0, 
         segment.colour = "white"
       ) +
-      coord_polar(theta = "y") +
+      ggplot2::coord_polar(theta = "y") +
       scale_fill_viridis_d(name = "Rating") +
-      labs(title = "Days Spent per Rating") +
-      theme(
-        axis.ticks = element_blank(),
-        axis.text = element_blank(),
-        axis.title = element_blank(),
-        panel.grid = element_blank(),
-        panel.border = element_blank()
+      ggplot2::labs(title = "Days Spent per Rating") +
+      ggplot2::theme(
+        axis.ticks = ggplot2::element_blank(),
+        axis.text = ggplot2::element_blank(),
+        axis.title = ggplot2::element_blank(),
+        panel.grid = ggplot2::element_blank(),
+        panel.border = ggplot2::element_blank()
       )
 }

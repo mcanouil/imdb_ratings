@@ -52,8 +52,11 @@ library(ggpubr)
 library(rvest)
 library(gganimate)
 
-devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R')
-devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/capitalise.R')
+# devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R')
+# devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/capitalise.R')
+
+source('../DEV/R/theme_black.R')
+source('../DEV/R/capitalise.R')
 
 ### functions
 source("./R/set_colours.R")
@@ -74,7 +77,7 @@ source("./R/print_infography.R")
 if (params$theme_dark) {
   theme_set(theme_black(base_size = params$gg_fontsize))
 } else {
-  theme_set(theme_grey(base_size = params$gg_fontsize))
+  ggplot2::theme_set(ggplot2::theme_grey(base_size = params$gg_fontsize))
 }
 ```
 
@@ -88,7 +91,7 @@ ratings <- add_metascore(
   file_in = "./data/ratings.csv", 
   file_out = "./data/ratings_ms.csv", 
   from = 2016, 
-  locale = locale(encoding = "Windows-1252")
+  locale = readr::locale(encoding = "Windows-1252")
 )
 ```
 
@@ -96,29 +99,29 @@ ratings <- add_metascore(
 ```{r ggplot_time, fig.height = 9, fig.width = 16}
 ### make plots
 gg_ratings <- ratings %>% 
-  mutate(YR = YearRated) %>% 
-  group_by(YR) %>% 
-  nest() %>% 
-  mutate(
-    p_movies_streak = map(.x = data, .f = plot_streak),
-    p_genres_distribution = map(.x = data, .f = plot_genres_distribution),
-    p_genres_rating = map(.x = data, .f = plot_genres_rating),
-    p_ratings_runtime = map(.x = data, .f = plot_ratings_runtime),
-    p_ratings_distribution = map(.x = data, .f = plot_ratings_distribution),
-    p_bad = map(.x = data, .f = plot_bad),
-    p_top = map(.x = data, .f = plot_top)
+  dplyr::mutate(YR = YearRated) %>% 
+  dplyr::group_by(YR) %>% 
+  tidyr::nest() %>% 
+  dplyr::mutate(
+    p_movies_streak = purrr::map(.x = data, .f = plot_streak),
+    p_genres_distribution = purrr::map(.x = data, .f = plot_genres_distribution),
+    p_genres_rating = purrr::map(.x = data, .f = plot_genres_rating),
+    p_ratings_runtime = purrr::map(.x = data, .f = plot_ratings_runtime),
+    p_ratings_distribution = purrr::map(.x = data, .f = plot_ratings_distribution),
+    p_bad = purrr::map(.x = data, .f = plot_bad),
+    p_top = purrr::map(.x = data, .f = plot_top)
   ) %>% 
-  mutate(
+  dplyr::mutate(
     data_agg = list(movies_theatres),
-    p_movies_theatres = map2(.x = YR, .y = data_agg, .f = plot_movies_theatres)
+    p_movies_theatres = purrr::map2(.x = YR, .y = data_agg, .f = plot_movies_theatres)
   ) %>% 
-  select(-data, -data_agg) %>%
-  ungroup()
+  dplyr::select(-data, -data_agg) %>%
+  dplyr::ungroup()
 
 p <- gg_ratings %>% 
-  group_by(YR) %>% 
-  mutate(
-    gg = map(
+  dplyr::group_by(YR) %>% 
+  dplyr::mutate(
+    gg = purrr::map(
       .x = YR,
       .a = p_movies_streak,
       .b = p_movies_theatres,
@@ -130,8 +133,8 @@ p <- gg_ratings %>%
       .i = p_ratings_distribution,
       .f = print_infography
     ) %>% 
-      map2(.x = YR, .y = ., .f = function(x, y) {
-        ggsave(
+      purrr::map2(.x = YR, .y = ., .f = function(x, y) {
+        ggplot2::ggsave(
           filename = paste0("./images/", x, "_Coeos_IMDb.png"),
           plot = y,
           width = 16,
@@ -145,122 +148,122 @@ p <- gg_ratings %>%
         return(y)
       })
   ) %>% 
-  ungroup()
+  dplyr::ungroup()
 ```
 
 # GIF {.tabset}
 ```{r data_radar}
 range_dates <- 2013:2018
 p <- movies_theatres %>% 
-  mutate(Month = map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
-  unnest() %>% 
+  dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
+  tidyr::unnest() %>% 
   (function(.movies_theatres) {
     .movies_theatres  %>% 
-      mutate(
+      dplyr::mutate(
         Year = as.character(Year),
-        Month = factor(Month, levels = c(locale()$date_names$mon, "JD"))
+        Month = factor(Month, levels = c(readr::locale()$date_names$mon, "JD"))
       ) %>% 
-      bind_rows(
+      dplyr::bind_rows(
         .movies_theatres  %>% 
-          mutate(
+          dplyr::mutate(
             Year = as.character(Year),
-            Month = factor(Month, levels = c(locale()$date_names$mon, "JD"))
+            Month = factor(Month, levels = c(readr::locale()$date_names$mon, "JD"))
           ) %>% 
-          group_by(Month) %>% 
-          summarise(
+          dplyr::group_by(Month) %>% 
+          dplyr::summarise(
             Year = "ALL",
             Count = floor(mean(Count, na.rm = TRUE))
           )
       ) %>% 
-      arrange(Year, Month) %>%
-      mutate(
+      dplyr::arrange(Year, Month) %>%
+      dplyr::mutate(
         YM = paste0(Year, sprintf("%02d", as.numeric(Month))) %>% factor() %>% as.integer(),
         Year = factor(x = Year, levels = c(range_dates, "ALL")),
         Month_int = as.integer(Month)
       )
   })(.) %>% 
-  ggplot(mapping = aes(group = Year)) +
-  coord_polar(theta = "x") +
+  ggplot2::ggplot(mapping = ggplot2::aes(group = Year)) +
+  ggplot2::coord_polar(theta = "x") +
   # theme
   theme_black(base_size = 16) +
-    theme(
-    axis.text.y = element_blank(),
-    axis.text.x = element_text(size = rel(0.75)),
-    axis.title = element_blank(),
-    axis.ticks = element_blank(),
-    axis.line = element_blank(),
-    panel.grid = element_blank(), # panel.grid.minor.x
-    panel.border = element_blank(),
-    plot.caption = element_text(size = 10, hjust = 0.5)
+    ggplot2::theme(
+    axis.text.y = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_text(size = ggplot2::rel(0.75)),
+    axis.title = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank(),
+    axis.line = ggplot2::element_blank(),
+    panel.grid = ggplot2::element_blank(), # panel.grid.minor.x
+    panel.border = ggplot2::element_blank(),
+    plot.caption = ggplot2::element_text(size = 10, hjust = 0.5)
   ) +
-  scale_y_continuous(
+  ggplot2::scale_y_continuous(
     limits = c(0, 22.5),
     breaks = seq(0, 20, by = 5),
     minor_breaks = seq(0, 20, by = 2.5),
     expand = c(0, 0)
   ) +
-  scale_x_continuous(
+  ggplot2::scale_x_continuous(
     breaks = seq_len(12),
-    labels = locale()$date_names$mon,
+    labels = readr::locale()$date_names$mon,
     expand = c(0, 0)
   ) +
-  scale_colour_manual(
+  ggplot2::scale_colour_manual(
     name = "Year",
     values = c("white", viridis_pal(direction = 1)(length(range_dates))) %>% 
       `names<-`(c("ALL", range_dates))
   ) +
-  scale_fill_manual(
+  ggplot2::scale_fill_manual(
     name = "Year",
     values = c("white", viridis_pal(direction = 1)(length(range_dates))) %>% 
       `names<-`(c("ALL", range_dates))
   ) +
-  scale_size_manual(
+  ggplot2::scale_size_manual(
     name = "Year",
     values = c(5, rep(3, length(range_dates))) %>% 
       `names<-`(c("ALL", range_dates))
   ) +
-  geom_hline( # layer 1
+  ggplot2::geom_hline( # layer 1
     yintercept = seq(0, 20, by = 2.5),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.2
   ) +
-  geom_hline( # layer 2
+  ggplot2::geom_hline( # layer 2
     yintercept = seq(0, 20, by = 5),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4
   ) +
-  geom_hline( # layer 3
+  ggplot2::geom_hline( # layer 3
     yintercept = 20,
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4
   ) +
-  geom_vline( # layer 4
+  ggplot2::geom_vline( # layer 4
     xintercept = seq_len(12),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.2
   ) +
-  geom_text( # layer 5
-    data = tibble(
+  ggplot2::geom_text( # layer 5
+    data = dplyr::tibble(
       Count = c(0, rep(seq(5, 20, by = 5), times = 4)), 
       Month = c(1, rep(c(1, 4, 7, 10), each = 4))
     ),
-    mapping = aes(x = Month, y = Count, label = Count),
+    mapping = ggplot2::aes(x = Month, y = Count, label = Count),
     colour = ggplot2::theme_get()$text$colour,
     size = 16 * 1/4,
     inherit.aes = FALSE
   ) +
-  geom_vline( # layer 6
-    mapping = aes(xintercept = Month_int),
+  ggplot2::geom_vline( # layer 6
+    mapping = ggplot2::aes(xintercept = Month_int),
     colour = "grey50"
   ) +
-  geom_point( # layer 7
-    mapping = aes(x = Month_int, y = Count, colour = Year, size = Year)
+  ggplot2::geom_point( # layer 7
+    mapping = ggplot2::aes(x = Month_int, y = Count, colour = Year, size = Year)
   ) +
-  geom_path( # layer 8
-    mapping = aes(x = Month_int, y = Count, colour = Year),
+  ggplot2::geom_path( # layer 8
+    mapping = ggplot2::aes(x = Month_int, y = Count, colour = Year),
     size = 1.5
   ) +
-  labs(
+  ggplot2::labs(
     title = "# Movies Seen in Theatres",
     caption = "© Mickaël 'Coeos' Canouil"
   )
@@ -269,8 +272,8 @@ p <- movies_theatres %>%
 ## Movies at theatre (smooth)
 ```{r gif_circular}
 p_animate1 <- p +
-  geom_smooth(
-    mapping = aes(x = Month_int, y = Count),
+  ggplot2::geom_smooth(
+    mapping = ggplot2::aes(x = Month_int, y = Count),
     colour ="white",
     method = "loess",
     se = FALSE,
@@ -278,22 +281,24 @@ p_animate1 <- p +
     linetype = 2,
     show.legend = FALSE
   ) +
-  transition_states(
+  gganimate::transition_states(
     Year,
     transition_length = 6,
     state_length = 8
   ) +
-  enter_appear(early = TRUE) +
-  exit_disappear(early = TRUE) +
-  ease_aes('linear')
+  gganimate::enter_appear(early = TRUE) +
+  gganimate::exit_disappear(early = TRUE) +
+  gganimate::ease_aes('linear') +
+  ggplot2::labs(subtitle = "{closest_state}") +
+  ggplot2::theme(legend.position = "none")
 
-animate(
+gganimate::animate(
   plot = p_animate1, 
   width = 500, 
   height = 500, 
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
-  renderer = gifski_renderer(
+  renderer = gganimate::gifski_renderer(
     file = "./images/Coeos_IMDb_01.gif"
   )
 )
@@ -302,21 +307,21 @@ animate(
 ## Movies at theatre (radar)
 ```{r gif_radar}
 p_animate2 <- p + 
-  transition_reveal(along = Month_int, range = c(1L, 13L), keep_last = TRUE) +
-  shadow_wake(
+  gganimate::transition_reveal(along = Month_int, range = c(1L, 13L), keep_last = TRUE) +
+  gganimate::shadow_wake(
     wake_length = 0.15,
     wrap = TRUE,
     exclude_layer = c(1:5, 7, 8),
     exclude_phase = NULL
   )
 
-animate(
+gganimate::animate(
   plot = p_animate2, 
   width = 500, 
   height = 500, 
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
-  renderer = gifski_renderer(
+  renderer = gganimate::gifski_renderer(
     file = "./images/Coeos_IMDb_02.gif"
   )
 )
@@ -324,136 +329,142 @@ animate(
 
 ## Ratings distribution
 ```{r gif_distribution}
-data_ratings <- full_join(
+data_ratings <- dplyr::full_join(
   x = ratings %>% 
-    select(ends_with("Rating"), YearRated) %>%
-    gather(key = Who, value = Rating, -YearRated) %>%
-    mutate(
+    dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+    tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+    dplyr::mutate(
       Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
       rounded_rating = round(Rating, digits = 0)
     ) %>% 
-    select(-Rating) %>% 
-    group_by(YearRated, Who, rounded_rating) %>% 
-    summarise(n = n()) %>% 
-    mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
-    complete(rating) %>% 
-    mutate(
+    dplyr::select(-Rating) %>% 
+    dplyr::group_by(YearRated, Who, rounded_rating) %>% 
+    dplyr::summarise(n = dplyr::n()) %>% 
+    dplyr::mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+    tidyr::complete(rating) %>% 
+    dplyr::mutate(
       rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
       n = ifelse(is.na(n), 0, n)
     ) %>% 
-    ungroup() %>% 
-    group_by(YearRated, Who) %>% 
-    mutate(
+    dplyr::ungroup() %>% 
+    dplyr::group_by(YearRated, Who) %>% 
+    dplyr::mutate(
       total = sum(n),
       ntotal = n/total
     ) %>% 
-    ungroup() %>% 
-    select(YearRated, Who, rounded_rating, ntotal),
+    dplyr::ungroup() %>% 
+    dplyr::select(YearRated, Who, rounded_rating, ntotal),
   y = ratings %>% 
-    select(ends_with("Rating"), YearRated) %>%
-    gather(key = Who, value = Rating, -YearRated) %>%
-    mutate(
+    dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+    tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+    dplyr::mutate(
       Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
       rounded_rating = round(Rating, digits = 0)
     ) %>% 
-    select(-Rating),
+    dplyr::select(-Rating),
   by = c("YearRated", "Who", "rounded_rating")
 ) %>% 
-  mutate(
+  dplyr::mutate(
     YearRated = as.character(YearRated)
   ) %>% 
-  bind_rows(
-    full_join(
+  dplyr::bind_rows(
+    dplyr::full_join(
       x = ratings %>% 
-        select(ends_with("Rating"), YearRated) %>%
-        gather(key = Who, value = Rating, -YearRated) %>%
-        mutate(
+        dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+        tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+        dplyr::mutate(
           Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
           rounded_rating = round(Rating, digits = 0)
         ) %>% 
-        select(-Rating) %>% 
-        group_by(Who, rounded_rating) %>% 
-        summarise(n = n()) %>% 
-        mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
-        complete(rating) %>% 
-        mutate(
+        dplyr::select(-Rating) %>% 
+        dplyr::group_by(Who, rounded_rating) %>% 
+        dplyr::summarise(n = dplyr::n()) %>% 
+        dplyr::mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+        tidyr::complete(rating) %>% 
+        dplyr::mutate(
           rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
           n = ifelse(is.na(n), 0, n)
         ) %>% 
-        ungroup() %>% 
-        group_by(Who) %>% 
-        mutate(
+        dplyr::ungroup() %>% 
+        dplyr::group_by(Who) %>% 
+        dplyr::mutate(
           total = sum(n),
           ntotal = n/total
         ) %>% 
-        ungroup() %>% 
-        mutate(YearRated = "ALL") %>% 
-        select(YearRated, Who, rounded_rating, ntotal),
+        dplyr::ungroup() %>% 
+        dplyr::mutate(YearRated = "ALL") %>% 
+        dplyr::select(YearRated, Who, rounded_rating, ntotal),
       y = ratings %>% 
-        select(ends_with("Rating"), YearRated) %>%
-        gather(key = Who, value = Rating, -YearRated) %>%
-        mutate(
+        dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+        tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+        dplyr::mutate(
           Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
           rounded_rating = round(Rating, digits = 0)
         ) %>% 
-        select(-Rating) %>% 
-        mutate(YearRated = "ALL"),
+        dplyr::select(-Rating) %>% 
+        dplyr::mutate(YearRated = "ALL"),
       by = c("YearRated", "Who", "rounded_rating")
     )
   )
 
 
-p <- ggplot(data = data_ratings, aes(x = rounded_rating, fill = Who)) +
+p <- ggplot2::ggplot(
+  data = data_ratings, 
+  mapping = ggplot2::aes(x = rounded_rating, fill = Who)
+) +
   theme_black(base_size = 16) +
-  geom_density(colour = "white", adjust = 2.5, alpha = 0.25) +
-  geom_histogram(
-    data = distinct(data_ratings),
-    mapping = aes(y = ntotal),
+  ggplot2::geom_density(colour = "white", adjust = 2.5, alpha = 0.25, na.rm = TRUE) +
+  ggplot2::geom_bar(
+    data = dplyr::distinct(data_ratings),
+    mapping = ggplot2::aes(y = ntotal),
     stat = "identity",
     colour = "white",
     width = 0.5,
-    position = position_dodge(),
+    position = ggplot2::position_dodge(),
     na.rm = TRUE
   ) +
-  scale_x_continuous(
+  ggplot2::scale_x_continuous(
     expand = c(0, 0), 
     name = "Rating", 
     limits = c(0, 10), 
     breaks = c(0, seq_len(10))
   ) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1)), labels = percent) +
+  ggplot2::scale_y_continuous(
+    expand = ggplot2::expand_scale(mult = c(0, 0.1)), 
+    labels = scales::percent
+  ) +
   scale_fill_viridis_d() +
-  labs(
+  ggplot2::labs(
     x = "Rating", 
     y = "Proportion", 
     title = "Distribution of Ratings", 
     fill = "Rating from"
   ) + # facet_wrap(~YearRated)
-  transition_states(
+  gganimate::transition_states(
     YearRated,
     transition_length = 6,
     state_length = 8
   ) +
-  enter_appear(early = TRUE) +
-  exit_disappear(early = TRUE) +
-  ease_aes('linear') +
-  labs(
+  gganimate::enter_appear(early = TRUE) +
+  gganimate::exit_disappear(early = TRUE) +
+  gganimate::ease_aes('linear') +
+  ggplot2::labs(
     title = "Distribution of Ratings: {closest_state}",
     caption = "© Mickaël 'Coeos' Canouil"
   ) +
-  theme(
-    plot.caption = element_text(size = 10),
+  ggplot2::theme(
+    plot.caption = ggplot2::element_text(size = 10),
     legend.position = c(1, 1),
     legend.justification = c(1.05, 1.05)
   )
 
-animate(
+gganimate::animate(
   plot = p, 
   width = 800, 
   height = 450, 
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
-  renderer = gifski_renderer(
+  renderer = gganimate::gifski_renderer(
     file = "./images/Coeos_IMDb_03.gif"
   )
 )

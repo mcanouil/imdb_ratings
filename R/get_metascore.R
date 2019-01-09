@@ -1,10 +1,11 @@
 get_metascore <- function(.x) { 
-  sapply(.x, function(.y) {
-    paste0(.y, "criticreviews") %>% 
-    read_html() %>%
-    html_node("div.metascore") %>%
-    html_text() %>%
-    as.numeric() %>% 
-    `/`(10)
+  purrr::map(.x = .x, .f = function(.y) {
+    out <- rvest::html_text(
+      x = rvest::html_node(
+        x = xml2::read_html(x = paste0(.y, "criticreviews")), 
+        css = "div.metascore"
+      )              
+    )
+    return(as.numeric(out)/10)
   })
 }

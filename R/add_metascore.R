@@ -2,34 +2,34 @@ add_metascore <- function(
   file_in = "./data/ratings.csv", 
   file_out = "./data/ratings_ms.csv", 
   from = 2016, 
-  locale = locale(encoding = "Windows-1252")
+  locale = readr::locale(encoding = "Windows-1252")
 ) {
   suppressMessages({
-    ratings <- read_csv(file = file_in, locale = locale) %>%
-      mutate(
-        YearRated = year(`Date Rated`),
-        Genres = map(Genres, capitalise) %>%
+    ratings <- readr::read_csv(file = file_in, locale = locale) %>%
+      dplyr::mutate(
+        YearRated = lubridate::year(`Date Rated`),
+        Genres = purrr::map_chr(.x = Genres, .f = capitalise) %>%
           gsub("Musical", "Music", .)
       ) %>%
-      filter(YearRated>=!!from)
+      dplyr::filter(YearRated>=!!from)
         
     if (file.exists(file_out)) {
-      ratings_old <- read_csv(file = file_out)
-      ratings <- filter(.data = ratings, !Const%in%ratings_old[["Const"]])
+      ratings_old <- readr::read_csv(file = file_out)
+      ratings <- dplyr::filter(.data = ratings, !Const%in%ratings_old[["Const"]])
     
       if (nrow(ratings)>0) {
         ratings <- ratings %>%
-          mutate(`Metascore Rating` = get_metascore(URL)) %>%
-          bind_rows(ratings_old) %>%
-          write_csv(path = file_out)
+          dplyr::mutate(`Metascore Rating` = get_metascore(URL)) %>%
+          dplyr::bind_rows(ratings_old) %>%
+          readr::write_csv(path = file_out)
       }
     } else {
       if (nrow(ratings)>0) {
         ratings <- ratings %>%
-          mutate(`Metascore Rating` = get_metascore(URL)) %>%
-          write_csv(path = file_out)
+          dplyr::mutate(`Metascore Rating` = get_metascore(URL)) %>%
+          readr::write_csv(path = file_out)
       }
     }
   })
-  return(read_csv(file = file_out))
+  return(readr::read_csv(file = file_out))
 }
