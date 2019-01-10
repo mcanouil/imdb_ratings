@@ -25,21 +25,33 @@ editor_options:
 
 # Infography {.tabset}
 
-## 2016   
+## 2014   
 
 
 
 <img src="./images/ggplot_time-1.png" style="display: block; margin: auto;" />
 
-## 2017   
+## 2015   
 
 
 
 <img src="./images/ggplot_time-2.png" style="display: block; margin: auto;" />
 
-## 2018   
+## 2016   
+
+
 
 <img src="./images/ggplot_time-3.png" style="display: block; margin: auto;" />
+
+## 2017   
+
+
+
+<img src="./images/ggplot_time-4.png" style="display: block; margin: auto;" />
+
+## 2018   
+
+<img src="./images/ggplot_time-5.png" style="display: block; margin: auto;" />
 
 # GIF {.tabset}
 

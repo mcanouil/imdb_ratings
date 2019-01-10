@@ -90,7 +90,7 @@ movies_theatres <- source('./data/movies_theatres.R')$value
 ratings <- add_metascore(
   file_in = "./data/ratings.csv", 
   file_out = "./data/ratings_ms.csv", 
-  from = 2016, 
+  from = min(movies_theatres[["Year"]]), 
   locale = readr::locale(encoding = "Windows-1252")
 )
 ```
@@ -134,7 +134,7 @@ p <- gg_ratings %>%
       .f = print_infography
     ) %>% 
       purrr::map2(.x = YR, .y = ., .f = function(x, y) {
-        ggplot2::ggsave(
+        ggsave(
           filename = paste0("./images/", x, "_Coeos_IMDb.png"),
           plot = y,
           width = 16,
