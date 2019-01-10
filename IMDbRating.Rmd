@@ -153,7 +153,7 @@ p <- gg_ratings %>%
 
 # GIF {.tabset}
 ```{r data_radar}
-range_dates <- 2013:2018
+range_dates <- min(movies_theatres[["Year"]]):max(movies_theatres[["Year"]]) # 2013:2018
 p <- movies_theatres %>% 
   dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
   tidyr::unnest() %>% 
