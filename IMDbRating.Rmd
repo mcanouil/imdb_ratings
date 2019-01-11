@@ -52,11 +52,8 @@ library(ggpubr)
 library(rvest)
 library(gganimate)
 
-# devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R')
-# devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/capitalise.R')
-
-source('../DEV/R/theme_black.R')
-source('../DEV/R/capitalise.R')
+devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R')
+devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/capitalise.R')
 
 ### functions
 source("./R/set_colours.R")
