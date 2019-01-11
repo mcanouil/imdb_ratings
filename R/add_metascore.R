@@ -28,6 +28,7 @@ add_metascore <- function(
       if (nrow(ratings)>0) {
         ratings <- ratings %>%
           dplyr::mutate(`Metascore Rating` = get_metascore(URL)) %>%
+          unnest() %>%
           readr::write_csv(path = file_out)
       }
     }
