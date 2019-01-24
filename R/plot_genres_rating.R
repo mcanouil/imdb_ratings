@@ -26,7 +26,7 @@ plot_genres_rating <- function(.data) {
     ) %>% 
     ggplot2::ggplot(mapping = ggplot2::aes(x = Genre, y = Rating, fill = N)) +
       ggplot2::geom_bar(width = 1, stat = "identity", colour = "white", na.rm = TRUE) +
-      ggplot2::geom_text(
+      ggplot2::geom_label(
         mapping = ggplot2::aes(label = N), 
         colour = ggplot2::theme_get()$panel.grid$colour, 
         nudge_y = -0.5, 

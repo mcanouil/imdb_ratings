@@ -18,15 +18,16 @@ plot_genres_distribution <- function(.data) {
       Genre_label = ifelse(Genre_label, Genre, NA),
       Genre = factor(Genre, levels = unique(Genre))
     ) %>% 
-    ggplot2::ggplot(mapping = ggplot2::aes(x = factor(1), y = Score, fill = Genre)) +
-      ggplot2::geom_bar(colour = "white", width = 1, stat = "identity", na.rm = TRUE) +
+    ggplot2::ggplot(mapping = ggplot2::aes(x = factor(1), y = Score)) +
+      ggplot2::geom_bar(mapping = ggplot2::aes(fill = Genre), width = 1, stat = "identity", na.rm = TRUE) +
       ggrepel::geom_label_repel(
         mapping = ggplot2::aes(
           x = 1.5,
           y = cumsum(rev(Score)) - rev(Score) / 2,
           label = rev(Genre_label)
         ), 
-        fill = "white", 
+        colour = "black",
+        fill = "white",
         size = 2, 
         nudge_x = 0.25,
         min.segment.length = 0, 

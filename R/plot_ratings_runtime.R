@@ -4,15 +4,16 @@ plot_ratings_runtime <- function(.data) {
     dplyr::group_by(`Your Rating`) %>%
     dplyr::summarise(Runtime = sum(`Runtime (mins)`, na.rm = TRUE) / (60 * 24)) %>%
     ggplot2::ggplot(
-      mapping = ggplot2::aes(x = factor(1), y = Runtime, fill = factor(`Your Rating`))
+      mapping = ggplot2::aes(x = factor(1), y = Runtime)
     ) +
-      ggplot2::geom_bar(colour = "white", width = 1, stat = "identity", na.rm = TRUE) +
+      ggplot2::geom_bar(mapping = ggplot2::aes(fill = factor(`Your Rating`)), width = 1, stat = "identity", na.rm = TRUE) +
       ggrepel::geom_label_repel(
         mapping = ggplot2::aes(
           x = 1.5,
           y = cumsum(rev(Runtime)) - rev(Runtime) / 2,
           label = round(rev(Runtime), digits = 1)
         ), 
+        colour = "black",
         fill = "white", 
         size = 2, 
         nudge_x = 0.25,
