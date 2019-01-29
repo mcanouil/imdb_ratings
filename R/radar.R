@@ -45,7 +45,7 @@ p <- movies_theatres %>%
   theme_black(base_size = 16, base_family = "xkcd") +
     ggplot2::theme(
     axis.text.y = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_text(size = ggplot2::rel(0.75)),
+    axis.text.x = ggplot2::element_text(size = ggplot2::rel(if(base_family=="xkcd"){0.85}else{0.75})),
     axis.title = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank(),
     axis.line = ggplot2::element_blank(),

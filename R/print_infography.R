@@ -1,4 +1,4 @@
-print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = params$gg_fontsize) {
+print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = params$gg_fontsize, base_family) {
   ggpubr::ggarrange(
     ggpubr::ggarrange(
       .b[[1]],
@@ -41,10 +41,11 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
   ) %>%
     gridExtra::arrangeGrob(
       top = ggpubr::text_grob(
-        paste0(.x, " in Movie Theatres"), 
+        paste("Movies in", .x), 
         color = ggplot2::theme_get()$text$colour, 
         face = "bold", 
-        size = 16
+        size = 16,
+        family = base_family
       ),
       left = "",
       right = "", 
@@ -53,7 +54,8 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
         color = ggplot2::theme_get()$text$colour, 
         face = "bold",
         hjust = 0,
-        size = 5
+        size = 5,
+        family = base_family
       )
     ) %>%
     ggpubr::as_ggplot()

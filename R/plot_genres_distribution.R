@@ -1,4 +1,4 @@
-plot_genres_distribution <- function(.data) {
+plot_genres_distribution <- function(.data, base_family) {
   .data %>% 
     dplyr::mutate(
       Genre_details = purrr::map(.x = Genres, .f = function(x) {
@@ -31,7 +31,8 @@ plot_genres_distribution <- function(.data) {
         size = 2, 
         nudge_x = 0.25,
         min.segment.length = 0, 
-        segment.colour = ggplot2::theme_get()$line$colour
+        segment.colour = ggplot2::theme_get()$line$colour,
+        family = base_family
       ) +
       ggplot2::coord_polar(theta = "y") +
       scale_fill_viridis_d(guide = ggplot2::guide_legend(ncol = 2)) +

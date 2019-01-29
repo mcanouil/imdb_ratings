@@ -1,4 +1,4 @@
-plot_streak <- function(.data, facet = TRUE, number = TRUE) {
+plot_streak <- function(.data, facet = TRUE, number = TRUE, base_family) {
   .data <- .data %>%
     dplyr::group_by(`Date Rated`) %>%
     dplyr::summarise(
@@ -63,7 +63,7 @@ plot_streak <- function(.data, facet = TRUE, number = TRUE) {
     ggplot2::labs(title = "Movies Streak", x = "Month", y = "Day")
   
   if (number) {
-    p_out <- p_out + ggplot2::geom_text(colour = "white", fontface = "bold", size = 2)
+    p_out <- p_out + ggplot2::geom_text(colour = "white", fontface = "bold", size = 2, family = base_family)
   }
   if (facet) {
     p_out <- p_out + ggplot2::facet_grid(cols = vars(streak))

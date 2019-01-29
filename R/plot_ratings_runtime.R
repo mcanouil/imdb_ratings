@@ -1,4 +1,4 @@
-plot_ratings_runtime <- function(.data) {
+plot_ratings_runtime <- function(.data, base_family) {
   .data %>% 
     dplyr::select(`Your Rating`, `Runtime (mins)`) %>%
     dplyr::group_by(`Your Rating`) %>%
@@ -18,7 +18,8 @@ plot_ratings_runtime <- function(.data) {
         size = 2, 
         nudge_x = 0.25,
         min.segment.length = 0, 
-        segment.colour = "white"
+        segment.colour = "white",
+        family = base_family
       ) +
       ggplot2::coord_polar(theta = "y") +
       scale_fill_viridis_d(name = "Rating") +

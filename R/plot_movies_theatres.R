@@ -1,4 +1,4 @@
-plot_movies_theatres <- function(.year, .data) {
+plot_movies_theatres <- function(.year, .data, base_family) {
   range_dates <- sort(unique(.data[["Year"]]))
   .data %>% 
     dplyr::mutate(
@@ -22,7 +22,7 @@ plot_movies_theatres <- function(.year, .data) {
     # theme_black(base_size = 16) +
     ggplot2::theme(
       axis.text.y = ggplot2::element_blank(),
-      axis.text.x = ggplot2::element_text(size = ggplot2::rel(0.75)),
+      axis.text.x = ggplot2::element_text(size = ggplot2::rel(if(base_family=="xkcd"){1}else{0.75})),
       axis.title = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank(),
       axis.line = ggplot2::element_blank(),
@@ -69,7 +69,11 @@ plot_movies_theatres <- function(.year, .data) {
       colour = ggplot2::theme_get()$panel.grid$colour,
       size = 0.2
     ) +
-    ggplot2::geom_text( # layer 5
+    ggplot2::geom_vline( # layer 5
+      mapping = ggplot2::aes(xintercept = Month_int),
+      colour = "grey50"
+    ) +
+    ggplot2::geom_text( # layer 6
       data = dplyr::tibble(
         Count = c(0, rep(seq(5, 20, by = 5), times = 4)), 
         Month = c(1, rep(c(1, 4, 7, 10), each = 4))
@@ -77,11 +81,8 @@ plot_movies_theatres <- function(.year, .data) {
       mapping = ggplot2::aes(x = Month, y = Count, label = Count),
       colour = ggplot2::theme_get()$text$colour,
       size = 16 * 1/4,
-      inherit.aes = FALSE
-    ) +
-    ggplot2::geom_vline( # layer 6
-      mapping = ggplot2::aes(xintercept = Month_int),
-      colour = "grey50"
+      inherit.aes = FALSE,
+      family = base_family
     ) +
     ggplot2::geom_point( # layer 7
       mapping = ggplot2::aes(x = Month_int, y = Count, colour = Year, size = size)

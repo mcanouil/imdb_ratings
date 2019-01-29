@@ -1,4 +1,4 @@
-plot_genres_rating <- function(.data) {
+plot_genres_rating <- function(.data, base_family) {
   .data %>% 
     dplyr::mutate(
       Genre_details = purrr::map(.x = Genres, .f = function(x) {
@@ -29,14 +29,17 @@ plot_genres_rating <- function(.data) {
       ggplot2::geom_label(
         mapping = ggplot2::aes(label = N), 
         colour = ggplot2::theme_get()$panel.grid$colour, 
+        fill = ggplot2::theme_get()$text$colour,
         nudge_y = -0.5, 
-        size = 2
+        size = 2,
+        family = base_family
       ) +
       ggplot2::geom_text(
         mapping = ggplot2::aes(label = round(Rating, digits = 2)), 
         colour = ggplot2::theme_get()$text$colour, 
         nudge_y = 0.5, 
-        size = 3
+        size = 3,
+        family = base_family
       ) +
       scale_fill_viridis_c(direction = 1) +
       ggplot2::scale_x_discrete(expand = c(0, 0)) +
