@@ -59,9 +59,8 @@ base_family <- 'xkcd'
 
 ### functions
 source("./R/set_colours.R")
-source("./R/best_streak.R")
-source("./R/get_metascore.R")
-source("./R/add_metascore.R")
+source("./R/streak.R")
+source("./R/metascore.R")
 source("./R/plot_streak.R")
 source("./R/plot_genres_distribution.R")
 source("./R/plot_genres_rating.R")
