@@ -26,7 +26,7 @@ plot_streak <- function(.data, facet = TRUE, number = TRUE, base_family) {
     ) %>%
     dplyr::group_by(YearRated) %>%
     dplyr::mutate(
-      streak = paste0("[", lubridate::year(`Date Rated`), "] ", best_streak(n_rating)),
+      streak = paste0("[", lubridate::year(`Date Rated`), "] ", print_streak(n_rating)),
       Week = ifelse(Month=="January" & Week>=50, 0, Week),
       Week = ifelse(Month=="December" & Week<=40, max(Week)+1, Week) 
     ) %>%
