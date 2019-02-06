@@ -186,7 +186,7 @@ p <- gg_ratings %>%
 
 # GIF {.tabset}
 ```{r data_radar}
-range_dates <- min(movies_theatres[["Year"]]):max(movies_theatres[["Year"]]) # 2013:2018
+range_dates <- min(movies_theatres[["Year"]]):max(movies_theatres[["Year"]])
 p <- movies_theatres %>% 
   dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
   tidyr::unnest() %>% 
@@ -242,12 +242,12 @@ p <- movies_theatres %>%
   ) +
   ggplot2::scale_colour_manual(
     name = "Year",
-    values = c("white", viridis_pal(direction = 1)(length(range_dates))) %>% 
+    values = c("white", scales::viridis_pal(direction = 1)(length(range_dates))) %>% 
       `names<-`(c("ALL", range_dates))
   ) +
   ggplot2::scale_fill_manual(
     name = "Year",
-    values = c("white", viridis_pal(direction = 1)(length(range_dates))) %>% 
+    values = c("white", scales::viridis_pal(direction = 1)(length(range_dates))) %>% 
       `names<-`(c("ALL", range_dates))
   ) +
   ggplot2::scale_size_manual(
@@ -345,7 +345,6 @@ p_animate2 <- p +
   gganimate::shadow_wake(
     wake_length = 0.15,
     wrap = TRUE,
-    exclude_layer = c(1:5, 7, 8),
     exclude_phase = NULL
   )
 
