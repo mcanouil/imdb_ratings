@@ -306,15 +306,15 @@ p <- movies_theatres %>%
 ## Movies at theatre (smooth)
 ```{r gif_circular}
 p_animate1 <- p +
-  ggplot2::geom_smooth(
-    mapping = ggplot2::aes(x = Month_int, y = Count),
-    colour ="white",
-    method = "loess",
-    se = FALSE,
-    size = 1,
-    linetype = 2,
-    show.legend = FALSE
-  ) +
+  # ggplot2::geom_smooth(
+  #   mapping = ggplot2::aes(x = Month_int, y = Count),
+  #   colour ="white",
+  #   method = "loess",
+  #   se = FALSE,
+  #   size = 1,
+  #   linetype = 2,
+  #   show.legend = FALSE
+  # ) +
   gganimate::transition_states(
     Year,
     transition_length = 6,

@@ -51,7 +51,13 @@ editor_options:
 
 ## 2018   
 
+
+
 <img src="./images/ggplot_time-5.png" style="display: block; margin: auto;" />
+
+## 2019   
+
+<img src="./images/ggplot_time-6.png" style="display: block; margin: auto;" />
 
 # GIF {.tabset}
 
