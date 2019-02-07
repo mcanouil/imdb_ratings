@@ -48,7 +48,7 @@ grid_data <- tibble(
   tidyr::drop_na() %>% 
   tidyr::unnest()
 
-ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Count, group = Year)) +
+p <- ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Count, group = Year)) +
   ggplot2::labs(
     title = "# Movies Seen in Theatres",
     caption = "© Mickaël 'Coeos' Canouil"
@@ -147,6 +147,17 @@ ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Cou
     # exclude_layer = c(1, 2, 3, 4, 9), 
     exclude_phase = NULL
   ) + 
-  ggplot2::facet_wrap(facets = vars(Year)) +
+  ggplot2::facet_wrap(facets = vars(Year), nrow = 2) +
   ggplot2::theme(legend.position = 'none')
 
+
+gganimate::animate(
+  plot = p, 
+  width = 800, 
+  height = 450, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    file = "./images/radar_test.gif"
+  )
+)
