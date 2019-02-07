@@ -6,10 +6,9 @@ library(gganimate)
 
 
 devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R')
-# theme_set(theme_black(base_size = 16, base_family = "xkcd"))
+theme_set(theme_black(base_size = 16, base_family = "xkcd"))
 
 base_family <- "xkcd"
-
 movies_theatres <- source('./data/movies_theatres.R')$value
 
 data_radar <- movies_theatres %>% 
@@ -33,8 +32,7 @@ data_radar <- movies_theatres %>%
     Month_int = as.integer(Month)
   ) %>% 
   dplyr::arrange(Year, Month) %>% 
-  tidyr::drop_na() %>% 
-  filter(Year==2018)
+  tidyr::drop_na()
 
 grid_data <- tibble(
   major = scales::pretty_breaks(5)(c(0, max(data_radar[["Count"]], na.rm = TRUE)))
@@ -101,7 +99,7 @@ ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Cou
   ) +
   ggplot2::geom_text( # layer 4
     data = dplyr::tibble(
-      y = c(0, rep(unique(filter(grid_data, type=="major")[["Count"]])[-1], times = 4)),
+      y = c(0, rep(unique(filter(grid_data, type=="major")[["yintercept"]])[-1], times = 4)),
       x = as.integer(c(1, rep(c(1, 4, 7, 10), each = 4)))
     ),
     mapping = ggplot2::aes(x = x, y = y, label = y),
@@ -110,53 +108,45 @@ ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Cou
     inherit.aes = FALSE,
     family = base_family
   ) +
-  # ggplot2::geom_path( # layer 5
-  #   mapping = ggplot2::aes(colour = Year),
-  #   size = 1.5,
-  #   na.rm = TRUE
-  # ) + 
-  ggplot2::geom_hline( # layer 6
+  ggplot2::geom_hline( # layer 5
     data = data.frame(Count = seq(0, 20, 5)),
     mapping = ggplot2::aes(yintercept = Count),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4,
-    colour = "grey50"
+    alpha = 1
   ) +
-  ggplot2::geom_hline( # layer 7
+  ggplot2::geom_hline( # layer 6
     data = data.frame(Count = seq(0, 25, 5)),
     mapping = ggplot2::aes(yintercept = Count-5),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4,
-    colour = "grey50"
+    alpha = 1
   ) +
-  ggplot2::geom_hline( # layer 8
+  ggplot2::geom_hline( # layer 7
     data = data.frame(Count = seq(0, 30, 5)),
     mapping = ggplot2::aes(yintercept = Count-10),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4,
-    colour = "grey50"
+    alpha = 1
   ) +
-  ggplot2::geom_hline( # layer 9
+  ggplot2::geom_hline( # layer 8
     data = data.frame(Count = seq(0, 35, 5)),
     mapping = ggplot2::aes(yintercept = Count-15),
     colour = ggplot2::theme_get()$panel.grid$colour,
     size = 0.4,
-    colour = "grey50"
+    alpha = 1
   ) +
-  # ggplot2::geom_vline( # layer 10
-  #   data = data.frame(Count = as.numeric(1:13)),
-  #   mapping = ggplot2::aes(xintercept = Count),
-  #   colour = "grey50"
-  # ) +
-  ggplot2::geom_point( # layer 11
+  ggplot2::geom_point( # layer 9
     mapping = ggplot2::aes(colour = Year, size = Year),
     na.rm = TRUE
   ) +
   gganimate::transition_reveal(along = Count, range = c(0, 20), keep_last = TRUE) +
   gganimate::shadow_wake(
-    wake_length = 0.25,
+    wake_length = 0.15,
     wrap = FALSE,
-    exclude_layer = NULL, 
+    # exclude_layer = c(1, 2, 3, 4, 9), 
     exclude_phase = NULL
-  )
+  ) + 
+  ggplot2::facet_wrap(facets = vars(Year)) +
+  ggplot2::theme(legend.position = 'none')
 
