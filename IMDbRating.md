@@ -62,6 +62,8 @@ editor_options:
 # GIF {.tabset}
 
 
+
+
 ## Movies at theatre (smooth)
 <img src="./images/gif_circular-1.gif" style="display: block; margin: auto;" />
 
