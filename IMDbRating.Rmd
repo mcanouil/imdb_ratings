@@ -515,7 +515,7 @@ gganimate::animate(
 ```
 
 ### Radar-waves-point
-```{r}
+```{r waves_points}
 ### Waves: Point
 gganimate::animate(
   plot = radar_base +
@@ -557,7 +557,7 @@ gganimate::animate(
 ```
 
 ### Radar-waves-path
-```{r}
+```{r waves_path}
 ### Waves: Path + Point
 gganimate::animate(
   plot = radar_base +
