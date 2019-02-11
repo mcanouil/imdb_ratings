@@ -59,17 +59,28 @@ editor_options:
 
 <img src="./images/ggplot_time-6.png" style="display: block; margin: auto;" />
 
-# GIF {.tabset}
-
-
-
-
-## Movies at theatre (smooth)
-<img src="./images/gif_circular-1.gif" style="display: block; margin: auto;" />
-
-## Movies at theatre (radar)
-<img src="./images/gif_radar-1.gif" style="display: block; margin: auto;" />
+# GIF
 
 ## Ratings distribution
 <img src="./images/gif_distribution-1.gif" style="display: block; margin: auto;" />
+
+## Movies at theatre {.tabset}
+
+
+
+
+### Circular-smooth
+<img src="./images/gif_smooth-1.gif" style="display: block; margin: auto;" />
+
+### Radar-radius
+<img src="./images/gif_radar-1.gif" style="display: block; margin: auto;" />
+
+### Radar-waves-point
+<img src="./images/gif_waves_points-1.gif" style="display: block; margin: auto;" />
+
+### Radar-waves-path
+<img src="./images/gif_waves_path-1.gif" style="display: block; margin: auto;" />
+
+
+
 

@@ -324,7 +324,7 @@ gganimate::animate(
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    file = "./images/Coeos_IMDb_01.gif"
+    # file = "./images/Coeos_IMDb_01.gif"
   )
 )
 ```
@@ -471,7 +471,7 @@ gganimate::animate(
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    file = "./images/Coeos_IMDb_02.gif"
+    # file = "./images/Coeos_IMDb_02.gif"
   )
 )
 ```
@@ -509,13 +509,13 @@ gganimate::animate(
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    file = "./images/Coeos_IMDb_03.gif"
+    # file = "./images/Coeos_IMDb_03.gif"
   )
 )
 ```
 
 ### Radar-waves-point
-```{r waves_points}
+```{r gif_waves_points}
 ### Waves: Point
 gganimate::animate(
   plot = radar_base +
@@ -551,13 +551,13 @@ gganimate::animate(
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    file = "./images/Coeos_IMDb_04.gif"
+    # file = "./images/Coeos_IMDb_04.gif"
   )
 )
 ```
 
 ### Radar-waves-path
-```{r waves_path}
+```{r gif_waves_path}
 ### Waves: Path + Point
 gganimate::animate(
   plot = radar_base +
@@ -596,7 +596,7 @@ gganimate::animate(
   units = "px", 
   bg = ggplot2::theme_get()$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    file = "./images/Coeos_IMDb_05.gif"
+    # file = "./images/Coeos_IMDb_05.gif"
   )
 )
 ```
