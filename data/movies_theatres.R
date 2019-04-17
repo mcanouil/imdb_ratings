@@ -108,8 +108,8 @@ bind_rows(list(
   tribble(
     ~Year, ~Month, ~Count,
     2019, "January", 13,
-    2019, "February", NA,
-    2019, "March", NA,
+    2019, "February", 11,
+    2019, "March", 13,
     2019, "April", NA,
     2019, "May", NA,
     2019, "June", NA,
