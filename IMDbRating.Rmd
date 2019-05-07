@@ -53,8 +53,7 @@ library(rvest)
 library(gganimate)
 
 devtools::source_url("https://github.com/mcanouil/DEV/raw/master/R/theme_black.R")
-# devtools::source_url("https://github.com/mcanouil/ggcoeos/master/R/theme.R")
-devtools::source_url("https://github.com/mcanouil/ggcoeos/raw/master/R/format.R")
+devtools::source_url("https://github.com/mcanouil/DEV/raw/master/R/format.R")
 
 base_family <- "xkcd"
 
