@@ -532,7 +532,7 @@ gganimate::animate(
       size = 5,
       colour = ggplot2::theme_get()$text$colour
     ) +
-    ggplot2::theme(legend.position = "none") +
+    # ggplot2::theme(legend.position = "none") +
     # ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
     gganimate::transition_reveal(
       along = Count, 
@@ -579,7 +579,7 @@ gganimate::animate(
       na.rm = TRUE,
       size = 5
     ) +
-    ggplot2::theme(legend.position = "none") +
+    # ggplot2::theme(legend.position = "none") +
     # ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
     gganimate::transition_reveal(
       along = Count, 
