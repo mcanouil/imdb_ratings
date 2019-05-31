@@ -53,7 +53,7 @@ print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = p
         "© Mickaël 'Coeos' Canouil", 
         color = ggplot2::theme_get()$text$colour, 
         face = "bold",
-        hjust = 0,
+        # hjust = 0.5,
         size = 5,
         family = base_family
       )
