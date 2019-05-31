@@ -6,7 +6,8 @@ get_metascore <- function(.x) {
         css = "div.metascore"
       )              
     )
-    return(as.numeric(out)/10)
+    
+    as.numeric(out)/10
   })
 }
 
@@ -45,5 +46,6 @@ add_metascore <- function(
       }
     }
   })
-  return(readr::read_csv(file = file_out))
+  
+  readr::read_csv(file = file_out)
 }
