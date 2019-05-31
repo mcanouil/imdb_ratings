@@ -60,10 +60,7 @@ source("./R/plot_top.R")
 source("./R/plot_movies_theatres.R")
 source("./R/print_infography.R")
 
-### ggplot2 parameters
-
 theme_set(theme_black(base_size = 9, base_family = base_family))
-
 ```
 
 ```{r movies_data, incude = FALSE}
@@ -80,11 +77,12 @@ ratings <- add_metascore(
 )
 ```
 
-## Infography {.tabset}
+## Infography
+
 ```{r ggplot_time, fig.height = 9, fig.width = 16}
-### make plots
 gg_ratings <- ratings %>% 
   dplyr::mutate(YR = YearRated) %>% 
+  dplyr::filter(YR==lubridate::year(lubridate::today())) %>% 
   dplyr::group_by(YR) %>% 
   tidyr::nest() %>% 
   dplyr::mutate(
@@ -171,9 +169,8 @@ p <- gg_ratings %>%
   dplyr::ungroup()
 ```
 
-## GIF
+## Ratings distribution
 
-### Ratings distribution
 ```{r gif_distribution}
 data_ratings <- dplyr::full_join(
   x = ratings %>% 
@@ -259,7 +256,7 @@ p <- ggplot2::ggplot(
   mapping = ggplot2::aes(x = rounded_rating, fill = Who)
 ) +
   theme_black(base_size = 16, base_family = base_family) +
-  ggplot2::geom_density(colour = "white", adjust = 2.5, alpha = 0.25, na.rm = TRUE) +
+  ggplot2::geom_density(colour = "white", adjust = 10, alpha = 0.25, na.rm = TRUE) +
   ggplot2::geom_bar(
     data = dplyr::distinct(data_ratings),
     mapping = ggplot2::aes(y = ntotal),
@@ -285,7 +282,7 @@ p <- ggplot2::ggplot(
     y = "Proportion", 
     title = "Distribution of Ratings", 
     fill = "Rating from"
-  ) + # facet_wrap(~YearRated)
+  ) + 
   gganimate::transition_states(
     YearRated,
     transition_length = 6,
@@ -316,7 +313,8 @@ gganimate::animate(
 )
 ```
 
-### Movies at theatre {.tabset}
+## Movies at theatre
+
 ```{r data_radar}
 data_radar <- movies_theatres %>% 
   dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
@@ -368,7 +366,7 @@ radar_base <- ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Mont
   theme_black(base_size = 16, base_family = base_family) +
   ggplot2::theme(
     axis.text.y = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_text(size = ggplot2::rel(if (base_family=="xkcd") {0.85} else {0.75})),
+    axis.text.x = ggplot2::element_text(size = ggplot2::rel(if (base_family=="xkcd") 0.85 else 0.75)),
     axis.title = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank(),
     axis.line = ggplot2::element_blank(),
@@ -419,40 +417,43 @@ radar_base <- ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Mont
   )
 ```
 
-#### Circular-smooth
+### Circular-smooth
+
 ```{r gif_smooth}
 gganimate::animate(
-  plot = radar_base +
-    ggplot2::geom_path( # layer 5
-      mapping = ggplot2::aes(colour = Year),
-      size = 1.5,
-      na.rm = TRUE
-    ) +
-    ggplot2::geom_point( # layer 6
-      mapping = ggplot2::aes(colour = Year, fill = Year), 
-      shape = 21,
-      colour = ggplot2::theme_get()$text$colour,
-      na.rm = TRUE
-    ) +
-    ggplot2::geom_smooth( # layer 7
-      mapping = ggplot2::aes(x = Month_int, y = Count),
-      colour = ggplot2::theme_get()$text$colour,
-      method = "gam",
-      se = FALSE,
-      size = 1.5,
-      linetype = 2,
-      show.legend = FALSE
-    ) +
-    gganimate::transition_states(
-      Year,
-      transition_length = 5,
-      state_length = 25
-    ) +
-    gganimate::enter_appear(early = FALSE) +
-    gganimate::exit_disappear(early = FALSE) +
-    gganimate::ease_aes("linear") +
-    ggplot2::labs(subtitle = "{closest_state}") +
-    ggplot2::theme(legend.position = "none"), 
+  plot = {
+    radar_base +
+      ggplot2::geom_path( # layer 5
+        mapping = ggplot2::aes(colour = Year),
+        size = 1.5,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_point( # layer 6
+        mapping = ggplot2::aes(colour = Year, fill = Year), 
+        shape = 21,
+        colour = ggplot2::theme_get()$text$colour,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_smooth( # layer 7
+        mapping = ggplot2::aes(x = Month_int, y = Count),
+        colour = ggplot2::theme_get()$text$colour,
+        method = "gam",
+        se = FALSE,
+        size = 1.5,
+        linetype = 2,
+        show.legend = FALSE
+      ) +
+      gganimate::transition_states(
+        Year,
+        transition_length = 5,
+        state_length = 25
+      ) +
+      gganimate::enter_appear(early = FALSE) +
+      gganimate::exit_disappear(early = FALSE) +
+      gganimate::ease_aes("linear") +
+      ggplot2::labs(subtitle = "{closest_state}") +
+      ggplot2::theme(legend.position = "none")
+  }, 
   width = 500, 
   height = 500, 
   units = "px", 
@@ -463,34 +464,41 @@ gganimate::animate(
 )
 ```
 
-#### Radar-radius
+### Radar-radius
+
 ```{r gif_radar}
 gganimate::animate(
-  plot = radar_base +
-    ggplot2::geom_vline( # layer 5
-      data = data.frame(Month_int = seq_len(13)),
-      mapping = ggplot2::aes(xintercept = Month_int),
-      colour = ggplot2::theme_get()$panel.grid$colour,
-      size = 0.4,
-      na.rm = TRUE
-    ) +
-    ggplot2::geom_path( # layer 6
-      mapping = ggplot2::aes(colour = Year),
-      size = 1.5,
-      na.rm = TRUE
-    ) +
-    ggplot2::geom_point( # layer 7
-      mapping = ggplot2::aes(fill = Year, group = paste(Year, Month_int)),
-      na.rm = TRUE,
-      shape = 21,
-      size = 5,
-      colour = ggplot2::theme_get()$text$colour
-    ) +
-    gganimate::transition_reveal(along = Month_int, range = c(1L, 13L), keep_last = TRUE) +
-    gganimate::shadow_wake(
-      wake_length = 1 / 3,
-      wrap = TRUE
-    ), 
+  plot = {
+    radar_base +
+      ggplot2::geom_vline( # layer 5
+        data = data.frame(Month_int = seq_len(13)),
+        mapping = ggplot2::aes(xintercept = Month_int),
+        colour = ggplot2::theme_get()$panel.grid$colour,
+        size = 0.4,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_path( # layer 6
+        mapping = ggplot2::aes(colour = Year),
+        size = 1.5,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_point( # layer 7
+        mapping = ggplot2::aes(fill = Year, group = paste(Year, Month_int)),
+        na.rm = TRUE,
+        shape = 21,
+        size = 5,
+        colour = ggplot2::theme_get()$text$colour
+      ) +
+      gganimate::transition_reveal(
+        along = Month_int, 
+        range = c(1L, 13L), 
+        keep_last = TRUE
+      ) +
+      gganimate::shadow_wake(
+        wake_length = 1 / 3,
+        wrap = TRUE
+      )
+  }, 
   width = 500, 
   height = 500, 
   units = "px", 
@@ -501,18 +509,16 @@ gganimate::animate(
 )
 ```
 
-#### Radar-waves-point
+### Radar-waves-point
+
 ```{r gif_waves_points}
-### Waves: Point
 gganimate::animate(
   plot = radar_base +
     purrr::map(.x = seq(from = 0, to = 3, by = 1.5), .f = function(.x) { # layer 5-8
-      tmp_data <- grid_data %>% 
-        dplyr::filter(type=="major")
+      tmp_data <- dplyr::filter(.data = grid_data, type=="major")
       waves_interval <- .x * unique(diff(tmp_data[["yintercept"]]))
       ggplot2::geom_hline(
-        data = tmp_data %>% 
-          dplyr::mutate(Count = yintercept + waves_interval),
+        data = dplyr::mutate(.data = tmp_data, Count = yintercept + waves_interval),
         mapping = ggplot2::aes(yintercept = Count - waves_interval),
         colour = ggplot2::theme_get()$panel.grid$colour,
         size = 0.4,
@@ -527,8 +533,12 @@ gganimate::animate(
       colour = ggplot2::theme_get()$text$colour
     ) +
     ggplot2::theme(legend.position = "none") +
-    ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
-    gganimate::transition_reveal(along = Count, range = c(0, max(grid_data[["yintercept"]])*1.25), keep_last = TRUE) +
+    # ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
+    gganimate::transition_reveal(
+      along = Count, 
+      range = c(0, max(grid_data[["yintercept"]]) * 1.25), 
+      keep_last = TRUE
+    ) +
     gganimate::shadow_wake(
       wake_length = 1 / 3,
       wrap = TRUE
@@ -543,18 +553,16 @@ gganimate::animate(
 )
 ```
 
-#### Radar-waves-path
+### Radar-waves-path
+
 ```{r gif_waves_path}
-### Waves: Path + Point
 gganimate::animate(
   plot = radar_base +
     purrr::map(.x = seq(from = 0, to = 3, by = 1.5), .f = function(.x) { # layer 5-8
-      tmp_data <- grid_data %>% 
-        dplyr::filter(type=="major")
+      tmp_data <- dplyr::filter(.data = grid_data, type=="major")
       waves_interval <- .x * unique(diff(tmp_data[["yintercept"]]))
       ggplot2::geom_hline(
-        data = tmp_data %>% 
-          dplyr::mutate(Count = yintercept + waves_interval),
+        data = dplyr::mutate(.data = tmp_data, Count = yintercept + waves_interval),
         mapping = ggplot2::aes(yintercept = Count - waves_interval),
         colour = ggplot2::theme_get()$panel.grid$colour,
         size = 0.4,
@@ -572,8 +580,12 @@ gganimate::animate(
       size = 5
     ) +
     ggplot2::theme(legend.position = "none") +
-    ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
-    gganimate::transition_reveal(along = Count, range = c(0, max(grid_data[["yintercept"]])*1.25), keep_last = TRUE) +
+    # ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
+    gganimate::transition_reveal(
+      along = Count, 
+      range = c(0, max(grid_data[["yintercept"]]) * 1.25), 
+      keep_last = TRUE
+    ) +
     gganimate::shadow_wake(
       wake_length = 1 / 3,
       wrap = TRUE
