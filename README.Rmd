@@ -255,7 +255,7 @@ p <- ggplot2::ggplot(
   mapping = ggplot2::aes(x = rounded_rating, fill = Who)
 ) +
   theme_black(base_size = 16, base_family = base_family) +
-  ggplot2::geom_density(colour = "white", adjust = 10, alpha = 0.25, na.rm = TRUE) +
+  ggplot2::geom_density(colour = "white", adjust = 2.5, alpha = 0.25, na.rm = TRUE) +
   ggplot2::geom_bar(
     data = dplyr::distinct(data_ratings),
     mapping = ggplot2::aes(y = ntotal),
