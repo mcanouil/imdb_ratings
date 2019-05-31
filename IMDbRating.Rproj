@@ -14,4 +14,7 @@ LaTeX: pdfLaTeX
 
 LineEndingConversion: Posix
 
+BuildType: Custom
+CustomScriptPath: _build.sh
+
 QuitChildProcessesOnExit: Yes
