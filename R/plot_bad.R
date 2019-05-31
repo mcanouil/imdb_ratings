@@ -1,4 +1,4 @@
-plot_bad <- function(.data, n = 3, gg_fontsize = params$gg_fontsize, base_family) {
+plot_bad <- function(.data, n = 3, gg_fontsize = 9, base_family) {
   .data %>% 
     dplyr::arrange(`Your Rating`, `IMDb Rating`) %>%
     dplyr::select(Title, `Your Rating`, `IMDb Rating`) %>%
