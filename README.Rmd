@@ -43,7 +43,7 @@ library(gganimate)
 devtools::source_url("https://github.com/mcanouil/DEV/raw/master/R/theme_black.R")
 devtools::source_url("https://github.com/mcanouil/DEV/raw/master/R/format.R")
 
-base_family <- "xkcd"
+base_family <- if ("sysfonts" %in% installed.packages()) "xkcd" else ""
 
 ### functions
 source("./R/set_colours.R")
