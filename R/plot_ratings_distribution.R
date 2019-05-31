@@ -1,5 +1,4 @@
 plot_ratings_distribution <- function(.data, base_family) {
-  
   data_ratings <- dplyr::full_join(
     x = .data %>% 
       dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%

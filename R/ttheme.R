@@ -36,5 +36,6 @@ ttheme <- function(
   ))
   .ttheme$core$fg_params$fontfamily <- base_family
   attr(.ttheme, "style") <- base_style
+
   .ttheme
 }

@@ -68,5 +68,6 @@ plot_streak <- function(.data, facet = TRUE, number = TRUE, base_family) {
   if (facet) {
     p_out <- p_out + ggplot2::facet_grid(cols = vars(streak))
   }
-  return(p_out)
+  
+  p_out
 }

@@ -8,11 +8,9 @@ compute_streak <- function(vec) {
 }
 
 print_streak <- function(vec) {
-  return(
-    paste0(
-      "Movies rated: ", sum(vec), "\n",
-      "Best streak: ", compute_streak(vec != 0), " days ! ",
-      "Worst streak: ", compute_streak(vec == 0), " days !"
-    )
+  paste0(
+    "Movies rated: ", sum(vec), "\n",
+    "Best streak: ", compute_streak(vec != 0), " days ! ",
+    "Worst streak: ", compute_streak(vec == 0), " days !"
   )
 }

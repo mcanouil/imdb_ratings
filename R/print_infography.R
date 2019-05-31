@@ -1,4 +1,4 @@
-print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = params$gg_fontsize, base_family) {
+print_infography <- function(.x, .a, .b, .c, .d, .e, .g, .h, .i, gg_fontsize = 9, base_family) {
   ggpubr::ggarrange(
     ggpubr::ggarrange(
       .b[[1]],
