@@ -159,10 +159,9 @@ p <- gg_ratings %>%
           height = 9,
           dpi = 300
         )
-        cat("\n\n")
-        cat("##", YR, "  \n\n")
+        cat("\n")
         print(y)
-        cat("\n\n")
+        cat("\n")
         return(y)
       })
   ) %>% 
