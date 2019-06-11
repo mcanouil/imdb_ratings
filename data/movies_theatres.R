@@ -19,7 +19,7 @@ bind_rows(list(
     ~Year, ~Month, ~Count,
     2013, "January", NA,
     2013, "February", NA,
-    2013, "March", NA,
+    2013, "March", 1,
     2013, "April", 8,
     2013, "May", 10,
     2013, "June", 10,
@@ -55,7 +55,7 @@ bind_rows(list(
     2015, "June", 6,
     2015, "July", 6,
     2015, "August", 10,
-    2015, "September", 8,
+    2015, "September", 9,
     2015, "October", 13,
     2015, "November", 10,
     2015, "December", 9
@@ -63,8 +63,8 @@ bind_rows(list(
   tribble(
     ~Year, ~Month, ~Count,
     2016, "January", 7,
-    2016, "February", 17,
-    2016, "March", 9,
+    2016, "February", 16,
+    2016, "March", 10,
     2016, "April", 8,
     2016, "May", 13,
     2016, "June", 8,
