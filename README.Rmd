@@ -64,7 +64,12 @@ theme_set(theme_black(base_size = 9, base_family = base_family))
 ```
 
 ```{r movies_data, incude = FALSE}
-movies_theatres <- source("./data/movies_theatres.R")$value
+all_movies_theatres <- source("./data/movies_theatres.R")$value
+movies_theatres <- all_movies_theatres %>%
+  dplyr::group_by(Year = year, Month = month) %>%
+  dplyr::count() %>% 
+  dplyr::ungroup() %>% 
+  dplyr::rename(Count = n)
 ```
 
 ```{r read_imdb, include = FALSE}
