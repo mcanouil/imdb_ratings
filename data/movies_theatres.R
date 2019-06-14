@@ -820,7 +820,7 @@
   "2019-05-30 16:30", 8, "LILLE"
 )
 .data[["date_time"]] <- lubridate::ymd_hm(.data[["date_time"]])
-.data[["Month"]] <- lubridate::month(.data[["date_time"]], label = TRUE, abbr = FALSE)
+.data[["Month"]] <- lubridate::month(.data[["date_time"]], label = FALSE, abbr = FALSE)
 .data[["Year"]] <- lubridate::year(.data[["date_time"]])
 
 .data
