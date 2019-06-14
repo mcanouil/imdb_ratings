@@ -5,8 +5,6 @@
 
 ## Infography
 
-## 2019
-
 ![](README_files/figure-gfm/ggplot_time-1.png)<!-- -->
 
 ## Ratings distribution
