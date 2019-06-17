@@ -41,19 +41,19 @@ ggplot(data = circle_room_lille, mapping = aes(x = x, y = y)) +
 
 
 source("./data/movies_theatres.R")$value %>% 
-    filter(theatre=="LILLE") %>% 
-    full_join(y = circle_room_lille, by = "room") %>% 
+  filter(theatre=="LILLE") %>% 
+  full_join(y = circle_room_lille, by = "room") %>% 
   arrange(date_time) %>% 
   group_by(room) %>% 
   mutate(room_n = 1:n()) %>% 
   ungroup() %>% 
   ggplot(
     data = ., 
-    mapping = aes(x = x, y = y, colour = Year)
+    mapping = aes(x = x, y = y, colour = Year, size = room_n)
   ) + 
     scale_x_continuous(expand = expand_scale(mult = c(0.2))) + 
     scale_y_continuous(expand = expand_scale(mult = c(0.2))) +
     coord_equal() +
-    geom_point(mapping = aes(size = room_n)) + 
-    geom_line() +
-    transition_reveal(along = date_time)
+    geom_point() + 
+    transition_reveal(along = date_time) +
+    shadow_mark()
