@@ -14,46 +14,50 @@ circle_room_lille <- tibble(
 ) %>% 
   slice(-n())
 
-
-
-ggplot(data = circle_room_lille, mapping = aes(x = x, y = y)) + 
-  geom_label(
-    mapping = aes(label = sprintf("%02d", room)), 
-    label.r = unit(2.35, "lines"), 
-    label.padding =  unit(2, "lines")
-  ) + 
-  scale_x_continuous(expand = expand_scale(mult = c(0.2))) + 
-  scale_y_continuous(expand = expand_scale(mult = c(0.2))) +
-  coord_equal() +
-  geom_point(
-    data = source("./data/movies_theatres.R")$value %>% 
-      filter(theatre=="LILLE") %>% 
-      full_join(y = circle_room_lille, by = "room"),
-    mapping = aes(colour = Year)
-  ) + 
-  geom_line(
-    data = source("./data/movies_theatres.R")$value %>% 
-      filter(theatre=="LILLE") %>% 
-      full_join(y = circle_room_lille, by = "room"),
-    mapping = aes(colour = Year)
-  ) +
-  transition_reveal(along = date_time)
-
-
-source("./data/movies_theatres.R")$value %>% 
+.data <- source("./data/movies_theatres.R")$value %>% 
   filter(theatre=="LILLE") %>% 
+  mutate(watch = 1) %>% 
+  group_by(date_time) %>% 
+  complete(room = 1:14) %>% 
+  replace_na(replace = list(watch = 0)) %>% 
+  arrange(Year) %>%
+  fill(everything()) %>% 
+  ungroup() %>% 
   full_join(y = circle_room_lille, by = "room") %>% 
   arrange(date_time) %>% 
   group_by(room) %>% 
-  mutate(room_n = 1:n()) %>% 
+  do(mutate(., room_n = cumsum(watch))) %>% 
   ungroup() %>% 
-  ggplot(
-    data = ., 
-    mapping = aes(x = x, y = y, colour = Year, size = room_n)
-  ) + 
-    scale_x_continuous(expand = expand_scale(mult = c(0.2))) + 
-    scale_y_continuous(expand = expand_scale(mult = c(0.2))) +
-    coord_equal() +
-    geom_point() + 
-    transition_reveal(along = date_time) +
-    shadow_mark()
+  mutate(room = factor(room))
+
+ggplot(
+  data = .data, 
+  mapping = aes(x = x, y = y)
+) + 
+  scale_x_continuous(expand = expand_scale(mult = c(0.2))) + 
+  scale_y_continuous(expand = expand_scale(mult = c(0.2))) +
+  scale_size_continuous(range = c(1, 25)) +
+  scale_colour_viridis_c(option = "plasma") +
+  scale_fill_viridis_d(option = "plasma", begin = 0.25) +
+  coord_equal() +
+  geom_line(
+    data = filter(.data, watch==1), 
+    mapping = aes(x = x, y = y, colour = as.numeric(date_time)), 
+    # size = 1, 
+    show.legend = FALSE, 
+    inherit.aes = FALSE
+  ) +
+  geom_point(
+    mapping = aes(fill = room, size = room_n, group = room),
+    shape = 21,
+    colour = "white"
+  ) +
+  geom_text(
+    mapping = aes(size = room_n / 4, label = room, group = room), 
+    show.legend = FALSE, 
+    colour = "black"
+  ) +
+  transition_reveal(along = date_time) +
+  theme(legend.position = "none")
+
+
