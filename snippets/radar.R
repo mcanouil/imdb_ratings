@@ -43,7 +43,7 @@ p <- movies_theatres %>%
   ggplot2::coord_polar(theta = "x") +
   # theme
   theme_black(base_size = 16, base_family = "xkcd") +
-    ggplot2::theme(
+  ggplot2::theme(
     axis.text.y = ggplot2::element_blank(),
     axis.text.x = ggplot2::element_text(size = ggplot2::rel(if(base_family=="xkcd"){0.85}else{0.75})),
     axis.title = ggplot2::element_blank(),
