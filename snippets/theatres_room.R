@@ -3,6 +3,7 @@ options(stringsAsFactors = FALSE)
 library(tidyverse)
 library(scales)
 library(gganimate)
+library(ggforce)
 
 devtools::source_url("https://github.com/mcanouil/DEV/raw/master/R/theme_black.R")
 
@@ -20,11 +21,16 @@ make_bubble_circle <- function(n, radius, count = 1) {
   )
 }
 
-movies_theatres <- source("./data/movies_theatres.R")$value
+theatres_names <- c(
+  "LILLE" = "UGC LILLE", 
+  "LYON" = "UGC LYON", 
+  "VDA" = "UGC VDA", 
+  "METROPOLE" = "METROPOLE", 
+  "MAJESTIC" = "MAJESTIC"
+)
 
-# theatre_room_observed <- movies_theatres %>% 
-#   unite(col = "theatre_room", theatre, room, sep = "_") %>% 
-#   .[["theatre_room"]]
+movies_theatres <- source("./data/movies_theatres.R")$value %>% 
+  mutate(theatre = theatres_names[theatre])
 
 theatre_room_observed <- movies_theatres %>% 
   group_by(theatre) %>% 
@@ -45,7 +51,11 @@ theatre_room_observed <- movies_theatres %>%
   arrange(date_time) %>% 
   group_by(theatre_room) %>% 
   do(mutate(., theatre_room_n = cumsum(watch))) %>% 
-  ungroup()
+  ungroup() %>% 
+  group_by(date_time) %>% 
+  do(mutate(., theatre_room_n_r = rank(theatre_room_n, ties.method = "min"))) %>% 
+  ungroup() %>% 
+  mutate(theatre_room_n_r = factor(theatre_room_n_r))
 
 
 circle_room <- movies_theatres %>% 
@@ -53,24 +63,32 @@ circle_room <- movies_theatres %>%
   group_by(theatre) %>% 
   summarise(
     max_room = max(room),
-    max_n = max(n)
+    max_n = max(n),
+    max = max_n * max_room
   ) %>% 
-  arrange(max_n) %>% 
+  arrange(max) %>% 
   mutate(theatre = factor(theatre, levels = unique(theatre))) %>% 
   mutate(
     circle = map2(
       .x = max_room, .y = as.numeric(theatre),
-      .f = ~make_bubble_circle(n = .x, radius = 25, count = .y)
+      .f = ~make_bubble_circle(n = .x, radius = 0.75, count = .y)
     )
   ) %>% 
   unnest() %>% 
-  unite(col = "theatre_room", theatre, room, sep = "_")
+  mutate(theatre_num = as.numeric(theatre)) %>% 
+  left_join(
+    y = make_bubble_circle(n = 5, radius = 40, count = 0) %>% 
+      select(room, x_centre = x, y_centre = y), 
+    by = c("theatre_num" = "room")
+  ) %>% 
+  mutate(x = x + x_centre, y = y + y_centre) %>%  
+  unite(col = "theatre_room", theatre, room, sep = "_") %>% 
+  select(theatre_room, x, y)
 
-# ggplot(data = circle_room, mapping = aes(x = x, y = y, colour = theatre)) + 
+# ggplot(data = circle_room, mapping = aes(x = x, y = y, colour = gsub("_.*", "", theatre_room))) +
 #   coord_equal() +
-#   geom_point() +
-#   theme(legend.position = "none")
-
+#   geom_point()+
+#   theme(legend.position = "none") 
 
 .data_circle <- left_join(
   x = .data,
@@ -78,8 +96,8 @@ circle_room <- movies_theatres %>%
   by = c("theatre_room")
 ) 
   
-ggplot(
-  data = .data_circle, 
+p <- ggplot(
+  data = .data_circle,
   mapping = aes(x = x, y = y)
 ) + 
   theme_black(base_size = 9) +
@@ -95,29 +113,62 @@ ggplot(
   ) +
   scale_x_continuous(expand = expand_scale(mult = c(0.2))) + 
   scale_y_continuous(expand = expand_scale(mult = c(0.2))) +
-  scale_size_continuous(range = c(1, 25)) +
+  scale_size_continuous(range = c(1, 15)) +
   scale_colour_viridis_c(option = "viridis", direction = -1) +
-  scale_fill_viridis_d(option = "plasma", begin = 0.25, direction = -1) +
+  scale_fill_viridis_d(option = "viridis", direction = 1) +
   coord_equal() +
-  # geom_line(
-  #   data = filter(.data_circle, watch==1),
-  #   mapping = aes(x = x, y = y, colour = as.numeric(date_time)),
-  #   show.legend = FALSE,
-  #   inherit.aes = FALSE
-  # ) +
+  geom_mark_ellipse(
+    mapping = aes(
+      group = gsub("_.*", "", theatre_room),
+      label = gsub("_.*", "", theatre_room)
+    ),
+    fill = "white",
+    alpha = 0.05,
+    colour = "white", 
+    label.fill = "transparent", 
+    label.colour = "white", 
+    con.colour = "white", 
+    con.cap = unit(0, "mm"), 
+    expand = unit(7, "mm")
+  ) +
+  geom_line(
+    data = filter(.data_circle, watch==1),
+    mapping = aes(x = x, y = y),
+    show.legend = FALSE,
+    inherit.aes = FALSE,
+    colour = "grey50"
+  ) +
   geom_point(
-    mapping = aes(fill = gsub("_.*", "", theatre_room), size = theatre_room_n, group = theatre_room),
+    mapping = aes(
+      fill = theatre_room_n_r, 
+      size = theatre_room_n, 
+      group = theatre_room
+    ),
     shape = 21,
     colour = "white", 
     na.rm = TRUE
   ) +
   geom_text(
-    mapping = aes(size = theatre_room_n / 4, label = gsub(".*_", "", theatre_room), group = theatre_room),
+    mapping = aes(
+      size = theatre_room_n / 4, 
+      label = gsub(".*_", "", theatre_room), 
+      group = theatre_room
+    ),
     show.legend = FALSE,
     colour = "black"
   ) +
   theme(legend.position = "none") +
-  # facet_wrap(facets = vars(theatre)) +
-  transition_reveal(along = date_time)
+  labs(title = "{frame_along}")
+
+gganimate::animate(
+  plot = p + transition_reveal(along = date_time), 
+  width = 500,
+  height = 500,
+  units = "px", 
+  bg = p$theme$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    # file = "./images/Coeos_IMDb_06.gif"
+  )
+)
 
 
