@@ -139,13 +139,14 @@ p <- ggplot(
   scale_fill_viridis_d(option = "viridis", direction = 1) +
   coord_equal() +
   geom_mark_ellipse(
-    data = .data_circle %>% select(theatre_room, x, y) %>% distinct(),
+    # data = .data_circle %>% select(theatre_room, x, y) %>% distinct(),
     mapping = aes(
-      x = x, 
-      y = y,
+      # x = x, 
+      # y = y,
       group = theatres_names(gsub("_.*", "", theatre_room)),
       label = theatres_names(gsub("_.*", "", theatre_room))
-    ),
+    ), 
+    # inherit.aes = FALSE,
     fill = "white",
     alpha = 0.05,
     colour = "white",
@@ -154,8 +155,7 @@ p <- ggplot(
     con.colour = "white",
     con.cap = unit(0, "mm"),
     expand = unit(7, "mm"), 
-    label.family = base_family, 
-    inherit.aes = FALSE
+    label.family = base_family
   ) +
   geom_line(
     data = filter(.data_circle, watch==1),
