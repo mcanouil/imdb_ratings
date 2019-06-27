@@ -139,8 +139,10 @@ p <- ggplot(
   scale_fill_viridis_d(option = "viridis", direction = 1) +
   coord_equal() +
   geom_mark_ellipse(
-    data = .data_circle %>% select(theatre_room) %>% distinct(),
+    data = .data_circle %>% select(theatre_room, x, y) %>% distinct(),
     mapping = aes(
+      x = x, 
+      y = y,
       group = theatres_names(gsub("_.*", "", theatre_room)),
       label = theatres_names(gsub("_.*", "", theatre_room))
     ),
