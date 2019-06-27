@@ -181,7 +181,8 @@ p <- ggplot(
       group = theatre_room
     ),
     show.legend = FALSE,
-    colour = "black"
+    colour = "black",
+    family = base_family
   ) +
   theme(legend.position = "right") +
   guides(
