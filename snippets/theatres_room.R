@@ -21,20 +21,35 @@ make_bubble_circle <- function(n, radius, count = 1) {
   )
 }
 
-theatres_names <- c(
-  "LILLE" = "UGC LILLE", 
-  "LYON" = "UGC LYON", 
-  "VDA" = "UGC VDA", 
-  "METROPOLE" = "METROPOLE", 
-  "MAJESTIC" = "MAJESTIC"
-)
+theatres_names <- function(x) {
+  c(
+    "LILLE" = "UGC LILLE", 
+    "LYON PART-DIEU" = "UGC LYON PART-DIEU", 
+    "VDA" = "UGC VDA", 
+    "METROPOLE" = "METROPOLE", 
+    "MAJESTIC" = "MAJESTIC"
+  )[x]
+}
 
-movies_theatres <- source("./data/movies_theatres.R")$value %>% 
-  mutate(theatre = theatres_names[theatre])
+movies_theatres <- source("../data/movies_theatres.R")$value
+# %>% 
+#   mutate(theatre = theatres_names[theatre])
 
-theatre_room_observed <- movies_theatres %>% 
-  group_by(theatre) %>% 
-  summarise(room = list(1:max(room))) %>% 
+theatre_room_observed <- movies_theatres %>%
+  group_by(theatre) %>%
+  summarise(room = list(1:max(room))) %>%
+  unnest() %>%
+  unite(col = "theatre_room", theatre, room, sep = "_") %>%
+  .[["theatre_room"]]
+
+theatre_room_all <- tribble(
+  ~theatre, ~room,
+  "LILLE", 1:14, 
+  "LYON PART-DIEU", 1:14, 
+  "VDA", 1:12, 
+  "METROPOLE", 1:4, 
+  "MAJESTIC", 1:6
+) %>% 
   unnest() %>% 
   unite(col = "theatre_room", theatre, room, sep = "_") %>% 
   .[["theatre_room"]]
@@ -43,7 +58,7 @@ theatre_room_observed <- movies_theatres %>%
   mutate(watch = 1) %>% 
   unite(col = "theatre_room", theatre, room, sep = "_", remove = FALSE) %>% 
   group_by(date_time) %>% 
-  complete(theatre_room = theatre_room_observed) %>% 
+  complete(theatre_room = theatre_room_all) %>% 
   replace_na(replace = list(watch = 0)) %>% 
   arrange(Year) %>%
   fill(everything()) %>% 
@@ -59,7 +74,11 @@ theatre_room_observed <- movies_theatres %>%
 
 
 circle_room <- movies_theatres %>% 
-  count(theatre, room) %>% 
+  count(theatre, room) %>%
+  unite(col = "theatre_room", theatre, room, sep = "_") %>% 
+  complete(theatre_room = theatre_room_all) %>% 
+  separate(col = "theatre_room", into = c("theatre", "room"), sep = "_", convert = TRUE) %>% 
+  replace_na(replace = list(n = 0)) %>% 
   group_by(theatre) %>% 
   summarise(
     max_room = max(room),
@@ -94,13 +113,15 @@ circle_room <- movies_theatres %>%
   x = .data,
   y = circle_room, 
   by = c("theatre_room")
-) 
+)
+
+base_family <- if ("sysfonts" %in% installed.packages()) "xkcd" else ""
   
 p <- ggplot(
   data = .data_circle,
   mapping = aes(x = x, y = y)
 ) + 
-  theme_black(base_size = 9) +
+  theme_black(base_size = 12, base_family = base_family) +
   theme(
     axis.text.y = element_blank(),
     axis.text.x =  element_blank(),
@@ -118,18 +139,21 @@ p <- ggplot(
   scale_fill_viridis_d(option = "viridis", direction = 1) +
   coord_equal() +
   geom_mark_ellipse(
+    data = .data_circle %>% select(theatre_room) %>% distinct(),
     mapping = aes(
-      group = gsub("_.*", "", theatre_room),
-      label = gsub("_.*", "", theatre_room)
+      group = theatres_names(gsub("_.*", "", theatre_room)),
+      label = theatres_names(gsub("_.*", "", theatre_room))
     ),
     fill = "white",
     alpha = 0.05,
-    colour = "white", 
-    label.fill = "transparent", 
-    label.colour = "white", 
-    con.colour = "white", 
-    con.cap = unit(0, "mm"), 
-    expand = unit(7, "mm")
+    colour = "white",
+    label.fill = "transparent",
+    label.colour = "white",
+    con.colour = "white",
+    con.cap = unit(0, "mm"),
+    expand = unit(7, "mm"), 
+    label.family = base_family, 
+    inherit.aes = FALSE
   ) +
   geom_line(
     data = filter(.data_circle, watch==1),
@@ -157,18 +181,32 @@ p <- ggplot(
     show.legend = FALSE,
     colour = "black"
   ) +
-  theme(legend.position = "none") +
-  labs(title = "{frame_along}")
+  theme(legend.position = "right") +
+  guides(
+    # size = guide_legend(
+    #   title.position = "top", 
+    #   title.hjust = 0.5, 
+    #   label.position = "bottom"
+    # ),
+    colour = "none", 
+    fill = "none"
+  ) + 
+  labs(
+    title = "{frame_along}", 
+    size = "# Movies", 
+    caption = "© Mickaël 'Coeos' Canouil"
+  ) +
+  theme(
+    plot.caption = element_text(size = rel(5 / 6), hjust = 0.5)
+  )
 
 gganimate::animate(
-  plot = p + transition_reveal(along = date_time), 
-  width = 500,
-  height = 500,
-  units = "px", 
+  plot = p + transition_reveal(along = date_time),
+  width = 6.3 * 100,
+  height = 4.7 * 100,
+  units = "px",
   bg = p$theme$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    # file = "./images/Coeos_IMDb_06.gif"
+    file = "../images/Coeos_theatres.gif"
   )
 )
-
-
