@@ -837,7 +837,17 @@
   "2019-07-14 13:40", 6, "MAJESTIC",
   "2019-07-16 19:30", 9, "LILLE",
   "2019-07-18 17:55", 13, "LILLE",
-  "2019-07-19 19:55", 4, "LILLE"
+  "2019-07-19 19:55", 4, "LILLE",
+  "2019-07-21 13:35", 14, "LILLE",
+  "2019-07-21 20:10", 7, "LILLE",
+  "2019-07-23 20:00", 4, "LILLE",
+  "2019-07-27 13:40", 12, "LILLE",
+  "2019-07-30 19:40", 5, "LILLE",
+  "2019-08-01 16:15", 6, "LILLE",
+  "2019-08-04 16:00", 3, "MAJESTIC",
+  "2019-08-04 19:05", 4, "LILLE",
+  "2019-08-06 19:20", 5, "LILLE"
+  
 )
 .data[["date_time"]] <- lubridate::ymd_hm(.data[["date_time"]])
 .data[["Month"]] <- as.character(lubridate::month(.data[["date_time"]], label = TRUE, abbr = FALSE))
