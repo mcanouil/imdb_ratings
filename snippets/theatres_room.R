@@ -31,7 +31,7 @@ theatres_names <- function(x) {
   )[x]
 }
 
-movies_theatres <- source("../data/movies_theatres.R")$value
+movies_theatres <- source("./data/movies_theatres.R")$value
 # %>% 
 #   mutate(theatre = theatres_names[theatre])
 
@@ -210,6 +210,6 @@ gganimate::animate(
   units = "px",
   bg = p$theme$plot.background$colour,
   renderer = gganimate::gifski_renderer(
-    file = "../images/Coeos_theatres.gif"
+    file = "./images/Coeos_theatres.gif"
   )
 )
