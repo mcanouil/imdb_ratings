@@ -29,6 +29,9 @@ plot_ratings_runtime <- function(.data, base_family) {
         axis.text = ggplot2::element_blank(),
         axis.title = ggplot2::element_blank(),
         panel.grid = ggplot2::element_blank(),
-        panel.border = ggplot2::element_blank()
+        panel.border = ggplot2::element_blank(),
+        plot.title = ggplot2:element_text(hjust = "0.5),
+        plot.subtitle = ggplot2:element_text(hjust = "0.5)
+          
       )
 }
