@@ -59,8 +59,8 @@ plot_streak <- function(.data, facet = TRUE, number = TRUE, base_family) {
       axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
       axis.title = ggplot2::element_blank(),
       panel.grid = ggplot2::element_blank(),
-      plot.title = ggplot2:element_text(hjust = 0.5),
-      plot.subtitle = ggplot2:element_text(hjust = 0.5)
+      plot.title = ggplot2::element_text(hjust = 0.5),
+      plot.subtitle = ggplot2::element_text(hjust = 0.5)
     ) +
     ggplot2::labs(title = "Movies Streak", x = "Month", y = "Day")
   

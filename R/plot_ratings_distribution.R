@@ -64,7 +64,7 @@ plot_ratings_distribution <- function(.data, base_family) {
       fill = "Rating from"
     ) +
     ggplot2::theme(
-      plot.title = ggplot2:element_text(hjust = 0.5),
-      plot.subtitle = ggplot2:element_text(hjust = 0.5)
+      plot.title = ggplot2::element_text(hjust = 0.5),
+      plot.subtitle = ggplot2::element_text(hjust = 0.5)
     )
 }
