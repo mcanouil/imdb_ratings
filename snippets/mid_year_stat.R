@@ -99,5 +99,6 @@ inner_join(
       hjust = 1
     )
   ) +
-  labs(x = NULL, y = "# Movies in Theatres", colour = "Year", fill = "Year", size = "Year")
+  labs(x = NULL, y = "# Movies in Theatres", colour = "Year", fill = "Year") +
+  guides(size = "none")
 })
