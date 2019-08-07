@@ -6,7 +6,7 @@ library(gganimate)
 
 
 devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R')
-# theme_set(theme_black(base_size = 16, base_family = "xkcd"))
+theme_set(theme_black(base_size = 16, base_family = "xkcd"))
 
 movies_theatres <- source('./data/movies_theatres.R')$value
 
@@ -14,7 +14,9 @@ range_dates <- min(movies_theatres[["Year"]]):max(movies_theatres[["Year"]]) # 2
 p <- movies_theatres %>% 
   dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
   tidyr::unnest() %>% 
-  (function(.movies_theatres) {
+  count(Month, Year, name = "Count") %>% 
+  do({
+    .movies_theatres <- .
     .movies_theatres  %>% 
       dplyr::mutate(
         Year = as.character(Year),
@@ -38,14 +40,14 @@ p <- movies_theatres %>%
         Year = factor(x = Year, levels = c(range_dates, "ALL")),
         Month_int = as.integer(Month)
       )
-  })(.) %>% 
+  }) %>% 
   ggplot2::ggplot(mapping = ggplot2::aes(group = Year)) +
   ggplot2::coord_polar(theta = "x") +
   # theme
   theme_black(base_size = 16, base_family = "xkcd") +
   ggplot2::theme(
     axis.text.y = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_text(size = ggplot2::rel(if(base_family=="xkcd"){0.85}else{0.75})),
+    axis.text.x = ggplot2::element_text(size = ggplot2::rel(0.85)),
     axis.title = ggplot2::element_blank(),
     axis.ticks = ggplot2::element_blank(),
     axis.line = ggplot2::element_blank(),
