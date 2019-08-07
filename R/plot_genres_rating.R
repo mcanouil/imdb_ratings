@@ -48,6 +48,8 @@ plot_genres_rating <- function(.data, base_family) {
       ggplot2::theme(
         axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
         axis.title.x = ggplot2::element_blank(),
-        panel.grid.major.x = ggplot2::element_blank()
+        panel.grid.major.x = ggplot2::element_blank(),
+        plot.title = ggplot2:element_text(hjust = 0.5),
+        plot.subtitle = ggplot2:element_text(hjust = 0.5)
       )
 }

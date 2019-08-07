@@ -27,7 +27,9 @@ plot_movies_theatres <- function(.year, .data, base_family) {
       axis.ticks = ggplot2::element_blank(),
       axis.line = ggplot2::element_blank(),
       panel.grid = ggplot2::element_blank(), # panel.grid.minor.x
-      panel.border = ggplot2::element_blank()
+      panel.border = ggplot2::element_blank(),
+      plot.title = ggplot2:element_text(hjust = 0.5),
+      plot.subtitle = ggplot2:element_text(hjust = 0.5)
     ) +
     ggplot2::scale_y_continuous(
       limits = c(0, 22.5),

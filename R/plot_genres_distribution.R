@@ -44,6 +44,8 @@ plot_genres_distribution <- function(.data, base_family) {
         axis.title.y = ggplot2::element_blank(),
         panel.grid = ggplot2::element_blank(),
         panel.border = ggplot2::element_blank(), 
-        legend.text = ggplot2::element_text(size = ggplot2::rel(0.4))
+        legend.text = ggplot2::element_text(size = ggplot2::rel(0.4)),
+        plot.title = ggplot2:element_text(hjust = 0.5),
+        plot.subtitle = ggplot2:element_text(hjust = 0.5)
       )
 }
