@@ -376,7 +376,9 @@ radar_base <- ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Mont
     axis.line = ggplot2::element_blank(),
     panel.grid = ggplot2::element_blank(), # panel.grid.minor.x
     panel.border = ggplot2::element_blank(),
-    plot.caption = ggplot2::element_text(size = 10, hjust = 0.5)
+    plot.caption = ggplot2::element_text(size = 10, hjust = 0.5),
+    plot.title = ggplot2::element_text(hjust = 0.5),
+    plot.subtitle = ggplot2::element_text(hjust = 0.5)
   ) +
   ggplot2::scale_y_continuous(
     limits = range(grid_data[["yintercept"]]), 
