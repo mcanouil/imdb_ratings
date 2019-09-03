@@ -1,0 +1,6 @@
+Package: IMDbRating
+Title: IMDbRating
+Version: 0.0.1
+Imports: 
+    rmarkdown
+
