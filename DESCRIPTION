@@ -2,5 +2,19 @@ Package: IMDbRating
 Title: IMDbRating
 Version: 0.0.1
 Imports: 
-    rmarkdown
-
+    tidyverse,
+    rmarkdown,
+    dplyr,
+    readr,
+    tidyr,
+    purrr,
+    lubridate,
+    ggplot2,
+    scales,
+    viridis,
+    grid,
+    gridExtra,
+    ggrepel,
+    ggpubr,
+    rvest,
+    gganimate
