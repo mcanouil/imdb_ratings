@@ -1,0 +1,613 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE, echo = FALSE}
+options(stringsAsFactors = FALSE)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  results = "asis",
+  include = TRUE, 
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  tidy = FALSE,
+  crop = TRUE,
+  autodep = TRUE,
+  dpi = 150
+)
+```
+
+# My IMDb Ratings Analysis
+
+```{r packages_functions}
+### Define
+n_cores <- parallel::detectCores()
+
+### Load packages
+library(tidyverse)
+library(viridis)
+library(scales)
+library(lubridate)
+library(grid)
+library(gridExtra)
+library(ggrepel)
+library(ggpubr)
+library(rvest)
+library(gganimate)
+
+
+dir.create("images")
+
+source("https://github.com/mcanouil/DEV/raw/master/R/theme_black.R")
+source("https://github.com/mcanouil/DEV/raw/master/R/format.R")
+
+base_family <- if ("sysfonts" %in% installed.packages()) "xkcd" else ""
+
+### functions
+source("./R/set_colours.R")
+source("./R/streak.R")
+source("./R/metascore.R")
+source("./R/plot_streak.R")
+source("./R/plot_genres_distribution.R")
+source("./R/plot_genres_rating.R")
+source("./R/plot_ratings_runtime.R")
+source("./R/plot_ratings_distribution.R")
+source("./R/ttheme.R")
+source("./R/plot_bad.R")
+source("./R/plot_top.R")
+source("./R/plot_movies_theatres.R")
+source("./R/print_infography.R")
+
+theme_set(theme_black(base_size = 9, base_family = base_family))
+```
+
+```{r movies_data, incude = FALSE}
+all_movies_theatres <- source("./data/movies_theatres.R")$value
+movies_theatres <- all_movies_theatres %>%
+  dplyr::group_by(Year, Month) %>%
+  dplyr::count() %>% 
+  dplyr::ungroup() %>% 
+  dplyr::rename(Count = n)
+```
+
+```{r read_imdb, include = FALSE}
+# "http://www.imdb.com/user/ur56341222/ratings?start=1&view=compact"
+ratings <- add_metascore(
+  file_in = "./data/ratings.csv", 
+  file_out = "./data/ratings_ms.csv", 
+  from = min(movies_theatres[["Year"]]), 
+  locale = readr::locale(encoding = "Windows-1252")
+)
+```
+
+## Infography
+
+```{r ggplot_time, fig.height = 9, fig.width = 16}
+gg_ratings <- ratings %>% 
+  dplyr::mutate(YR = YearRated) %>%  
+  dplyr::group_by(YR) %>% 
+  tidyr::nest() %>% 
+  dplyr::mutate(
+    p_movies_streak = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_streak(.data = .x, base_family = base_family)
+    ),
+    p_genres_distribution = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_genres_distribution(.data = .x, base_family = base_family)
+    ),
+    p_genres_rating = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_genres_rating(.data = .x, base_family = base_family)
+    ),
+    p_ratings_runtime = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_ratings_runtime(.data = .x, base_family = base_family)
+    ),
+    p_ratings_distribution = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_ratings_distribution(.data = .x, base_family = base_family)
+    ),
+    p_bad = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_bad(.data = .x, gg_fontsize = 9, base_family = base_family)
+    ),
+    p_top = purrr::map(
+      .x = data, 
+      base_family = base_family,
+      .f = ~plot_top(.data = .x, gg_fontsize = 9, base_family = base_family)
+    )
+  ) %>% 
+  dplyr::mutate(
+    data_agg = list(movies_theatres),
+    p_movies_theatres = purrr::map2(
+      .x = YR, 
+      .y = data_agg, 
+      base_family = base_family,
+      .f = ~plot_movies_theatres(.year = .x, .data = .y, base_family = base_family)
+    )
+  ) %>% 
+  dplyr::select(-data, -data_agg) %>%
+  dplyr::ungroup()
+
+p <- gg_ratings %>% 
+  dplyr::group_by(YR) %>% 
+  dplyr::mutate(
+    gg = purrr::map(
+      .x = YR,
+      .a = p_movies_streak,
+      .b = p_movies_theatres,
+      .c = p_top,
+      .d = p_bad,
+      .e = p_genres_rating,
+      .g = p_ratings_runtime,
+      .h = p_genres_distribution,
+      .i = p_ratings_distribution,
+      base_family = base_family,
+      gg_fontsize = 9,
+      .f = print_infography
+    ) %>% 
+      purrr::map2(.x = YR, .y = ., .f = function(x, y) {
+        ggsave(
+          filename = paste0("./images/", x, "_Coeos_IMDb.png"),
+          plot = y,
+          width = 16,
+          height = 9,
+          dpi = 300
+        )
+        cat("\n")
+        if (x == lubridate::year(lubridate::today())) {
+          print(y)
+          cat("\n")
+          return(y)
+        } else {
+          return(NULL)
+        }
+      })
+  ) %>% 
+  dplyr::ungroup()
+```
+
+## Ratings distribution
+
+```{r gif_distribution}
+data_ratings <- dplyr::full_join(
+  x = ratings %>% 
+    dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+    tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+    dplyr::mutate(
+      Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+      rounded_rating = round(Rating, digits = 0)
+    ) %>% 
+    dplyr::select(-Rating) %>% 
+    dplyr::group_by(YearRated, Who, rounded_rating) %>% 
+    dplyr::summarise(n = dplyr::n()) %>% 
+    dplyr::mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+    tidyr::complete(rating) %>% 
+    dplyr::mutate(
+      rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
+      n = ifelse(is.na(n), 0, n)
+    ) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::group_by(YearRated, Who) %>% 
+    dplyr::mutate(
+      total = sum(n),
+      ntotal = n/total
+    ) %>% 
+    dplyr::ungroup() %>% 
+    dplyr::select(YearRated, Who, rounded_rating, ntotal),
+  y = ratings %>% 
+    dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+    tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+    dplyr::mutate(
+      Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+      rounded_rating = round(Rating, digits = 0)
+    ) %>% 
+    dplyr::select(-Rating),
+  by = c("YearRated", "Who", "rounded_rating")
+) %>% 
+  dplyr::mutate(
+    YearRated = as.character(YearRated)
+  ) %>% 
+  dplyr::bind_rows(
+    dplyr::full_join(
+      x = ratings %>% 
+        dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+        tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+        dplyr::mutate(
+          Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+          rounded_rating = round(Rating, digits = 0)
+        ) %>% 
+        dplyr::select(-Rating) %>% 
+        dplyr::group_by(Who, rounded_rating) %>% 
+        dplyr::summarise(n = dplyr::n()) %>% 
+        dplyr::mutate(rating = factor(x = rounded_rating, levels = 1:10)) %>% 
+        tidyr::complete(rating) %>% 
+        dplyr::mutate(
+          rounded_rating = ifelse(is.na(rounded_rating), as.numeric(rating), rounded_rating),
+          n = ifelse(is.na(n), 0, n)
+        ) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::group_by(Who) %>% 
+        dplyr::mutate(
+          total = sum(n),
+          ntotal = n/total
+        ) %>% 
+        dplyr::ungroup() %>% 
+        dplyr::mutate(YearRated = "ALL") %>% 
+        dplyr::select(YearRated, Who, rounded_rating, ntotal),
+      y = ratings %>% 
+        dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
+        tidyr::gather(key = Who, value = Rating, -YearRated) %>%
+        dplyr::mutate(
+          Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+          rounded_rating = round(Rating, digits = 0)
+        ) %>% 
+        dplyr::select(-Rating) %>% 
+        dplyr::mutate(YearRated = "ALL"),
+      by = c("YearRated", "Who", "rounded_rating")
+    )
+  )
+
+
+p <- ggplot2::ggplot(
+  data = data_ratings, 
+  mapping = ggplot2::aes(x = rounded_rating, fill = Who)
+) +
+  theme_black(base_size = 16, base_family = base_family) +
+  ggplot2::geom_density(colour = "white", adjust = 2.5, alpha = 0.25, na.rm = TRUE) +
+  ggplot2::geom_bar(
+    data = dplyr::distinct(data_ratings),
+    mapping = ggplot2::aes(y = ntotal),
+    stat = "identity",
+    colour = "white",
+    width = 0.5,
+    position = ggplot2::position_dodge(),
+    na.rm = TRUE
+  ) +
+  ggplot2::scale_x_continuous(
+    expand = c(0, 0), 
+    name = "Rating", 
+    limits = c(0, 10), 
+    breaks = c(0, seq_len(10))
+  ) +
+  ggplot2::scale_y_continuous(
+    expand = ggplot2::expand_scale(mult = c(0, 0.1)), 
+    labels = scales::percent
+  ) +
+  scale_fill_viridis_d() +
+  ggplot2::labs(
+    x = "Rating", 
+    y = "Proportion", 
+    title = "Distribution of Ratings", 
+    fill = "Rating from"
+  ) + 
+  gganimate::transition_states(
+    YearRated,
+    transition_length = 6,
+    state_length = 8
+  ) +
+  gganimate::enter_appear(early = TRUE) +
+  gganimate::exit_disappear(early = TRUE) +
+  gganimate::ease_aes("linear") +
+  ggplot2::labs(
+    title = "Distribution of Ratings: {closest_state}",
+    caption = "© Mickaël 'Coeos' Canouil"
+  ) +
+  ggplot2::theme(
+    plot.caption = ggplot2::element_text(size = 10),
+    legend.position = c(1, 1),
+    legend.justification = c(1.05, 1.05)
+  )
+
+gganimate::animate(
+  plot = p, 
+  width = 800, 
+  height = 450, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    # file = "./images/Coeos_IMDb_01.gif"
+  )
+)
+```
+
+## Movies at theatre
+
+```{r data_radar}
+data_radar <- movies_theatres %>% 
+  dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
+  tidyr::unnest() %>% 
+  (function(.x) {
+    dplyr::bind_rows(
+    .x %>% 
+      dplyr::mutate(Year = as.character(Year)),
+    .x %>% 
+      dplyr::group_by(Month) %>% 
+      dplyr::summarise(
+        Year = "ALL",
+        Count = floor(mean(Count, na.rm = TRUE))
+      )
+    )
+  })(.) %>% 
+  dplyr::mutate(
+    Year = factor(x = Year, levels = c(setdiff(sort(unique(Year)), "ALL"), "ALL")),
+    Month = factor(Month, levels = c(readr::locale()$date_names$mon, "JD")),
+    Month_int = as.integer(Month)
+  ) %>% 
+  dplyr::arrange(Year, Month) %>% 
+  tidyr::drop_na() 
+
+grid_data <- dplyr::tibble(
+  major = scales::pretty_breaks(5)(c(0, max(data_radar[["Count"]], na.rm = TRUE)))
+) %>% 
+  dplyr::mutate(
+    minor = c(major[-length(major)] + diff(major)/2, NA)
+  ) %>% 
+  tidyr::gather(key = "type", value = "yintercept") %>% 
+  dplyr::mutate(
+    size = c("major" = 0.4, "minor" = 0.2)[type],
+    Year = list(unique(data_radar[["Year"]]))
+  ) %>% 
+  tidyr::drop_na() %>% 
+  tidyr::unnest() %>% 
+  dplyr::select(-Year) %>% 
+  dplyr::distinct()
+```
+
+```{r main_radar}
+radar_base <- ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Count, group = Year)) +
+  ggplot2::labs(
+    title = "# Movies Seen in Theatres",
+    caption = "© Mickaël 'Coeos' Canouil"
+  ) +
+  ggplot2::coord_polar(theta = "x") +
+  theme_black(base_size = 16, base_family = base_family) +
+  ggplot2::theme(
+    axis.text.y = ggplot2::element_blank(),
+    axis.text.x = ggplot2::element_text(size = ggplot2::rel(if (base_family=="xkcd") 0.85 else 0.75)),
+    axis.title = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank(),
+    axis.line = ggplot2::element_blank(),
+    panel.grid = ggplot2::element_blank(), # panel.grid.minor.x
+    panel.border = ggplot2::element_blank(),
+    plot.caption = ggplot2::element_text(size = 10, hjust = 0.5),
+    plot.title = ggplot2::element_text(hjust = 0.5),
+    plot.subtitle = ggplot2::element_text(hjust = 0.5)
+  ) +
+  ggplot2::scale_y_continuous(
+    limits = range(grid_data[["yintercept"]]), 
+    expand = ggplot2::expand_scale(mult = c(0, 0.15))
+  ) +
+  ggplot2::scale_x_continuous(
+    breaks = seq_len(12),
+    labels = readr::locale()$date_names$mon,
+    expand = c(0, 0)
+  ) +
+  ggplot2::scale_colour_viridis_d(begin = 0.4) +
+  ggplot2::scale_fill_viridis_d(begin = 0.4) +
+  ggplot2::geom_hline( # layer 1
+    data = dplyr::filter(grid_data, type=="minor"),
+    mapping = ggplot2::aes(yintercept = yintercept),
+    colour = ggplot2::theme_get()$panel.grid$colour,
+    size = 0.2,
+    na.rm = TRUE
+  ) +
+  ggplot2::geom_hline( # layer 2
+    data = dplyr::filter(grid_data, type=="major"),
+    mapping = ggplot2::aes(yintercept = yintercept),
+    colour = ggplot2::theme_get()$panel.grid$colour,
+    size = 0.4,
+    na.rm = TRUE
+  ) +
+  ggplot2::geom_vline( # layer 3
+    xintercept = seq_len(13),
+    colour = ggplot2::theme_get()$panel.grid$colour,
+    size = 0.2
+  ) +
+  ggplot2::geom_text( # layer 4
+    data = dplyr::tibble(
+      y = c(0, rep(unique(dplyr::filter(grid_data, type=="major")[["yintercept"]])[-1], times = 4)),
+      x = as.integer(c(1, rep(c(1, 4, 7, 10), each = 4)))
+    ),
+    mapping = ggplot2::aes(x = x, y = y, label = y),
+    colour = ggplot2::theme_get()$text$colour,
+    size = 16 * 1/4,
+    inherit.aes = FALSE,
+    family = base_family
+  )
+```
+
+### Circular-smooth
+
+```{r gif_smooth}
+gganimate::animate(
+  plot = {
+    radar_base +
+      ggplot2::geom_path( # layer 5
+        mapping = ggplot2::aes(colour = Year),
+        size = 1.5,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_point( # layer 6
+        mapping = ggplot2::aes(colour = Year, fill = Year), 
+        shape = 21,
+        colour = ggplot2::theme_get()$text$colour,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_smooth( # layer 7
+        mapping = ggplot2::aes(x = Month_int, y = Count),
+        colour = ggplot2::theme_get()$text$colour,
+        method = "gam",
+        se = FALSE,
+        size = 1.5,
+        linetype = 2,
+        show.legend = FALSE
+      ) +
+      gganimate::transition_states(
+        Year,
+        transition_length = 5,
+        state_length = 25
+      ) +
+      gganimate::enter_appear(early = FALSE) +
+      gganimate::exit_disappear(early = FALSE) +
+      gganimate::ease_aes("linear") +
+      ggplot2::labs(subtitle = "{closest_state}") +
+      ggplot2::theme(legend.position = "none")
+  }, 
+  width = 500, 
+  height = 500, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    # file = "./images/Coeos_IMDb_02.gif"
+  )
+)
+```
+
+### Radar-radius
+
+```{r gif_radar}
+gganimate::animate(
+  plot = {
+    radar_base +
+      ggplot2::geom_vline( # layer 5
+        data = data.frame(Month_int = seq_len(13)),
+        mapping = ggplot2::aes(xintercept = Month_int),
+        colour = ggplot2::theme_get()$panel.grid$colour,
+        size = 0.4,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_path( # layer 6
+        mapping = ggplot2::aes(colour = Year),
+        size = 1.5,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_point( # layer 7
+        mapping = ggplot2::aes(fill = Year, group = paste(Year, Month_int)),
+        na.rm = TRUE,
+        shape = 21,
+        size = 5,
+        colour = ggplot2::theme_get()$text$colour
+      ) +
+      gganimate::transition_reveal(
+        along = Month_int, 
+        range = c(1L, 13L), 
+        keep_last = TRUE
+      ) +
+      gganimate::shadow_wake(
+        wake_length = 1 / 3,
+        wrap = TRUE
+      )
+  }, 
+  width = 500, 
+  height = 500, 
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    # file = "./images/Coeos_IMDb_03.gif"
+  )
+)
+```
+
+### Radar-waves-point
+
+```{r gif_waves_points}
+gganimate::animate(
+  plot = radar_base +
+    purrr::map(.x = seq(from = 0, to = 3, by = 1.5), .f = function(.x) { # layer 5-8
+      tmp_data <- dplyr::filter(.data = grid_data, type=="major")
+      waves_interval <- .x * unique(diff(tmp_data[["yintercept"]]))
+      ggplot2::geom_hline(
+        data = dplyr::mutate(.data = tmp_data, Count = yintercept + waves_interval),
+        mapping = ggplot2::aes(yintercept = Count - waves_interval),
+        colour = ggplot2::theme_get()$panel.grid$colour,
+        size = 0.4,
+        na.rm = TRUE
+      )
+    }) +
+    ggplot2::geom_point( # layer 9
+      mapping = ggplot2::aes(fill = Year, group = paste(Year, Month_int)),
+      na.rm = TRUE,
+      shape = 21,
+      size = 5,
+      colour = ggplot2::theme_get()$text$colour
+    ) +
+    # ggplot2::theme(legend.position = "none") +
+    # ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
+    gganimate::transition_reveal(
+      along = Count, 
+      range = c(0, max(grid_data[["yintercept"]]) * 1.25), 
+      keep_last = TRUE
+    ) +
+    gganimate::shadow_wake(
+      wake_length = 1 / 3,
+      wrap = TRUE
+    ), 
+  width = 500,
+  height = 500,
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    # file = "./images/Coeos_IMDb_04.gif"
+  )
+)
+```
+
+### Radar-waves-path
+
+```{r gif_waves_path}
+gganimate::animate(
+  plot = radar_base +
+    purrr::map(.x = seq(from = 0, to = 3, by = 1.5), .f = function(.x) { # layer 5-8
+      tmp_data <- dplyr::filter(.data = grid_data, type=="major")
+      waves_interval <- .x * unique(diff(tmp_data[["yintercept"]]))
+      ggplot2::geom_hline(
+        data = dplyr::mutate(.data = tmp_data, Count = yintercept + waves_interval),
+        mapping = ggplot2::aes(yintercept = Count - waves_interval),
+        colour = ggplot2::theme_get()$panel.grid$colour,
+        size = 0.4,
+        na.rm = TRUE
+      )
+    }) +
+    ggplot2::geom_path( # layer 9
+      mapping = ggplot2::aes(colour = Year),
+      na.rm = TRUE,
+      size = 1.5
+    ) +
+    ggplot2::geom_point( # layer 10
+      mapping = ggplot2::aes(colour = Year, group = paste(Year, Month_int)),
+      na.rm = TRUE,
+      size = 5
+    ) +
+    # ggplot2::theme(legend.position = "none") +
+    # ggplot2::facet_wrap(facets = ggplot2::vars(Year), nrow = 2) +
+    gganimate::transition_reveal(
+      along = Count, 
+      range = c(0, max(grid_data[["yintercept"]]) * 1.25), 
+      keep_last = TRUE
+    ) +
+    gganimate::shadow_wake(
+      wake_length = 1 / 3,
+      wrap = TRUE
+    ), 
+  width = 500,
+  height = 500,
+  units = "px", 
+  bg = ggplot2::theme_get()$plot.background$colour,
+  renderer = gganimate::gifski_renderer(
+    # file = "./images/Coeos_IMDb_05.gif"
+  )
+)
+```
