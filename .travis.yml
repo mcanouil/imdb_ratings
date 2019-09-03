@@ -3,7 +3,7 @@ cache: packages
 
 pandoc_version: 2.3.1
 
-script: Rscript -e 'rmarkdown::render(input = "index.Rmd")'
+script: Rscript -e 'rmarkdown::render(input = "IMDb_rating_analysis.Rmd")'
 
 before_deploy: Rscript -e 'remotes::install_cran("pkgdown")'
 
