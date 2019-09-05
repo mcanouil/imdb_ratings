@@ -7,6 +7,10 @@ addons:
   apt:
     packages:
     - cargo
+    - libudunits2-dev
+    - libproj-dev
+    - libgeos-dev
+    - libgdal-dev
 
 script: Rscript -e 'rmarkdown::render(input = "IMDb_rating_analysis.Rmd")'
 
