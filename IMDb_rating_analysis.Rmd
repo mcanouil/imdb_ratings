@@ -1,8 +1,24 @@
 ---
-output: github_document
+title: "My IMDb Ratings Analysis"
+author: 
+  - name: "Mickaël Canouil, *Ph.D.*"
+date: '`r format(Sys.time(), "%B %d, %Y")`'
+monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"
+output:
+  bookdown::html_document2:
+    theme: simplex
+    toc: true
+    toc_depth: 2
+    toc_float: 
+      collapsed: false
+    fig_width: 6.3
+    fig_height: 4.7
+    number_sections: true
+    self_contained: true
+    mathjax: default
+    df_print: kable
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE, echo = FALSE}
 options(stringsAsFactors = FALSE)
