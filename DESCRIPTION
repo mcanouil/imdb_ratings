@@ -18,4 +18,5 @@ Imports:
     ggpubr,
     rvest,
     gganimate,
+    png,
     gifski
