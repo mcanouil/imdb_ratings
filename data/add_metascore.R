@@ -1,5 +1,7 @@
+`%>%` <- magrittr::`%>%`
 get_metascore <- function(.x) { 
   purrr::map(.x = .x, .f = function(.y) {
+    message(.y)
     out <- rvest::html_text(
       x = rvest::html_node(
         x = xml2::read_html(x = paste0(.y, "criticreviews")), 
@@ -21,7 +23,7 @@ add_metascore <- function(
     ratings <- readr::read_csv(file = file_in, locale = locale) %>%
       dplyr::mutate(
         YearRated = lubridate::year(`Date Rated`),
-        Genres = purrr::map_chr(.x = Genres, .f = capitalise) %>%
+        Genres = purrr::map_chr(.x = Genres, .f = Hmisc::capitalize) %>%
           gsub("Musical", "Music", .)
       ) %>%
       dplyr::filter(YearRated>=!!from)
@@ -49,3 +51,10 @@ add_metascore <- function(
   
   readr::read_csv(file = file_out)
 }
+
+ratings <- add_metascore(
+  file_in = "ratings.csv", 
+  file_out = "ratings_ms.csv", 
+  from = min(source("movies_theatres.R")$value[["Year"]]), 
+  locale = readr::locale(encoding = "Windows-1252")
+)

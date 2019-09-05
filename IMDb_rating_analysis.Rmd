@@ -93,12 +93,7 @@ movies_theatres <- all_movies_theatres %>%
 
 ```{r read_imdb, include = FALSE}
 # "http://www.imdb.com/user/ur56341222/ratings?start=1&view=compact"
-ratings <- add_metascore(
-  file_in = "./data/ratings.csv", 
-  file_out = "./data/ratings_ms.csv", 
-  from = min(movies_theatres[["Year"]]), 
-  locale = readr::locale(encoding = "Windows-1252")
-)
+ratings <-  readr::read_csv(file = "./data/ratings_ms.csv")
 ```
 
 ## Infography
