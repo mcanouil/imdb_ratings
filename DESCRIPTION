@@ -17,4 +17,5 @@ Imports:
     ggrepel,
     ggpubr,
     rvest,
-    gganimate
+    gganimate,
+    gifski
