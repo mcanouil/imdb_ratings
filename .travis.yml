@@ -31,9 +31,9 @@ addons:
     - libgdal-dev
     
 before_script:
-  - git clone https://github.com/ipython/xkcd-font.git /usr/share/fonts/xkcd-font
-  - fc-cache -f -v
-  - Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
+  - sudo git clone https://github.com/ipython/xkcd-font.git /usr/share/fonts/xkcd-font
+  - sudo fc-cache -f -v
+  - sudo Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
 
 script: Rscript -e 'rmarkdown::render(input = "IMDb_rating_analysis.Rmd")'
 
