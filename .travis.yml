@@ -33,13 +33,13 @@ addons:
 before_script:
   - sudo git clone https://github.com/ipython/xkcd-font.git /usr/share/fonts/xkcd-font
   - sudo fc-cache -f -v
-  - sudo Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
+  - Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
 
 script: Rscript -e 'rmarkdown::render(input = "IMDb_rating_analysis.Rmd")'
 
 before_deploy: 
-    - Rscript -e 'remotes::install_cran("pkgdown")'
-    - Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R")'
+  - Rscript -e 'remotes::install_cran("pkgdown")'
+  - Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R")'
 
 deploy:
   provider: script
