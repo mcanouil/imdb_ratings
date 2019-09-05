@@ -20,4 +20,7 @@ Imports:
     gganimate,
     png,
     transformr,
-    gifski
+    gifski,
+    sysfonts,
+    showtext,
+    xkcd
