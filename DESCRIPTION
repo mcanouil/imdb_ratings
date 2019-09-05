@@ -4,6 +4,7 @@ Version: 0.0.1
 Imports: 
     tidyverse,
     rmarkdown,
+    bookdown,
     dplyr,
     readr,
     tidyr,
