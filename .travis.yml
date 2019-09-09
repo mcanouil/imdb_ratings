@@ -36,11 +36,9 @@ before_script:
   - Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
 
 script: 
-  - Rscript -e 'source("data/add_metascore.R")'
   - Rscript -e 'rmarkdown::render(input = "IMDb_rating_analysis.Rmd")'
 
 before_deploy: 
-  - Rscript -e 'source("data/add_metascore.R")'
   - Rscript -e 'remotes::install_cran("pkgdown")'
   - Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R")'
 
