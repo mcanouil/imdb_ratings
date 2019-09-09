@@ -67,7 +67,6 @@ base_family <- if ("sysfonts" %in% installed.packages()) "xkcd" else ""
 ### functions
 source("./R/set_colours.R")
 source("./R/streak.R")
-source("./R/metascore.R")
 source("./R/plot_streak.R")
 source("./R/plot_genres_distribution.R")
 source("./R/plot_genres_rating.R")
