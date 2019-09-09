@@ -40,10 +40,11 @@ script:
 
 before_deploy: 
   - Rscript -e 'remotes::install_cran("pkgdown")'
-  - Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R")'
 
 deploy:
   provider: script
-  script: Rscript -e 'deploy_site("IMDb_rating_analysis.Rmd", commit_message = "IMDbRating")'
+  script: 
+    - Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R")'
+    - Rscript -e 'deploy_site("IMDb_rating_analysis.Rmd", commit_message = "IMDbRating")'
   skip_cleanup: true
 
