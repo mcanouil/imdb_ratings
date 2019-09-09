@@ -92,7 +92,21 @@ movies_theatres <- all_movies_theatres %>%
 
 ```{r read_imdb, include = FALSE}
 # "http://www.imdb.com/user/ur56341222/ratings?start=1&view=compact"
-ratings <-  readr::read_csv(file = "./data/ratings_ms.csv")
+if (file.exists("./data/ratings_ms.csv")) {
+  source("./data/add_metascore.R")
+  # ratings <-  readr::read_csv(file = "./data/ratings_ms.csv")
+} else {
+  ratings <- readr::read_csv(
+    file = "./data/ratings.csv", 
+    locale = readr::locale(encoding = "Windows-1252")
+  ) %>%
+    dplyr::mutate(
+      YearRated = lubridate::year(`Date Rated`),
+      Genres = purrr::map_chr(.x = Genres, .f = Hmisc::capitalize) %>%
+        gsub("Musical", "Music", .)
+    ) %>%
+    dplyr::filter(YearRated>=!!min(source("./data/movies_theatres.R")$value[["Year"]]))
+}
 ```
 
 ## Infography
