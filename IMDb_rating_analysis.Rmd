@@ -9,7 +9,7 @@ output:
   bookdown::html_document2:
     theme: simplex
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     toc_float: 
       collapsed: false
     fig_width: 6.3
