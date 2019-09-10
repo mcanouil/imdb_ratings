@@ -211,7 +211,7 @@ data_ratings <- dplyr::full_join(
     dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
     tidyr::gather(key = Who, value = Rating, -YearRated) %>%
     dplyr::mutate(
-      Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+      Who = c("Your" = "Me", "IMDb" = "IMDb Users", "Metascore" = "Metascore")[gsub(" Rating", "", Who)],
       rounded_rating = round(Rating, digits = 0)
     ) %>% 
     dplyr::select(-Rating) %>% 
@@ -235,7 +235,7 @@ data_ratings <- dplyr::full_join(
     dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
     tidyr::gather(key = Who, value = Rating, -YearRated) %>%
     dplyr::mutate(
-      Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+      Who = c("Your" = "Me", "IMDb" = "IMDb Users", "Metascore" = "Metascore")[gsub(" Rating", "", Who)],
       rounded_rating = round(Rating, digits = 0)
     ) %>% 
     dplyr::select(-Rating),
@@ -250,7 +250,7 @@ data_ratings <- dplyr::full_join(
         dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
         tidyr::gather(key = Who, value = Rating, -YearRated) %>%
         dplyr::mutate(
-          Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+          Who = c("Your" = "Me", "IMDb" = "IMDb Users", "Metascore" = "Metascore")[gsub(" Rating", "", Who)],
           rounded_rating = round(Rating, digits = 0)
         ) %>% 
         dplyr::select(-Rating) %>% 
@@ -275,7 +275,7 @@ data_ratings <- dplyr::full_join(
         dplyr::select(dplyr::ends_with("Rating"), YearRated) %>%
         tidyr::gather(key = Who, value = Rating, -YearRated) %>%
         dplyr::mutate(
-          Who = Who %>% gsub(" Rating", "", .) %>% gsub("Your", "User", .),
+          Who = c("Your" = "Me", "IMDb" = "IMDb Users", "Metascore" = "Metascore")[gsub(" Rating", "", Who)],
           rounded_rating = round(Rating, digits = 0)
         ) %>% 
         dplyr::select(-Rating) %>% 
