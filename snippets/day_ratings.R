@@ -7,7 +7,12 @@ devtools::source_url('https://github.com/mcanouil/DEV/raw/master/R/theme_black.R
 theme_set(theme_black(base_size = 12, base_family = "xkcd"))
 
 
-ratings_day <- read_csv(file = "./data/ratings_ms.csv") %>% 
+ratings_day <- read_csv(file = "./data/ratings.csv", locale = locale(encoding = "Windows-1252")) %>%
+  mutate(
+    YearRated = year(`Date Rated`),
+    Genres = map_chr(.x = Genres, .f = Hmisc::capitalize) %>%
+      gsub("Musical", "Music", .)
+  ) %>% 
   filter(YearRated >= 2017) %>% 
   mutate(day = wday(`Date Rated`, label = TRUE, abbr = FALSE, week_start = 1)) %>% 
   group_by(YearRated, day) %>% 
