@@ -13,19 +13,21 @@ base_family <- if ("sysfonts" %in% installed.packages()) "xkcd" else ""
 
 theme_set(theme_black(base_size = 16, base_family = base_family))
 
-source("/home/Coeos/data/IMDbRating/data/metascore.R")
-all_movies_theatres <- source("/home/Coeos/data/IMDbRating/data/movies_theatres.R")$value
+all_movies_theatres <- source("./data/movies_theatres.R")$value
 movies_theatres <- all_movies_theatres %>%
   dplyr::group_by(Year, Month) %>%
   dplyr::count() %>% 
   dplyr::ungroup() %>% 
   dplyr::rename(Count = n)
-ratings <- add_metascore(
-  file_in = "/home/Coeos/data/IMDbRating/data/ratings.csv", 
-  file_out = "/home/Coeos/data/IMDbRating/data/ratings_ms.csv", 
-  from = min(movies_theatres[["Year"]]), 
-  locale = locale(encoding = "Windows-1252")
-)
+
+ratings <- read_csv(file = "./data/ratings.csv", locale = locale(encoding = "Windows-1252")) %>%
+  mutate(
+    YearRated = year(`Date Rated`),
+    Genres = map_chr(.x = Genres, .f = Hmisc::capitalize) %>%
+      gsub("Musical", "Music", .)
+  ) %>% 
+  filter(YearRated >= min(movies_theatres[["Year"]]))
+
 
 # full_join(
 #   inner_join(
