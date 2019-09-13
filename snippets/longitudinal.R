@@ -21,7 +21,7 @@ base_family <- if ("sysfonts" %in% installed.packages()) "xkcd" else ""
 
 theme_set(theme_black(base_size = 9, base_family = base_family))
 
-all_movies_theatres <- source("/home/Coeos/data/IMDbRating/data/movies_theatres.R")$value
+all_movies_theatres <- source("./data/movies_theatres.R")$value
 movies_theatres <- all_movies_theatres %>%
   dplyr::group_by(Year, Month) %>%
   dplyr::count() %>% 
