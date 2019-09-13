@@ -5,7 +5,7 @@ plot_movies_theatres <- function(.year, .data, base_family) {
       Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD")),
       size = Year==.year
     ) %>% 
-    tidyr::unnest() %>% 
+    tidyr::unnest(cols = Month) %>% 
     dplyr::mutate(
       Year = as.character(Year),
       Month = factor(Month, levels = c(readr::locale()$date_names$mon, "JD"))

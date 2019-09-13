@@ -3,5 +3,5 @@ set_colours <- function(fac, direction = 1) {
   names(out) <- sort(unique(as.character(fac)))
   out["SMOOTH"] <- "white"
   out["ALL"] <- "white"
-  return(out)
+  out
 }

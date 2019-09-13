@@ -352,7 +352,7 @@ gganimate::animate(
 ```{r data_radar}
 data_radar <- movies_theatres %>% 
   dplyr::mutate(Month = purrr::map_if(.x = Month, .p = ~.x=="January", .f = ~c(.x, "JD"))) %>% 
-  tidyr::unnest() %>% 
+  tidyr::unnest(cols = Month) %>% 
   (function(.x) {
     dplyr::bind_rows(
     .x %>% 

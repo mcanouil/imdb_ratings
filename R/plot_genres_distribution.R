@@ -8,7 +8,7 @@ plot_genres_distribution <- function(.data, base_family) {
         )
       })
     ) %>% 
-    tidyr::unnest(Genre_details) %>% 
+    tidyr::unnest(cols = Genre_details) %>% 
     dplyr::group_by(Genre) %>% 
     dplyr::summarise(Score = sum(Weight)) %>% 
     dplyr::arrange(dplyr::desc(Score)) %>% 
