@@ -1,4 +1,3 @@
-reprex::reprex({
 ### Load packages
 library(tidyverse)
 library(lubridate)
@@ -103,4 +102,4 @@ inner_join(
   ) +
   labs(x = NULL, y = "# Movies in Theatres", colour = "Year", fill = "Year") +
   guides(size = "none")
-})
+

@@ -1,4 +1,3 @@
-reprex::reprex({
 options(gganimate.dev_args = list(width = 672, height = 480))
 ### Load packages
 library(tidyverse)
@@ -122,5 +121,3 @@ ggplot2::ggplot(data = data_radar, mapping = ggplot2::aes(x = Month_int, y = Cou
     wake_length = 1 / 3,
     wrap = TRUE
   )
-
-})
