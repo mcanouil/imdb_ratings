@@ -38,7 +38,7 @@ movies_theatres <- source("./data/movies_theatres.R")$value
 theatre_room_observed <- movies_theatres %>%
   group_by(theatre) %>%
   summarise(room = list(1:max(room))) %>%
-  unnest() %>%
+  unnest(cols = room) %>%
   unite(col = "theatre_room", theatre, room, sep = "_") %>%
   .[["theatre_room"]]
 
@@ -50,7 +50,7 @@ theatre_room_all <- tribble(
   "METROPOLE", 1:4, 
   "MAJESTIC", 1:6
 ) %>% 
-  unnest() %>% 
+  unnest(cols = room) %>% 
   unite(col = "theatre_room", theatre, room, sep = "_") %>% 
   .[["theatre_room"]]
 
@@ -61,7 +61,7 @@ theatre_room_all <- tribble(
   complete(theatre_room = theatre_room_all) %>% 
   replace_na(replace = list(watch = 0)) %>% 
   arrange(Year) %>%
-  fill(everything()) %>% 
+  fill(-date_time) %>% 
   ungroup() %>% 
   arrange(date_time) %>% 
   group_by(theatre_room) %>% 
@@ -93,7 +93,7 @@ circle_room <- movies_theatres %>%
       .f = ~make_bubble_circle(n = .x, radius = 0.75, count = .y)
     )
   ) %>% 
-  unnest() %>% 
+  unnest(cols = circle) %>% 
   mutate(theatre_num = as.numeric(theatre)) %>% 
   left_join(
     y = make_bubble_circle(n = 5, radius = 40, count = 0) %>% 
