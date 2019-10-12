@@ -43,6 +43,6 @@ before_deploy:
 
 deploy:
   provider: script
-  script: Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R"); deploy_site("IMDb_rating_analysis.Rmd", commit_message = "IMDbRating")'
+  script: Rscript -e 'source("https://raw.githubusercontent.com/mcanouil/DEV/master/R/deploy.R"); deploy_site("IMDb_rating_dashboard.Rmd", commit_message = "IMDbRating")'
   skip_cleanup: true
 

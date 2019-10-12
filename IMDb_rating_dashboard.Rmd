@@ -92,7 +92,7 @@ all_movies_theatres %>%
   dplyr::count(Year, Month, name = "Count") %>% 
   dplyr::filter(Year == lubridate::year(lubridate::today())) %>% 
   dplyr::filter(Month == last_month) %>% 
-  nrow() %>% 
+  .[["Count"]] %>% 
   flexdashboard::valueBox(
     caption = paste0("Movies last Month (", last_month, " ", last_month_year, ")"), 
     icon = "fa-film"
