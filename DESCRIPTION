@@ -24,4 +24,5 @@ Imports:
     gifski,
     sysfonts,
     showtext,
-    xkcd
+    xkcd,
+    flexdashboard
