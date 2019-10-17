@@ -1,5 +1,5 @@
 ---
-title: "My Life in a Movie Theatre"
+title: "Movies & Me"
 author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%d %B %Y")`'
 output: 
@@ -7,7 +7,7 @@ output:
     orientation: rows
     vertical_layout: fill
     theme: cerulean
-    social: [ "twitter", "linkedin", "facebook" ]
+    social: [ "twitter", "facebook" ]
     source_code: "https://github.com/mcanouil/IMDbRating"
     fig_width: 12
     fig_height: 5
@@ -17,10 +17,6 @@ editor_options:
 
 ```{r setup, include = FALSE}
 options(stringsAsFactors = FALSE)
-options(
-  ggplot2.continuous.colour = "viridis",
-  ggplot2.continuous.fill = "viridis"
-)
 fig_params <- list(
   res = 300,
   width = 12,
@@ -63,21 +59,22 @@ source("./R/plot_movies_theatres.R")
 source("./R/print_infography.R")
 
 theme_set(theme_black(base_size = 9, base_family = base_family))
+
+knitr::opts_chunk$set(autodep = TRUE, cache = TRUE)
 ```
 
 ```{r movies_data, incude = FALSE}
-all_movies_theatres <- source("./data/movies_theatres.R")$value %>% 
+raw_movies_theatres <- source("./data/movies_theatres.R")$value
+all_movies_theatres <- raw_movies_theatres %>% 
   dplyr::mutate(
     Month = factor(Month, levels = readr::locale(date_names = "en")$date_names$mon)
   ) %>% 
   dplyr::filter(Year > 2013)
 ```
 
-## Sidebar {.sidebar}
+# My Life in a Movie Theatre
 
-Mickaël Canouil, *Ph.D.*
-
-## Row 
+## Row {data-height=100}
 
 ### Movies Last Month
 
@@ -129,7 +126,7 @@ all_movies_theatres %>%
   flexdashboard::valueBox(icon = "fa-film")
 ```
 
-## Row {data-height=1000 data-width=100% .tabset .tabset-fade}
+## Row {data-height=900 data-width=100% .tabset .tabset-fade}
 
 ### Movies in Theatres (Count)
 
@@ -330,4 +327,30 @@ gganimate::animate(
 )
 ```
 
+
+# IMDb Ratings {.hidden}
+
+## Row {data-height=100}
+
+### Movies Last Month
+
+```{r}
 ```
+
+### Movies per Month
+
+```{r}
+```
+
+### Movies per Year
+
+```{r}
+```
+
+## Row {data-height=900 data-width=100% .tabset .tabset-fade}
+
+### Movies (Count)
+
+```{r}
+```
+
