@@ -36,7 +36,7 @@ before_script:
   - Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
 
 script: 
-  - Rscript -e 'rmarkdown::render(input = "IMDb_rating_analysis.Rmd")'
+  - Rscript -e 'rmarkdown::render(input = "IMDb_rating_dashboard.Rmd")'
 
 before_deploy: 
   - Rscript -e 'remotes::install_cran("pkgdown")'
