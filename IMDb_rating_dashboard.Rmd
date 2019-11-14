@@ -43,23 +43,7 @@ source("https://github.com/mcanouil/DEV/raw/master/R/theme_black.R")
 source("https://github.com/mcanouil/DEV/raw/master/R/format.R")
 
 base_family <- "" # if ("sysfonts" %in% installed.packages()) "xkcd" else ""
-
-### functions
-source("./R/set_colours.R")
-source("./R/streak.R")
-source("./R/plot_streak.R")
-source("./R/plot_genres_distribution.R")
-source("./R/plot_genres_rating.R")
-source("./R/plot_ratings_runtime.R")
-source("./R/plot_ratings_distribution.R")
-source("./R/ttheme.R")
-source("./R/plot_bad.R")
-source("./R/plot_top.R")
-source("./R/plot_movies_theatres.R")
-source("./R/print_infography.R")
-
 theme_set(theme_black(base_size = 9, base_family = base_family))
-
 knitr::opts_chunk$set(autodep = TRUE, cache = TRUE)
 ```
 
