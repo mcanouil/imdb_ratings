@@ -169,7 +169,7 @@ p <- all_movies_theatres %>%
     labels = readr::locale()$date_names$mon
   ) +
   ggplot2::geom_label(
-    data = ~dplyr::filter(.x, Count == min(Count)),
+    data = ~ dplyr::filter(.x, Count == min(Count)),
     mapping = ggplot2::aes(label = Count),
     nudge_y = -1, 
     colour = ggplot2::theme_get()$text$colour,
@@ -177,7 +177,7 @@ p <- all_movies_theatres %>%
     show.legend = FALSE
   ) +
   ggplot2::geom_label(
-    data = ~dplyr::filter(.x, Count == max(Count)),
+    data = ~ dplyr::filter(.x, Count == max(Count)),
     mapping = ggplot2::aes(label = Count),
     nudge_y = 1, 
     colour = ggplot2::theme_get()$text$colour,
