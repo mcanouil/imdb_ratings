@@ -908,7 +908,7 @@
   "2019-12-27 14:00", 3, "LILLE",
   "2019-12-27 19:00", 6, "MAJESTIC",
   "2019-12-28 22:15", 11, "LILLE",
-  "2019-12-31 9:00", 2, "MAJESTIC"
+  "2019-12-31 19:00", 2, "MAJESTIC"
 )
 .data[["date_time"]] <- lubridate::ymd_hm(.data[["date_time"]])
 .data[["Month"]] <- as.character(lubridate::month(.data[["date_time"]], label = TRUE, abbr = FALSE))

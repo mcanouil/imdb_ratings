@@ -203,15 +203,16 @@ p <- all_movies_theatres %>%
     plot.caption = ggplot2::element_text(size = 10, hjust = 0.5),
     plot.title = ggplot2::element_text(hjust = 0.5),
     plot.subtitle = ggplot2::element_text(hjust = 0.5)
-  ) +
-  gganimate::transition_reveal(
-    along = Month_int, 
-    range = c(1, 13), 
-    keep_last = TRUE
   )
 
+
 gganimate::animate(
-  plot = p,
+  plot = p +
+    gganimate::transition_reveal(
+      along = Month_int, 
+      range = c(1, 13), 
+      keep_last = TRUE
+    ),
   width = fig_params[["width"]],
   height = fig_params[["height"]],
   units = "in", 
