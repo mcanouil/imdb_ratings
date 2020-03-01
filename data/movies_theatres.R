@@ -937,7 +937,11 @@
   "2020-02-20 18:00", 1, "LILLE",
   "2020-02-22 11:00", 3, "LILLE",
   "2020-02-22 15:50", 12, "LILLE",
-  "2020-02-23 13:45", 7, "LILLE"
+  "2020-02-23 13:45", 7, "LILLE",
+  "2020-02-25 17:35", 5, "MAJESTIC",
+  "2020-02-27 18:00", 1, "LILLE",
+  "2020-02-29 13:30", 1, "LILLE",
+  "2020-02-29 11:05", 2, "MAJESTIC"
 )
 .data[["date_time"]] <- lubridate::ymd_hm(.data[["date_time"]])
 .data[["Month"]] <- as.character(lubridate::month(.data[["date_time"]], label = TRUE, abbr = FALSE))
