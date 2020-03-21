@@ -1,6 +1,6 @@
 ---
 params:
-  static: TRUE
+  static: FALSE
 title: "My IMDb Ratings Analysis"
 author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
@@ -14,8 +14,7 @@ knit: (function(inputFile, encoding) {
     )
   })
 output: 
-  mctemplates::html_report: 
-    self_contained: false
+  mctemplates::html_report: default
   flexdashboard::flex_dashboard:
     orientation: rows
     vertical_layout: fill
@@ -45,6 +44,10 @@ library(scales)
 library(ggplot2)
 library(gganimate)
 library(forcats)
+library(glue)
+library(stringr)
+library(ggtext)
+library(broom)
 library(here)
 
 
@@ -67,8 +70,6 @@ opts_chunk$set(
 ### Define theme
 theme_set(theme_black(11, base_family = "xkcd"))
 ```
-
-# Summary
 
 ```{r data}
 ratings_db <- read_csv(
@@ -99,12 +100,14 @@ movies_db <- map_df(
 # )
 ```
 
-## Streak
+# Streak of Movies Seen in Theatres
 
-```{r streak}
-tmp <- movies_db %>% 
+## Per Year
+
+```{r streak-year, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
+streak_data <- movies_db %>% 
   mutate(date = date(date_time)) %>% 
-  complete(date = full_seq(date, 1)) %>% 
+  complete(date = full_seq(c(date, today()), 1)) %>% 
   group_by(date) %>% 
   summarise(count = sum(!is.na(theatre))) %>% 
   ungroup() %>% 
@@ -113,41 +116,140 @@ tmp <- movies_db %>%
     month = month(date, label = TRUE, abbr = FALSE),
     month_num = month(date),
     wday = wday(date, label = TRUE, abbr = FALSE, week_start = 1),
-    week = factor(sprintf("%02d", week(date))),
     count2 = ifelse(count == 0, NA, count)
+  ) %>% 
+  group_by(year) %>% 
+  mutate(
+    week = isoweek(date),
+    week = ifelse(week == 1 & month_num == 12, max(week) + 1, week)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    week = factor(sprintf("%02d", week), ordered = TRUE)
   )
 
-ggplot(data = tmp, mapping = aes(x = week, y = fct_rev(wday))) +
+week_month_breaks <- streak_data %>% 
+  group_by(month) %>% 
+  filter(wday == "Monday") %>% 
+  add_count(week) %>% 
+  distinct(month, week, n) %>% 
+  filter(n == max(n)) %>% 
+  filter(as.numeric(week) == min(as.numeric(week))) %>% 
+  arrange(month, week) %>% 
+  ungroup()
+
+p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
   geom_tile(
-    data = ~ filter(.x, month_num %% 2 == 0), 
-    show.legend = FALSE, 
+    data = ~ filter(.x, month_num %% 2 == 0),
+    show.legend = FALSE,
     colour = "white",
     fill = "white",
     alpha = 0
   ) +
   geom_tile(
-    data = ~ filter(.x, month_num %% 2 == 1), 
-    show.legend = FALSE, 
+    data = ~ filter(.x, month_num %% 2 == 1),
+    show.legend = FALSE,
     colour = "white",
     fill = "white",
     alpha = 0.2
   ) +
-  geom_tile(aes(fill = count * 40), alpha = 0.75) +
-  geom_text(aes(label = ifelse(count == 0, NA, count)), na.rm = TRUE) +
+  geom_tile(aes(fill = count), alpha = 0.3) +
+  geom_text(aes(label = count2), na.rm = TRUE, family = "xkcd", size = 2.5) +
   scale_x_discrete(
     expand = expansion(c(0, 0)), 
-    labels = function(x) ifelse((as.numeric(x) + 4) %% 5 == 0, x, "") 
+    breaks = week_month_breaks[["week"]],
+    labels = week_month_breaks[["month"]], 
+    guide = guide_axis(n.dodge = 2)
   ) +
   scale_y_discrete(expand = expansion(c(0, 0))) +
-  scale_colour_viridis_d() +
-  scale_fill_viridis_b() +
+  scale_colour_viridis_c() +
+  scale_fill_viridis_c() +
   facet_grid(rows = vars(year)) +
-  guides(fill = guide_colourbar()) +
-  theme(panel.grid = element_blank())
+  theme(
+    panel.grid = element_blank(), 
+    plot.title.position = "plot",
+    plot.caption = element_textbox_simple(halign = 1),
+    plot.caption.position = "plot"
+  ) +
+  labs(
+    title = glue("Streak of Movies Seen in Theatres ({sum(streak_data$count)})"),
+    caption = "© Mickaël '<i style='color:#21908CFF;'>Coeos</i>' Canouil",
+    colour = "Count",
+    fill = "Count",
+    x = NULL, # "Week Number",
+    y = NULL # "Day"
+  )
+
+p
 ```
 
+## It Happened on Tuesdays
 
-## Radar
+```{r streak-year-tuesday, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
+ftest <- movies_db %>% 
+  mutate(wday = wday(date(date_time), label = TRUE, abbr = FALSE, week_start = 1)) %>% 
+  filter(between(year, 2014, 2019)) %>% 
+  mutate(is_tuesday = ifelse(wday=="Tuesday", "Tuesday", "Other Days")) %>% 
+  count(year, is_tuesday) %>% 
+  mutate(is_2019 = ifelse(year==2019, "2019", "2014-2018")) %>% 
+  group_by(is_2019, is_tuesday) %>% 
+  summarise(n = mean(n)) %>% 
+  ungroup() %>% 
+  mutate(n = ceiling(n)) %>% 
+  pivot_wider(names_from = "is_tuesday", values_from = "n") %>% 
+  column_to_rownames("is_2019") %>% 
+  fisher.test() %>% 
+  tidy() %>% 
+  mutate_if(is.numeric, signif, digits = 3) %>% 
+  glue_data(
+    "<i style='color:#21908CFF;'>2019's Tuesdays</i> Vs. <i style='color:#21908CFF;'>2014-2018's Tuesdays</i>: ",
+    "<span style='color:firebrick2;'>OR = {estimate}</span>; ",
+    "95% CI, {conf.low}-{conf.high}; <span style='color:firebrick2;'>P = {p.value}</span>",
+    "<br>(<i>{method}</i>)"
+  )
+p +
+  labs(subtitle = ftest) + 
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = 5.5, fill = "grey20", alpha = 0.5) +
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = 6.5, ymax = Inf, fill = "grey20", alpha = 0.5) +
+  annotate("rect", xmin = -Inf, xmax = Inf, ymin = 5.5, ymax = 6.5, colour = "firebrick2", fill = "transparent") +
+  scale_y_discrete(
+    expand = expansion(c(0, 0)),
+    labels = function(x) ifelse(x=="Tuesday", "<span style='color:firebrick2;'>Tuesday</span>", x)
+  ) +
+  theme(
+    axis.text.y = element_markdown(size = rel(0.8)), 
+    plot.subtitle = element_textbox_simple()
+  )
+```
+
+## In One Day
+
+```{r streak-day}
+movies_db %>% 
+  add_count(year, date(date_time)) %>% 
+  filter(n == max(n)) %>% 
+  mutate(
+    wday = wday(date(date_time), label = TRUE, abbr = FALSE, week_start = 1),
+    day = day(date(date_time)),
+    month = month(date(date_time), label = TRUE, abbr = FALSE),
+    nth = case_when(
+      day %in% c(1, 21, 31) ~ "st",
+      day %in% c(2, 22) ~ "nd",
+      day %in% c(3, 23) ~ "rd",
+      TRUE ~ "th"
+    ),
+    time = glue("{hour(date_time)}h{minute(date_time)}"),
+    date = glue("{wday}, the {day}{nth} of {month}, {year(date(date_time))}"),
+    theatre = glue("UGC {theatre}")
+  ) %>% 
+  select(date, theatre, time, room) %>% 
+  # rename_all(str_to_title) %>%
+  gt(auto_align = "center") %>% 
+  opt_all_caps(all_caps = TRUE) %>% 
+  opt_row_striping()
+```
+
+## Number of Movies Seen in Theatres per Month
 
 ```{r base-radar}
 data_radar <- movies_db %>% 
@@ -173,8 +275,8 @@ grid_data <- tibble(
 
 radar_base <- ggplot(data = data_radar, mapping = aes(x = month_integer, y = count, group = year)) +
   labs(
-    title = "# Movies Seen in Theatres",
-    caption = "© Mickaël 'Coeos' Canouil",
+    title = "Number of Movies Seen in Theatres",
+    caption = "© Mickaël '<i style='color:#21908CFF;'>Coeos</i>' Canouil",
     colour = "Year",
     fill = "Year"
   ) +
@@ -187,7 +289,7 @@ radar_base <- ggplot(data = data_radar, mapping = aes(x = month_integer, y = cou
     axis.line = element_blank(),
     panel.grid = element_blank(),
     panel.border = element_blank(),
-    plot.caption = element_text(size = 10, hjust = 0.5),
+    plot.caption = element_textbox_simple(halign = 1),
     plot.title = element_text(hjust = 0.5),
     plot.subtitle = element_text(hjust = 0.5),
     plot.title.position = "plot",
@@ -228,7 +330,9 @@ radar_base <- ggplot(data = data_radar, mapping = aes(x = month_integer, y = cou
   )
 ```
 
-```{r circular-path}
+### "*Radar*"
+
+```{r circular-path, fig.width = 5.4}
 circular_path <- radar_base +
   geom_vline( # layer 5
     data = data.frame(month_integer = seq_len(13)),
@@ -257,8 +361,8 @@ if (params[["static"]]) {
     plot = circular_path +
       transition_reveal(along = month_integer, range = c(1L, 13L), keep_last = TRUE) +
       shadow_wake(wake_length = 1 / 3, wrap = TRUE), 
-    width = 16,
-    height = 12,
+    width = 5.3 * 2.54,
+    height = 4.7 * 2.54,
     units = "cm", 
     res = 120,
     bg = theme_get()$plot.background$colour,
@@ -267,7 +371,9 @@ if (params[["static"]]) {
 }
 ```
 
-```{r radar-point}
+### "*Sonar*"
+
+```{r radar-point, fig.width = 5.4}
 radar_point <- radar_base +
   map(
     .x = seq(from = 0, to = 3, by = 1.5),
@@ -303,8 +409,8 @@ if (params[["static"]]) {
         keep_last = TRUE
       ) +
       shadow_wake(wake_length = 1 / 3, wrap = TRUE), 
-    width = 16,
-    height = 12,
+    width = 5.3 * 2.54,
+    height = 4.7 * 2.54,
     units = "cm", 
     res = 120,
     bg = theme_get()$plot.background$colour,
@@ -312,7 +418,6 @@ if (params[["static"]]) {
   )
 }
 ```
-
 
 # R session information
 
