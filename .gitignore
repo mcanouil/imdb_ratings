@@ -2,10 +2,4 @@
 .Rhistory
 .RData
 .Ruserdata
-**.log
-IMDb_rating_analysis_files
-IMDb_rating_analysis_cache
-IMDb_rating_dashboard_files
-IMDb_rating_dashboard_cache
-images
-**.html
+
