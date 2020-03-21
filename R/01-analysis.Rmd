@@ -63,7 +63,8 @@ opts_chunk$set(
   tidy = FALSE,
   crop = TRUE,
   autodep = TRUE,
-  fig.align = "center"
+  fig.align = "center",
+  fig.path = here("images", "fig-")
 )
 
 
