@@ -4,8 +4,8 @@ library(lubridate)
 library(here)
 
 movies_db <- tribble(
-  ~date_time, ~room, ~theatre,
-  "2019-01-04 18:00", 1, "MAJESTIC", ~imdb_id,
+  ~date_time, ~room, ~theatre, ~imdb_id,
+  "2019-01-04 18:00", 1, "MAJESTIC", "tt5028340",
   "2019-01-05 15:20", 6, "LILLE", "tt4844148",
   "2019-01-11 17:50", 9, "LILLE", "tt7201846",
   "2019-01-12 13:50", 6, "LILLE", "tt6343314",
