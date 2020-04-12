@@ -170,7 +170,8 @@ p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
     panel.grid = element_blank(), 
     plot.title.position = "plot",
     plot.caption = element_textbox_simple(halign = 1),
-    plot.caption.position = "plot"
+    plot.caption.position = "plot",
+    legend.position = "none"
   ) +
   labs(
     title = glue("Streak of Movies Seen in Theatres ({sum(streak_data$count)})"),
