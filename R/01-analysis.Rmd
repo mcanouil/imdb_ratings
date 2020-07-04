@@ -4,15 +4,7 @@ params:
 title: "My IMDb Ratings Analysis"
 author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
-knit: (function(inputFile, encoding) {
-    rmarkdown::render(
-      inputFile,
-      output_file = "index.html",
-      encoding = encoding, 
-      output_dir = here::here("docs"),
-      intermediates_dir = here::here("docs")
-    )
-  })
+knit: (function(inputFile, encoding) rmarkdown::render(inputFile, output_file = "index.html", encoding = encoding, output_dir = here::here("docs"), intermediates_dir = here::here("docs")))
 output: 
   mctemplates::html_report: default
   flexdashboard::flex_dashboard:
@@ -69,7 +61,7 @@ opts_chunk$set(
 
 
 ### Define theme
-theme_set(theme_black(11, base_family = "xkcd"))
+theme_set(theme_black_md(11, base_family = "xkcd") + theme(plot.title.position = "plot", plot.caption.position = "plot"))
 ```
 
 ```{r data}
@@ -169,9 +161,7 @@ p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
   facet_grid(rows = vars(year)) +
   theme(
     panel.grid = element_blank(), 
-    plot.title.position = "plot",
-    plot.caption = element_textbox_simple(halign = 1),
-    plot.caption.position = "plot",
+    plot.caption = element_markdown(halign = 1),
     legend.position = "none"
   ) +
   labs(
@@ -219,10 +209,7 @@ p +
     expand = expansion(c(0, 0)),
     labels = function(x) ifelse(x=="Tuesday", "<span style='color:firebrick2;'>Tuesday</span>", x)
   ) +
-  theme(
-    axis.text.y = element_markdown(size = rel(0.8)), 
-    plot.subtitle = element_textbox_simple()
-  )
+  theme(axis.text.y = element_markdown(size = rel(0.8)))
 ```
 
 ## In One Day
@@ -293,11 +280,9 @@ radar_base <- ggplot(data = data_radar, mapping = aes(x = month_integer, y = cou
     axis.line = element_blank(),
     panel.grid = element_blank(),
     panel.border = element_blank(),
-    plot.caption = element_textbox_simple(halign = 1),
-    plot.title = element_text(hjust = 0.5),
-    plot.subtitle = element_text(hjust = 0.5),
-    plot.title.position = "plot",
-    plot.caption.position = "plot"
+    plot.caption = element_markdown(halign = 1),
+    plot.title = element_markdown(hjust = 0.5),
+    plot.subtitle = element_markdown(hjust = 0.5)
   ) +
   scale_y_continuous(
     expand = expansion(mult = c(0, 0.15)),
