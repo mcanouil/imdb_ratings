@@ -21,29 +21,30 @@ editor_options:
 options(stringsAsFactors = FALSE)
 options("width" = 100)
 
+### Load packages ==================================================================================
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(tidyr)
+  library(readr)
+  library(purrr)
+  library(sessioninfo)
+  library(knitr)
+  library(gt)
+  library(mctemplates)
+  library(lubridate)
+  library(scales)
+  library(ggplot2)
+  library(gganimate)
+  library(forcats)
+  library(glue)
+  library(stringr)
+  library(ggtext)
+  library(broom)
+  library(here)
+})
 
-### Load packages and functions
-library(dplyr)
-library(tidyr)
-library(readr)
-library(purrr)
-library(sessioninfo)
-library(knitr)
-library(gt)
-library(mctemplates)
-library(lubridate)
-library(scales)
-library(ggplot2)
-library(gganimate)
-library(forcats)
-library(glue)
-library(stringr)
-library(ggtext)
-library(broom)
-library(here)
 
-
-### Set knitr rmarkdown chunk options
+### Environment ====================================================================================
 opts_chunk$set(
   comment = "#>",
   results = "asis",
@@ -60,8 +61,14 @@ opts_chunk$set(
 )
 
 
-### Define theme
-theme_set(theme_black_md(11, base_family = "xkcd") + theme(plot.title.position = "plot", plot.caption.position = "plot"))
+### Define theme ===================================================================================
+options(
+  ggplot2.discrete.colour = scale_colour_viridis_d,
+  ggplot2.discrete.fill = scale_fill_viridis_d,
+  ggplot2.continuous.colour = scale_colour_viridis_c,
+  ggplot2.continuous.fill = scale_fill_viridis_c
+)
+theme_set(theme_black(11, base_family = "xkcd") + theme(plot.title.position = "plot", plot.caption.position = "plot"))
 ```
 
 ```{r data}
@@ -69,7 +76,7 @@ ratings_db <- read_csv(
   file = here("data", "ratings.csv"), 
   locale = locale(encoding = "Windows-1252")
 ) %>%
-  rename_all(~ gsub("[()]", "", gsub(" ", "_", tolower(.x)))) %>% 
+  rename_with(~ gsub("[()]", "", gsub(" ", "_", tolower(.x)))) %>% 
   mutate(
     genres = tolower(genres),
     month_rated = month(date_rated, label = TRUE, abbr = FALSE),
@@ -102,8 +109,7 @@ streak_data <- movies_db %>%
   mutate(date = date(date_time)) %>% 
   complete(date = full_seq(c(date, today()), 1)) %>% 
   group_by(date) %>% 
-  summarise(count = sum(!is.na(theatre))) %>% 
-  ungroup() %>% 
+  summarise(count = sum(!is.na(theatre)), .groups = "drop") %>% 
   mutate(
     year = year(date),
     month = month(date, label = TRUE, abbr = FALSE),
@@ -117,9 +123,7 @@ streak_data <- movies_db %>%
     week = ifelse(week == 1 & month_num == 12, max(week) + 1, week)
   ) %>% 
   ungroup() %>% 
-  mutate(
-    week = factor(sprintf("%02d", week), ordered = TRUE)
-  )
+  mutate(week = factor(sprintf("%02d", week), ordered = TRUE))
 
 week_month_breaks <- streak_data %>% 
   filter(year > 2013) %>% 
@@ -148,7 +152,12 @@ p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
     alpha = 0.2
   ) +
   geom_tile(aes(fill = count), alpha = 0.3) +
-  geom_text(aes(label = count2), na.rm = TRUE, family = "xkcd", size = 2.5) +
+  geom_tile(
+    data = ~ filter(.x, between(date, ymd("2020-03-16"), ymd("2020-06-21"))),
+    fill = "#21908CFF", 
+    alpha = 0.3
+  ) +
+  geom_text(aes(label = count2), colour = "white", na.rm = TRUE, family = "xkcd", size = 2.5) +
   scale_x_discrete(
     expand = expansion(c(0, 0)), 
     breaks = week_month_breaks[["week"]],
@@ -161,7 +170,7 @@ p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
   facet_grid(rows = vars(year)) +
   theme(
     panel.grid = element_blank(), 
-    plot.caption = element_markdown(halign = 1),
+    plot.caption = element_markdown(),
     legend.position = "none"
   ) +
   labs(
@@ -186,8 +195,7 @@ ftest <- movies_db %>%
   count(year, is_tuesday) %>% 
   mutate(is_2019 = ifelse(year==2019, "2019", "2014-2018")) %>% 
   group_by(is_2019, is_tuesday) %>% 
-  summarise(n = mean(n)) %>% 
-  ungroup() %>% 
+  summarise(n = mean(n), .groups = "drop") %>% 
   mutate(n = ceiling(n)) %>% 
   pivot_wider(names_from = "is_tuesday", values_from = "n") %>% 
   column_to_rownames("is_2019") %>% 
@@ -195,7 +203,7 @@ ftest <- movies_db %>%
   tidy() %>% 
   mutate_if(is.numeric, signif, digits = 3) %>% 
   glue_data(
-    "<i style='color:#21908CFF;'>2019's Tuesdays</i> Vs. <i style='color:#21908CFF;'>2014-2018's Tuesdays</i>: ",
+    "<i style='color:#21908CFF;'>2019's Tuesdays</i> <i>Vs.</i> <i style='color:#21908CFF;'>2014-2018's Tuesdays</i>: ",
     "<span style='color:firebrick2;'>OR = {estimate}</span>; ",
     "95% CI, {conf.low}-{conf.high}; <span style='color:firebrick2;'>P = {p.value}</span>",
     "<br>(<i>{method}</i>)"
@@ -207,9 +215,12 @@ p +
   annotate("rect", xmin = -Inf, xmax = Inf, ymin = 5.5, ymax = 6.5, colour = "firebrick2", fill = "transparent") +
   scale_y_discrete(
     expand = expansion(c(0, 0)),
-    labels = function(x) ifelse(x=="Tuesday", "<span style='color:firebrick2;'>Tuesday</span>", x)
+    labels = function(x) ifelse(x == "Tuesday", "<span style='color:firebrick2;'>Tuesday</span>", x)
   ) +
-  theme(axis.text.y = element_markdown(size = rel(0.8)))
+  theme(
+    axis.text.y = element_markdown(size = rel(0.8)),
+    plot.subtitle = element_markdown()
+  )
 ```
 
 ## In One Day
@@ -233,7 +244,6 @@ movies_db %>%
     theatre = glue("UGC {theatre}")
   ) %>% 
   select(date, theatre, time, room) %>% 
-  # rename_all(str_to_title) %>%
   gt(auto_align = "center") %>% 
   opt_all_caps(all_caps = TRUE) %>% 
   opt_row_striping()
@@ -333,7 +343,8 @@ circular_path <- radar_base +
   geom_path( # layer 6
     mapping = aes(colour = year),
     size = 1.5,
-    na.rm = TRUE
+    na.rm = TRUE, 
+    show.legend = FALSE
   ) +
   geom_point( # layer 7
     mapping = aes(fill = year, group = paste(year, month_integer)),
