@@ -1,37 +1,29 @@
-Package: IMDbRating
-Title: Mickaël Canouil's Movies Analyses
+Package: IMDbRatings
 Version: 0.1.0
-Authors@R: 
-    person(given = "Mickaël",
-           family = "Canouil",
-           role = c("aut", "cre"),
-           email = "mickael.canouil@cnrs.fr",
-           comment = c(ORCID = "0000-0002-3396-4549"))
-Description: Mickaël Canouil's Movies Analyses
 License: GPL-3
 URL: https://github.com/mcanouil/IMDbRating, https://mcanouil.github.io/IMDbRating
 BugReports: https://github.com/mcanouil/IMDbRating/issues
 Depends: 
     R (>= 3.6.0)
 Imports: 
-    broom (>= 0.5.5),
-    dplyr (>= 0.8.5),
+    broom (>= 0.5.6),
+    dplyr (>= 1.0.0),
     forcats (>= 0.5.0),
     gganimate (>= 1.0.5),
-    ggplot2 (>= 3.3.0),
+    ggplot2 (>= 3.3.2),
     ggtext (>= 0.1.0),
-    glue (>= 1.3.1),
-    gt (>= 0.1.0),
+    glue (>= 1.4.1),
+    gt (>= 0.2.1),
     here (>= 0.1),
-    knitr (>= 1.28),
-    lubridate (>= 1.7.4),
-    mctemplates (>= 0.2.8),
-    purrr (>= 0.3.3),
+    knitr (>= 1.29),
+    lubridate (>= 1.7.8),
+    mctemplates (>= 0.4.1),
+    purrr (>= 0.3.4),
     readr (>= 1.3.1),
-    scales (>= 1.1.0),
+    scales (>= 1.1.1),
     sessioninfo (>= 1.1.1),
     stringr (>= 1.4.0),
-    tidyr (>= 1.0.2)
+    tidyr (>= 1.1.0)
 Remotes:
     github::mcanouil/mctemplates
 Encoding: UTF-8
