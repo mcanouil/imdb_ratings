@@ -33,8 +33,7 @@ Imports:
     stringr (>= 1.4.0),
     tidyr (>= 1.0.2)
 Remotes:
-    github::mcanouil/mctemplates,
-    github::wilkelab/ggtext
+    github::mcanouil/mctemplates
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
