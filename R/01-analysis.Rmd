@@ -41,6 +41,8 @@ suppressPackageStartupMessages({
   library(ggtext)
   library(broom)
   library(here)
+  library(rvest)
+  library(xml2)
 })
 
 
@@ -69,12 +71,52 @@ options(
   ggplot2.continuous.fill = scale_fill_viridis_c
 )
 theme_set(theme_black(11, base_family = "xkcd") + theme(plot.title.position = "plot", plot.caption.position = "plot"))
-```
 
-```{r data}
+
+### Functions ======================================================================================
+get_metascore <- function(x) { 
+  map_dbl(.x = paste0("https://www.imdb.com/title/", x, "/"), .f = function(y) {
+    as.numeric(html_text(
+      x = html_node(
+        x = read_html(x = paste0(y, "criticreviews")), 
+        css = "div.metascore"
+      )              
+    )) / 10
+  })
+}
+
+
+### Import data ====================================================================================
+movies_db <- map_df(
+  .x = list.files(here("R"), "[0-9]{4}.R", full.names = TRUE), 
+  .f = function(x) { 
+    source(x)
+    read_csv(here("data", gsub(".R$", ".csv", basename(x))))
+  }
+) %>% 
+  mutate(
+    month = as.character(month(date_time, label = TRUE, abbr = FALSE)),
+    year = year(date_time)
+  )
+
 ratings_db <- read_csv(
   file = here("data", "ratings.csv"), 
-  locale = locale(encoding = "Windows-1252")
+  locale = locale(encoding = "Windows-1252"), 
+  col_types = cols(
+    Const = col_character(),
+    `Your Rating` = col_double(),
+    `Date Rated` = col_date(format = ""),
+    Title = col_character(),
+    URL = col_character(),
+    `Title Type` = col_character(),
+    `IMDb Rating` = col_double(),
+    `Runtime (mins)` = col_double(),
+    Year = col_double(),
+    Genres = col_character(),
+    `Num Votes` = col_double(),
+    `Release Date` = col_date(format = ""),
+    Directors = col_character()
+  )
 ) %>%
   rename_with(~ gsub("[()]", "", gsub(" ", "_", tolower(.x)))) %>% 
   mutate(
@@ -83,21 +125,60 @@ ratings_db <- read_csv(
     year_rated = year(date_rated)
   )
 
-movies_db <- map_df(
-  .x = list.files(here("R"), "[0-9]{4}.R", full.names = TRUE), 
-  .f = function(x) { source(x); read_csv(here("data", gsub(".R$", ".csv", basename(x)))) }
-) %>% 
-  mutate(
-    month = as.character(month(date_time, label = TRUE, abbr = FALSE)),
-    year = year(date_time)
+if (exists(here("data", "ratings_ms.csv"))) {
+  read_csv(
+    file = here("data", "ratings_ms.csv"), 
+    col_types = cols(
+      const = col_character(),
+      your_rating = col_double(),
+      date_rated = col_date(format = ""),
+      title = col_character(),
+      url = col_character(),
+      title_type = col_character(),
+      imdb_rating = col_double(),
+      runtime_mins = col_double(),
+      year = col_double(),
+      genres = col_character(),
+      num_votes = col_double(),
+      release_date = col_date(format = ""),
+      directors = col_character(),
+      month_rated = col_character(),
+      year_rated = col_double(),
+      metascore_rating = col_double()
+    )
+  ) %>% 
+    filter(date_rated < (today() - 100) & year < year(today())) %>% 
+    anti_join(x = ratings_db, y = ., by = "const") %>% 
+    mutate(metascore_rating = get_metascore(const)) %>% 
+    write_csv(here("data", "ratings_ms.csv"))
+} else {
+  ratings_db %>% 
+    mutate(metascore_rating = get_metascore(const)) %>% 
+    write_csv(here("data", "ratings_ms.csv"))
+}
+
+ratings_ms <- read_csv(
+  file = here("data", "ratings_ms.csv"), 
+  col_types = cols(
+    const = col_character(),
+    your_rating = col_double(),
+    date_rated = col_date(format = ""),
+    title = col_character(),
+    url = col_character(),
+    title_type = col_character(),
+    imdb_rating = col_double(),
+    runtime_mins = col_double(),
+    year = col_double(),
+    genres = col_character(),
+    num_votes = col_double(),
+    release_date = col_date(format = ""),
+    directors = col_character(),
+    month_rated = col_character(),
+    year_rated = col_double(),
+    metascore_rating = col_double()
   )
-  
-# ratings <- add_metascore(
-#   file_in = "ratings.csv", 
-#   file_out = "ratings_ms.csv", 
-#   from = min(source("movies_theatres.R")$value[["year"]]), 
-#   locale = locale(encoding = "Windows-1252")
-# )
+) %>% 
+  mutate(in_theatres = as.integer(const %in% movies_db[["imdb_id"]]))
 ```
 
 # Streak of Movies Seen in Theatres
