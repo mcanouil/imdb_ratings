@@ -134,7 +134,7 @@ ratings_db <- read_csv(
   )
 
 if (file.exists(here("data", "ratings_ms.csv"))) {
-  ratings_ms <- read_csv(
+  read_csv(
     file = here("data", "ratings_ms.csv"), 
     col_types = cols(
       const = col_character(),
@@ -155,13 +155,12 @@ if (file.exists(here("data", "ratings_ms.csv"))) {
       metascore_rating = col_double()
     )
   ) %>% 
-    filter(date_rated < (today() - 100) | year < year(today()))
-  
-  anti_join(x = ratings_db, y = ratings_ms, by = "const") %>% 
-    mutate(metascore_rating = get_metascore(const)) %>% 
-    bind_rows(
-      inner_join(x = ratings_db, y = ratings_ms, by = "const")
-    ) %>% 
+    filter(date_rated < (today() - 100) | year < year(today())) %>% 
+    (function(.data) {
+      anti_join(x = ratings_db, y = .data, by = "const") %>% 
+        mutate(metascore_rating = get_metascore(const)) %>% 
+        bind_rows(.data)
+    })() %>% 
     write_csv(here("data", "ratings_ms.csv"))
 } else {
   ratings_db %>% 

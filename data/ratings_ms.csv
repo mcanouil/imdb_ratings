@@ -1,4 +1,22 @@
 const,your_rating,date_rated,title,url,title_type,imdb_rating,runtime_mins,year,genres,num_votes,release_date,directors,month_rated,year_rated,metascore_rating
+tt10183816,3,2020-05-02,Dangerous Lies,https://www.imdb.com/title/tt10183816/,movie,5.2,96,2020,"drama, mystery, thriller",11435,2020-04-30,Michael M. Scott,May,2020,5.1
+tt10441958,3,2020-06-28,La bonne épouse,https://www.imdb.com/title/tt10441958/,movie,5.9,109,2020,"comedy, drama",163,2020-01-15,Martin Provost,June,2020,NA
+tt10456740,6,2020-06-21,Balle perdue,https://www.imdb.com/title/tt10456740/,movie,6.2,92,2020,"action, crime, thriller",3514,2020-06-19,Guillaume Pierret,June,2020,NA
+tt10540242,2,2020-04-11,The Main Event,https://www.imdb.com/title/tt10540242/,movie,4.7,101,2020,"action, comedy, family",1474,2020-04-10,Jay Karas,April,2020,5.2
+tt10714856,5,2020-06-21,Feel the Beat,https://www.imdb.com/title/tt10714856/,movie,6.4,109,2020,"comedy, drama, family",3427,2020-06-19,Elissa Down,June,2020,NA
+tt10886166,1,2020-06-13,365 dni,https://www.imdb.com/title/tt10886166/,movie,3.4,114,2020,"drama, romance",21960,2020-02-07,"Barbara Bialowas, Tomasz Mandes",June,2020,NA
+tt11958344,6,2020-06-19,Nakitai watashi wa neko wo kaburu,https://www.imdb.com/title/tt11958344/,movie,6.8,104,2020,"animation, adventure, family, fantasy, romance",1767,2020-06-18,"Jun'ichi Satô, Tomotaka Shibayama",June,2020,NA
+tt1552211,1,2020-06-09,The Last Days of American Crime,https://www.imdb.com/title/tt1552211/,movie,3.5,148,2020,"action, crime, thriller",6745,2020-06-05,Olivier Megaton,June,2020,1.5
+tt5096470,5,2020-04-11,Love Wedding Repeat,https://www.imdb.com/title/tt5096470/,movie,5.5,100,2020,"comedy, romance",14378,2020-04-10,Dean Craig,April,2020,4.1
+tt8580274,4,2020-06-29,Eurovision Song Contest: The Story of Fire Saga,https://www.imdb.com/title/tt8580274/,movie,6.6,123,2020,"comedy, music",30261,2020-06-26,David Dobkin,June,2020,4.9
+tt8750570,5,2020-04-26,Sergio,https://www.imdb.com/title/tt8750570/,movie,6.1,118,2020,"biography, drama, history, romance",6523,2020-01-28,Greg Barker,April,2020,5.5
+tt8851668,3,2020-05-31,The Lovebirds,https://www.imdb.com/title/tt8851668/,movie,6,86,2020,"action, comedy, crime, mystery, romance, thriller",15187,2020-05-22,Michael Showalter,May,2020,5.9
+tt8936646,4,2020-04-24,Extraction,https://www.imdb.com/title/tt8936646/,movie,6.8,116,2020,"action, crime, thriller",127644,2020-04-24,Sam Hargrave,April,2020,5.6
+tt9261218,6,2020-05-22,Uncorked,https://www.imdb.com/title/tt9261218/,movie,6.2,104,2020,drama,3320,2020-03-27,Prentice Penny,May,2020,6.2
+tt9354842,4,2020-03-29,To All the Boys: P.S. I Still Love You,https://www.imdb.com/title/tt9354842/,movie,6,101,2020,"comedy, romance",19201,2020-02-12,Michael Fimognari,March,2020,5.4
+tt9619798,1,2020-05-14,The Wrong Missy,https://www.imdb.com/title/tt9619798/,movie,5.7,90,2020,"comedy, romance",24829,2020-05-13,Tyler Spindel,May,2020,3.3
+tt9777644,5,2020-06-14,Da 5 Bloods,https://www.imdb.com/title/tt9777644/,movie,6.6,154,2020,"adventure, drama, war",22045,2020-06-12,Spike Lee,June,2020,8.2
+tt9898858,2,2020-04-14,Coffee & Kareem,https://www.imdb.com/title/tt9898858/,movie,5.1,88,2020,"action, comedy",9976,2020-04-03,Michael Dowse,April,2020,3.5
 tt1001508,5,2014-12-17,He's Just Not That Into You,https://www.imdb.com/title/tt1001508/,movie,6.4,129,2009,"comedy, drama, romance",158463,2009-01-24,Ken Kwapis,December,2014,4.7
 tt1001526,7,2014-11-08,Megamind,https://www.imdb.com/title/tt1001526/,movie,7.2,95,2010,"animation, action, comedy, family, sci-fi",221081,2010-10-28,Tom McGrath,November,2014,6.3
 tt0100240,3,2014-11-26,The NeverEnding Story II: The Next Chapter,https://www.imdb.com/title/tt0100240/,movie,5.2,90,1990,"adventure, drama, family, fantasy",23677,1990-10-25,George Miller,November,2014,NA
@@ -17,7 +35,6 @@ tt1014763,4,2015-08-05,Child 44,https://www.imdb.com/title/tt1014763/,movie,6.5,
 tt1016301,7,2014-11-15,La habitación de Fermat,https://www.imdb.com/title/tt1016301/,movie,6.7,89,2007,"mystery, thriller",19025,2007-10-07,"Rodrigo Sopeña, Luis Piedrahita",November,2014,NA
 tt1017460,6,2014-12-15,Splice,https://www.imdb.com/title/tt1017460/,movie,5.7,104,2009,"drama, horror, sci-fi",91003,2009-10-06,Vincenzo Natali,December,2014,6.6
 tt10183616,2,2019-06-27,Yves,https://www.imdb.com/title/tt10183616/,movie,5.5,107,2019,comedy,332,2019-05-23,Benoît Forgeard,June,2019,NA
-tt10183816,3,2020-05-02,Dangerous Lies,https://www.imdb.com/title/tt10183816/,movie,5.2,96,2020,"drama, mystery, thriller",11435,2020-04-30,Michael M. Scott,May,2020,5.1
 tt10199590,7,2020-01-12,Les misérables,https://www.imdb.com/title/tt10199590/,movie,7.6,104,2019,"crime, drama, thriller",12929,2019-05-15,Ladj Ly,January,2020,7.8
 tt10204366,7,2019-09-19,Trois jours et une vie,https://www.imdb.com/title/tt10204366/,movie,6.6,120,2019,"crime, drama, thriller",594,2019-08-21,Nicolas Boukhrief,September,2019,NA
 tt10204940,5,2019-10-11,Donne-moi des ailes,https://www.imdb.com/title/tt10204940/,movie,7.2,113,2019,"adventure, family",921,2019-08-25,Nicolas Vanier,October,2019,NA
@@ -51,10 +68,8 @@ tt0104070,5,2014-11-27,Death Becomes Her,https://www.imdb.com/title/tt0104070/,m
 tt10407272,7,2019-09-14,Deux moi,https://www.imdb.com/title/tt10407272/,movie,6.5,110,2019,"comedy, drama, family, romance",1890,2019-08-21,Cédric Klapisch,September,2019,NA
 tt1043726,3,2014-11-15,The Legend of Hercules,https://www.imdb.com/title/tt1043726/,movie,4.2,99,2014,"action, adventure, fantasy",51813,2014-01-08,Renny Harlin,November,2014,2.2
 tt1043842,7,2014-11-08,Appurushido: Ekusu makina,https://www.imdb.com/title/tt1043842/,movie,7.1,105,2007,"animation, action, adventure, drama, family, sci-fi, thriller, war",9259,2007-10-20,Shinji Aramaki,November,2014,NA
-tt10441958,3,2020-06-28,La bonne épouse,https://www.imdb.com/title/tt10441958/,movie,5.9,109,2020,"comedy, drama",163,2020-01-15,Martin Provost,June,2020,NA
 tt0104431,8,2015-12-25,Home Alone 2: Lost in New York,https://www.imdb.com/title/tt0104431/,movie,6.8,120,1992,"adventure, comedy, crime, family",289238,1992-11-15,Chris Columbus,December,2015,NA
 tt1045658,8,2014-11-08,Silver Linings Playbook,https://www.imdb.com/title/tt1045658/,movie,7.7,122,2012,"comedy, drama, romance",647744,2012-09-08,David O. Russell,November,2014,8.1
-tt10456740,6,2020-06-21,Balle perdue,https://www.imdb.com/title/tt10456740/,movie,6.2,92,2020,"action, crime, thriller",3514,2020-06-19,Guillaume Pierret,June,2020,NA
 tt1045778,2,2019-07-07,Year One,https://www.imdb.com/title/tt1045778/,movie,4.9,97,2009,comedy,90209,2009-06-18,Harold Ramis,July,2019,3.4
 tt1046173,5,2014-11-15,G.I. Joe: The Rise of Cobra,https://www.imdb.com/title/tt1046173/,movie,5.8,118,2009,"action, adventure, sci-fi, thriller",196238,2009-07-27,Stephen Sommers,November,2014,3.2
 tt1046245,3,2015-01-01,Cross,https://www.imdb.com/title/tt1046245/,video,3,105,2011,"action, fantasy",2182,2011-05-31,Patrick Durham,January,2015,NA
@@ -67,7 +82,6 @@ tt1051906,6,2020-03-03,The Invisible Man,https://www.imdb.com/title/tt1051906/,m
 tt10533078,2,2019-10-06,J'irai où tu iras,https://www.imdb.com/title/tt10533078/,movie,5.3,100,2019,"comedy, drama",214,2019-08-26,Géraldine Nakache,October,2019,NA
 tt1053424,7,2014-11-15,Repo Men,https://www.imdb.com/title/tt1053424/,movie,6.3,111,2010,"action, sci-fi, thriller",99093,2010-03-19,Miguel Sapochnik,November,2014,3.2
 tt10537978,1,2019-12-25,Rendez-vous chez les Malawas,https://www.imdb.com/title/tt10537978/,movie,3.8,92,2019,comedy,180,2019-12-25,James Huth,December,2019,NA
-tt10540242,2,2020-04-11,The Main Event,https://www.imdb.com/title/tt10540242/,movie,4.7,101,2020,"action, comedy, family",1474,2020-04-10,Jay Karas,April,2020,5.2
 tt1054606,7,2014-11-15,The Imaginarium of Doctor Parnassus,https://www.imdb.com/title/tt1054606/,movie,6.8,123,2009,"adventure, comedy, fantasy, mystery",142407,2009-05-22,Terry Gilliam,November,2014,6.5
 tt1055292,7,2014-11-08,Life as We Know It,https://www.imdb.com/title/tt1055292/,movie,6.5,114,2010,"comedy, drama, romance",119503,2010-10-02,Greg Berlanti,November,2014,3.9
 tt1055366,2,2014-11-27,Camp Rock,https://www.imdb.com/title/tt1055366/,tvMovie,5.2,94,2008,"comedy, family, music, musical, romance",29252,2008-06-20,Matthew Diamond,November,2014,NA
@@ -83,7 +97,6 @@ tt1067106,6,2014-12-17,A Christmas Carol,https://www.imdb.com/title/tt1067106/,m
 tt1067765,5,2014-11-20,Adult World,https://www.imdb.com/title/tt1067765/,movie,6.1,97,2013,"comedy, drama",16530,2013-10-06,Scott Coffey,November,2014,6.1
 tt1068680,7,2014-11-08,Yes Man,https://www.imdb.com/title/tt1068680/,movie,6.8,104,2008,"comedy, romance",327739,2008-12-09,Peyton Reed,November,2014,4.6
 tt0106965,5,2014-12-26,Free Willy,https://www.imdb.com/title/tt0106965/,movie,6,112,1993,"adventure, drama, family",66927,1993-07-16,Simon Wincer,December,2014,7.9
-tt10714856,5,2020-06-21,Feel the Beat,https://www.imdb.com/title/tt10714856/,movie,6.4,109,2020,"comedy, drama, family",3427,2020-06-19,Elissa Down,June,2020,NA
 tt10715194,4,2019-08-31,La grande classe,https://www.imdb.com/title/tt10715194/,movie,5.3,83,2019,comedy,904,2019-08-30,"Julien War, Remy Four",August,2019,NA
 tt1071875,4,2014-11-08,Ghost Rider: Spirit of Vengeance,https://www.imdb.com/title/tt1071875/,movie,4.3,96,2011,"action, fantasy, thriller",108509,2011-12-11,"Brian Taylor, Mark Neveldine",November,2014,3.4
 tt0107290,9,2014-11-08,Jurassic Park,https://www.imdb.com/title/tt0107290/,movie,8.1,127,1993,"action, adventure, sci-fi, thriller",836236,1993-06-09,Steven Spielberg,November,2014,6.8
@@ -102,7 +115,6 @@ tt1085492,3,2014-11-15,The Prince,https://www.imdb.com/title/tt1085492/,movie,4.
 tt1086772,6,2014-11-15,Blended,https://www.imdb.com/title/tt1086772/,movie,6.5,117,2014,"comedy, romance",114580,2014-05-19,Frank Coraci,November,2014,3.1
 tt1087842,4,2015-01-01,Eden Log,https://www.imdb.com/title/tt1087842/,movie,5.3,98,2007,"horror, mystery, sci-fi, thriller",6358,2007-12-26,Franck Vestiel,January,2015,NA
 tt10880402,5,2020-03-14,De Gaulle,https://www.imdb.com/title/tt10880402/,movie,6.1,108,2020,history,171,2020-02-05,Gabriel Le Bomin,March,2020,NA
-tt10886166,1,2020-06-13,365 dni,https://www.imdb.com/title/tt10886166/,movie,3.4,114,2020,"drama, romance",21960,2020-02-07,"Barbara Bialowas, Tomasz Mandes",June,2020,NA
 tt0109040,5,2014-12-26,Ace Ventura: Pet Detective,https://www.imdb.com/title/tt0109040/,movie,6.9,86,1994,comedy,270460,1994-02-04,Tom Shadyac,December,2014,3.7
 tt1091191,6,2014-11-08,Lone Survivor,https://www.imdb.com/title/tt1091191/,movie,7.5,121,2013,"action, biography, drama, war",259897,2013-11-12,Peter Berg,November,2014,6
 tt0109162,7,2014-11-15,Asterix in America,https://www.imdb.com/title/tt0109162/,movie,6,85,1994,"animation, adventure, comedy, family, fantasy, western",6769,1994-09-29,Gerhard Hahn,November,2014,NA
@@ -224,7 +236,6 @@ tt1194624,5,2014-11-27,Sun cheung sau,https://www.imdb.com/title/tt1194624/,movi
 tt0119528,6,2014-11-08,Liar Liar,https://www.imdb.com/title/tt0119528/,movie,6.9,86,1997,"comedy, fantasy",274133,1997-03-18,Tom Shadyac,November,2014,7
 tt1195478,6,2014-11-15,The Five-Year Engagement,https://www.imdb.com/title/tt1195478/,movie,6.2,124,2012,"comedy, romance",91254,2012-04-18,Nicholas Stoller,November,2014,6.2
 tt0119567,6,2014-11-08,The Lost World: Jurassic Park,https://www.imdb.com/title/tt0119567/,movie,6.6,129,1997,"action, adventure, sci-fi",367505,1997-05-19,Steven Spielberg,November,2014,5.9
-tt11958344,6,2020-06-19,Nakitai watashi wa neko wo kaburu,https://www.imdb.com/title/tt11958344/,movie,6.8,104,2020,"animation, adventure, family, fantasy, romance",1767,2020-06-18,"Jun'ichi Satô, Tomotaka Shibayama",June,2020,NA
 tt0119654,6,2014-11-08,Men in Black,https://www.imdb.com/title/tt0119654/,movie,7.3,98,1997,"action, adventure, comedy, sci-fi",503783,1997-06-25,Barry Sonnenfeld,November,2014,7.1
 tt1196956,6,2015-08-06,One Chance,https://www.imdb.com/title/tt1196956/,movie,6.8,103,2013,"biography, comedy, drama, music",11257,2013-09-09,David Frankel,August,2015,5.2
 tt1197624,8,2014-11-10,Law Abiding Citizen,https://www.imdb.com/title/tt1197624/,movie,7.4,109,2009,"action, crime, drama, thriller",265026,2009-09-23,F. Gary Gray,November,2014,3.4
@@ -546,7 +557,6 @@ tt1542344,8,2014-11-08,127 Hours,https://www.imdb.com/title/tt1542344/,movie,7.6
 tt1542768,3,2017-08-02,True Memoirs of an International Assassin,https://www.imdb.com/title/tt1542768/,movie,5.9,98,2016,"action, comedy, crime",19277,2016-11-11,Jeff Wadlow,August,2017,3.7
 tt1547234,7,2014-11-16,Premium Rush,https://www.imdb.com/title/tt1547234/,movie,6.5,91,2012,"action, thriller",108326,2012-08-22,David Koepp,November,2014,6.6
 tt1549920,4,2014-11-15,The Last Stand,https://www.imdb.com/title/tt1549920/,movie,6.3,107,2013,"action, thriller",131060,2013-01-12,Jee-woon Kim,November,2014,5.4
-tt1552211,1,2020-06-09,The Last Days of American Crime,https://www.imdb.com/title/tt1552211/,movie,3.5,148,2020,"action, crime, thriller",6745,2020-06-05,Olivier Megaton,June,2020,1.5
 tt1552224,4,2015-04-06,Outcast,https://www.imdb.com/title/tt1552224/,movie,4.6,99,2014,"action, adventure, drama, thriller",12137,2014-09-26,Nick Powell,April,2015,3.3
 tt0155755,5,2015-08-27,Un idiot à Paris,https://www.imdb.com/title/tt0155755/,movie,6,90,1967,comedy,293,1967-03-22,Serge Korber,August,2015,NA
 tt1559547,5,2014-11-08,Beautiful Creatures,https://www.imdb.com/title/tt1559547/,movie,6.1,124,2013,"drama, fantasy, romance",82603,2013-01-19,Richard LaGravenese,November,2014,5.2
@@ -2079,7 +2089,6 @@ tt5083738,7,2019-02-10,The Favourite,https://www.imdb.com/title/tt5083738/,movie
 tt5091538,5,2016-11-25,La folle histoire de Max et Léon,https://www.imdb.com/title/tt5091538/,movie,6.2,98,2016,"comedy, war",1651,2016-08-27,Jonathan Barré,November,2016,NA
 tt5092380,5,2018-04-08,Dans la brume,https://www.imdb.com/title/tt5092380/,movie,5.9,89,2018,"drama, mystery, sci-fi, thriller",4957,2018-04-04,Daniel Roby,April,2018,NA
 tt5095030,7,2018-07-19,Ant-Man and the Wasp,https://www.imdb.com/title/tt5095030/,movie,7.1,118,2018,"action, adventure, comedy, sci-fi",290600,2018-06-25,Peyton Reed,July,2018,7
-tt5096470,5,2020-04-11,Love Wedding Repeat,https://www.imdb.com/title/tt5096470/,movie,5.5,100,2020,"comedy, romance",14378,2020-04-10,Dean Craig,April,2020,4.1
 tt5104604,5,2018-04-15,Isle of Dogs,https://www.imdb.com/title/tt5104604/,movie,7.9,101,2018,"animation, adventure, comedy, drama, fantasy, sci-fi",130455,2018-02-15,Wes Anderson,April,2018,8.2
 tt5109784,6,2017-09-30,Mother!,https://www.imdb.com/title/tt5109784/,movie,6.6,121,2017,"drama, horror, mystery",182039,2017-09-05,Darren Aronofsky,September,2017,7.5
 tt5113040,4,2019-08-01,The Secret Life of Pets 2,https://www.imdb.com/title/tt5113040/,movie,6.5,86,2019,"animation, adventure, comedy, family",44768,2019-05-24,"Chris Renaud, Jonathan del Val",August,2019,5.5
@@ -2507,7 +2516,6 @@ tt8523334,6,2019-02-19,Nicky Larson et le parfum de Cupidon,https://www.imdb.com
 tt8572922,4,2020-01-16,Selfie,https://www.imdb.com/title/tt8572922/,movie,5.9,108,2019,comedy,301,2019-09-18,"Tristan Aurouet, Vianney Lebasque, Cyril Gelblat, Thomas Bidegain, Marc Fitoussi",January,2020,NA
 tt0857376,4,2014-12-15,Gabriel,https://www.imdb.com/title/tt0857376/,movie,5.6,114,2007,"action, fantasy, horror, thriller",13510,2007-11-15,Shane Abbess,December,2014,NA
 tt8579674,8,2020-01-21,1917,https://www.imdb.com/title/tt8579674/,movie,8.3,119,2019,"drama, war",337624,2019-12-04,Sam Mendes,January,2020,7.8
-tt8580274,4,2020-06-29,Eurovision Song Contest: The Story of Fire Saga,https://www.imdb.com/title/tt8580274/,movie,6.6,123,2020,"comedy, music",30261,2020-06-26,David Dobkin,June,2020,4.9
 tt0859163,5,2014-11-15,The Mummy: Tomb of the Dragon Emperor,https://www.imdb.com/title/tt0859163/,movie,5.2,112,2008,"action, adventure, fantasy, horror, thriller",147801,2008-07-24,Rob Cohen,November,2014,3.1
 tt0085959,8,2014-11-15,The Meaning of Life,https://www.imdb.com/title/tt0085959/,movie,7.5,107,1983,"comedy, musical",111047,1983-03-31,"Terry Jones, Terry Gilliam",November,2014,NA
 tt8600414,5,2019-07-06,Beaux-parents,https://www.imdb.com/title/tt8600414/,movie,5.7,83,2019,comedy,277,2019-06-19,Héctor Cabello Reyes,July,2019,NA
@@ -2533,7 +2541,6 @@ tt0087363,7,2014-11-15,Gremlins,https://www.imdb.com/title/tt0087363/,movie,7.3,
 tt0087365,5,2014-12-23,"Greystoke: The Legend of Tarzan, Lord of the Apes",https://www.imdb.com/title/tt0087365/,movie,6.4,135,1984,"adventure, drama",17304,1984-03-30,Hugh Hudson,December,2014,6.2
 tt8743064,4,2019-05-18,See You Yesterday,https://www.imdb.com/title/tt8743064/,movie,5.1,84,2019,"action, adventure, crime, drama, sci-fi, thriller",8244,2019-05-03,Stefon Bristol,May,2019,7.4
 tt0087469,8,2014-11-08,Indiana Jones and the Temple of Doom,https://www.imdb.com/title/tt0087469/,movie,7.6,118,1984,"action, adventure",434185,1984-05-08,Steven Spielberg,November,2014,5.7
-tt8750570,5,2020-04-26,Sergio,https://www.imdb.com/title/tt8750570/,movie,6.1,118,2020,"biography, drama, history, romance",6523,2020-01-28,Greg Barker,April,2020,5.5
 tt0875113,6,2016-08-21,99 francs,https://www.imdb.com/title/tt0875113/,movie,7.3,100,2007,"comedy, drama",18462,2007-09-26,Jan Kounen,August,2016,NA
 tt0087544,9,2014-11-08,Kaze no tani no Naushika,https://www.imdb.com/title/tt0087544/,movie,8.1,117,1984,"animation, adventure, fantasy, sci-fi",142631,1984-03-11,Hayao Miyazaki,November,2014,8.6
 tt8763008,4,2018-10-13,Voyez comme on danse,https://www.imdb.com/title/tt8763008/,movie,5.6,88,2018,"comedy, drama",395,2018-08-22,Michel Blanc,October,2018,NA
@@ -2547,7 +2554,6 @@ tt0882977,6,2014-11-15,Snitch,https://www.imdb.com/title/tt0882977/,movie,6.4,11
 tt0088323,7,2014-11-25,Die unendliche Geschichte,https://www.imdb.com/title/tt0088323/,movie,7.4,102,1984,"adventure, drama, family, fantasy",127997,1984-04-06,Wolfgang Petersen,November,2014,4.6
 tt0884328,7,2014-11-10,The Mist,https://www.imdb.com/title/tt0884328/,movie,7.1,126,2007,"horror, sci-fi",274245,2007-11-12,Frank Darabont,November,2014,5.8
 tt0884732,4,2015-05-16,The Wedding Ringer,https://www.imdb.com/title/tt0884732/,movie,6.6,101,2015,comedy,69537,2015-01-06,Jeremy Garelick,May,2015,3.5
-tt8851668,3,2020-05-31,The Lovebirds,https://www.imdb.com/title/tt8851668/,movie,6,86,2020,"action, comedy, crime, mystery, romance, thriller",15187,2020-05-22,Michael Showalter,May,2020,5.9
 tt8856470,4,2020-03-01,Pokémon: Mewtwo Strikes Back - Evolution,https://www.imdb.com/title/tt8856470/,movie,5.7,98,2019,"animation, action, family, fantasy",3710,2019-07-04,"Kunihiko Yuyama, Motonori Sakakibara, Tetsuo Yajima",March,2020,NA
 tt0088748,7,2014-11-15,Astérix et la surprise de César,https://www.imdb.com/title/tt0088748/,movie,6.8,79,1985,"animation, adventure, comedy, family, fantasy",8572,1985-12-11,"Gaëtan Brizzi, Paul Brizzi",November,2014,NA
 tt0088763,8,2014-11-08,Back to the Future,https://www.imdb.com/title/tt0088763/,movie,8.5,116,1985,"adventure, comedy, sci-fi",1013796,1985-07-03,Robert Zemeckis,November,2014,8.7
@@ -2561,7 +2567,6 @@ tt8925540,3,2020-02-08,Racetime,https://www.imdb.com/title/tt8925540/,movie,5.5,
 tt0892769,7,2014-11-08,How to Train Your Dragon,https://www.imdb.com/title/tt0892769/,movie,8.1,98,2010,"animation, action, adventure, family, fantasy",646980,2010-03-18,"Dean DeBlois, Chris Sanders",November,2014,7.5
 tt0892782,5,2014-11-08,Monsters vs. Aliens,https://www.imdb.com/title/tt0892782/,movie,6.4,94,2009,"animation, action, adventure, comedy, family, sci-fi, thriller",143328,2009-03-09,"Conrad Vernon, Rob Letterman",November,2014,5.6
 tt0892791,5,2014-11-08,Shrek Forever After,https://www.imdb.com/title/tt0892791/,movie,6.3,93,2010,"animation, adventure, comedy, family, fantasy, romance",178992,2010-04-21,Mike Mitchell,November,2014,5.8
-tt8936646,4,2020-04-24,Extraction,https://www.imdb.com/title/tt8936646/,movie,6.8,116,2020,"action, crime, thriller",127644,2020-04-24,Sam Hargrave,April,2020,5.6
 tt8946378,8,2019-12-14,Knives Out,https://www.imdb.com/title/tt8946378/,movie,7.9,130,2019,"comedy, crime, drama, mystery, thriller",338469,2019-09-07,Rian Johnson,December,2019,8.2
 tt0089469,5,2014-11-21,Legend,https://www.imdb.com/title/tt0089469/,movie,6.5,94,1985,"adventure, fantasy, romance",58055,1985-08-28,Ridley Scott,November,2014,3
 tt0896798,7,2014-11-15,Cleaner,https://www.imdb.com/title/tt0896798/,movie,6.1,88,2007,"crime, mystery, thriller",36752,2007-09-11,Renny Harlin,November,2014,4.9
@@ -2592,13 +2597,11 @@ tt0923811,8,2014-11-15,Evangelion Shin Gekijôban: Jo,https://www.imdb.com/title
 tt0092494,6,2014-11-26,*batteries not included,https://www.imdb.com/title/tt0092494/,movie,6.7,106,1987,"comedy, family, fantasy, sci-fi",30492,1987-12-18,Matthew Robbins,November,2014,5.4
 tt9257484,2,2019-10-29,Rattlesnake,https://www.imdb.com/title/tt9257484/,movie,4.6,85,2019,"drama, horror, mystery, thriller",6694,2019-10-24,Zak Hilditch,October,2019,NA
 tt0926084,7,2014-11-08,Harry Potter and the Deathly Hallows: Part 1,https://www.imdb.com/title/tt0926084/,movie,7.7,146,2010,"adventure, family, fantasy, mystery",458843,2010-11-11,David Yates,November,2014,6.5
-tt9261218,6,2020-05-22,Uncorked,https://www.imdb.com/title/tt9261218/,movie,6.2,104,2020,drama,3320,2020-03-27,Prentice Penny,May,2020,6.2
 tt0092644,6,2014-11-15,Beverly Hills Cop II,https://www.imdb.com/title/tt0092644/,movie,6.5,100,1987,"action, comedy, crime, thriller",104055,1987-05-19,Tony Scott,November,2014,4.8
 tt0926759,7,2016-04-23,Le premier jour du reste de ta vie,https://www.imdb.com/title/tt0926759/,movie,7.6,114,2008,drama,8956,2008-06-13,Rémi Bezançon,April,2016,NA
 tt9284430,6,2019-12-08,Le meilleur reste à venir,https://www.imdb.com/title/tt9284430/,movie,6.7,117,2019,"comedy, drama",500,2019-10-21,"Matthieu Delaporte, Alexandre de La Patellière",December,2019,NA
 tt0929629,8,2014-11-15,Stargate: Continuum,https://www.imdb.com/title/tt0929629/,video,7.5,98,2008,"action, adventure, drama, fantasy, sci-fi",22437,2008-07-29,Martin Wood,November,2014,NA
 tt0093389,8,2014-11-19,The Last Emperor,https://www.imdb.com/title/tt0093389/,movie,7.7,163,1987,"biography, drama, history",90992,1987-10-04,Bernardo Bertolucci,November,2014,7.6
-tt9354842,4,2020-03-29,To All the Boys: P.S. I Still Love You,https://www.imdb.com/title/tt9354842/,movie,6,101,2020,"comedy, romance",19201,2020-02-12,Michael Fimognari,March,2020,5.4
 tt0936501,8,2014-11-08,Taken,https://www.imdb.com/title/tt0936501/,movie,7.8,90,2008,"action, thriller",555668,2008-02-27,Pierre Morel,November,2014,5.1
 tt9372116,3,2019-10-26,La vérité si je mens! Les débuts,https://www.imdb.com/title/tt9372116/,movie,4.6,110,2019,comedy,114,2019-09-05,"Gérard Bitton, Michel Munz",October,2019,NA
 tt0093773,7,2014-11-15,Predator,https://www.imdb.com/title/tt0093773/,movie,7.8,107,1987,"action, adventure, sci-fi, thriller",362313,1987-06-12,John McTiernan,November,2014,4.5
@@ -2629,7 +2632,6 @@ tt0959337,8,2014-11-15,Revolutionary Road,https://www.imdb.com/title/tt0959337/,
 tt0095953,8,2014-11-08,Rain Man,https://www.imdb.com/title/tt0095953/,movie,8,133,1988,drama,462132,1988-12-12,Barry Levinson,November,2014,6.5
 tt0960144,5,2015-01-03,You Don't Mess with the Zohan,https://www.imdb.com/title/tt0960144/,movie,5.5,113,2008,comedy,186716,2008-06-06,Dennis Dugan,January,2015,5.4
 tt0960731,4,2015-12-24,Bedtime Stories,https://www.imdb.com/title/tt0960731/,movie,6,99,2008,"comedy, family, fantasy, romance",86300,2008-12-24,Adam Shankman,December,2015,3.3
-tt9619798,1,2020-05-14,The Wrong Missy,https://www.imdb.com/title/tt9619798/,movie,5.7,90,2020,"comedy, romance",24829,2020-05-13,Tyler Spindel,May,2020,3.3
 tt9625632,4,2020-03-08,Mes jours de gloire,https://www.imdb.com/title/tt9625632/,movie,5.8,98,2019,comedy,209,2019-08-31,Antoine de Bary,March,2020,NA
 tt0962711,3,2014-12-26,The Objective,https://www.imdb.com/title/tt0962711/,movie,5.5,90,2008,"horror, sci-fi, thriller",7721,2008-04-24,Daniel Myrick,December,2014,2.6
 tt0962726,3,2014-11-27,High School Musical 3: Senior Year,https://www.imdb.com/title/tt0962726/,movie,4.8,112,2008,"comedy, drama, family, music, musical, romance",56307,2008-09-28,Kenny Ortega,November,2014,5.7
@@ -2651,7 +2653,6 @@ tt0975645,6,2014-11-08,Hitchcock,https://www.imdb.com/title/tt0975645/,movie,6.8
 tt0097576,9,2014-11-08,Indiana Jones and the Last Crusade,https://www.imdb.com/title/tt0097576/,movie,8.2,127,1989,"action, adventure",671875,1989-05-24,Steven Spielberg,November,2014,6.5
 tt9760504,6,2020-01-19,Ni no Kuni,https://www.imdb.com/title/tt9760504/,movie,6.1,106,2019,"animation, action, adventure, family, fantasy, romance",2085,2019-08-23,Yoshiyuki Momose,January,2020,NA
 tt0097757,6,2014-11-08,The Little Mermaid,https://www.imdb.com/title/tt0097757/,movie,7.6,83,1989,"animation, family, fantasy, musical, romance",229802,1989-11-13,"Ron Clements, John Musker",November,2014,8.8
-tt9777644,5,2020-06-14,Da 5 Bloods,https://www.imdb.com/title/tt9777644/,movie,6.6,154,2020,"adventure, drama, war",22045,2020-06-12,Spike Lee,June,2020,8.2
 tt9777790,5,2019-08-11,C'est quoi cette mamie?!,https://www.imdb.com/title/tt9777790/,movie,4.5,99,2019,comedy,237,2019-08-02,Gabriel Julien-Laferrière,August,2019,NA
 tt0097814,8,2014-11-08,Majo no takkyûbin,https://www.imdb.com/title/tt0097814/,movie,7.8,103,1989,"animation, adventure, drama, family, fantasy",115544,1989-07-29,Hayao Miyazaki,November,2014,8.3
 tt0978764,3,2014-12-31,Sucker Punch,https://www.imdb.com/title/tt0978764/,movie,6,110,2011,"action, adventure, fantasy",225900,2011-03-21,Zack Snyder,December,2014,3.3
@@ -2668,7 +2669,6 @@ tt0986263,7,2014-11-15,Surrogates,https://www.imdb.com/title/tt0986263/,movie,6.
 tt0988045,8,2014-11-08,Sherlock Holmes,https://www.imdb.com/title/tt0988045/,movie,7.6,128,2009,"action, adventure, mystery",571206,2009-12-14,Guy Ritchie,November,2014,5.7
 tt0988595,6,2014-12-15,27 Dresses,https://www.imdb.com/title/tt0988595/,movie,6.1,111,2008,"comedy, romance",150801,2008-01-09,Anne Fletcher,December,2014,4.7
 tt0989757,5,2015-01-05,Dear John,https://www.imdb.com/title/tt0989757/,movie,6.3,108,2010,"drama, romance, war",135388,2010-01-24,Lasse Hallström,January,2015,4.3
-tt9898858,2,2020-04-14,Coffee & Kareem,https://www.imdb.com/title/tt9898858/,movie,5.1,88,2020,"action, comedy",9976,2020-04-03,Michael Dowse,April,2020,3.5
 tt0990407,4,2014-11-20,The Green Hornet,https://www.imdb.com/title/tt0990407/,movie,5.8,119,2011,"action, comedy",153198,2011-01-12,Michel Gondry,November,2014,3.9
 tt9908390,3,2020-01-31,Le lion,https://www.imdb.com/title/tt9908390/,movie,5.2,95,2020,comedy,299,2020-01-14,Ludovic Colbeau-Justin,January,2020,NA
 tt0099088,7,2014-11-08,Back to the Future Part III,https://www.imdb.com/title/tt0099088/,movie,7.4,118,1990,"adventure, comedy, sci-fi, western",389337,1990-05-25,Robert Zemeckis,November,2014,5.5
