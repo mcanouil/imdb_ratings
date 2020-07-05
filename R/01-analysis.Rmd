@@ -91,7 +91,15 @@ movies_db <- map_df(
   .x = list.files(here("R"), "[0-9]{4}.R", full.names = TRUE), 
   .f = function(x) { 
     source(x)
-    read_csv(here("data", gsub(".R$", ".csv", basename(x))))
+    read_csv(
+      file = here("data", gsub(".R$", ".csv", basename(x))), 
+      col_types = cols(
+        date_time = col_datetime(format = ""),
+        room = col_double(),
+        theatre = col_character(),
+        imdb_id = col_character()
+      )
+    )
   }
 ) %>% 
   mutate(
@@ -125,8 +133,8 @@ ratings_db <- read_csv(
     year_rated = year(date_rated)
   )
 
-if (exists(here("data", "ratings_ms.csv"))) {
-  read_csv(
+if (file.exists(here("data", "ratings_ms.csv"))) {
+  ratings_ms <- read_csv(
     file = here("data", "ratings_ms.csv"), 
     col_types = cols(
       const = col_character(),
@@ -147,9 +155,13 @@ if (exists(here("data", "ratings_ms.csv"))) {
       metascore_rating = col_double()
     )
   ) %>% 
-    filter(date_rated < (today() - 100) & year < year(today())) %>% 
-    anti_join(x = ratings_db, y = ., by = "const") %>% 
+    filter(date_rated < (today() - 100) | year < year(today()))
+  
+  anti_join(x = ratings_db, y = ratings_ms, by = "const") %>% 
     mutate(metascore_rating = get_metascore(const)) %>% 
+    bind_rows(
+      inner_join(x = ratings_db, y = ratings_ms, by = "const")
+    ) %>% 
     write_csv(here("data", "ratings_ms.csv"))
 } else {
   ratings_db %>% 
