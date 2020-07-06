@@ -18,36 +18,12 @@ editor_options:
 ---
 
 ```{r setup, include = FALSE}
-options(stringsAsFactors = FALSE)
-options("width" = 100)
-
-### Load packages ==================================================================================
-suppressPackageStartupMessages({
-  library(dplyr)
-  library(tidyr)
-  library(readr)
-  library(purrr)
-  library(sessioninfo)
-  library(knitr)
-  library(gt)
-  library(mctemplates)
-  library(lubridate)
-  library(scales)
-  library(ggplot2)
-  library(gganimate)
-  library(forcats)
-  library(glue)
-  library(stringr)
-  library(ggtext)
-  library(broom)
-  library(here)
-  library(rvest)
-  library(xml2)
-})
+options("stringsAsFactors" = FALSE, "width" = 100)
 
 
 ### Environment ====================================================================================
-opts_chunk$set(
+library(here)
+knitr::opts_chunk$set(
   comment = "#>",
   results = "asis",
   include = TRUE,
@@ -61,6 +37,29 @@ opts_chunk$set(
   fig.align = "center",
   fig.path = here("images", "fig-")
 )
+
+
+### Load packages ==================================================================================
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(tidyr)
+  library(readr)
+  library(purrr)
+  library(sessioninfo)
+  library(gt)
+  library(mctemplates)
+  library(lubridate)
+  library(scales)
+  library(ggplot2)
+  library(gganimate)
+  library(forcats)
+  library(glue)
+  library(stringr)
+  library(ggtext)
+  library(broom)
+  library(rvest)
+  library(xml2)
+})
 
 
 ### Define theme ===================================================================================
@@ -510,6 +509,107 @@ if (params[["static"]]) {
   )
 }
 ```
+
+# Ratings
+
+```{r ratings, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
+who_colours <- setNames(viridis_pal(begin = 0.5)(3), toupper(c("Coeos", "metascore", "imdb")))
+
+p_ratings <- ggplot(
+  data = pivot_longer(
+    data = ratings_ms, 
+    cols = ends_with("rating"), 
+    names_to = "who", 
+    names_pattern = "(.*)_.*", 
+    values_to = "rating"
+  ) %>% 
+    mutate(
+      who = factor(
+        x = who, 
+        levels = c(COEOS = "your", METASCORE = "metascore", IMDB = "imdb")[names(who_colours)], 
+        labels = names(who_colours)
+      )
+    ),
+  mapping = aes(
+    x = rating, 
+    y = after_stat(count / tapply(count, group, sum)[group]), 
+    colour = who, 
+    fill = who,
+    group = paste(year_rated, who, sep = "_")
+  )
+) +
+  geom_bar(
+    position = position_dodge2(width = 0.90, preserve = "single"),
+    na.rm = TRUE
+  ) +
+  geom_text(
+    mapping = aes(label = after_stat(percent(count / tapply(count, group, sum)[group], suffix = " %", accuracy = 0.1))), 
+    stat = "count", 
+    position = position_dodge2(width = 0.90, preserve = "single"),
+    family = "xkcd",
+    angle = 90,
+    size = 2,
+    hjust = -0.1,
+    vjust = 0.5,
+    na.rm = TRUE,
+    show.legend = FALSE
+  ) +
+  scale_x_binned(
+    limits = c(0, 10), 
+    right = FALSE,
+    # labels = function(x) ifelse(x %in% 10, x, glue("[{x},{x+1})")),
+    expand = c(0, 0)
+  ) +
+  scale_y_continuous(labels = percent_format(suffix = " %"), expand = expansion(c(0, 0.25))) +
+  scale_colour_manual(values = who_colours) +
+  scale_fill_manual(values = who_colours) +
+  labs(
+    x = "Rating", 
+    y = "Percentage of Movies", 
+    colour = NULL,
+    fill = NULL,
+    title = glue_collapse(c(
+      glue('Distribution of Ratings ({comma(nrow(drop_na(select(ratings_ms, ends_with("rating")))))})'),
+      glue_collapse(
+        glue("<b style='color:{who_colours};'>{names(who_colours)}</b>"), 
+        sep = ", ", 
+        last = " and "
+      )),
+      sep = ": "
+    ),
+    caption = "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
+  ) +
+  theme(
+    legend.position = "none", 
+    plot.title = element_markdown(),
+    plot.subtitle = element_markdown(),
+    plot.caption = element_markdown(),
+    panel.grid.minor = element_blank()
+  )
+
+p_ratings + facet_grid(rows = vars(year_rated))
+
+# p_ratings +
+#   transition_states(year_rated) +
+#       shadow_wake(wake_length = 1 / 3, wrap = TRUE)
+
+# if (params[["static"]]) {
+#   print(p)
+# } else {
+#   animate(
+#     plot = p_ratings +
+#       transition_states(year) +
+#       shadow_wake(wake_length = 1 / 3, wrap = TRUE), 
+#     width = 5.3 * 2.54,
+#     height = 4.7 * 2.54,
+#     units = "cm", 
+#     res = 120,
+#     bg = theme_get()$plot.background$colour,
+#     renderer = gifski_renderer()
+#   )
+# }
+```
+
 
 # R session information
 
