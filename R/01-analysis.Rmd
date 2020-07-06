@@ -557,6 +557,7 @@ p_ratings <- ggplot(
   scale_x_binned(
     limits = c(0, 10), 
     right = FALSE,
+    labels = function(x) ifelse(x %in% 10, x, paste0(x, "+"))
     # labels = function(x) ifelse(x %in% 10, x, glue("[{x},{x+1})")),
     expand = c(0, 0)
   ) +
