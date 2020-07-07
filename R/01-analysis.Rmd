@@ -69,7 +69,18 @@ options(
   ggplot2.continuous.colour = scale_colour_viridis_c,
   ggplot2.continuous.fill = scale_fill_viridis_c
 )
-theme_set(theme_black(11, base_family = "xkcd") + theme(plot.title.position = "plot", plot.caption.position = "plot"))
+theme_set(
+  theme_black(11, base_family = "xkcd") + 
+    theme(
+      plot.title.position = "plot", 
+      plot.caption.position = "plot",
+      plot.title = element_markdown(),
+      plot.subtitle = element_markdown(),
+      plot.caption = element_markdown()
+    )
+)
+
+fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
 
 
 ### Functions ======================================================================================
@@ -261,12 +272,11 @@ p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
   facet_grid(rows = vars(year)) +
   theme(
     panel.grid = element_blank(), 
-    plot.caption = element_markdown(),
     legend.position = "none"
   ) +
   labs(
     title = glue("Streak of Movies Seen in Theatres ({sum(streak_data$count)})"),
-    caption = "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil",
+    caption = fig_caption,
     colour = "Count",
     fill = "Count",
     x = NULL, # "Week Number",
@@ -308,10 +318,7 @@ p +
     expand = expansion(c(0, 0)),
     labels = function(x) ifelse(x == "Tuesday", "<span style='color:firebrick2;'>Tuesday</span>", x)
   ) +
-  theme(
-    axis.text.y = element_markdown(size = rel(0.8)),
-    plot.subtitle = element_markdown()
-  )
+  theme(axis.text.y = element_markdown(size = rel(0.8)))
 ```
 
 ## In One Day
@@ -368,7 +375,7 @@ grid_data <- tibble(
 radar_base <- ggplot(data = data_radar, mapping = aes(x = month_integer, y = count, group = year)) +
   labs(
     title = "Number of Movies Seen in Theatres",
-    caption = "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil",
+    caption = fig_caption,
     colour = "Year",
     fill = "Year"
   ) +
@@ -532,13 +539,18 @@ p_ratings <- ggplot(
     ),
   mapping = aes(
     x = rating, 
-    y = after_stat(count / tapply(count, group, sum)[group]), 
+    y = stat(prop),
     colour = who, 
     fill = who,
     group = paste(year_rated, who, sep = "_")
   )
 ) +
+  annotation_raster(
+    raster = matrix(rep(viridis_pal(option = "plasma", alpha = 0.25)(50), each = 50), nrow = 50),
+    xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf
+  ) +
   geom_bar(
+    mapping = aes(y = stat(prop)),
     position = position_dodge2(width = 0.90, preserve = "single"),
     na.rm = TRUE
   ) +
@@ -555,10 +567,9 @@ p_ratings <- ggplot(
     show.legend = FALSE
   ) +
   scale_x_binned(
-    limits = c(0, 10), 
+    limits = c(0, 10),
     right = FALSE,
-    labels = function(x) ifelse(x %in% 10, x, paste0(x, "+"))
-    # labels = function(x) ifelse(x %in% 10, x, glue("[{x},{x+1})")),
+    labels = function(x) ifelse(x %in% 10, x, paste0(x, "+")),
     expand = c(0, 0)
   ) +
   scale_y_continuous(labels = percent_format(suffix = " %"), expand = expansion(c(0, 0.25))) +
@@ -578,37 +589,31 @@ p_ratings <- ggplot(
       )),
       sep = ": "
     ),
-    caption = "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
+    caption = fig_caption
   ) +
   theme(
     legend.position = "none", 
-    plot.title = element_markdown(),
-    plot.subtitle = element_markdown(),
-    plot.caption = element_markdown(),
     panel.grid.minor = element_blank()
   )
 
-p_ratings + facet_grid(rows = vars(year_rated))
+# p_ratings + facet_grid(rows = vars(year_rated))
 
-# p_ratings +
-#   transition_states(year_rated) +
-#       shadow_wake(wake_length = 1 / 3, wrap = TRUE)
-
-# if (params[["static"]]) {
-#   print(p)
-# } else {
-#   animate(
-#     plot = p_ratings +
-#       transition_states(year) +
-#       shadow_wake(wake_length = 1 / 3, wrap = TRUE), 
-#     width = 5.3 * 2.54,
-#     height = 4.7 * 2.54,
-#     units = "cm", 
-#     res = 120,
-#     bg = theme_get()$plot.background$colour,
-#     renderer = gifski_renderer()
-#   )
-# }
+if (params[["static"]]) {
+  print(p_ratings)
+} else {
+  animate(
+    plot = p_ratings +
+      transition_states(year_rated, transition_length = 2, state_length = 4) +
+      enter_fade() +
+      exit_fade(),
+    width = 6.3 * 2.54,
+    height = 4.7 * 2.54,
+    units = "cm",
+    res = 120,
+    bg = theme_get()$plot.background$colour,
+    renderer = gifski_renderer()
+  )
+}
 ```
 
 
