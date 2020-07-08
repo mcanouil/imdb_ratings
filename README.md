@@ -8,4 +8,4 @@
 <!-- badges: end -->
 
 This is the work-in-progress repo for my [IMDb ratings
-analysis](https://mcanouil.github.io/IMDbRating).
+analysis](https://mcanouil.github.io/imdb_ratings).
