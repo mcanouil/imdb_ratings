@@ -65,6 +65,6 @@ jobs:
 
       - ame: Render ANALYSIS
         run: |
-          Rscript -e 'rmarkdown::render("01-analysis.Rmd", output_file = "index.html", output_dir = here::here("docs"))'
+          Rscript -e 'rmarkdown::render("R/01-analysis.Rmd", output_file = "docs/index.html")'
           git commit docs/index.html -m 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
