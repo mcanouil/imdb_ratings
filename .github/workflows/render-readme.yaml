@@ -1,0 +1,23 @@
+on:
+  push:
+    paths:
+      - 01-analysis.Rmd
+
+name: Render ANALYSIS
+
+jobs:
+  render:
+    name: Render ANALYSIS
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Install rmarkdown
+        run: Rscript -e 'install.packages("rmarkdown")'
+      - name: Render ANALYSIS
+        run: Rscript -e 'rmarkdown::render("01-analysis.Rmd", output_file = "index.html", output_dir = here::here("docs"))'
+      - name: Commit results
+        run: |
+          git commit docs/index.html -m 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
