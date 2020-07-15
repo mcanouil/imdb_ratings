@@ -21,25 +21,9 @@ editor_options:
 options("stringsAsFactors" = FALSE, "width" = 100)
 
 
-### Environment ====================================================================================
-library(here)
-knitr::opts_chunk$set(
-  comment = "#>",
-  results = "asis",
-  include = TRUE,
-  echo = FALSE,
-  warning = FALSE,
-  message = FALSE,
-  dpi = 120,
-  tidy = FALSE,
-  crop = TRUE,
-  autodep = TRUE,
-  fig.align = "center",
-  fig.path = here("images", "fig-")
-)
-
-
 ### Load packages ==================================================================================
+library(here)
+
 suppressPackageStartupMessages({
   library(dplyr)
   library(tidyr)
@@ -60,6 +44,23 @@ suppressPackageStartupMessages({
   library(rvest)
   library(xml2)
 })
+
+
+### Environment ====================================================================================
+knitr::opts_chunk$set(
+  comment = "#>",
+  results = "asis",
+  include = TRUE,
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
+  dpi = 120,
+  tidy = FALSE,
+  crop = TRUE,
+  autodep = TRUE,
+  fig.align = "center",
+  fig.path = here("images", "fig-")
+)
 
 
 ### Define theme ===================================================================================
