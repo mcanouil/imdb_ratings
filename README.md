@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R build
+[![Analysis build
 status](https://github.com/mcanouil/imdb_ratings/workflows/render-analysis/badge.svg)](https://github.com/mcanouil/imdb_ratings/actions)
 <!-- badges: end -->
 
