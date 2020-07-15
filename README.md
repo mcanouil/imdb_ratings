@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![R build
+status](https://github.com/mcanouil/imdb_ratings/workflows/render-analysis/badge.svg)](https://github.com/mcanouil/imdb_ratings/actions)
 <!-- badges: end -->
 
 This is the work-in-progress repo for my [IMDb ratings
