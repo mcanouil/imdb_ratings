@@ -59,6 +59,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          remotes::install_github("mcanouil/mctemplates")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
 
