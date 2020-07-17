@@ -63,7 +63,7 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      - ame: Render ANALYSIS
+      - name: Render ANALYSIS
         run: |
           Rscript -e 'rmarkdown::render("R/01-analysis.Rmd", output_file = "index.html", output_dir = "docs")'
           git commit -am 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
