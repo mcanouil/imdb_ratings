@@ -31,7 +31,6 @@ suppressPackageStartupMessages({
   library(purrr)
   library(sessioninfo)
   library(gt)
-  library(mctemplates)
   library(lubridate)
   library(scales)
   library(ggplot2)
@@ -63,6 +62,20 @@ knitr::opts_chunk$set(
 )
 
 
+### Functions ======================================================================================
+source(here("R/theme_black.R"))
+get_metascore <- function(x) { 
+  map_dbl(.x = paste0("https://www.imdb.com/title/", x, "/"), .f = function(y) {
+    as.numeric(html_text(
+      x = html_node(
+        x = read_html(x = paste0(y, "criticreviews")), 
+        css = "div.metascore"
+      )              
+    )) / 10
+  })
+}
+
+
 ### Define theme ===================================================================================
 options(
   ggplot2.discrete.colour = scale_colour_viridis_d,
@@ -82,19 +95,6 @@ theme_set(
 )
 
 fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
-
-
-### Functions ======================================================================================
-get_metascore <- function(x) { 
-  map_dbl(.x = paste0("https://www.imdb.com/title/", x, "/"), .f = function(y) {
-    as.numeric(html_text(
-      x = html_node(
-        x = read_html(x = paste0(y, "criticreviews")), 
-        css = "div.metascore"
-      )              
-    )) / 10
-  })
-}
 
 
 ### Import data ====================================================================================
