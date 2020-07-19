@@ -94,7 +94,7 @@ theme_set(
     )
 )
 
-fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
+fig_caption <- NULL # "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
 
 
 ### Import data ====================================================================================
