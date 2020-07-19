@@ -585,7 +585,7 @@ p_ratings <- ggplot(
     colour = NULL,
     fill = NULL,
     title = glue(
-      'Distribution of Ratings ({glue_collapse(range(drop_na(select(ratings_ms, year_rated, ends_with("rating")))[["year_rated"]]), sep = "--")}; N = {comma(nrow(drop_na(select(ratings_ms, ends_with("rating")))))})'
+      'Distribution of Ratings ({glue_collapse(range(ratings_ms[["year_rated"]]), sep = "--")}; N = {comma(n_distinct(ratings_ms[["const"]]))})'
     ),
     subtitle = text_legend,
     caption = fig_caption

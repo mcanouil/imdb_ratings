@@ -149,8 +149,8 @@ p_ratings <- ggplot(
     fill = NULL,
     title = "Distribution of Ratings  for Movies Seen in Movie Theatres",
     subtitle = glue(
-      'From {glue_collapse(range(drop_na(select(ggdata, year_rated, ends_with("rating")))[["year_rated"]]), sep = " to ")},',
-      '{comma(nrow(drop_na(select(ggdata, ends_with("rating")))))} movies seen and rated by:', 
+      'From {glue_collapse(range(ggdata[["year_rated"]]), sep = "--")},',
+      '{comma(n_distinct(ggdata[["const"]]))} movies seen and rated by:', 
       text_legend,
       .sep = " "
     )
