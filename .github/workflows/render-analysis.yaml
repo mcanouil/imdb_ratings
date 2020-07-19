@@ -64,6 +64,6 @@ jobs:
 
       - name: Render ANALYSIS
         run: |
-          Rscript -e 'rmarkdown::render("R/01-analysis.Rmd", output_file = "index.html", output_dir = "docs")'
+          Rscript -e 'install.packages('rmarkdown'); rmarkdown::render("R/01-analysis.Rmd", output_file = "index.html", output_dir = "docs")'
           git commit -am 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
