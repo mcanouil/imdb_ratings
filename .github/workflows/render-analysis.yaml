@@ -59,7 +59,7 @@ jobs:
 
       - name: Install dependencies and xkcd font
         run: |
-          remotes::install_deps(dependencies = TRUE)
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
           Rscript -e 'utils::download.file("https://github.com/ipython/xkcd-font/raw/master/xkcd/build/xkcd.otf", file.path(tempdir(), "xkcd.otf"))'
           Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd", "sysfonts"), quiet = TRUE)'
           Rscript -e 'sysfonts::font_add("xkcd", file.path(tempdir(), "xkcd.otf"))'
