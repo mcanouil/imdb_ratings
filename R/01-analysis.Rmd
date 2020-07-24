@@ -7,9 +7,11 @@ date: '`r format(Sys.time(), "%B %d, %Y")`'
 knit: (function(inputFile, encoding) rmarkdown::render(inputFile, output_file = "index.html", encoding = encoding, output_dir = here::here("docs"), intermediates_dir = here::here("docs")))
 output: 
   bookdown::html_document2: 
-    theme: "simplex"
+    theme: simplex
     toc: true
     toc_depth: 3
+    toc_float: 
+      collapsed: true
     fig_width: 6.3
     fig_height:  4.7
     number_sections: true
