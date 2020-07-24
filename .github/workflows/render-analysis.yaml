@@ -61,10 +61,10 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           Rscript -e 'remotes::install_deps(dependencies = TRUE)'
+          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd", "gifski"), quiet = TRUE)'
           cd /usr/share/fonts
           git clone https://github.com/ipython/xkcd-font.git 
           fc-cache -f -v
-          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd"), quiet = TRUE)'
           Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")' 
 
       - name: Render ANALYSIS
