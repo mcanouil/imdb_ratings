@@ -56,12 +56,19 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+          
+      - name: Install xkcd
+        if: runner.os != 'Windows'
+        run: |
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
+          cd /usr/share/fonts/xkcd-font
+          git clone https://github.com/ipython/xkcd-font.git 
+          fc-cache -f -v
+          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd"), quiet = TRUE)'
+          Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")' 
 
       - name: Render ANALYSIS
         run: |
-          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
-          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd", "sysfonts"), quiet = TRUE)'
-          Rscript -e 'utils::download.file("https://github.com/ipython/xkcd-font/raw/master/xkcd/build/xkcd.otf", file.path(tempdir(), "xkcd.otf")); sysfonts::font_add("xkcd", file.path(tempdir(), "xkcd.otf"))'
           Rscript -e 'rmarkdown::render("R/01-analysis.Rmd", output_file = "index.html", output_dir = "docs")'
           git commit -am 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
