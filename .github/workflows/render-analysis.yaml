@@ -60,12 +60,9 @@ jobs:
       - name: Install dependencies and xkcd font
         run: |
           remotes::install_deps(dependencies = TRUE)
-          git clone https://github.com/ipython/xkcd-font.git /usr/share/fonts/xkcd-font
-          fc-cache -f -v
-          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd"), quiet = TRUE)'
-          Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
-          Rscript -e 'sysfonts::font_add("xkcd_regular", "xkcd-Regular.otf")'
-          Rscript -e 'sysfonts::font_add("xkcd_script", "xkcd-script.ttf")'
+          Rscript -e 'utils::download.file("https://github.com/ipython/xkcd-font/raw/master/xkcd/build/xkcd.otf", file.path(tempdir(), "xkcd.otf"))'
+          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd", "sysfonts"), quiet = TRUE)'
+          Rscript -e 'sysfonts::font_add("xkcd", file.path(tempdir(), "xkcd.otf"))'
         shell: Rscript {0}
 
       - name: Render ANALYSIS
