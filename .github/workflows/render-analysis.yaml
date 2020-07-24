@@ -71,4 +71,4 @@ jobs:
         run: |
           Rscript -e 'rmarkdown::render("R/01-analysis.Rmd", output_file = "index.html", output_dir = "docs")'
           git commit -am 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
+          git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
