@@ -57,9 +57,15 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
-      - name: Install dependencies
+      - name: Install dependencies and xkcd font
         run: |
           remotes::install_deps(dependencies = TRUE)
+          git clone https://github.com/ipython/xkcd-font.git /usr/share/fonts/xkcd-font
+          fc-cache -f -v
+          Rscript -e 'utils::install.packages(pkgs = c("showtext", "xkcd"), quiet = TRUE)'
+          Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
+          Rscript -e 'sysfonts::font_add("xkcd_regular", "xkcd-Regular.otf")'
+          Rscript -e 'sysfonts::font_add("xkcd_script", "xkcd-script.ttf")'
         shell: Rscript {0}
 
       - name: Render ANALYSIS
