@@ -6,7 +6,13 @@ author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 knit: (function(inputFile, encoding) rmarkdown::render(inputFile, output_file = "index.html", encoding = encoding, output_dir = here::here("docs"), intermediates_dir = here::here("docs")))
 output: 
-  mctemplates::html_report: default
+  bookdown::html_document2: 
+    toc: true
+    toc_depth: 3
+    fig_width: 6.3
+    fig_height:  4.7
+    number_sections: true
+    self_contained: true
   flexdashboard::flex_dashboard:
     orientation: rows
     vertical_layout: fill
