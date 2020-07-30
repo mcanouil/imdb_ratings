@@ -1,33 +1,36 @@
 const,your_rating,date_rated,title,url,title_type,imdb_rating,runtime_mins,year,genres,num_votes,release_date,directors,month_rated,year_rated,metascore_rating
-tt10183816,3,2020-05-02,Dangerous Lies,https://www.imdb.com/title/tt10183816/,movie,5.2,96,2020,"drama, mystery, thriller",11852,2020-04-30,Michael M. Scott,May,2020,5.1
-tt10369344,5,2020-07-19,L'aventure des Marguerite,https://www.imdb.com/title/tt10369344/,movie,6.4,89,2020,family,32,2020-01-18,Pierre Coré,July,2020,NA
-tt10426916,4,2020-07-09,Tout simplement noir,https://www.imdb.com/title/tt10426916/,movie,6.6,90,2020,comedy,218,2020-07-08,"John Wax, Jean-Pascal Zadi",July,2020,NA
-tt10441958,3,2020-06-28,La bonne épouse,https://www.imdb.com/title/tt10441958/,movie,5.9,109,2020,"comedy, drama",218,2020-01-15,Martin Provost,June,2020,NA
-tt10456740,6,2020-06-21,Balle perdue,https://www.imdb.com/title/tt10456740/,movie,6.2,92,2020,"action, crime, thriller",4749,2020-06-19,Guillaume Pierret,June,2020,7.8
-tt10457128,7,2020-07-21,Été 85,https://www.imdb.com/title/tt10457128/,movie,7,100,2020,drama,242,2020-07-02,François Ozon,July,2020,NA
-tt10714856,5,2020-06-21,Feel the Beat,https://www.imdb.com/title/tt10714856/,movie,6.3,109,2020,"comedy, drama, family",5000,2020-06-19,Elissa Down,June,2020,NA
-tt10886166,1,2020-06-13,365 dni,https://www.imdb.com/title/tt10886166/,movie,3.3,114,2020,"drama, romance",28584,2020-02-07,"Barbara Bialowas, Tomasz Mandes",June,2020,NA
-tt11748354,7,2020-07-04,Les parfums,https://www.imdb.com/title/tt11748354/,movie,6.6,100,2020,comedy,79,2020-01-30,Grégory Magne,July,2020,NA
-tt11958344,6,2020-06-19,Nakitai watashi wa neko wo kaburu,https://www.imdb.com/title/tt11958344/,movie,6.8,104,2020,"animation, adventure, family, fantasy, romance",2612,2020-06-18,"Jun'ichi Satô, Tomotaka Shibayama",June,2020,NA
-tt1552211,1,2020-06-09,The Last Days of American Crime,https://www.imdb.com/title/tt1552211/,movie,3.6,148,2020,"action, crime, thriller",7490,2020-06-05,Olivier Megaton,June,2020,1.5
+tt10183816,3,2020-05-02,Dangerous Lies,https://www.imdb.com/title/tt10183816/,movie,5.2,96,2020,"drama, mystery, thriller",11939,2020-04-30,Michael M. Scott,May,2020,5.1
+tt10369344,5,2020-07-19,L'aventure des Marguerite,https://www.imdb.com/title/tt10369344/,movie,6.5,89,2020,family,38,2020-01-18,Pierre Coré,July,2020,NA
+tt10426916,4,2020-07-09,Tout simplement noir,https://www.imdb.com/title/tt10426916/,movie,6.6,90,2020,comedy,244,2020-07-08,"Jean-Pascal Zadi, John Wax",July,2020,NA
+tt10441958,3,2020-06-28,La bonne épouse,https://www.imdb.com/title/tt10441958/,movie,5.9,109,2020,"comedy, drama",235,2020-01-15,Martin Provost,June,2020,NA
+tt10456740,6,2020-06-21,Balle perdue,https://www.imdb.com/title/tt10456740/,movie,6.2,92,2020,"action, crime, thriller",4876,2020-06-19,Guillaume Pierret,June,2020,7.8
+tt10457128,7,2020-07-21,Été 85,https://www.imdb.com/title/tt10457128/,movie,6.9,100,2020,drama,290,2020-07-02,François Ozon,July,2020,NA
+tt10714856,5,2020-06-21,Feel the Beat,https://www.imdb.com/title/tt10714856/,movie,6.3,109,2020,"comedy, drama, family",5196,2020-06-19,Elissa Down,June,2020,NA
+tt10886166,1,2020-06-13,365 dni,https://www.imdb.com/title/tt10886166/,movie,3.3,114,2020,"drama, romance",29417,2020-02-07,"Barbara Bialowas, Tomasz Mandes",June,2020,NA
+tt11748354,7,2020-07-04,Les parfums,https://www.imdb.com/title/tt11748354/,movie,6.6,100,2020,comedy,84,2020-01-30,Grégory Magne,July,2020,NA
+tt11958344,6,2020-06-19,Nakitai watashi wa neko wo kaburu,https://www.imdb.com/title/tt11958344/,movie,6.8,104,2020,"animation, adventure, family, fantasy, romance",2717,2020-06-18,"Jun'ichi Satô, Tomotaka Shibayama",June,2020,NA
+tt12588448,1,2020-07-28,The Larva Island Movie,https://www.imdb.com/title/tt12588448/,movie,5,89,2020,animation,127,2020-07-23,Byoung-Wook Ahn,July,2020,NA
+tt1552211,1,2020-06-09,The Last Days of American Crime,https://www.imdb.com/title/tt1552211/,movie,3.6,148,2020,"action, crime, thriller",7595,2020-06-05,Olivier Megaton,June,2020,1.5
+tt3152592,3,2020-07-10,Scoob!,https://www.imdb.com/title/tt3152592/,movie,5.7,93,2020,"animation, adventure, comedy, family, mystery",12522,2020-05-15,Tony Cervone,July,2020,4.3
+tt6818118,4,2020-07-05,Jumbo,https://www.imdb.com/title/tt6818118/,movie,6.3,93,2020,drama,247,2020-01-24,Zoé Wittock,July,2020,5.4
+tt7438706,3,2020-07-28,Adorables,https://www.imdb.com/title/tt7438706/,movie,4.5,91,2020,comedy,10,2020-07-22,Solange Cicurel,July,2020,NA
+tt7556122,7,2020-07-10,The Old Guard,https://www.imdb.com/title/tt7556122/,movie,6.7,125,2020,"action, adventure, fantasy, thriller",74725,2020-07-10,Gina Prince-Bythewood,July,2020,7
+tt8145202,3,2020-07-21,The F**k-It List,https://www.imdb.com/title/tt8145202/,movie,5.1,103,2020,comedy,2602,2020-07-01,Michael Duggan,July,2020,NA
+tt8580274,4,2020-06-29,Eurovision Song Contest: The Story of Fire Saga,https://www.imdb.com/title/tt8580274/,movie,6.6,123,2020,"comedy, music",53270,2020-06-26,David Dobkin,June,2020,5
+tt8750570,5,2020-04-26,Sergio,https://www.imdb.com/title/tt8750570/,movie,6.1,118,2020,"biography, drama, history, romance",6855,2020-01-28,Greg Barker,April,2020,5.5
+tt8851668,3,2020-05-31,The Lovebirds,https://www.imdb.com/title/tt8851668/,movie,6,86,2020,"action, comedy, crime, mystery, romance, thriller",16840,2020-05-22,Michael Showalter,May,2020,5.9
+tt8936646,4,2020-04-24,Extraction,https://www.imdb.com/title/tt8936646/,movie,6.7,116,2020,"action, thriller",135212,2020-04-24,Sam Hargrave,April,2020,5.6
+tt9076562,5,2020-07-07,Irresistible,https://www.imdb.com/title/tt9076562/,movie,6.2,101,2020,"comedy, drama",4683,2020-06-26,Jon Stewart,July,2020,4.7
+tt9261218,6,2020-05-22,Uncorked,https://www.imdb.com/title/tt9261218/,movie,6.2,104,2020,drama,3451,2020-03-27,Prentice Penny,May,2020,6.2
+tt9303772,3,2020-07-15,Divorce Club,https://www.imdb.com/title/tt9303772/,movie,5.5,108,2020,comedy,71,2020-01-17,Michaël Youn,July,2020,NA
+tt9308382,6,2020-07-14,The High Note,https://www.imdb.com/title/tt9308382/,movie,6.2,113,2020,"drama, music, romance",2608,2020-05-29,Nisha Ganatra,July,2020,5.8
+tt9619798,1,2020-05-14,The Wrong Missy,https://www.imdb.com/title/tt9619798/,movie,5.7,90,2020,"comedy, romance",27098,2020-05-13,Tyler Spindel,May,2020,3.3
+tt9686708,7,2020-07-30,The King of Staten Island,https://www.imdb.com/title/tt9686708/,movie,7.2,136,2020,"comedy, drama",16692,2020-06-12,Judd Apatow,July,2020,6.7
+tt9747594,7,2020-07-10,Beasts That Cling to the Straw,https://www.imdb.com/title/tt9747594/,movie,7.1,108,2020,"drama, mystery, thriller",809,2020-01-25,Kim Yong-Hoon,July,2020,NA
+tt9777644,5,2020-06-14,Da 5 Bloods,https://www.imdb.com/title/tt9777644/,movie,6.5,154,2020,"adventure, drama, war",26342,2020-06-12,Spike Lee,June,2020,8.2
+tt9784456,4,2020-07-24,The Kissing Booth 2,https://www.imdb.com/title/tt9784456/,movie,6.1,134,2020,"comedy, romance",7981,2020-07-24,Vince Marcello,July,2020,3.9
 tt2076298,7,2020-07-25,Yip Man 4,https://www.imdb.com/title/tt2076298/,movie,7.1,107,2019,"action, biography, drama, history",18858,2019-12-19,Wilson Yip,July,2020,6.2
-tt3152592,3,2020-07-10,Scoob!,https://www.imdb.com/title/tt3152592/,movie,5.7,93,2020,"animation, adventure, comedy, family, mystery",12155,2020-05-15,Tony Cervone,July,2020,4.3
 tt4155534,5,2020-07-24,Animal Crackers,https://www.imdb.com/title/tt4155534/,movie,5.6,105,2017,"animation, adventure, comedy, family, fantasy",724,2017-06-12,"Tony Bancroft, Jaime Maestro, Scott Christian Sava",July,2020,6.2
-tt6818118,4,2020-07-05,Jumbo,https://www.imdb.com/title/tt6818118/,movie,6.4,93,2020,drama,236,2020-01-24,Zoé Wittock,July,2020,5.4
-tt7556122,7,2020-07-10,The Old Guard,https://www.imdb.com/title/tt7556122/,movie,6.7,125,2020,"action, adventure, fantasy, thriller",68999,2020-07-10,Gina Prince-Bythewood,July,2020,7
-tt8145202,3,2020-07-21,The F**k-It List,https://www.imdb.com/title/tt8145202/,movie,5.1,103,2020,comedy,2382,2020-07-01,Michael Duggan,July,2020,NA
-tt8580274,4,2020-06-29,Eurovision Song Contest: The Story of Fire Saga,https://www.imdb.com/title/tt8580274/,movie,6.6,123,2020,"comedy, music",51551,2020-06-26,David Dobkin,June,2020,5
-tt8750570,5,2020-04-26,Sergio,https://www.imdb.com/title/tt8750570/,movie,6.1,118,2020,"biography, drama, history, romance",6811,2020-01-28,Greg Barker,April,2020,5.5
-tt8851668,3,2020-05-31,The Lovebirds,https://www.imdb.com/title/tt8851668/,movie,6,86,2020,"action, comedy, crime, mystery, romance, thriller",16638,2020-05-22,Michael Showalter,May,2020,5.9
-tt8936646,4,2020-04-24,Extraction,https://www.imdb.com/title/tt8936646/,movie,6.7,116,2020,"action, thriller",133898,2020-04-24,Sam Hargrave,April,2020,5.6
-tt9076562,5,2020-07-07,Irresistible,https://www.imdb.com/title/tt9076562/,movie,6.2,101,2020,"comedy, drama",4534,2020-06-26,Jon Stewart,July,2020,4.7
-tt9261218,6,2020-05-22,Uncorked,https://www.imdb.com/title/tt9261218/,movie,6.2,104,2020,drama,3432,2020-03-27,Prentice Penny,May,2020,6.2
-tt9303772,3,2020-07-15,Divorce Club,https://www.imdb.com/title/tt9303772/,movie,5.2,108,2020,comedy,53,2020-01-17,Michaël Youn,July,2020,NA
-tt9308382,6,2020-07-14,The High Note,https://www.imdb.com/title/tt9308382/,movie,6.2,113,2020,"drama, music, romance",2542,2020-05-29,Nisha Ganatra,July,2020,5.8
-tt9619798,1,2020-05-14,The Wrong Missy,https://www.imdb.com/title/tt9619798/,movie,5.7,90,2020,"comedy, romance",26785,2020-05-13,Tyler Spindel,May,2020,3.3
-tt9747594,7,2020-07-10,Beasts That Cling to the Straw,https://www.imdb.com/title/tt9747594/,movie,7.1,108,2020,"drama, mystery, thriller",781,2020-01-25,Kim Yong-Hoon,July,2020,NA
-tt9777644,5,2020-06-14,Da 5 Bloods,https://www.imdb.com/title/tt9777644/,movie,6.6,154,2020,"adventure, drama, war",25935,2020-06-12,Spike Lee,June,2020,8.2
-tt9784456,4,2020-07-24,The Kissing Booth 2,https://www.imdb.com/title/tt9784456/,movie,6.2,130,2020,"comedy, romance",4100,2020-07-24,Vince Marcello,July,2020,3.9
 tt10540242,2,2020-04-11,The Main Event,https://www.imdb.com/title/tt10540242/,movie,4.7,101,2020,"action, comedy, family",1523,2020-04-10,Jay Karas,April,2020,5.2
 tt5096470,5,2020-04-11,Love Wedding Repeat,https://www.imdb.com/title/tt5096470/,movie,5.5,100,2020,"comedy, romance",14741,2020-04-10,Dean Craig,April,2020,4.1
 tt9898858,2,2020-04-14,Coffee & Kareem,https://www.imdb.com/title/tt9898858/,movie,5.1,88,2020,"action, comedy",10184,2020-04-03,Michael Dowse,April,2020,3.5
