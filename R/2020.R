@@ -1,6 +1,5 @@
 library(tibble)
 library(readr)
-library(lubridate)
 library(here)
 
 movies_db <- tribble(
@@ -60,7 +59,8 @@ movies_db <- tribble(
   "2020-07-21 20:30", 6, "LILLE", "tt10457128",
   "2020-07-25 16:30", 9, "LILLE", "tt2076298",
   "2020-07-26 18:30", 10, "LILLE", "tt9686708",
-  "2020-07-28 21:00", 6, "LILLE", "tt7438706"
+  "2020-07-28 21:00", 6, "LILLE", "tt7438706",
+  "2020-07-31 16:05", 13, "LILLE", "tt9855978"
 )
 
 write_csv(
