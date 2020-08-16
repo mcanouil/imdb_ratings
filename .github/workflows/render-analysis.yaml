@@ -1,10 +1,7 @@
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    paths:
+      - R/01-analysis.Rmd
 
 name: render-analysis
 
