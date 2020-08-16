@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - R/01-analysis.Rmd
+      - data/ratings.csv
 
 name: render-analysis
 
