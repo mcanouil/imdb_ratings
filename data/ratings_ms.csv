@@ -1,55 +1,64 @@
 const,your_rating,date_rated,title,url,title_type,imdb_rating,runtime_mins,year,genres,num_votes,release_date,directors,month_rated,year_rated,metascore_rating
-tt10003008,5,2020-08-19,The Rental,https://www.imdb.com/title/tt10003008/,movie,5.7,88,2020,"horror, thriller",10480,2020-06-18,Dave Franco,August,2020,6.3
-tt10059518,6,2020-08-25,Unhinged,https://www.imdb.com/title/tt10059518/,movie,6.2,90,2020,"action, thriller",6042,2020-07-16,Derrick Borte,August,2020,4
-tt10065694,4,2020-09-19,Antebellum,https://www.imdb.com/title/tt10065694/,movie,5.6,105,2020,"horror, mystery, thriller",2753,2020-09-02,"Gerard Bush, Christopher Renz",September,2020,4.6
-tt10233406,3,2020-08-05,Les blagues de Toto,https://www.imdb.com/title/tt10233406/,movie,3.8,84,2020,comedy,32,2020-08-05,Pascal Bourdiaux,August,2020,NA
-tt10276470,4,2020-08-15,Work It,https://www.imdb.com/title/tt10276470/,movie,6.1,93,2020,"comedy, music",7179,2020-08-07,Laura Terruso,August,2020,5.8
-tt10366254,3,2020-08-04,Terrible jungle,https://www.imdb.com/title/tt10366254/,movie,5.3,91,2020,"adventure, comedy",134,2020-01-18,"David Caviglioli, Hugo Benamozig",August,2020,NA
+tt10003008,5,2020-08-19,The Rental,https://www.imdb.com/title/tt10003008/,movie,5.7,88,2020,"horror, thriller",10636,2020-06-18,Dave Franco,August,2020,6.3
+tt10059518,6,2020-08-25,Unhinged,https://www.imdb.com/title/tt10059518/,movie,6.1,90,2020,"action, thriller",6274,2020-07-16,Derrick Borte,August,2020,4
+tt10065694,4,2020-09-19,Antebellum,https://www.imdb.com/title/tt10065694/,movie,5.5,105,2020,"drama, horror, mystery, thriller",4446,2020-09-02,"Gerard Bush, Christopher Renz",September,2020,4.4
+tt10233406,3,2020-08-05,Les blagues de Toto,https://www.imdb.com/title/tt10233406/,movie,3.7,84,2020,comedy,33,2020-08-05,Pascal Bourdiaux,August,2020,NA
+tt10276470,4,2020-08-15,Work It,https://www.imdb.com/title/tt10276470/,movie,6.1,93,2020,"comedy, music",7268,2020-08-07,Laura Terruso,August,2020,5.8
+tt10366254,3,2020-08-04,Terrible jungle,https://www.imdb.com/title/tt10366254/,movie,5.3,91,2020,"adventure, comedy",134,2020-01-18,"Hugo Benamozig, David Caviglioli",August,2020,NA
 tt10369344,5,2020-07-19,L'aventure des Marguerite,https://www.imdb.com/title/tt10369344/,movie,6.7,89,2020,family,50,2020-01-18,Pierre Coré,July,2020,NA
-tt10426916,4,2020-07-09,Tout simplement noir,https://www.imdb.com/title/tt10426916/,movie,6.4,90,2020,comedy,381,2020-07-08,"John Wax, Jean-Pascal Zadi",July,2020,NA
-tt10441958,3,2020-06-28,La bonne épouse,https://www.imdb.com/title/tt10441958/,movie,6.3,109,2020,"comedy, drama",473,2020-01-15,Martin Provost,June,2020,NA
-tt10456740,6,2020-06-21,Balle perdue,https://www.imdb.com/title/tt10456740/,movie,6.2,92,2020,"action, crime, thriller",5802,2020-06-19,Guillaume Pierret,June,2020,7.8
-tt10457128,7,2020-07-21,Été 85,https://www.imdb.com/title/tt10457128/,movie,7,100,2020,drama,730,2020-07-02,François Ozon,July,2020,6.8
-tt10627352,2,2020-08-27,Effacer l'historique,https://www.imdb.com/title/tt10627352/,movie,6.1,110,2020,"comedy, drama",490,2020-02-24,"Gustave Kervern, Benoît Delépine",August,2020,NA
-tt10714856,5,2020-06-21,Feel the Beat,https://www.imdb.com/title/tt10714856/,movie,6.3,109,2020,"comedy, drama, family",6560,2020-06-19,Elissa Down,June,2020,NA
-tt10886166,1,2020-06-13,365 dni,https://www.imdb.com/title/tt10886166/,movie,3.3,114,2020,"drama, romance",37125,2020-02-07,"Barbara Bialowas, Tomasz Mandes",June,2020,NA
-tt10888708,4,2020-08-29,The Sleepover,https://www.imdb.com/title/tt10888708/,movie,5.5,100,2020,"action, adventure, comedy, family",5399,2020-08-21,Trish Sie,August,2020,4.6
-tt10965792,6,2020-09-09,Belle fille,https://www.imdb.com/title/tt10965792/,movie,5.6,96,2020,NA,29,2020-08-19,Méliane Marcaggi,September,2020,NA
-tt11013434,5,2020-09-16,Antoinette dans les Cévennes,https://www.imdb.com/title/tt11013434/,movie,6.7,97,2020,comedy,65,2020-08-28,Caroline Vignal,September,2020,NA
-tt11018048,5,2020-09-12,Le bonheur des uns...,https://www.imdb.com/title/tt11018048/,movie,6.1,104,2020,comedy,66,2020-09-09,Daniel Cohen,September,2020,NA
-tt11024272,2,2020-09-13,The Babysitter: Killer Queen,https://www.imdb.com/title/tt11024272/,movie,5.9,101,2020,"comedy, horror",12528,2020-09-10,McG,September,2020,2.2
-tt11032990,1,2020-08-18,Malibu Rescue: The Next Wave,https://www.imdb.com/title/tt11032990/,movie,4.6,68,2020,"action, adventure, comedy, family",430,2020-08-04,Savage Steve Holland,August,2020,NA
+tt10426916,4,2020-07-09,Tout simplement noir,https://www.imdb.com/title/tt10426916/,movie,6.4,90,2020,comedy,384,2020-07-08,"Jean-Pascal Zadi, John Wax",July,2020,NA
+tt10441958,3,2020-06-28,La bonne épouse,https://www.imdb.com/title/tt10441958/,movie,6.3,109,2020,"comedy, drama",484,2020-01-15,Martin Provost,June,2020,NA
+tt10456740,6,2020-06-21,Balle perdue,https://www.imdb.com/title/tt10456740/,movie,6.2,92,2020,"action, crime, thriller",5849,2020-06-19,Guillaume Pierret,June,2020,7.8
+tt10457128,7,2020-07-21,Été 85,https://www.imdb.com/title/tt10457128/,movie,7,100,2020,drama,759,2020-07-02,François Ozon,July,2020,6.8
+tt10627352,2,2020-08-27,Effacer l'historique,https://www.imdb.com/title/tt10627352/,movie,6.1,110,2020,"comedy, drama",501,2020-02-24,"Gustave Kervern, Benoît Delépine",August,2020,NA
+tt10714856,5,2020-06-21,Feel the Beat,https://www.imdb.com/title/tt10714856/,movie,6.3,109,2020,"comedy, drama, family",6605,2020-06-19,Elissa Down,June,2020,NA
+tt10888708,4,2020-08-29,The Sleepover,https://www.imdb.com/title/tt10888708/,movie,5.5,100,2020,"action, adventure, comedy, family",5520,2020-08-21,Trish Sie,August,2020,4.6
+tt10965792,6,2020-09-09,Belle fille,https://www.imdb.com/title/tt10965792/,movie,5.6,96,2020,comedy,30,2020-08-19,Méliane Marcaggi,September,2020,NA
+tt11013434,5,2020-09-16,Antoinette dans les Cévennes,https://www.imdb.com/title/tt11013434/,movie,6.8,97,2020,comedy,98,2020-08-28,Caroline Vignal,September,2020,NA
+tt11018048,5,2020-09-12,Le bonheur des uns...,https://www.imdb.com/title/tt11018048/,movie,6,104,2020,comedy,80,2020-09-09,Daniel Cohen,September,2020,NA
+tt11024272,2,2020-09-13,The Babysitter: Killer Queen,https://www.imdb.com/title/tt11024272/,movie,5.9,101,2020,"comedy, horror",14154,2020-09-10,McG,September,2020,2.2
+tt11032990,1,2020-08-18,Malibu Rescue: The Next Wave,https://www.imdb.com/title/tt11032990/,movie,4.6,68,2020,"action, adventure, comedy, family",434,2020-08-04,Savage Steve Holland,August,2020,NA
+tt11127690,3,2020-09-20,El practicante,https://www.imdb.com/title/tt11127690/,movie,5.6,94,2020,"drama, thriller",3378,2020-09-16,Carles Torras,September,2020,NA
 tt11154574,4,2020-08-13,Voir le jour,https://www.imdb.com/title/tt11154574/,movie,6.2,91,2020,drama,22,2020-08-12,Marion Laine,August,2020,NA
-tt11958344,6,2020-06-19,Nakitai watashi wa neko wo kaburu,https://www.imdb.com/title/tt11958344/,movie,6.7,104,2020,"animation, adventure, family, fantasy, romance",3673,2020-06-18,"Jun'ichi Satô, Tomotaka Shibayama",June,2020,NA
-tt12588448,1,2020-07-28,The Larva Island Movie,https://www.imdb.com/title/tt12588448/,movie,5.1,89,2020,animation,333,2020-07-23,Byoung-Wook Ahn,July,2020,NA
-tt12633744,2,2020-08-14,T'as pécho?,https://www.imdb.com/title/tt12633744/,movie,5.1,98,2020,comedy,26,2020-07-29,Adeline Picault,August,2020,NA
-tt3152592,3,2020-07-10,Scoob!,https://www.imdb.com/title/tt3152592/,movie,5.7,93,2020,"animation, adventure, comedy, family, mystery",15232,2020-05-15,Tony Cervone,July,2020,4.3
-tt4682266,5,2020-08-29,The New Mutants,https://www.imdb.com/title/tt4682266/,movie,5.6,94,2020,"action, horror, sci-fi",10208,2020-08-26,Josh Boone,August,2020,4.3
-tt5206260,5,2020-08-30,The Willoughbys,https://www.imdb.com/title/tt5206260/,movie,6.4,90,2020,"animation, adventure, comedy, family",11290,2020-04-22,"Rob Lodermeier, Kris Pearn, Cory Evans",August,2020,6.8
-tt6587640,5,2020-08-09,Trolls World Tour,https://www.imdb.com/title/tt6587640/,movie,6.1,90,2020,"animation, adventure, comedy, family, fantasy, musical",12637,2020-03-12,"David P. Smith, Walt Dohrn",August,2020,5.1
-tt6723592,7,2020-09-01,Tenet,https://www.imdb.com/title/tt6723592/,movie,7.8,150,2020,"action, sci-fi",107001,2020-08-22,Christopher Nolan,September,2020,6.9
-tt6818118,4,2020-07-05,Jumbo,https://www.imdb.com/title/tt6818118/,movie,6.3,93,2020,"drama, fantasy",344,2020-01-24,Zoé Wittock,July,2020,5.4
+tt11508096,6,2020-09-22,J'irai mourir dans les Carpates,https://www.imdb.com/title/tt11508096/,movie,6.3,96,2020,"comedy, mystery",45,2020-08-31,Antoine de Maximy,September,2020,NA
+tt11958344,6,2020-06-19,Nakitai watashi wa neko wo kaburu,https://www.imdb.com/title/tt11958344/,movie,6.7,104,2020,"animation, adventure, family, fantasy, romance",3715,2020-06-18,"Jun'ichi Satô, Tomotaka Shibayama",June,2020,NA
+tt12588448,1,2020-07-28,The Larva Island Movie,https://www.imdb.com/title/tt12588448/,movie,5.1,89,2020,animation,337,2020-07-23,Byoung-Wook Ahn,July,2020,NA
+tt12633744,2,2020-08-14,T'as pécho?,https://www.imdb.com/title/tt12633744/,movie,4.9,98,2020,comedy,27,2020-07-29,Adeline Picault,August,2020,NA
+tt1403981,5,2020-09-20,Remember Me,https://www.imdb.com/title/tt1403981/,movie,7.1,113,2010,"drama, romance",136137,2010-03-01,Allen Coulter,September,2020,4
+tt1545304,4,2020-09-20,Desperados,https://www.imdb.com/title/tt1545304/,movie,5.1,105,2020,"comedy, romance",7338,2020-07-03,LP,September,2020,4.1
+tt1621045,5,2020-09-20,Think Like a Man,https://www.imdb.com/title/tt1621045/,movie,6.6,123,2012,"comedy, romance",43391,2012-02-10,Tim Story,September,2020,5.1
+tt3152592,3,2020-07-10,Scoob!,https://www.imdb.com/title/tt3152592/,movie,5.7,93,2020,"animation, adventure, comedy, family, mystery",15332,2020-05-15,Tony Cervone,July,2020,4.3
+tt0364045,4,2020-09-21,Taking Lives,https://www.imdb.com/title/tt0364045/,movie,6.3,103,2004,"crime, mystery, thriller",79091,2004-03-16,D.J. Caruso,September,2020,3.8
+tt0405422,7,2020-09-20,The 40 Year Old Virgin,https://www.imdb.com/title/tt0405422/,movie,7.1,116,2005,"comedy, romance",388880,2005-08-11,Judd Apatow,September,2020,7.3
+tt4682266,5,2020-08-29,The New Mutants,https://www.imdb.com/title/tt4682266/,movie,5.5,94,2020,"action, horror, sci-fi",10738,2020-08-26,Josh Boone,August,2020,4.3
+tt5206260,5,2020-08-30,The Willoughbys,https://www.imdb.com/title/tt5206260/,movie,6.4,90,2020,"animation, adventure, comedy, family",11317,2020-04-22,"Rob Lodermeier, Kris Pearn, Cory Evans",August,2020,6.8
+tt6587640,5,2020-08-09,Trolls World Tour,https://www.imdb.com/title/tt6587640/,movie,6.1,90,2020,"animation, adventure, comedy, family, fantasy, musical",12791,2020-03-12,"David P. Smith, Walt Dohrn",August,2020,5.1
+tt6723592,7,2020-09-01,Tenet,https://www.imdb.com/title/tt6723592/,movie,7.8,150,2020,"action, sci-fi",112021,2020-08-22,Christopher Nolan,September,2020,6.9
+tt6818118,4,2020-07-05,Jumbo,https://www.imdb.com/title/tt6818118/,movie,6.3,93,2020,"drama, fantasy",347,2020-01-24,Zoé Wittock,July,2020,5.4
+tt7395114,6,2020-09-20,The Devil All the Time,https://www.imdb.com/title/tt7395114/,movie,7.2,138,2020,"crime, drama, thriller",30761,2020-09-16,Antonio Campos,September,2020,5.4
 tt7438706,3,2020-07-28,Adorables,https://www.imdb.com/title/tt7438706/,movie,4.7,91,2020,comedy,25,2020-07-22,Solange Cicurel,July,2020,NA
-tt7550000,5,2020-08-15,Project Power,https://www.imdb.com/title/tt7550000/,movie,6,113,2020,"action, crime, sci-fi, thriller",52439,2020-08-14,"Henry Joost, Ariel Schulman",August,2020,5.1
-tt7556122,7,2020-07-10,The Old Guard,https://www.imdb.com/title/tt7556122/,movie,6.7,125,2020,"action, adventure, fantasy, thriller",103606,2020-07-10,Gina Prince-Bythewood,July,2020,7
-tt7737786,6,2020-08-07,Greenland,https://www.imdb.com/title/tt7737786/,movie,6.5,119,2020,"action, thriller",2029,2020-07-29,Ric Roman Waugh,August,2020,NA
-tt7772582,8,2020-08-24,Never Rarely Sometimes Always,https://www.imdb.com/title/tt7772582/,movie,7.3,101,2020,drama,6569,2020-01-24,Eliza Hittman,August,2020,9.1
-tt7939766,6,2020-09-16,I'm Thinking of Ending Things,https://www.imdb.com/title/tt7939766/,movie,6.8,134,2020,"drama, thriller",31521,2020-08-28,Charlie Kaufman,September,2020,7.8
-tt8145202,3,2020-07-21,The F**k-It List,https://www.imdb.com/title/tt8145202/,movie,5.1,103,2020,comedy,3689,2020-07-01,Michael Duggan,July,2020,NA
+tt7550000,5,2020-08-15,Project Power,https://www.imdb.com/title/tt7550000/,movie,6,113,2020,"action, crime, sci-fi, thriller",53421,2020-08-14,"Henry Joost, Ariel Schulman",August,2020,5.1
+tt7556122,7,2020-07-10,The Old Guard,https://www.imdb.com/title/tt7556122/,movie,6.7,125,2020,"action, adventure, fantasy, thriller",104507,2020-07-10,Gina Prince-Bythewood,July,2020,7
+tt7737786,6,2020-08-07,Greenland,https://www.imdb.com/title/tt7737786/,movie,6.5,119,2020,"action, thriller",2159,2020-07-29,Ric Roman Waugh,August,2020,NA
+tt7772582,8,2020-08-24,Never Rarely Sometimes Always,https://www.imdb.com/title/tt7772582/,movie,7.3,101,2020,drama,6640,2020-01-24,Eliza Hittman,August,2020,9.1
+tt7939766,6,2020-09-16,I'm Thinking of Ending Things,https://www.imdb.com/title/tt7939766/,movie,6.7,134,2020,"drama, thriller",33820,2020-08-28,Charlie Kaufman,September,2020,7.8
+tt8145202,3,2020-07-21,The F**k-It List,https://www.imdb.com/title/tt8145202/,movie,5.1,103,2020,comedy,3719,2020-07-01,Michael Duggan,July,2020,NA
+tt8580274,4,2020-06-29,Eurovision Song Contest: The Story of Fire Saga,https://www.imdb.com/title/tt8580274/,movie,6.5,123,2020,"comedy, music",64514,2020-06-26,David Dobkin,June,2020,5
+tt9076562,5,2020-07-07,Irresistible,https://www.imdb.com/title/tt9076562/,movie,6.2,101,2020,"comedy, drama",6981,2020-06-26,Jon Stewart,July,2020,4.7
+tt9204164,6,2020-08-06,Bigfoot Family,https://www.imdb.com/title/tt9204164/,movie,7.1,89,2020,"animation, family",40,2020-06-15,"Ben Stassen, Jeremy Degruson",August,2020,NA
+tt9288726,6,2020-09-13,La daronne,https://www.imdb.com/title/tt9288726/,movie,5.8,104,2020,"comedy, crime, drama",171,2020-01-16,Jean-Paul Salomé,September,2020,NA
+tt9303772,3,2020-07-15,Divorce Club,https://www.imdb.com/title/tt9303772/,movie,4.6,108,2020,comedy,168,2020-01-17,Michaël Youn,July,2020,NA
+tt9308382,6,2020-07-14,The High Note,https://www.imdb.com/title/tt9308382/,movie,6.3,113,2020,"drama, music, romance",3845,2020-05-29,Nisha Ganatra,July,2020,5.8
+tt9665968,7,2020-08-30,Petit pays,https://www.imdb.com/title/tt9665968/,movie,7,111,2020,drama,134,2020-02-03,Eric Barbier,August,2020,NA
+tt9686708,7,2020-07-30,The King of Staten Island,https://www.imdb.com/title/tt9686708/,movie,7.1,136,2020,"comedy, drama",23821,2020-06-12,Judd Apatow,July,2020,6.7
+tt9747594,7,2020-07-10,Beasts That Cling to the Straw,https://www.imdb.com/title/tt9747594/,movie,7,108,2020,"crime, drama, thriller",1246,2020-01-25,Yong-Hoon Kim,July,2020,NA
+tt9784456,4,2020-07-24,The Kissing Booth 2,https://www.imdb.com/title/tt9784456/,movie,5.9,134,2020,"comedy, romance",16234,2020-07-24,Vince Marcello,July,2020,3.9
+tt9850344,5,2020-09-03,Police,https://www.imdb.com/title/tt9850344/,movie,5.1,98,2020,"crime, drama",212,2020-02-23,Anne Fontaine,September,2020,NA
+tt9855978,4,2020-07-31,Drømmebyggerne,https://www.imdb.com/title/tt9855978/,movie,6.3,81,2020,"animation, adventure, comedy, drama",197,2020-02-06,"Kim Hagen Jensen, Tonni Zinck",July,2020,NA
+tt9861288,5,2020-09-23,Boutchou,https://www.imdb.com/title/tt9861288/,movie,NA,78,2020,comedy,NA,2020-09-23,Adrien Piquet-Gauthier,September,2020,NA
+tt10886166,1,2020-06-13,365 dni,https://www.imdb.com/title/tt10886166/,movie,3.3,114,2020,"drama, romance",37125,2020-02-07,"Barbara Bialowas, Tomasz Mandes",June,2020,NA
 tt0814768,6,2020-09-18,Le prix à payer,https://www.imdb.com/title/tt0814768/,movie,5.6,95,2007,comedy,969,2007-04-04,Alexandra Leclère,September,2020,NA
-tt8580274,4,2020-06-29,Eurovision Song Contest: The Story of Fire Saga,https://www.imdb.com/title/tt8580274/,movie,6.5,123,2020,"comedy, music",64255,2020-06-26,David Dobkin,June,2020,5
-tt9076562,5,2020-07-07,Irresistible,https://www.imdb.com/title/tt9076562/,movie,6.2,101,2020,"comedy, drama",6871,2020-06-26,Jon Stewart,July,2020,4.7
-tt9204164,6,2020-08-06,Bigfoot Family,https://www.imdb.com/title/tt9204164/,movie,7,89,2020,"animation, family",39,2020-06-15,"Ben Stassen, Jeremy Degruson",August,2020,NA
-tt9288726,6,2020-09-13,La daronne,https://www.imdb.com/title/tt9288726/,movie,5.7,104,2020,"comedy, crime, drama",145,2020-01-16,Jean-Paul Salomé,September,2020,NA
-tt9303772,3,2020-07-15,Divorce Club,https://www.imdb.com/title/tt9303772/,movie,4.6,108,2020,comedy,167,2020-01-17,Michaël Youn,July,2020,NA
-tt9308382,6,2020-07-14,The High Note,https://www.imdb.com/title/tt9308382/,movie,6.3,113,2020,"drama, music, romance",3793,2020-05-29,Nisha Ganatra,July,2020,5.8
-tt9665968,7,2020-08-30,Petit pays,https://www.imdb.com/title/tt9665968/,movie,7,111,2020,drama,125,2020-02-03,Eric Barbier,August,2020,NA
-tt9686708,7,2020-07-30,The King of Staten Island,https://www.imdb.com/title/tt9686708/,movie,7.1,136,2020,"comedy, drama",23574,2020-06-12,Judd Apatow,July,2020,6.7
-tt9747594,7,2020-07-10,Beasts That Cling to the Straw,https://www.imdb.com/title/tt9747594/,movie,7,108,2020,"crime, drama, thriller",1221,2020-01-25,Yong-Hoon Kim,July,2020,NA
 tt9777644,5,2020-06-14,Da 5 Bloods,https://www.imdb.com/title/tt9777644/,movie,6.5,154,2020,"adventure, drama, war",31142,2020-06-12,Spike Lee,June,2020,8.2
-tt9784456,4,2020-07-24,The Kissing Booth 2,https://www.imdb.com/title/tt9784456/,movie,5.9,134,2020,"comedy, romance",16094,2020-07-24,Vince Marcello,July,2020,3.9
-tt9850344,5,2020-09-03,Police,https://www.imdb.com/title/tt9850344/,movie,5.2,98,2020,"crime, drama",203,2020-02-23,Anne Fontaine,September,2020,NA
-tt9855978,4,2020-07-31,Drømmebyggerne,https://www.imdb.com/title/tt9855978/,movie,6.3,81,2020,"animation, adventure, comedy, drama",193,2020-02-06,"Kim Hagen Jensen, Tonni Zinck",July,2020,NA
 tt11276598,1,2020-09-13,Pets United,https://www.imdb.com/title/tt11276598/,movie,3.4,89,2019,"animation, adventure, comedy",443,2019-11-08,Reinhard Klooss,September,2020,NA
 tt1552211,1,2020-06-09,The Last Days of American Crime,https://www.imdb.com/title/tt1552211/,movie,3.6,148,2020,"action, crime, thriller",8318,2020-06-05,Olivier Megaton,June,2020,1.5
 tt2557490,4,2020-09-14,A Million Ways to Die in the West,https://www.imdb.com/title/tt2557490/,movie,6.1,116,2014,"comedy, western",170976,2014-05-15,Seth MacFarlane,September,2020,4.4
