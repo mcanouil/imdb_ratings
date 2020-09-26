@@ -27,13 +27,11 @@ editor_options:
 ---
 
 ```{r setup, include = FALSE}
-options("stringsAsFactors" = FALSE, "width" = 100)
-
-
 ### Load packages ==================================================================================
 library(here)
 
 suppressPackageStartupMessages({
+  library(tibble)
   library(dplyr)
   library(tidyr)
   library(readr)
@@ -107,20 +105,14 @@ fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Cano
 
 
 ### Import data ====================================================================================
-movies_db <- map_df(
-  .x = list.files(here("R"), "[0-9]{4}.R", full.names = TRUE), 
-  .f = function(x) { 
-    source(x)
-    read_csv(
-      file = here("data", gsub(".R$", ".csv", basename(x))), 
-      col_types = cols(
-        date_time = col_datetime(format = ""),
-        room = col_double(),
-        theatre = col_character(),
-        imdb_id = col_character()
-      )
-    )
-  }
+movies_db <- read_csv(
+  file = here("data", "theatres.csv"), 
+  col_types = cols(
+    date_time = col_datetime(format = ""),
+    room = col_double(),
+    theatre = col_character(),
+    imdb_id = col_character()
+  )
 ) %>% 
   mutate(
     month = as.character(month(date_time, label = TRUE, abbr = FALSE)),
