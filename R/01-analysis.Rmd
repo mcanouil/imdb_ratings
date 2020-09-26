@@ -31,13 +31,13 @@ editor_options:
 library(here)
 
 suppressPackageStartupMessages({
+  library(data.table)
   library(knitr)
   library(ggplot2)
   library(ggtext)
   library(xml2)
   library(rvest)
   library(lubridate)
-  library(data.table)
 })
 
 
@@ -104,7 +104,7 @@ fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Cano
 ```{r import-data}
 movies_db <- fread(file = here("data", "theatres.csv"))[,
   c("date", "month", "year") := list(
-    as.IDate(date_time)
+    as.IDate(date_time),
     as.character(month(as.IDate(date_time), label = TRUE, abbr = FALSE)),
     year(as.IDate(date_time))
   )
@@ -134,13 +134,15 @@ if (file.exists(here("data", "ratings_ms.csv"))) {
   
   fwrite(x = rbind(ratings_db_ms, ratings_db_new), file = here("data", "ratings_ms.csv"))
 } else {
-  fwrite(x = ratings_db[, metascore_rating := get_metascore(const)][], file = here("data", "ratings_ms.csv"))
+  fwrite(x = ratings_db[, metascore_rating := get_metascore(const)], file = here("data", "ratings_ms.csv"))
 }
 
 ratings_ms <- fread(file = here("data", "ratings_ms.csv"))[, 
   c("date_rated", "release_date") := lapply(.SD, as.IDate), 
   .SDcols = c("date_rated", "release_date")
-][, in_theatres := as.integer(const %in% movies_db[["imdb_id"]])]
+][, 
+  in_theatres := as.integer(const %in% movies_db[["imdb_id"]])
+]
 ```
 
 # Streak of Movies Seen in Theatres {.tabset}
