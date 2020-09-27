@@ -38,6 +38,10 @@ suppressPackageStartupMessages({
   library(xml2)
   library(rvest)
   library(lubridate)
+  library(glue)
+  library(broom)
+  library(scales)
+  library(gganimate)
 })
 
 
@@ -73,6 +77,111 @@ get_metascore <- function(x) {
   )
 }
 
+ratings_histogram <- function(ratings, static) {
+  who_colours <- setNames(viridis_pal(begin = 0.5, direction = -1)(3), c("COEOS", "METASCORE", "IMDB USERS"))
+  
+  text_legend <- glue_collapse(
+    glue("<b style='color:{who_colours};'>{names(who_colours)}</b>"), 
+    sep = ", ", 
+    last = " and "
+  )
+
+  ratings_long <- melt(
+    data = ratings[, 
+      c(grep("rating$", names(ratings), value = TRUE)) := lapply(.SD, as.numeric), 
+      .SDcols = grep("rating$", names(ratings), value = TRUE)
+    ], 
+    id.vars = c("const", "year_rated"), 
+    measure.vars = patterns("rating$"), 
+    variable.name = "who", 
+    value.name = "rating"
+  )[, 
+    who := factor(
+      x = toupper(gsub("your", "coeos", gsub("_.*", "", who))), 
+      levels = c("COEOS", "METASCORE", "IMDB"),
+      labels = 1:3
+    )
+  ]
+  
+  p_ratings <- ggplot(data = ratings_long) +
+    aes(
+      x = rating, 
+      y = after_stat(count / tapply(count, group, sum)[group]),
+      colour = who, 
+      fill = who
+    ) +
+    annotation_raster(
+      raster = matrix(
+        data = rep(viridis_pal(option = "plasma", alpha = 0.10)(50), each = 50), 
+        nrow = 50
+      ),
+      xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf
+    ) +
+    geom_bar(
+      position = position_dodge2(width = 0.90, preserve = "single"),
+      na.rm = TRUE,
+      colour = NA
+    ) +
+    geom_text(
+      mapping = aes(label = after_stat(percent(count / tapply(count, group, sum)[group], suffix = " %", accuracy = 0.1))),
+      stat = "count",
+      position = position_dodge2(width = 0.90, preserve = "single"),
+      family = "xkcd",
+      angle = 90,
+      size = 3,
+      hjust = -0.1,
+      vjust = 0.5,
+      na.rm = TRUE,
+      show.legend = FALSE
+    ) +
+    scale_x_binned(
+      limits = c(0, 10),
+      right = FALSE,
+      labels = function(x) ifelse(x %in% 10, x, paste0(x, "+")),
+      expand = c(0, 0)
+    ) +
+    scale_y_continuous(labels = percent_format(suffix = " %"), expand = expansion(c(0, 0.15))) +
+    scale_colour_manual(values = unname(who_colours), labels = names(who_colours)) +
+    scale_fill_manual(values = unname(who_colours), labels = names(who_colours)) +
+    labs(
+      x = "Rating", 
+      y = "Percentage of Movies", 
+      colour = NULL,
+      fill = NULL,
+      title = glue(
+        'Distribution of Ratings ({ratings[, glue_collapse(range(year_rated), sep = "--")]}; N = {data[, comma(uniqueN(const))]})'
+      ),
+      subtitle = text_legend,
+      caption = fig_caption
+    ) +
+    theme(
+      legend.position = "none",
+      panel.grid.minor = element_blank()
+    )
+  
+  if (static) {
+    p_ratings + aes(group = who)
+  } else {
+    animate(
+      plot = p_ratings + 
+        aes(group = paste(who, year_rated, sep = "_")) +
+        labs(
+          title = 'Distribution of Ratings ({ratings[year_rated == closest_state, comma(uniqueN(const))]}) in {closest_state}',
+          subtitle = "{text_legend}"
+        ) +
+        transition_states(year_rated, transition_length = 3, state_length = 6) +
+        enter_fade() +
+        exit_fade(),
+      width = 6.3 * 2.54,
+      height = 4.7 * 2.54,
+      units = "cm",
+      res = 120,
+      bg = theme_get()$plot.background$colour,
+      renderer = gifski_renderer()
+    )
+  }
+}
+
 source(here("R/theme_black.R"))
 
 
@@ -103,11 +212,19 @@ fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Cano
 
 ```{r import-data}
 movies_db <- fread(file = here("data", "theatres.csv"))[,
-  c("date", "month", "year") := list(
-    as.IDate(date_time),
-    as.character(month(as.IDate(date_time), label = TRUE, abbr = FALSE)),
-    year(as.IDate(date_time))
+    date := as.IDate(date_time)
+][
+  J(date = seq(min(date), today(), by = "1 day")), 
+  on = "date"
+][,
+  c("month", "year", "wday") := list(
+    as.character(month(date, label = TRUE, abbr = FALSE)),
+    year(date),
+    wday(date, label = TRUE, abbr = FALSE, week_start = 1)
   )
+][, 
+  year_complete := uniqueN(date) >= 365, 
+  by = "year"
 ]
 
 ratings_db <- fread(file = here("data", "ratings.csv"), encoding = "Latin-1")
@@ -150,47 +267,58 @@ ratings_ms <- fread(file = here("data", "ratings_ms.csv"))[,
 ## Per Year {-}
 
 ```{r streak-year, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
-streak_data <- movies_db %>% 
-  mutate(date = date(date_time)) %>% 
-  complete(date = full_seq(c(date, today()), 1)) %>% 
-  group_by(date) %>% 
-  summarise(count = sum(!is.na(theatre)), .groups = "drop") %>% 
-  mutate(
-    year = year(date),
-    month = month(date, label = TRUE, abbr = FALSE),
+streak_data <- movies_db[, 
+  .(
+    count = sum(!is.na(theatre)),
+    month = month,
+    year = year,
     month_num = month(date),
-    wday = wday(date, label = TRUE, abbr = FALSE, week_start = 1),
-    count2 = ifelse(count == 0, NA, count)
-  ) %>% 
-  group_by(year) %>% 
-  mutate(
-    week = isoweek(date),
-    week = ifelse(week == 1 & month_num == 12, max(week) + 1, week)
-  ) %>% 
-  ungroup() %>% 
-  mutate(week = factor(sprintf("%02d", week), ordered = TRUE))
+    wday = wday
+  ), 
+  by = "date"
+][, 
+  week := fifelse(
+    isoweek(date) == 1 & month_num == 12, 
+    max(isoweek(date)) + 1, 
+    isoweek(date)
+  ), 
+  by = "year"
+][, 
+  week := factor(sprintf("%02d", week), ordered = TRUE)
+][, 
+  unique(.SD)
+]
 
-week_month_breaks <- streak_data %>% 
-  filter(year > 2013) %>% 
-  group_by(month) %>% 
-  filter(wday == "Monday") %>% 
-  add_count(week) %>% 
-  distinct(month, week, n) %>% 
-  filter(n == max(n)) %>% 
-  filter(as.numeric(week) == min(as.numeric(week))) %>% 
-  arrange(month, week) %>% 
-  ungroup()
+week_month_breaks <- streak_data[
+  wday == "Monday" & year > 2013, 
+  .(week = week, n = .N),
+  by = c("month_num", "month")
+][,
+  month_start := n == max(n) & as.numeric(week) == min(as.numeric(week)),
+  by = c("month_num", "month")
+][
+  (month_start), 
+  unique(.SD), 
+  .SDcols = c("month_num", "month", "week", "n")
+][
+  order(month_num, week)
+]
 
-p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
+p <- ggplot(data = streak_data) + 
+  aes(
+    x = week, 
+    y = factor(wday, levels = rev(levels(wday))),
+    label = count
+  ) +
   geom_tile(
-    data = ~ filter(.x, month_num %% 2 == 0),
+    data = ~ .x[month_num %% 2 == 0],
     show.legend = FALSE,
     colour = "white",
     fill = "white",
     alpha = 0
   ) +
   geom_tile(
-    data = ~ filter(.x, month_num %% 2 == 1),
+    data = ~ .x[month_num %% 2 == 1],
     show.legend = FALSE,
     colour = "white",
     fill = "white",
@@ -198,11 +326,17 @@ p <- ggplot(data = streak_data, mapping = aes(x = week, y = fct_rev(wday))) +
   ) +
   geom_tile(aes(fill = count), alpha = 0.3) +
   geom_tile(
-    data = ~ filter(.x, between(date, ymd("2020-03-16"), ymd("2020-06-21"))),
+    data = ~ .x[between(date, ymd("2020-03-16"), ymd("2020-06-21"))],
     fill = "#21908CFF", 
     alpha = 0.3
   ) +
-  geom_text(aes(label = count2), colour = "white", na.rm = TRUE, family = "xkcd", size = 2.5) +
+  geom_text(
+    data = ~ .x[count != 0],
+    colour = "white", 
+    na.rm = TRUE, 
+    family = "xkcd", 
+    size = 2.5
+  ) +
   scale_x_discrete(
     expand = expansion(c(0, 0)), 
     breaks = week_month_breaks[["week"]],
@@ -232,26 +366,36 @@ p
 ## It Happened on Tuesdays {-}
 
 ```{r streak-year-tuesday, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
-ftest <- movies_db %>% 
-  mutate(wday = wday(date(date_time), label = TRUE, abbr = FALSE, week_start = 1)) %>% 
-  filter(between(year, 2014, 2019)) %>% 
-  mutate(is_tuesday = ifelse(wday=="Tuesday", "Tuesday", "Other Days")) %>% 
-  count(year, is_tuesday) %>% 
-  mutate(is_2019 = ifelse(year==2019, "2019", "2014-2018")) %>% 
-  group_by(is_2019, is_tuesday) %>% 
-  summarise(n = mean(n), .groups = "drop") %>% 
-  mutate(n = ceiling(n)) %>% 
-  pivot_wider(names_from = "is_tuesday", values_from = "n") %>% 
-  column_to_rownames("is_2019") %>% 
-  fisher.test() %>% 
-  tidy() %>% 
-  mutate_if(is.numeric, signif, digits = 3) %>% 
-  glue_data(
+ftest <- movies_db[
+  (year_complete) & !is.na(theatre)
+][, 
+  .N, 
+  by = .(year, is_tuesday = fifelse(wday == "Tuesday", "Tuesday", "Other Days"))
+][,
+  .(n = round(mean(N))), 
+  by = .(
+    is_2019 = fifelse(
+      year == 2019, 
+      as.character(year), 
+      paste(min(year), 2018, sep = "-")
+    ), 
+    is_tuesday
+  )
+][, 
+  list(
+    tidy(fisher.test(matrix(n, nrow = 2, ncol = 2, byrow = TRUE)))
+  )
+][, 
+  lapply(.SD, function(x) if (is.numeric(x)) signif(x, digits = 3) else x)
+][,
+  glue_data(.SD,
     "<i style='color:#21908CFF;'>2019's Tuesdays</i> <i>Vs.</i> <i style='color:#21908CFF;'>2014-2018's Tuesdays</i>: ",
     "<span style='color:firebrick2;'>OR = {estimate}</span>; ",
-    "95% CI, {conf.low}-{conf.high}; <span style='color:firebrick2;'>P = {p.value}</span>",
+    "95 % CI, {conf.low}-{conf.high}; <span style='color:firebrick2;'>P = {p.value}</span>",
     "<br>(<i>{method}</i>)"
   )
+]
+
 p +
   labs(subtitle = ftest) + 
   annotate("rect", xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = 5.5, fill = "grey20", alpha = 0.5) +
@@ -264,128 +408,24 @@ p +
   theme(axis.text.y = element_markdown(size = rel(0.8)))
 ```
 
-# In One Day
+# Ratings {.tabset}
 
-```{r streak-day}
-movies_db %>% 
-  add_count(year, date(date_time)) %>% 
-  filter(n == max(n)) %>% 
-  mutate(
-    wday = wday(date(date_time), label = TRUE, abbr = FALSE, week_start = 1),
-    day = day(date(date_time)),
-    month = month(date(date_time), label = TRUE, abbr = FALSE),
-    nth = case_when(
-      day %in% c(1, 21, 31) ~ "st",
-      day %in% c(2, 22) ~ "nd",
-      day %in% c(3, 23) ~ "rd",
-      TRUE ~ "th"
-    ),
-    time = glue("{hour(date_time)}h{minute(date_time)}"),
-    date = glue("{wday}, the {day}{nth} of {month}, {year(date(date_time))}"),
-    theatre = glue("UGC {theatre}")
-  ) %>% 
-  select(date, theatre, time, room) %>% 
-  gt(auto_align = "center") %>% 
-  opt_all_caps(all_caps = TRUE) %>% 
-  opt_row_striping()
+## Movies in Theatres {-}
+
+```{r ratings-theatres}
+ratings_histogram(
+  ratings = merge(
+    x = ratings_ms[, -c("year_rated")],
+    y = movies_db[!is.na(imdb_id), .(const = imdb_id, year_rated = year(date))],
+    by = "const",
+    all = FALSE
+  ), 
+  static = params[["static"]]
+)
 ```
 
-# Ratings
+## Everywhere {-}
 
-```{r ratings}
-who_colours <- setNames(viridis_pal(begin = 0.5, direction = -1)(3), c("COEOS", "METASCORE", "IMDB USERS"))
-text_legend <- glue_collapse(
-  glue("<b style='color:{who_colours};'>{names(who_colours)}</b>"), 
-  sep = ", ", 
-  last = " and "
-)
-p_ratings <- ggplot(
-  data = pivot_longer(
-    data = ratings_ms, 
-    cols = ends_with("rating"), 
-    names_to = "who", 
-    names_pattern = "(.*)_.*", 
-    names_transform = list(
-      who = ~ factor(
-        x = toupper(gsub("your", "coeos", .x)), 
-        levels = c("COEOS", "METASCORE", "IMDB"),
-        labels = 1:3
-      )
-    ),
-    values_to = "rating"
-  ),
-  mapping = aes(
-    x = rating, 
-    y = after_stat(count / tapply(count, group, sum)[group]),
-    colour = who, 
-    fill = who
-  )
-) +
-  annotation_raster(
-    raster = matrix(rep(viridis_pal(option = "plasma", alpha = 0.10)(50), each = 50), nrow = 50),
-    xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf
-  ) +
-  geom_bar(
-    position = position_dodge2(width = 0.90, preserve = "single"),
-    na.rm = TRUE,
-    colour = NA
-  ) +
-  geom_text(
-    mapping = aes(label = after_stat(percent(count / tapply(count, group, sum)[group], suffix = " %", accuracy = 0.1))),
-    stat = "count",
-    position = position_dodge2(width = 0.90, preserve = "single"),
-    family = "xkcd",
-    angle = 90,
-    size = 3,
-    hjust = -0.1,
-    vjust = 0.5,
-    na.rm = TRUE,
-    show.legend = FALSE
-  ) +
-  scale_x_binned(
-    limits = c(0, 10),
-    right = FALSE,
-    labels = function(x) ifelse(x %in% 10, x, paste0(x, "+")),
-    expand = c(0, 0)
-  ) +
-  scale_y_continuous(labels = percent_format(suffix = " %"), expand = expansion(c(0, 0.15))) +
-  scale_colour_manual(values = unname(who_colours), labels = names(who_colours)) +
-  scale_fill_manual(values = unname(who_colours), labels = names(who_colours)) +
-  labs(
-    x = "Rating", 
-    y = "Percentage of Movies", 
-    colour = NULL,
-    fill = NULL,
-    title = glue(
-      'Distribution of Ratings ({glue_collapse(range(ratings_ms[["year_rated"]]), sep = "--")}; N = {comma(n_distinct(ratings_ms[["const"]]))})'
-    ),
-    subtitle = text_legend,
-    caption = fig_caption
-  ) +
-  theme(
-    legend.position = "none",
-    panel.grid.minor = element_blank()
-  )
-
-if (params[["static"]]) {
-  print(p_ratings + aes(group = who))
-} else {
-  animate(
-    plot = p_ratings + 
-      aes(group = paste(who, year_rated, sep = "_")) +
-      labs(
-        title = 'Distribution of Ratings ({comma(nrow(drop_na(select(filter(ratings_ms, year_rated == closest_state), ends_with("rating")))))}) in {closest_state}',
-        subtitle = "{text_legend}"
-      ) +
-      transition_states(year_rated, transition_length = 3, state_length = 6) +
-      enter_fade() +
-      exit_fade(),
-    width = 6.3 * 2.54,
-    height = 4.7 * 2.54,
-    units = "cm",
-    res = 120,
-    bg = theme_get()$plot.background$colour,
-    renderer = gifski_renderer()
-  )
-}
+```{r ratings-all}
+ratings_histogram(ratings = ratings_ms, static = TRUE)
 ```
