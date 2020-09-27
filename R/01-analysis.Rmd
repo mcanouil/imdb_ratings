@@ -149,7 +149,7 @@ ratings_histogram <- function(ratings, static) {
       colour = NULL,
       fill = NULL,
       title = glue(
-        'Distribution of Ratings ({ratings[, glue_collapse(range(year_rated), sep = "--")]}; N = {data[, comma(uniqueN(const))]})'
+        'Distribution of Ratings ({ratings[, glue_collapse(range(year_rated), sep = "--")]}; N = {ratings[, comma(uniqueN(const))]})'
       ),
       subtitle = text_legend,
       caption = fig_caption
