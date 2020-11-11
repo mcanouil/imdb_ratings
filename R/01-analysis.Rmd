@@ -6,6 +6,14 @@ author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 knit: (function(inputFile, encoding) rmarkdown::render(inputFile, output_file = "index.html", encoding = encoding, output_dir = here::here("docs"), intermediates_dir = here::here("docs")))
 output: 
+  flexdashboard::flex_dashboard:
+    logo: logo.png
+    favicon: favicon.png
+    orientation: rows
+    vertical_layout: fill
+    theme: lumen
+    social: [ "twitter", "facebook" ]
+    source_code: "https://github.com/mcanouil/IMDbRating"
   bookdown::html_document2: 
     theme: simplex
     toc: true
@@ -16,12 +24,6 @@ output:
     fig_height:  4.7
     number_sections: true
     self_contained: true
-  flexdashboard::flex_dashboard:
-    orientation: rows
-    vertical_layout: fill
-    theme: cerulean
-    social: [ "twitter", "facebook" ]
-    source_code: "https://github.com/mcanouil/IMDbRating"
 editor_options: 
   chunk_output_type: console
 ---
@@ -58,7 +60,9 @@ opts_chunk$set(
   crop = TRUE,
   autodep = TRUE,
   fig.align = "center",
-  fig.path = here("images", "fig-")
+  fig.path = here("images", "fig-"), 
+  fig.width = 6.3,
+  fig.height = 4.7
 )
 
 
@@ -264,7 +268,7 @@ ratings_ms <- fread(file = here("data", "ratings_ms.csv"))[,
 
 # Streak of Movies Seen in Theatres {.tabset}
 
-## Per Year {-}
+### Per Year {-}
 
 ```{r streak-year, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
 streak_data <- movies_db[, 
@@ -363,7 +367,7 @@ p <- ggplot(data = streak_data) +
 p
 ```
 
-## It Happened on Tuesdays {-}
+### It Happened on Tuesdays {-}
 
 ```{r streak-year-tuesday, fig.width = 16 / 2.54, fig.height = 24.7 / 2.54}
 ftest <- movies_db[
@@ -410,7 +414,7 @@ p +
 
 # Ratings {.tabset}
 
-## Movies in Theatres {-}
+### Movies in Theatres {-}
 
 ```{r ratings-theatres}
 ratings_histogram(
@@ -424,7 +428,7 @@ ratings_histogram(
 )
 ```
 
-## Everywhere {-}
+### Everywhere {-}
 
 ```{r ratings-all}
 ratings_histogram(ratings = ratings_ms, static = TRUE)
