@@ -54,11 +54,11 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
           
       - name: Install xkcd
         if: runner.os != 'Windows'
         run: |
-          Rscript -e 'remotes::install_deps(dependencies = TRUE)'
           cd /usr/share/fonts
           git clone https://github.com/ipython/xkcd-font.git 
           fc-cache -f -v

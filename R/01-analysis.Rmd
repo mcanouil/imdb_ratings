@@ -45,13 +45,14 @@ opts_chunk$set(
   echo = FALSE,
   warning = FALSE,
   message = FALSE,
-  dpi = 120,
+  dpi = 75,
   tidy = FALSE,
   crop = TRUE,
   autodep = TRUE,
   fig.align = "center",
   fig.width = 6.3,
-  fig.height = 4.7
+  fig.height = 4.7, 
+  dev = "ragg_png"
 )
 
 
@@ -119,7 +120,7 @@ ratings_histogram <- function(ratings, static) {
       mapping = aes(label = after_stat(percent(count / tapply(count, group, sum)[group], suffix = " %", accuracy = 0.1))),
       stat = "count",
       position = position_dodge2(width = 0.90, preserve = "single"),
-      family = "xkcd",
+      family = font,
       angle = 90,
       size = 3,
       hjust = -0.1,
@@ -185,8 +186,9 @@ options(
   ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 0.15, end = 0.85),
   ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 0.15, end = 0.85)
 )
+font <- "xkcd"
 theme_set(
-  theme_black(11, base_family = "xkcd") +
+  theme_black(11, base_family = font) +
     theme(
       plot.title.position = "plot",
       plot.caption.position = "plot",
@@ -327,7 +329,7 @@ p <- ggplot(data = streak_data) +
     data = ~ .x[count != 0],
     colour = "white", 
     na.rm = TRUE, 
-    family = "xkcd", 
+    family = font, 
     size = 2.5
   ) +
   scale_x_discrete(
@@ -345,7 +347,7 @@ p <- ggplot(data = streak_data) +
     legend.position = "none"
   ) +
   labs(
-    title = glue("Streak of Movies Seen in Theatres  ({sum(streak_data$count)})"),
+    title = glue("Streak of Movies Seen in Theatres ({format(sum(streak_data$count), big.mark = ',')})"),
     caption = fig_caption,
     colour = "Count",
     fill = "Count",
