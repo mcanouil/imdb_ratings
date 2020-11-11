@@ -345,7 +345,8 @@ p <- ggplot(data = streak_data) +
     legend.position = "none"
   ) +
   labs(
-    title = glue("Streak of Movies Seen in Theatres ({sum(streak_data$count)})"),
+    title = "Streak of Movies Seen in Theatres",
+    subtitle = paste("N =", format(sum(streak_data$count), big.mark = ",")),
     caption = fig_caption,
     colour = "Count",
     fill = "Count",
