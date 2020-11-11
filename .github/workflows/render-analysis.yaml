@@ -63,11 +63,15 @@ jobs:
           git clone https://github.com/ipython/xkcd-font.git 
           fc-cache -f -v
           Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")' 
+          
+      - name: Install rmarkdown
+        run: |
+          Rscript -e 'utils::install.packages(pkgs = "rmarkdown", quiet = TRUE)'
 
       - name: Render ANALYSIS
         run: |
           Rscript -e 'rmarkdown::render("R/01-analysis.Rmd", output_file = "index.html", output_dir = "docs")'
-          git config --global user.name "${{secrets.NAME}}"
+          git config --global user.name "${{github.actor}}"
           git config --global user.email ${{secrets.EMAIL}}
           git commit -am 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
           git push https://${{github.actor}}:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}.git HEAD:${{ github.ref }} || echo "No changes to commit"
