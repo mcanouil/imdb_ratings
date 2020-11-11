@@ -5,8 +5,10 @@ URL: https://github.com/mcanouil/IMDbRating, https://mcanouil.github.io/IMDbRati
 BugReports: https://github.com/mcanouil/IMDbRating/issues
 Depends: R (>= 4.0.0)
 Imports: 
+    bookdown (>= 0.21),
     broom (>= 0.7.2),
     data.table (>= 1.13.2),
+    flexdashboard (>= 0.5.2),
     gganimate (>= 1.0.7),
     ggplot2 (>= 3.3.2),
     ggtext (>= 0.1.0),
