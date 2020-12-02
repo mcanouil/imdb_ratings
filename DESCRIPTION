@@ -1,6 +1,6 @@
 Package: IMDbRatings
 Version: 0.2.0
-License: MIT + file LICENSE
+License: CC BY 4.0
 URL: https://github.com/mcanouil/IMDbRating, https://mcanouil.github.io/IMDbRating
 BugReports: https://github.com/mcanouil/IMDbRating/issues
 Depends: R (>= 4.0.0)
