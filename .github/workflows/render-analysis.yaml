@@ -62,7 +62,6 @@ jobs:
           cd /usr/share/fonts
           git clone https://github.com/ipython/xkcd-font.git 
           fc-cache -f -v
-          Rscript -e 'sysfonts::font_add("xkcd", "xkcd.otf")'
 
       - name: Render ANALYSIS
         run: |

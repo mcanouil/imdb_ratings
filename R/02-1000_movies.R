@@ -11,6 +11,7 @@ suppressPackageStartupMessages({
   library(glue)
   library(data.table)
   library(lubridate)
+  library(ragg)
 })
 
 
@@ -23,19 +24,17 @@ options(
   ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 1/3, end = 1),
   ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 1/3, end = 1)
 )
-theme_set(
-  theme_black(11, base_family = "xkcd") +
-    theme(
-      plot.title.position = "plot",
-      plot.caption.position = "plot",
-      plot.title = element_markdown(),
-      plot.subtitle = element_markdown(face = "italic", size = rel(0.8)),
-      plot.caption = element_markdown(face = "italic", size = rel(0.5)),
-      axis.title.x = element_markdown(),
-      axis.text.x = element_markdown(),
-      axis.title.y = element_markdown(),
-      axis.text.y = element_markdown()
-    )
+theme_set(theme_black(11, base_family = "xkcd"))
+theme_update(
+  plot.title.position = "plot",
+  plot.caption.position = "plot",
+  plot.title = element_markdown(),
+  plot.subtitle = element_markdown(face = "italic", size = rel(0.80)),
+  plot.caption = element_markdown(face = "italic", size = rel(0.65)),
+  axis.title.x = element_markdown(),
+  axis.text.x = element_markdown(),
+  axis.title.y = element_markdown(),
+  axis.text.y = element_markdown()
 )
 
 fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
@@ -199,7 +198,9 @@ p <- ggplot(data = ratings_long) +
     panel.grid.minor = element_blank()
   )
 
-ggsave(filename = here("images/1km-histogram.png"), plot = p, width = 6.3, height = 4.7, dpi = 240)
+agg_png(filename = here("images/1km-histogram.png"), width = 16, height = 12, units = "cm", res = 240)
+  print(p)
+invisible(dev.off())
 
 p <- ggplot(data = ratings_long[who == 1]) +
   aes(x = factor(year_rated), y = rating, fill = factor(year_rated), linetype = who) +
@@ -259,7 +260,9 @@ p <- ggplot(data = ratings_long[who == 1]) +
   ) +
   labs(x = NULL, y = "Rating", caption = fig_caption)
 
-ggsave(filename = here("images/1km-violin.png"), plot = p, width = 6.3, height = 4.7, dpi = 240)
+agg_png(filename = here("images/1km-violin.png"), width = 16, height = 12, units = "cm", res = 240)
+  print(p)
+invisible(dev.off())
 
 p <- ggplot(data = movies_db[, list(N = sum(!is.na(date_time))), by = c("year", "month")]) +
   aes(x = N) +
@@ -284,7 +287,9 @@ p <- ggplot(data = movies_db[, list(N = sum(!is.na(date_time))), by = c("year", 
     legend.position = "none",
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank()
-  )  +
+  ) +
   labs(x = "Number of Movies per Month", y = "Count Density", caption = fig_caption)
   
-ggsave(filename = here("images/1km-density.png"), plot = p, width = 6.3, height = 4.7, dpi = 240)
+agg_png(filename = here("images/1km-density.png"), width = 16, height = 12, units = "cm", res = 240)
+  print(p)
+invisible(dev.off())

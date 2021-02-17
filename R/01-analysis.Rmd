@@ -180,26 +180,24 @@ source(here("R/theme_black.R"))
 
 
 ### Define theme ===================================================================================
-options(
-  ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 0.15, end = 0.85),
-  ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 0.15, end = 0.85),
-  ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 0.15, end = 0.85),
-  ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 0.15, end = 0.85)
-)
 font <- "xkcd"
-theme_set(
-  theme_black(11, base_family = font) +
-    theme(
-      plot.title.position = "plot",
-      plot.caption.position = "plot",
-      plot.title = element_markdown(),
-      plot.subtitle = element_markdown(face = "italic", size = rel(0.8)),
-      plot.caption = element_markdown(face = "italic", size = rel(0.5)),
-      axis.title.x = element_markdown(),
-      axis.text.x = element_markdown(),
-      axis.title.y = element_markdown(),
-      axis.text.y = element_markdown()
-    )
+options(
+  ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 1/3, end = 1),
+  ggplot2.discrete.fill = function(...) scale_fill_viridis_d(..., begin = 1/3, end = 1),
+  ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 1/3, end = 1),
+  ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 1/3, end = 1)
+)
+theme_set(theme_black(11, base_family = font))
+theme_update(
+  plot.title.position = "plot",
+  plot.caption.position = "plot",
+  plot.title = element_markdown(),
+  plot.subtitle = element_markdown(face = "italic", size = rel(0.80)),
+  plot.caption = element_markdown(face = "italic", size = rel(0.65)),
+  axis.title.x = element_markdown(),
+  axis.text.x = element_markdown(),
+  axis.title.y = element_markdown(),
+  axis.text.y = element_markdown()
 )
 
 fig_caption <- "&copy; Micka&euml;l '<i style='color:#21908CFF;'>Coeos</i>' Canouil"
@@ -275,9 +273,13 @@ streak_data <- movies_db[,
   week := fifelse(
     isoweek(date) == 1 & month_num == 12, 
     max(isoweek(date)) + 1, 
-    isoweek(date)
+    fifelse(isoweek(date) > 5 & month_num == 1, 0, isoweek(date))
   ), 
   by = "year"
+]
+streak_data <- streak_data[
+  i = year %in% streak_data[week == 0, unique(year)],
+  j = week := week + 1
 ][, 
   week := factor(sprintf("%02d", week), ordered = TRUE)
 ][, 
@@ -321,7 +323,7 @@ p <- ggplot(data = streak_data) +
   ) +
   geom_tile(aes(fill = count), alpha = 0.3) +
   geom_tile(
-    data = ~ .x[between(date, ymd("2020-03-16"), ymd("2020-06-21")) | between(date, ymd("2020-11-02"), ymd("2020-12-31"))],
+    data = ~ .x[between(date, ymd("2020-03-16"), ymd("2020-06-21")) | between(date, ymd("2020-11-02"), ymd(Sys.Date()))],
     fill = "#21908CFF", 
     alpha = 0.3
   ) +
@@ -341,11 +343,11 @@ p <- ggplot(data = streak_data) +
   scale_y_discrete(expand = expansion(c(0, 0))) +
   scale_colour_viridis_c() +
   scale_fill_viridis_c() +
-  facet_grid(rows = vars(year)) +
   theme(
     panel.grid = element_blank(), 
     legend.position = "none"
   ) +
+  facet_grid(rows = vars(year)) +
   labs(
     title = glue("Streak of Movies Seen in Theatres ({format(sum(streak_data$count), big.mark = ',')})"),
     caption = fig_caption,

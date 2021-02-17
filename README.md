@@ -10,4 +10,4 @@ status](https://github.com/mcanouil/imdb_ratings/workflows/render-analysis/badge
 <!-- badges: end -->
 
 This is the work-in-progress repo for my [IMDb ratings
-analysis](https://mcanouil.github.io/imdb_ratings).
+analysis](https://m.canouil.fr/imdb_ratings).
