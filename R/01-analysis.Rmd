@@ -209,14 +209,14 @@ movies_db <- fread(file = here("data", "theatres.csv"))[,
 ][
   J(date = seq(min(date), today(), by = "1 day")), 
   on = "date"
-][,
-  c("month", "year", "wday") := list(
+][
+  j = c("month", "year", "wday") := list(
     as.character(month(date, label = TRUE, abbr = FALSE)),
     year(date),
     wday(date, label = TRUE, abbr = FALSE, week_start = 1)
   )
-][, 
-  year_complete := uniqueN(date) >= 365, 
+][
+  j = year_complete := uniqueN(date) >= 365, 
   by = "year"
 ]
 
