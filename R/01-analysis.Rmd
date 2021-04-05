@@ -6,8 +6,8 @@ author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
   flexdashboard::flex_dashboard:
-    logo: favicon.png
-    favicon: favicon.png
+    logo: https://raw.githubusercontent.com/mcanouil/hex-stickers/main/SVG/mc.svg
+    favicon: https://raw.githubusercontent.com/mcanouil/hex-stickers/main/SVG/mc.svg
     orientation: rows
     vertical_layout: fill
     theme: lumen
@@ -17,6 +17,13 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+
+```{css}
+.navbar-logo {
+  height: 50px;
+}
+```
+
 
 ```{r setup, include = FALSE}
 ### Load packages ==================================================================================
