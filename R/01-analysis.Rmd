@@ -6,7 +6,7 @@ author: "Mickaël Canouil, *Ph.D.*"
 date: '`r format(Sys.time(), "%B %d, %Y")`'
 output: 
   flexdashboard::flex_dashboard:
-    logo: logo.png
+    logo: favicon.png
     favicon: favicon.png
     orientation: rows
     vertical_layout: fill
