@@ -329,7 +329,7 @@ p <- ggplot(data = streak_data) +
   ) +
   geom_tile(aes(fill = count), alpha = 0.3) +
   geom_tile(
-    data = ~ .x[between(date, ymd("2020-03-16"), ymd("2020-06-21")) | between(date, ymd("2020-11-02"), ymd(Sys.Date()))],
+    data = ~ .x[between(date, ymd("2020-03-16"), ymd("2020-06-21")) | between(date, ymd("2020-11-02"), ymd("2021-05-18"))],
     fill = "#21908CFF", 
     alpha = 0.3
   ) +
