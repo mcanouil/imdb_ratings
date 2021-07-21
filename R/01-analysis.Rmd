@@ -182,7 +182,7 @@ ratings_histogram <- function(ratings, static) {
   }
 }
 
-source(here("R/theme_black.R"))
+source(here("R/theme_mc.R"))
 
 
 ### Define theme ===================================================================================

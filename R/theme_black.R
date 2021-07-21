@@ -1,20 +1,32 @@
-#' theme_black
+#' Complete MC themes
 #'
-#' @param base_size base font size
+#' These are complete themes with or without markdown (_i.e._, `ggtext`).
+#'
+#' @param base_size base font size, given in pts.
 #' @param base_family base font family
 #' @param base_line_size base size for line elements
 #' @param base_rect_size base size for rect elements
 #'
+#' @details
+#' \describe{
+#'
+#' \item{`theme_mc()`}{
+#' Theme with `c("#333333", "#7F7F7F", "#FAFAFA")` palette from background to foreground.}
+#'
+#' \item{`theme_mc_md()`}{`theme_mc()` with markdown ability using `ggtext` (if installed).}
+#'
+#' }
+#'
+#' @name theme_mc
 #' @export
-#' @import ggplot2
-theme_black <- function(
+theme_mc <- function(
   base_size = 11,
   base_family = "",
   base_line_size = base_size / 22,
   base_rect_size = base_size / 22
 ) {
+  bc <- c("#333333", "#7F7F7F", "#FAFAFA")
   half_line <- base_size / 2
-  bc <- c("grey20", "grey50", "white")
   ggplot2::theme(
     line = ggplot2::element_line(
       colour = bc[3],
@@ -163,60 +175,33 @@ theme_black <- function(
   )
 }
 
-
-#' @rdname theme_black
 #' @export
-theme_black_md <- function(
+#' @rdname theme_mc
+theme_mc_md <- function(
   base_size = 11,
   base_family = "",
   base_line_size = base_size / 22,
   base_rect_size = base_size / 22
 ) {
-  half_line <- base_size / 2
-  bc <- c("grey20", "grey50", "white")
-  theme_black(base_size, base_family, base_line_size, base_rect_size) %+replace%
-    ggplot2::theme(
-      axis.title.x = ggtext::element_markdown(margin = ggplot2::margin(t = half_line), vjust = 1),
-      axis.title.x.top = ggtext::element_markdown(margin = ggplot2::margin(b = half_line), vjust = 0),
-      axis.title.y = ggtext::element_markdown(angle = 90, margin = ggplot2::margin(r = half_line), vjust = 1),
-      axis.title.y.right = ggtext::element_markdown(angle = -90, margin = ggplot2::margin(l = half_line), vjust = 0),
-      axis.text = ggtext::element_markdown(size = ggplot2::rel(0.8), colour = bc[3]),
-      axis.text.x = ggtext::element_markdown(margin = ggplot2::margin(t = 0.8 * half_line / 2), vjust = 1),
-      axis.text.x.top = ggtext::element_markdown(margin = ggplot2::margin(b = 0.8 * half_line / 2), vjust = 0),
-      axis.text.y = ggtext::element_markdown(margin = ggplot2::margin(r = 0.8 * half_line / 2), hjust = 1),
-      axis.text.y.right = ggtext::element_markdown(margin = ggplot2::margin(l = 0.8 * half_line / 2), hjust = 0),
-
-      legend.text = ggtext::element_markdown(size = ggplot2::rel(0.8)),
-      legend.title = ggtext::element_markdown(hjust = 0),
-
-      plot.title = ggtext::element_markdown(
-        size = ggplot2::rel(1.25),
-        face = "bold",
-        hjust = 0,
-        vjust = 1,
-        margin = ggplot2::margin(b = half_line)
-      ),
-      plot.subtitle = ggtext::element_markdown(
-       size = ggplot2::rel(1),
-        face = "italic",
-        hjust = 0,
-        vjust = 1,
-        margin = ggplot2::margin(b = half_line)
-      ),
-      plot.caption = ggtext::element_markdown(
-        size = ggplot2::rel(0.75),
-        face = "italic",
-        hjust = 1,
-        vjust = 1,
-        margin = ggplot2::margin(t = half_line)
-      ),
-      plot.tag = ggtext::element_markdown(size = ggplot2::rel(1.25), hjust = 0.5, vjust = 0.5),
-
-      strip.text = ggtext::element_markdown(
-        colour = bc[3],
-        size = ggplot2::rel(0.8),
-        margin = ggplot2::margin(0.8 * half_line, 0.8 * half_line, 0.8 * half_line, 0.8 * half_line)
-      ),
-      strip.text.y = ggtext::element_markdown(angle = -90)
+  tmc <- theme_mc(
+    base_size = base_size,
+    base_family = base_family,
+    base_line_size = base_size / 22,
+    base_rect_size = base_size / 22
+  )
+  if (nchar(system.file(package = "ggtext")) > 0) {
+    tmc + ggplot2::theme(
+      plot.title.position = "plot",
+      plot.caption.position = "plot",
+      plot.title = ggtext::element_markdown(),
+      plot.subtitle = ggtext::element_markdown(face = "italic", size = ggplot2::rel(0.80)),
+      plot.caption = ggtext::element_markdown(face = "italic", size = ggplot2::rel(0.65)),
+      axis.title.x = ggtext::element_markdown(),
+      axis.text.x = ggtext::element_markdown(),
+      axis.title.y = ggtext::element_markdown(),
+      axis.text.y = ggtext::element_markdown()
     )
+  } else {
+    tmc
+  }
 }
