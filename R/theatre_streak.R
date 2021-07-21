@@ -5,7 +5,7 @@ library(ggplot2)
 library(ggtext)
 library(showtext)
 
-source(here("R/theme_black.R"))
+source(here("R/theme_mc.R"))
 
 font <- "Alegreya Sans"
 font_add_google(font, font, regular.wt = 300)
