@@ -4,6 +4,7 @@ library(lubridate)
 library(ggplot2)
 library(ggtext)
 library(showtext)
+library(grDevices)
 
 source(here("R", "theme_mc.R"))
 
@@ -93,10 +94,13 @@ p <- ggplot(data = streak_data) +
     axis.ticks.x = element_blank()
   )
 
-ggsave(
-  filename = here("media", "streak.svg"), 
-  plot = p,
-  width = 8, 
-  height = 2,
-  units = "cm"
-)
+# ggsave(
+#   filename = here("media", "streak.svg"), 
+#   plot = p,
+#   width = 8, 
+#   height = 2,
+#   units = "cm"
+# )
+svg(filename = here("media", "streak.svg"), width = 8, height = 2)
+  print(p)
+invisible(dev.off())
