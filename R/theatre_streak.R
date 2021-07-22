@@ -93,7 +93,10 @@ p <- ggplot(data = streak_data) +
     axis.ticks.x = element_blank()
   )
 
-
-svg(filename = here("media", "streak.svg"), width = 8, height = 2)
-  print(p)
-invisible(dev.off())
+ggsave(
+  filename = here("media", "streak.svg"), 
+  plot = p,
+  width = 8, 
+  height = 2,
+  units = "cm"
+)
