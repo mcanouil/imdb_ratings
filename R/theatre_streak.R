@@ -5,7 +5,7 @@ library(ggplot2)
 library(ggtext)
 library(showtext)
 
-source(here("R/theme_mc.R"))
+source(here("R", "theme_mc.R"))
 
 font <- "Alegreya Sans"
 font_add_google(font, font, regular.wt = 300)
@@ -94,6 +94,6 @@ p <- ggplot(data = streak_data) +
   )
 
 
-svg(filename = "test.svg", width = 8, height = 2)
+svg(filename = here("media", "streak.svg"), width = 8, height = 2)
   print(p)
 invisible(dev.off())
