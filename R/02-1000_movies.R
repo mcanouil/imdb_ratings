@@ -16,7 +16,7 @@ suppressPackageStartupMessages({
 
 
 ### Define theme ===================================================================================
-source(here("R/theme_black.R"))
+source(here("R/theme_mc.R"))
 
 options(
   ggplot2.discrete.colour = function(...) scale_colour_viridis_d(..., begin = 1/3, end = 1),
@@ -24,7 +24,7 @@ options(
   ggplot2.continuous.colour = function(...) scale_colour_viridis_c(..., begin = 1/3, end = 1),
   ggplot2.continuous.fill = function(...) scale_fill_viridis_c(..., begin = 1/3, end = 1)
 )
-theme_set(theme_black(11, base_family = "xkcd"))
+theme_set(theme_mc(11, base_family = "xkcd"))
 theme_update(
   plot.title.position = "plot",
   plot.caption.position = "plot",
