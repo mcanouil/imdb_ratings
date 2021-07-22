@@ -22,7 +22,7 @@ streak_data <- fread(file = here("data", "theatres.csv"))[
 ][
   j = list(
     count = sum(!is.na(theatre)),
-    month = as.character(month(date, label = TRUE, abbr = FALSE)),
+    month = as.character(month(date, label = TRUE, abbr = TRUE)),
     year = year(date),
     month_num = month(date),
     wday = wday(date, label = TRUE, abbr = FALSE, week_start = 1),
@@ -35,21 +35,18 @@ streak_data <- fread(file = here("data", "theatres.csv"))[
     "x" = as.integer(factor(sprintf("x%s", week), levels = sprintf("x%s", unique(week)))),
     "y" = factor(wday, levels = rev(levels(wday)))
   )
+][
+  j = month := sub("May.", "May", sprintf("%s.", month))
 ]
 
 week_month_breaks <- streak_data[
   i = wday == "Monday",
-  j = list(year, week = x, n = .N),
-  by = c("month_num", "month")
+  j = list(year, month, week = x)
 ][
-  j = month_start := week == week[which.min(abs(week - median(week)))],
-  by = c("month_num", "month")
+  j = .SD[2, ],
+  by = c("year", "month")
 ][
-  i = (month_start),
-  j = unique(.SD),
-  .SDcols = c("month_num", "month", "week", "n")
-][
-  order(month_num, week)
+ !is.na(week)
 ]
 
 p <- ggplot(data = streak_data) + 
@@ -69,20 +66,27 @@ p <- ggplot(data = streak_data) +
     alpha = 0.2
   ) +
   geom_tile(aes(fill = count), alpha = 0.3) +
-  geom_text(
+  geom_richtext(
     data = ~ .x[count != 0],
     colour = "white", 
     na.rm = TRUE, 
     family = font, 
-    size = 4
+    fontface = "bold",
+    size = 3.5,
+    fill = NA, 
+    label.colour = NA
   ) +
   scale_x_continuous(
     expand = expansion(c(0, 0)),
     breaks = week_month_breaks[["week"]],
     labels = week_month_breaks[["month"]],
-    guide = guide_axis(n.dodge = 2)
+    # guide = guide_axis(n.dodge = 2)
+    position = "top"
   ) +
-  scale_y_discrete(expand = expansion(c(0, 0))) +
+  scale_y_discrete(
+    expand = expansion(c(0, 0)),
+    labels = function(x) sub("([[:alpha:]]{3}).*", "\\1.", x)
+  ) +
   scale_colour_viridis_c() +
   scale_fill_viridis_c() +
   theme_mc_md(base_family = font) +
@@ -91,16 +95,16 @@ p <- ggplot(data = streak_data) +
     legend.position = "none",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
-    axis.ticks.x = element_blank()
+    axis.ticks.x = element_blank(),
+    plot.caption = element_markdown(face = "italic", size = rel(0.80))
+  ) +
+  labs(
+    caption = sprintf(
+      "<b>%s</b> movies seen in a <b>movie theatre</b> in the <b>last year</b>.", 
+      format(sum(streak_data[["count"]]), digits = 0, big.mark = ",")
+    )
   )
 
-# ggsave(
-#   filename = here("media", "streak.svg"), 
-#   plot = p,
-#   width = 8, 
-#   height = 2,
-#   units = "cm"
-# )
-svg(filename = here("media", "streak.svg"), width = 8, height = 2)
+svg(filename = here("media", "streak.svg"), width = 8, height = 1.75)
   print(p)
 invisible(dev.off())

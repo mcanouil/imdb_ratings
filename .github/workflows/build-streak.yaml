@@ -1,11 +1,13 @@
 on:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     paths:
-      - data/ratings.csv
-      - R/01-analysis.Rmd
-      - .github/workflows/render-analysis.yaml
+      - data/theatres.csv
+      - R/theatre_streak.R
+      - .github/workflows/build-streak.yaml
 
-name: render-analysis
+name: build-streak
 
 jobs:
   render-analysis:
@@ -47,22 +49,13 @@ jobs:
       - name: Install dependencies
         run: |
           pak::local_install_dev_deps(upgrade = TRUE)
-          pak::pkg_install("rstudio/pagedown")
         shell: Rscript {0}
           
-      - name: Install xkcd
-        if: runner.os != 'Windows'
+      - name: Build Streak SVG
         run: |
-          cd /usr/share/fonts
-          git clone https://github.com/ipython/xkcd-font.git 
-          fc-cache -f -v
-
-      - name: Render ANALYSIS
-        run: |
-          Rscript -e 'file.copy("R/01-analysis.Rmd", "docs/index.Rmd")'
-          Rscript -e 'rmarkdown::render("docs/index.Rmd")'
-          Rscript -e 'unlink("docs/index.Rmd")'
+          Rscript R/theatre_streak.R
           git config --local user.name "$GITHUB_ACTOR"
           git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git commit -am 'Re-build 01-analysis.Rmd' || echo "No changes to commit"
+          git add media/streak.svg
+          git commit media/streak.svg -m 'update streak svg' || echo "No changes to commit"
           git push origin main || echo "No changes to commit"
