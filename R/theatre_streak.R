@@ -54,18 +54,18 @@ p <- ggplot(data = streak_data) +
   geom_tile(
     data = ~ .x[month_num %% 2 == 0],
     show.legend = FALSE,
-    colour = "white",
+    colour = NA, # "white",
     fill = "white",
     alpha = 0
   ) +
   geom_tile(
     data = ~ .x[month_num %% 2 == 1],
     show.legend = FALSE,
-    colour = "white",
+    colour = NA, # "white",
     fill = "white",
     alpha = 0.2
   ) +
-  geom_tile(aes(fill = count), alpha = 0.3) +
+  geom_tile(aes(fill = count), alpha = 0.3, colour = "white") +
   geom_richtext(
     data = ~ .x[count != 0],
     colour = "white", 
@@ -80,7 +80,6 @@ p <- ggplot(data = streak_data) +
     expand = expansion(c(0, 0)),
     breaks = week_month_breaks[["week"]],
     labels = week_month_breaks[["month"]],
-    # guide = guide_axis(n.dodge = 2)
     position = "top"
   ) +
   scale_y_discrete(
@@ -95,8 +94,8 @@ p <- ggplot(data = streak_data) +
     legend.position = "none",
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
-    axis.ticks.x = element_blank(),
-    plot.caption = element_markdown(face = "italic", size = rel(0.80))
+    axis.ticks = element_blank(),
+    plot.caption = element_markdown(face = "italic", size = rel(0.90))
   ) +
   labs(
     caption = sprintf(
