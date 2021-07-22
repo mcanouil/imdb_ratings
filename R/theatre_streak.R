@@ -56,19 +56,12 @@ p <- ggplot(data = streak_data) +
     show.legend = FALSE,
     colour = NA, # "white",
     fill = "white",
-    alpha = 0
+    alpha = 0.05
   ) +
-  geom_tile(
-    data = ~ .x[month_num %% 2 == 1],
-    show.legend = FALSE,
-    colour = NA, # "white",
-    fill = "white",
-    alpha = 0.2
-  ) +
-  geom_tile(aes(fill = count), alpha = 0.3, colour = "#FAFAFA") +
+  geom_tile(aes(fill = count), alpha = 0.3, colour = "#FAFAFA66") +
   geom_richtext(
     data = ~ .x[count != 0],
-    colour = "white", 
+    colour = "#FAFAFA", 
     na.rm = TRUE, 
     family = font, 
     fontface = "bold",
@@ -87,7 +80,12 @@ p <- ggplot(data = streak_data) +
     labels = function(x) sub("([[:alpha:]]{3}).*", "\\1.", x)
   ) +
   scale_colour_viridis_c() +
-  scale_fill_viridis_c() +
+  scale_fill_viridis_c(
+    begin = 0.25,
+    end = 1,
+    limits = c(1, NA), 
+    na.value = NA
+  ) +
   theme_mc_md(base_family = font) +
   theme(
     panel.grid = element_blank(), 
