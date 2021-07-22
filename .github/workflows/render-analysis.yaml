@@ -3,6 +3,7 @@ on:
     paths:
       - data/ratings.csv
       - R/01-analysis.Rmd
+      - R/theatre_streak.R
       - .github/workflows/render-analysis.yaml
 
 name: render-analysis
