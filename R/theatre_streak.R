@@ -65,7 +65,7 @@ p <- ggplot(data = streak_data) +
     fill = "white",
     alpha = 0.2
   ) +
-  geom_tile(aes(fill = count), alpha = 0.3, colour = "white") +
+  geom_tile(aes(fill = count), alpha = 0.3, colour = "#FAFAFA") +
   geom_richtext(
     data = ~ .x[count != 0],
     colour = "white", 
